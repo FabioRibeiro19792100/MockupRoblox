@@ -15,7 +15,7 @@ function Card05_1_Concept({ onContinue, onMenu, onRestart }) {
           <div style={{ fontSize: '14px', fontWeight: 700, marginBottom: '8px', color: '#000000' }}>
             Conceito importante
           </div>
-          <h2 className="card-title" style={{ fontSize: '24px' }}>O que é um viewport?</h2>
+          <h2 className="card-title" style={{ fontSize: '24px' }}>O que é uma Part?</h2>
         </div>
         <div className="card-content">
           <p className="card-text">

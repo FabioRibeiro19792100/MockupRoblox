@@ -61,28 +61,28 @@ const CARD_INSTRUCTIONS = {
   },
   5: {
     title: 'Etapa do Tutorial - Antes da Ação',
-    purpose: 'Mostra instruções da etapa atual. Exibe "Construir um casa", "ETAPA X/3", "AÇÃO | [título da etapa]", lista de comandos e descrição do resultado.',
-    howItWorks: 'Recebe stepNumber, totalSteps (3), stepTitle do App.jsx baseado em currentStep. Mostra instruções passo a passo. Ao clicar em "Demonstrar", executa a ação no mock do Studio e depois avança automaticamente.',
+    purpose: 'Card que exibe as instruções completas de uma etapa ANTES de ela ser demonstrada. Mostra o que o usuário precisa fazer e o que verá como resultado. É o card de preparação e ensino.',
+    howItWorks: 'Exibe: (1) Título "Tutoriais Expedição Roblox", (2) Box azul com "Construir um casa" e "ETAPA X/3" em duas linhas separadas por linha branca, (3) Barra branca com borda preta "AÇÃO | [título da etapa]" (ex: "AÇÃO | Montar o terreno"), (4) Seção "COMO FAZER NO ROBLOX STUDIOS" com lista numerada de passos (ex: "Clique no menu Insert", "Selecione Part", etc.), (5) Seção "O QUE VOCÊ VAI VER NA TELA" com descrição do resultado esperado, (6) Link opcional "Entender conceito | O QUE É UMA PART?" (só aparece se onShowConcept existir). Recebe stepNumber, totalSteps (3) e stepTitle do App.jsx baseado em currentStep. Ao clicar em "Demonstrar", executa a ação no mock do Studio (adiciona step-box) e depois avança automaticamente para Card 06.',
     buttonBehaviors: {
-      'Voltar para menu': 'Chama onMenu() → handleMenu() → volta para Card 1, reseta tudo.',
-      'Reiniciar tutorial': 'Chama onRestart() → handleRestart() → setCurrentCard(4), setCurrentStep(1), setStudioState("empty"). Volta para introdução mantendo tutorial e modo.',
-      'Entender conceito | O QUE É UMA PART?': 'Chama onShowConcept() → setShowConcept(true). Mostra Card 05.1 como overlay. Não bloqueia progresso.',
-      'Voltar passo': 'Chama onBack() → handleBack(). Se currentStep > 1: remove último step-box do Studio, setCurrentStep(currentStep - 1), setCurrentCard(5). Se currentStep = 1: setCurrentCard(4).',
-      'Demonstrar': 'Chama onDemonstrate() → onCardAction("demonstrate") → setStudioState(step.action) (adiciona step-box no Studio), aguarda 1s, depois onNext() → setCurrentCard(6).'
+      'Voltar para menu': 'Chama onMenu() → handleMenu() → setCurrentCard(1), setTutorialMode(null), setCurrentStep(1), setStudioState("empty"). Volta para seleção de trilhas e reseta tudo.',
+      'Reiniciar tutorial': 'Chama onRestart() → handleRestart() → setCurrentCard(4), setCurrentStep(1), setStudioState("empty"). Volta para introdução (Card 04) mantendo tutorial selecionado e modo escolhido.',
+      'Entender conceito | O QUE É UMA PART?': 'Chama onShowConcept() → setShowConcept(true) no TutorialPanel. Mostra Card 05.1 (conceito) como overlay sobre o Card 05. Não bloqueia progresso, é opcional. O usuário pode clicar em "Continuar" no Card 05.1 para voltar ao Card 05.',
+      'Voltar passo': 'Chama onBack() → handleBack(). Se currentStep > 1: remove último step-box do Studio (setStudioState("remove-last-step-blocks")), setCurrentStep(currentStep - 1), setCurrentCard(5) (volta para Card 05 da etapa anterior). Se currentStep = 1: setCurrentCard(4) (volta para introdução).',
+      'Demonstrar': 'Chama onDemonstrate() → onCardAction("demonstrate") → setStudioState(step.action) (adiciona step-box no Studio mock com título da etapa), aguarda 1000ms para animação, depois onNext() → setCurrentCard(6) (vai para Card 06 - após ação).'
     },
-    dataCollected: 'Nenhum dado é coletado. Apenas atualiza currentStep e studioState para mostrar a ação no mock.'
+    dataCollected: 'Nenhum dado é coletado neste card. Apenas atualiza currentStep e studioState para mostrar a ação no mock do Studio. É um card de instrução, não de interação ou coleta.'
   },
   '5.1': {
-    title: 'Conceito Importante - O que é um viewport?',
-    purpose: 'Explica o conceito de Part no Roblox Studio. Card opcional acessível via link no Card 05.',
-    howItWorks: 'Mostra texto explicativo sobre Parts. Permite feedback com 👍 ou 👎 (apenas visual, muda opacidade). Ao clicar em "Continuar", volta para Card 05.',
+    title: 'Conceito Importante - O que é uma Part?',
+    purpose: 'Explica o conceito de Part no Roblox Studio. Card opcional acessível via link "Entender conceito | O QUE É UMA PART?" no Card 05.',
+    howItWorks: 'Mostra texto explicativo sobre Parts: "Uma Part é o objeto fundamental no Roblox Studio. É um bloco 3D que pode ser usado para construir qualquer coisa no seu jogo. Parts podem ter diferentes formas (bloco, esfera, cilindro) e propriedades como cor, tamanho e posição." Permite feedback com 👍 ou 👎 para indicar se a explicação foi útil. Ao clicar em "Continuar", volta para Card 05 mantendo o contexto da etapa.',
     buttonBehaviors: {
-      'Voltar para menu': 'Chama onMenu() → handleMenu() → volta para Card 1.',
-      'Reiniciar tutorial': 'Chama onRestart() → handleRestart() → volta para Card 4.',
-      '👍 / 👎': 'Apenas visual. setFeedback("positive" ou "negative") muda opacidade do botão não selecionado. Não coleta dados.',
-      'Continuar': 'Chama onContinue() → setShowConcept(false). Volta para Card 05, mantendo o contexto da etapa.'
+      'Voltar para menu': 'Chama onMenu() → handleMenu() → volta para Card 1, reseta tudo.',
+      'Reiniciar tutorial': 'Chama onRestart() → handleRestart() → volta para Card 4, mantendo tutorial e modo.',
+      '👍 / 👎': 'setFeedback("positive" ou "negative") muda opacidade do botão não selecionado. Coleta silenciosamente (via logs) se o usuário considerou a explicação útil (👍) ou não útil (👎), qual conceito foi consultado, e em qual etapa do tutorial foi acessado.',
+      'Continuar': 'Chama onContinue() → setShowConcept(false). Volta para Card 05, mantendo o contexto da etapa (currentStep, studioState).'
     },
-    dataCollected: 'Nenhum dado é coletado. O feedback é apenas visual, não é armazenado.'
+    dataCollected: 'Coleta silenciosamente (via logs): feedback do usuário sobre a utilidade da explicação (👍 positivo ou 👎 negativo), qual conceito foi consultado ("O que é uma Part?"), em qual etapa do tutorial foi acessado (currentStep), e se o usuário consultou o conceito antes ou depois de tentar a ação. Esses dados ajudam a identificar quais conceitos precisam de melhorias e quando os usuários mais precisam de ajuda conceitual.'
   },
   6: {
     title: 'Etapa do Tutorial - Após Ação',
@@ -104,7 +104,7 @@ const CARD_INSTRUCTIONS = {
       'Voltar para menu': 'Chama onMenu() → handleMenu() → volta para Card 1.',
       'Reiniciar tutorial': 'Chama onRestart() → handleRestart() → volta para Card 4.',
       'Sim, quero tentar.': 'Chama onTry() → onNext() → setCurrentCard(8). Vai para card de tentativa do usuário.',
-      'Prefiro continuar na demonstração': 'Chama onContinue() → onSkipToNextStep() → fixa ação no Studio (setStudioState), se currentStep < 3: avança passo e vai para Card 5, senão vai para Card 11. Pula cards 8-10.'
+      'Pular essa interação': 'Chama onContinue() → onSkipToNextStep() → fixa ação no Studio (setStudioState), se currentStep < 3: avança passo e vai para Card 5, senão vai para Card 11. Pula cards 8-10 (tentativa e feedback).'
     },
     dataCollected: 'Nenhum dado é coletado sobre a escolha. Apenas determina qual card aparece em seguida.'
   },
@@ -157,7 +157,7 @@ const CARD_INSTRUCTIONS = {
   }
 }
 
-function RobloxStudioMock({ state, onRemoveBlocks, currentCard, tutorialMode }) {
+function RobloxStudioMock({ state, onRemoveBlocks, currentCard, tutorialMode, showConcept }) {
   const [steps, setSteps] = useState([])
   const [highlightedMenu, setHighlightedMenu] = useState(null)
   const [showInstructions, setShowInstructions] = useState(true)
@@ -218,6 +218,10 @@ function RobloxStudioMock({ state, onRemoveBlocks, currentCard, tutorialMode }) 
 
   // Obter instruções do card atual
   const getCardInstructions = () => {
+    // Se o card conceitual está sendo exibido, usa as instruções do card 5.1
+    if (showConcept && currentCard === 5) {
+      return CARD_INSTRUCTIONS['5.1'] || CARD_INSTRUCTIONS[5]
+    }
     return CARD_INSTRUCTIONS[currentCard] || CARD_INSTRUCTIONS[0]
   }
 

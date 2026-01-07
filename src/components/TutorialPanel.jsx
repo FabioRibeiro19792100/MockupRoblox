@@ -13,9 +13,16 @@ import Card10_NegativeFeedback from './cards/Card10_NegativeFeedback'
 import Card11_Completion from './cards/Card11_Completion'
 import './TutorialPanel.css'
 
-function TutorialPanel({ currentCard, tutorialMode, currentStep, totalSteps, stepData, onNext, onBack, onCardAction, onModeSelect, onSkipToNextStep, onMenu, onRestart }) {
+function TutorialPanel({ currentCard, tutorialMode, currentStep, totalSteps, stepData, onNext, onBack, onCardAction, onModeSelect, onSkipToNextStep, onMenu, onRestart, onShowConceptChange }) {
   const [showConcept, setShowConcept] = useState(false)
   const [selectedTutorial, setSelectedTutorial] = useState(null)
+
+  // Notificar App quando showConcept muda
+  useEffect(() => {
+    if (onShowConceptChange) {
+      onShowConceptChange(showConcept)
+    }
+  }, [showConcept, onShowConceptChange])
 
   // Reset selectedTutorial quando volta para Card 01 (menu)
   useEffect(() => {

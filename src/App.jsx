@@ -16,6 +16,7 @@ function App() {
   const [tutorialMode, setTutorialMode] = useState(null) // 'demonstrative' | 'interactive'
   const [studioState, setStudioState] = useState('empty')
   const [currentStep, setCurrentStep] = useState(1) // Passo atual do tutorial (1-3)
+  const [showConcept, setShowConcept] = useState(false)
   const removeBlocksRef = useRef(null)
 
   // Reset Studio state apenas nos cards iniciais
@@ -25,6 +26,11 @@ function App() {
       setStudioState('empty')
     }
     // Não reseta entre passos - os blocos acumulam
+    
+    // Reset showConcept quando não está no card 5
+    if (currentCard !== 5) {
+      setShowConcept(false)
+    }
   }, [currentCard])
 
   const handleNext = () => {
@@ -197,12 +203,14 @@ function App() {
         onSkipToNextStep={handleSkipToNextStep}
         onMenu={handleMenu}
         onRestart={handleRestart}
+        onShowConceptChange={setShowConcept}
       />
       <RobloxStudioMock 
         state={studioState} 
         onRemoveBlocks={removeBlocksRef}
         currentCard={currentCard}
         tutorialMode={tutorialMode}
+        showConcept={showConcept}
       />
     </div>
   )

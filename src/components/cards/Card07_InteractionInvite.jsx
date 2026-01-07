@@ -24,7 +24,7 @@ function Card07_InteractionInvite({ onTry, onContinue, onMenu, onRestart }) {
           Sim, quero tentar.
         </button>
         <button className="interactive-button continue" onClick={onContinue}>
-          Prefiro continuar na demonstração
+          Pular essa interação
         </button>
       </div>
     </div>
