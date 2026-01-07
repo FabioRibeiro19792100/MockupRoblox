@@ -1,0 +1,200 @@
+.roblox-studio-mock {
+  width: 70%;
+  height: 100vh;
+  background: #e0e0e0;
+  display: flex;
+  flex-direction: column;
+}
+
+.studio-toolbar {
+  height: 40px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 24px;
+  flex-shrink: 0;
+}
+
+.toolbar-item {
+  color: #000000;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: background 0.2s;
+}
+
+.toolbar-item:hover {
+  background: #d5d5d5;
+}
+
+.toolbar-item.highlighted {
+  background: #FF0038;
+  color: #ffffff;
+}
+
+.studio-viewport {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  height: calc(100% - 40px - 40vh);
+}
+
+.studio-viewport.full-height {
+  height: calc(100% - 40px);
+}
+
+.viewport-grid {
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-color: #ffffff;
+  position: relative;
+}
+
+.steps-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 40px;
+  max-width: 600px;
+  margin: 0 auto;
+  justify-items: center;
+}
+
+.step-box {
+  width: 150px;
+  height: 100px;
+  border: 2px solid #000000;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #000000;
+  text-align: center;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+@keyframes blockAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Área de instruções de desenvolvimento (40% inferior) */
+.dev-instructions-panel {
+  height: 40vh;
+  background: #f5f5f5;
+  border-top: 2px solid #cccccc;
+  padding: 12px 16px;
+  overflow-y: auto;
+  flex-shrink: 0;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.dev-instructions-header {
+  font-size: 12px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #cccccc;
+}
+
+.dev-instructions-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dev-instruction-section {
+  color: #333333;
+  margin-bottom: 4px;
+}
+
+.dev-instruction-section strong {
+  color: #000000;
+  font-weight: 600;
+}
+
+.dev-instruction-buttons-list {
+  margin: 4px 0 0 16px;
+  padding: 0;
+  list-style-type: disc;
+}
+
+.dev-instruction-buttons-list li {
+  margin-bottom: 4px;
+  color: #555555;
+  line-height: 1.5;
+}
+
+.dev-instruction-buttons-list li strong {
+  color: #000000;
+  font-weight: 600;
+}
+
+/* Toggle switch para instruções */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #cccccc;
+  transition: 0.3s;
+  border-radius: 24px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: #ffffff;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background-color: #002DCC;
+}
+
+.toggle-switch input:checked + .toggle-slider:before {
+  transform: translateX(20px);
+}
+
+.toggle-switch input:focus + .toggle-slider {
+  box-shadow: 0 0 1px #002DCC;
+}

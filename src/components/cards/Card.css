@@ -1,0 +1,708 @@
+/* Reset e base */
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-y: auto;
+  background: #ffffff;
+  color: #000000;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Header global com Menu e Reiniciar - MESMO GRID DO FOOTER */
+.card-header-global {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+  padding: 16px 24px;
+  padding-bottom: 16px;
+  background: #ffffff;
+  border-bottom: 1px solid #cccccc;
+  margin-bottom: 16px;
+  gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 10;
+}
+
+.card-header-global.single-button-header {
+  grid-template-columns: 1fr;
+}
+
+/* Badge numérico removido - era apenas referência de código */
+
+.header-button {
+  width: 100%;
+  height: 48px;
+  padding: 0;
+  background: #000000;
+  color: #ffffff;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-sizing: border-box;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-button:hover {
+  background: #333333;
+}
+
+/* Card 00: Capa */
+.card-cover {
+  background: #ffffff;
+}
+
+.card-cover .card-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Card 01-02: Seleção - Fundo branco, botões laranja */
+.card-selection {
+  background: #ffffff;
+}
+
+.card-selection .card-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 40px;
+  line-height: 1.2;
+}
+
+.card-selection .card-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.selection-button {
+  width: 100%;
+  padding: 24px;
+  background: #002DCC;
+  color: #ffffff;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-bottom: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.selection-button:hover {
+  background: #0024A3;
+}
+
+/* Card 03: Modo - Fundo branco, retângulos cinza */
+.card-mode {
+  background: #ffffff;
+}
+
+.card-mode .card-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-mode .card-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 24px;
+}
+
+.mode-button {
+  width: 100%;
+  padding: 20px;
+  background: #e0e0e0;
+  color: #000000;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 16px;
+}
+
+.mode-button:hover {
+  background: #d0d0d0;
+  border-color: #cccccc;
+}
+
+.mode-button-demonstrative {
+  background: #002DCC !important;
+}
+
+.mode-button-demonstrative .mode-title,
+.mode-button-demonstrative .mode-description {
+  color: #ffffff !important;
+}
+
+.mode-button-demonstrative:hover {
+  background: #0024A3 !important;
+}
+
+.mode-button-interactive {
+  background: #4caf50 !important;
+}
+
+.mode-button-interactive .mode-title,
+.mode-button-interactive .mode-description {
+  color: #000000 !important;
+}
+
+.mode-button-interactive:hover {
+  background: #45a049 !important;
+}
+
+.mode-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #000000;
+  margin-bottom: 8px;
+}
+
+.mode-description {
+  font-size: 14px;
+  color: #666666;
+}
+
+/* Card 04: Introdução - Painel branco */
+.card.card-intro {
+  background: #ffffff !important;
+}
+
+.card-intro .card-content {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+}
+
+.card-intro .card-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.intro-start-button {
+  padding: 6px 12px;
+  background: #002DCC;
+  color: #ffffff;
+  border: none;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  height: 32px;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.intro-start-button:hover {
+  background: #0024A3;
+}
+
+.card-intro .card-text {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #000000;
+  margin-bottom: 16px;
+}
+
+/* Card 05-06: Etapa do tutorial */
+.card-step {
+  background: #ffffff;
+  padding-bottom: 80px; /* Espaço para os botões fixos */
+}
+
+.card-step .card-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.card-step-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.theme-box {
+  width: 100%;
+  padding: 10px 18px;
+  background: #002DCC;
+  border: none;
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.step-counter {
+  font-size: 15px;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.step-title-bar {
+  width: 100%;
+  padding: 10px 16px;
+  background: #ffffff;
+  border: 2px solid #000000;
+  color: #000000;
+  margin-bottom: 24px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.instructions-section {
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #000000;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.instructions-box {
+  background: #e0e0e0;
+  padding: 16px;
+}
+
+.instructions-list {
+  margin: 0;
+  padding-left: 20px;
+  color: #000000;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.instructions-list li {
+  margin-bottom: 2px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #000000;
+}
+
+.instructions-list li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* Concept label and link */
+.concept-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: #000000;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.concept-title-bar {
+  width: 100%;
+  padding: 10px 16px;
+  background: #B8C5F0;
+  color: #000000;
+  margin-bottom: 24px;
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-step .card-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #000000;
+  margin-bottom: 16px;
+}
+
+.card-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 0;
+  padding: 16px 24px;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: stretch;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  z-index: 10;
+}
+
+
+/* Quando há apenas um botão, ocupa toda a largura */
+.card-actions.single-button {
+  grid-template-columns: 1fr;
+}
+
+.primary-button {
+  width: 100%;
+  height: 48px;
+  padding: 0;
+  background: #002DCC;
+  color: #ffffff;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-sizing: border-box;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.primary-button:hover {
+  background: #0024A3;
+}
+
+.next-step-button {
+  background: #000000 !important;
+}
+
+.next-step-button:hover {
+  background: #333333 !important;
+}
+
+.secondary-button {
+  width: 100%;
+  height: 48px;
+  padding: 0;
+  background: #e0e0e0;
+  color: #000000;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-sizing: border-box;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.secondary-button:hover {
+  background: #d0d0d0;
+  border-color: #cccccc;
+}
+
+.demonstrate-button {
+  background: #002DCC !important;
+}
+
+.demonstrate-button:hover {
+  background: #0024A3 !important;
+}
+
+/* Card 05.1: Conceito - Fundo branco */
+.card-concept {
+  background: #ffffff;
+  padding-bottom: 80px; /* Espaço para os botões fixos */
+}
+
+.card-concept .card-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 16px;
+}
+
+.card-concept .card-text {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #000000;
+  margin-bottom: 16px;
+}
+
+.feedback-section {
+  margin-top: 24px;
+  padding-top: 24px;
+}
+
+.feedback-question {
+  font-size: 14px;
+  color: #000000;
+  margin-bottom: 12px;
+}
+
+.feedback-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.feedback-button {
+  width: 48px;
+  height: 48px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: transform 0.2s;
+  font-size: 32px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+}
+
+.feedback-button.positive {
+  background: transparent;
+}
+
+.feedback-button.negative {
+  background: transparent;
+}
+
+.feedback-button:hover {
+  transform: scale(1.1);
+}
+
+.feedback-button.low-opacity {
+  opacity: 0.3;
+  filter: grayscale(100%);
+}
+
+.concept-continue-button {
+  padding: 12px 24px;
+  background: #002DCC;
+  color: #ffffff;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  float: right;
+  margin-top: 24px;
+}
+
+.concept-continue-button:hover {
+  background: #0024A3;
+}
+
+/* Card 07: Momento interativo */
+.card-interactive {
+  background: #e0e0e0;
+  padding: 24px;
+}
+
+.card-interactive-header {
+  background: #e0e0e0;
+  padding: 24px;
+}
+
+.card-interactive-content {
+  background: #ffffff;
+  padding: 24px;
+  flex: 1;
+}
+
+.card-interactive .card-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 24px;
+  line-height: 1.2;
+}
+
+.interactive-button {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 12px;
+  text-align: left;
+}
+
+.interactive-button.try {
+  background: #4caf50;
+  color: #000000;
+}
+
+.interactive-button.continue {
+  background: #e0e0e0;
+  color: #000000;
+  border: none;
+}
+
+.interactive-button:hover {
+  opacity: 0.9;
+}
+
+/* Card 08: Tentativa do usuário */
+.user-attempt-button {
+  width: 100%;
+  padding: 16px;
+  background: #4caf50;
+  color: #000000;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 12px;
+  text-align: left;
+}
+
+.user-attempt-button:hover {
+  background: #45a049;
+}
+
+.skip-link {
+  color: #000000;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: left;
+  display: block;
+}
+
+/* Card 09-10: Feedback */
+.card-feedback {
+  background: #e0e0e0;
+  padding: 24px;
+}
+
+.card-feedback-header {
+  background: #e0e0e0;
+  padding: 24px;
+}
+
+.card-feedback-content {
+  background: #ffffff;
+  padding: 40px 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.feedback-icon {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 24px;
+}
+
+.feedback-icon.success {
+  color: #4caf50;
+}
+
+.feedback-icon.error {
+  color: #f44336;
+}
+
+.card-feedback .card-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.feedback-actions {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.feedback-button-red {
+  flex: 1;
+  padding: 12px 24px;
+  background: #f44336;
+  color: #ffffff;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  height: 44px;
+}
+
+.feedback-button-red:hover {
+  background: #d32f2f;
+}
+
+.feedback-button-black {
+  flex: 1;
+  padding: 12px 24px;
+  background: #002DCC;
+  color: #ffffff;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  height: 44px;
+}
+
+.feedback-button-black:hover {
+  background: #0024A3;
+}
+
+/* Card 11: Completion */
+.card-completion {
+  background: #ffffff;
+  padding: 24px;
+}
+
+.card-completion .card-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 24px;
+}
+
+.completion-button {
+  width: 100%;
+  padding: 16px;
+  background: #4caf50;
+  color: #000000;
+  border: none;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.completion-button:hover {
+  background: #45a049;
+}
+
+.completion-text {
+  font-size: 14px;
+  color: #666666;
+  line-height: 1.6;
+  text-align: left;
+}
