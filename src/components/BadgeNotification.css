@@ -1,0 +1,82 @@
+.badge-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10000;
+  animation: slideIn 0.3s ease-out;
+}
+
+.badge-notification-content {
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 300px;
+  border: 2px solid #FFD700;
+}
+
+.badge-icon {
+  font-size: 48px;
+  animation: bounce 0.6s ease-in-out;
+}
+
+.badge-text {
+  flex: 1;
+}
+
+.badge-text h3 {
+  margin: 0 0 4px 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #000000;
+}
+
+.badge-text p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333333;
+}
+
+.badge-close {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  color: #000000;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+
+.badge-close:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}

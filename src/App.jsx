@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import TutorialPanel from './components/TutorialPanel'
 import RobloxStudioMock from './components/RobloxStudioMock'
+import BadgeHeader from './components/BadgeHeader'
+import CreatorStamp from './components/CreatorStamp'
 import './App.css'
 
 // Definindo 3 passos mockados do tutorial com sequência lógica
@@ -18,6 +20,17 @@ function App() {
   const [currentStep, setCurrentStep] = useState(1) // Passo atual do tutorial (1-3)
   const [showConcept, setShowConcept] = useState(false)
   const removeBlocksRef = useRef(null)
+  
+  // Estados de gamificação
+  const [completedTutorials, setCompletedTutorials] = useState({
+    class1: [], // IDs dos tutoriais completados da classe 1 (1-5)
+    class2: []  // IDs dos tutoriais completados da classe 2 (1-5)
+  })
+  const [earnedBadges, setEarnedBadges] = useState([]) // IDs dos badges ganhos (1-3)
+  const [showBadgeNotification, setShowBadgeNotification] = useState(null) // Badge ID para mostrar notificação
+  const [showCreatorPopup, setShowCreatorPopup] = useState(false) // Mostrar popup de Creator
+  const [currentTutorialClass, setCurrentTutorialClass] = useState(null) // 1 ou 2
+  const [currentTutorialId, setCurrentTutorialId] = useState(null) // ID do tutorial atual (1-5 dentro de cada classe)
 
   // Reset Studio state apenas nos cards iniciais
   useEffect(() => {
@@ -31,13 +44,21 @@ function App() {
     if (currentCard !== 5) {
       setShowConcept(false)
     }
+    
+    // Não resetar currentTutorialClass e currentTutorialId quando está no Card 12
+    // Eles precisam ser mantidos para marcar como completo
   }, [currentCard])
 
   const handleNext = () => {
     if (currentCard < 11) {
-      // Card 0 (capa) sempre vai para card 1
+      // Card 0 (capa) sempre vai para card 1 (agora mostra tutoriais diretamente)
       if (currentCard === 0) {
         setCurrentCard(1)
+        return
+      }
+      // Card 1 agora mostra os tutoriais, então não precisa ir para Card 2
+      if (currentCard === 1) {
+        // Se já está no Card 1, não faz nada (já mostra os tutoriais)
         return
       }
       let nextCard = currentCard + 1
@@ -107,12 +128,97 @@ function App() {
     }
   }
 
+  // Função para verificar e conceder badges
+  const checkBadges = (classNum, completed) => {
+    const newBadges = []
+    const allCompleted = [...completedTutorials.class1, ...completedTutorials.class2]
+    
+    if (classNum === 1) {
+      // Badge 1: primeiro tutorial da classe 1
+      if (completed.includes(1) && !earnedBadges.includes(1)) {
+        newBadges.push(1)
+      }
+      // Badge 2: todos os 5 tutoriais da classe 1
+      if (completed.length === 5 && !earnedBadges.includes(2)) {
+        newBadges.push(2)
+      }
+    } else if (classNum === 2) {
+      // Badge 3: todos os 5 tutoriais da classe 2
+      if (completed.length === 5 && !earnedBadges.includes(3)) {
+        newBadges.push(3)
+      }
+    }
+    
+    if (newBadges.length > 0) {
+      setEarnedBadges([...earnedBadges, ...newBadges])
+      // Se ganhou o badge 1 (primeiro badge), mostrar popup de Creator
+      if (newBadges.includes(1)) {
+        setShowCreatorPopup(true)
+      }
+      // Mostrar notificação do primeiro badge
+      setShowBadgeNotification(newBadges[0])
+      setTimeout(() => setShowBadgeNotification(null), 5000)
+    }
+  }
+
+  // Função para marcar tutorial como completo
+  const handleTutorialComplete = () => {
+    if (!currentTutorialClass || !currentTutorialId) {
+      return
+    }
+    
+    const classKey = currentTutorialClass === 1 ? 'class1' : 'class2'
+    const newCompleted = [...completedTutorials[classKey]]
+    
+    if (!newCompleted.includes(currentTutorialId)) {
+      newCompleted.push(currentTutorialId)
+      setCompletedTutorials({
+        ...completedTutorials,
+        [classKey]: newCompleted.sort()
+      })
+      
+      // Verificar badges
+      checkBadges(currentTutorialClass, newCompleted)
+    }
+  }
+
+  const handleTutorialSelect = (tutorialId, tutorialClass) => {
+    setCurrentTutorialClass(tutorialClass)
+    setCurrentTutorialId(tutorialId)
+    
+    // Verificar se é tutorial mockado (2-5 da classe 1 ou 1-5 da classe 2)
+    const isMocked = (tutorialClass === 1 && tutorialId > 1) || (tutorialClass === 2)
+    
+    if (isMocked) {
+      // Vai direto para Card 12 (conclusão rápida)
+      setCurrentCard(12)
+    } else {
+      // Tutorial completo: vai para Card 3 (seleção de modo)
+      setCurrentCard(3)
+    }
+  }
+
   const handleMenu = () => {
     // Volta para Card 01 (seleção de categorias)
     setCurrentCard(1)
     setTutorialMode(null)
     setCurrentStep(1)
     setStudioState('empty')
+    // Reseta currentTutorialClass para permitir escolher qualquer classe novamente
+    setCurrentTutorialClass(null)
+    setCurrentTutorialId(null)
+  }
+
+  const handleResetGamification = () => {
+    // Zera toda a gamificação
+    setCompletedTutorials({
+      class1: [],
+      class2: []
+    })
+    setEarnedBadges([])
+    setShowBadgeNotification(null)
+    // Volta para o menu
+    handleMenu()
   }
 
   const handleRestart = () => {
@@ -204,6 +310,53 @@ function App() {
         onMenu={handleMenu}
         onRestart={handleRestart}
         onShowConceptChange={setShowConcept}
+        completedTutorials={completedTutorials}
+        earnedBadges={earnedBadges}
+        currentTutorialClass={currentTutorialClass}
+        currentTutorialId={currentTutorialId}
+        onTutorialClassSelect={setCurrentTutorialClass}
+        onTutorialSelect={(tutorialId, tutorialClass) => {
+          setCurrentTutorialId(tutorialId)
+          // Se passou a classe, usa ela, senão tenta determinar pela classe atual
+          const classToUse = tutorialClass || currentTutorialClass
+          if (classToUse) {
+            setCurrentTutorialClass(classToUse)
+          }
+          // Verificar se é mockado (tutoriais 2-5 da classe 1 e 1-5 da classe 2 são mockados)
+          const isMocked = (classToUse === 1 && tutorialId > 1) || (classToUse === 2)
+          if (isMocked) {
+            setCurrentCard(12)
+          } else {
+            // Tutorial 1 da classe 1 - vai para seleção de modo
+            setCurrentCard(3)
+          }
+        }}
+        onTutorialComplete={handleTutorialComplete}
+        onQuickComplete={() => {
+          // Marca como completo primeiro
+          handleTutorialComplete()
+          // Volta ao menu imediatamente (Card 1) para ver o status atualizado
+          setCurrentCard(1)
+          setTutorialMode(null)
+          setCurrentStep(1)
+          setStudioState('empty')
+          setCurrentTutorialId(null) // Reseta apenas o ID do tutorial
+        }}
+        onCompleteAndMenu={() => {
+          // Marca como completo primeiro
+          handleTutorialComplete()
+          // Volta ao menu imediatamente (Card 1) para ver o status atualizado
+          setCurrentCard(1)
+          setTutorialMode(null)
+          setCurrentStep(1)
+          setStudioState('empty')
+          setCurrentTutorialId(null) // Reseta apenas o ID do tutorial
+        }}
+        onResetGamification={handleResetGamification}
+        showBadgeNotification={showBadgeNotification}
+        onCloseBadgeNotification={() => setShowBadgeNotification(null)}
+        showCreatorPopup={showCreatorPopup}
+        onCloseCreatorPopup={() => setShowCreatorPopup(false)}
       />
       <RobloxStudioMock 
         state={studioState} 
@@ -211,6 +364,7 @@ function App() {
         currentCard={currentCard}
         tutorialMode={tutorialMode}
         showConcept={showConcept}
+        onResetGamification={handleResetGamification}
       />
     </div>
   )

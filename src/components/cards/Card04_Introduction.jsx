@@ -1,10 +1,25 @@
 import './Card.css'
 
-function Card04_Introduction({ tutorialName, onStart, onMenu, onRestart }) {
+function Card04_Introduction({ tutorialName, onStart, onMenu, onRestart, currentTutorialId, onCompleteAndMenu }) {
+  const isTutorial1 = currentTutorialId === 1
+
   return (
     <div className="card card-intro">
       <div className="card-header-global single-button-header">
         <button className="header-button" onClick={onMenu}>Voltar para menu</button>
+        {isTutorial1 && onCompleteAndMenu && (
+          <button 
+            className="header-button" 
+            onClick={onCompleteAndMenu}
+            style={{
+              background: '#4CAF50',
+              color: '#ffffff',
+              fontWeight: 600
+            }}
+          >
+            ✓ Marcar completo (teste)
+          </button>
+        )}
       </div>
       <div style={{ padding: '24px', paddingBottom: '80px' }}>
         <h3 style={{ fontSize: '20px', fontWeight: 700, margin: 0, color: '#000000', marginBottom: '24px', paddingTop: '12px' }}>

@@ -157,10 +157,11 @@ const CARD_INSTRUCTIONS = {
   }
 }
 
-function RobloxStudioMock({ state, onRemoveBlocks, currentCard, tutorialMode, showConcept }) {
+function RobloxStudioMock({ state, onRemoveBlocks, currentCard, tutorialMode, showConcept, onResetGamification }) {
   const [steps, setSteps] = useState([])
   const [highlightedMenu, setHighlightedMenu] = useState(null)
   const [showInstructions, setShowInstructions] = useState(true)
+  const [resetToggle, setResetToggle] = useState(false)
   const timeoutRefs = useRef([])
 
   // Expõe função para remover passos
@@ -237,16 +238,40 @@ function RobloxStudioMock({ state, onRemoveBlocks, currentCard, tutorialMode, sh
         </div>
         <div className="toolbar-item">View</div>
         <div className="toolbar-item">Plugins</div>
-        <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <span style={{ fontSize: '12px', color: '#666666' }}>Explicações</span>
-          <label className="toggle-switch">
-            <input
-              type="checkbox"
-              checked={showInstructions}
-              onChange={() => setShowInstructions(!showInstructions)}
-            />
-            <span className="toggle-slider"></span>
-          </label>
+        <div style={{ marginLeft: 'auto', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '10px', padding: '4px 0' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ fontSize: '12px', color: '#666666', whiteSpace: 'nowrap' }}>Explicações</span>
+            <label className="toggle-switch">
+              <input
+                type="checkbox"
+                checked={showInstructions}
+                onChange={() => setShowInstructions(!showInstructions)}
+              />
+              <span className="toggle-slider"></span>
+            </label>
+          </div>
+          {onResetGamification && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ fontSize: '12px', color: '#666666', whiteSpace: 'nowrap' }}>Resetar Gamificação</span>
+              <label className="toggle-switch">
+                <input
+                  type="checkbox"
+                  checked={resetToggle}
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      setResetToggle(true)
+                      onResetGamification()
+                      // Desmarca após resetar
+                      setTimeout(() => {
+                        setResetToggle(false)
+                      }, 300)
+                    }
+                  }}
+                />
+                <span className="toggle-slider"></span>
+              </label>
+            </div>
+          )}
         </div>
       </div>
       

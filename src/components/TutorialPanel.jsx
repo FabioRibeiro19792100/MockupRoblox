@@ -11,9 +11,54 @@ import Card08_UserAttempt from './cards/Card08_UserAttempt'
 import Card09_PositiveFeedback from './cards/Card09_PositiveFeedback'
 import Card10_NegativeFeedback from './cards/Card10_NegativeFeedback'
 import Card11_Completion from './cards/Card11_Completion'
+import Card12_QuickComplete from './cards/Card12_QuickComplete'
+import Card13_BadgeExplanation from './cards/Card13_BadgeExplanation'
+import BadgeNotification from './BadgeNotification'
+import BadgeDisplay from './BadgeDisplay'
+import BadgeHeader from './BadgeHeader'
+import BadgeScoreboard from './BadgeScoreboard'
+import CreatorPopup from './CreatorPopup'
+import CreatorStamp from './CreatorStamp'
 import './TutorialPanel.css'
 
-function TutorialPanel({ currentCard, tutorialMode, currentStep, totalSteps, stepData, onNext, onBack, onCardAction, onModeSelect, onSkipToNextStep, onMenu, onRestart, onShowConceptChange }) {
+function TutorialPanel({ 
+  currentCard, 
+  tutorialMode, 
+  currentStep, 
+  totalSteps, 
+  stepData, 
+  onNext, 
+  onBack, 
+  onCardAction, 
+  onModeSelect, 
+  onSkipToNextStep, 
+  onMenu, 
+  onRestart, 
+  onShowConceptChange,
+  completedTutorials,
+  earnedBadges,
+  currentTutorialClass,
+  currentTutorialId,
+  onTutorialClassSelect,
+  onTutorialSelect,
+  onTutorialComplete,
+  showBadgeNotification,
+  onCloseBadgeNotification,
+  onQuickComplete,
+  onResetGamification,
+  showCreatorPopup,
+  onCloseCreatorPopup
+}) {
+  const [showBadges, setShowBadges] = useState(true)
+  const [showBadgeExplanation, setShowBadgeExplanation] = useState(false)
+  const [badgeGalleryExpanded, setBadgeGalleryExpanded] = useState(false)
+
+  // Expandir galeria automaticamente quando um badge é conquistado
+  useEffect(() => {
+    if (showBadgeNotification) {
+      setBadgeGalleryExpanded(true)
+    }
+  }, [showBadgeNotification])
   const [showConcept, setShowConcept] = useState(false)
   const [selectedTutorial, setSelectedTutorial] = useState(null)
 
@@ -31,6 +76,13 @@ function TutorialPanel({ currentCard, tutorialMode, currentStep, totalSteps, ste
       setShowConcept(false)
     }
   }, [currentCard])
+
+  // Expandir galeria automaticamente quando um badge é conquistado
+  useEffect(() => {
+    if (showBadgeNotification) {
+      setBadgeGalleryExpanded(true)
+    }
+  }, [showBadgeNotification])
 
   const renderCard = () => {
     // Card 05.1 é opcional e pode aparecer após Card 05
@@ -59,6 +111,21 @@ function TutorialPanel({ currentCard, tutorialMode, currentStep, totalSteps, ste
             selectedTutorial={selectedTutorial}
             onSelect={setSelectedTutorial}
             onNext={onNext}
+            completedTutorials={completedTutorials}
+            earnedBadges={earnedBadges}
+            currentTutorialClass={currentTutorialClass}
+            onTutorialClassSelect={onTutorialClassSelect}
+            onTutorialSelect={onTutorialSelect}
+            onBack={onMenu}
+            onMenu={onMenu}
+          />
+        )
+      case 12:
+        return (
+          <Card12_QuickComplete
+            tutorialName={selectedTutorial || 'Tutorial'}
+            onComplete={onQuickComplete || onTutorialComplete}
+            onMenu={onMenu}
           />
         )
       case 3:
@@ -78,6 +145,8 @@ function TutorialPanel({ currentCard, tutorialMode, currentStep, totalSteps, ste
             onStart={onNext}
             onMenu={onMenu}
             onRestart={onRestart}
+            currentTutorialId={currentTutorialId}
+            onCompleteAndMenu={onQuickComplete}
           />
         )
       case 5:
@@ -240,6 +309,8 @@ function TutorialPanel({ currentCard, tutorialMode, currentStep, totalSteps, ste
           <Card11_Completion
             onMenu={onMenu}
             onRestart={onRestart}
+            onComplete={onTutorialComplete}
+            onCompleteAndMenu={onQuickComplete}
           />
         )
       default:
@@ -248,8 +319,83 @@ function TutorialPanel({ currentCard, tutorialMode, currentStep, totalSteps, ste
   }
 
   return (
-    <div className="tutorial-panel">
-      {renderCard()}
+    <div className={`tutorial-panel ${currentCard === 0 ? 'no-padding-top' : ''} ${badgeGalleryExpanded ? 'badge-gallery-expanded' : ''}`} style={{ position: 'relative' }}>
+      <div className="tutorial-panel-content">
+        {showBadgeExplanation ? (
+          <Card13_BadgeExplanation onClose={() => setShowBadgeExplanation(false)} />
+        ) : (
+          renderCard()
+        )}
+        {showBadgeNotification && (
+          <BadgeNotification 
+            badgeId={showBadgeNotification}
+            onClose={onCloseBadgeNotification}
+          />
+        )}
+        {showCreatorPopup && (
+          <CreatorPopup onClose={onCloseCreatorPopup} />
+        )}
+      </div>
+      {currentCard > 0 && currentCard !== 12 && !showBadgeExplanation && (
+        <div className={`badge-gallery-fixed ${badgeGalleryExpanded ? 'expanded' : 'collapsed'}`}>
+          <div 
+            className="badge-gallery-header"
+            onClick={() => setBadgeGalleryExpanded(!badgeGalleryExpanded)}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              cursor: 'pointer',
+              padding: '16px 24px',
+              userSelect: 'none',
+              minHeight: '100px',
+              position: 'relative'
+            }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+              <h2 className="card-title" style={{ fontSize: '20px', paddingTop: '0px', marginBottom: '0px', margin: 0 }}>
+                Galeria de Badges
+              </h2>
+              <span style={{ 
+                fontSize: '24px', 
+                fontWeight: 700,
+                color: '#ffffff',
+                transition: 'transform 0.3s',
+                transform: badgeGalleryExpanded ? 'rotate(45deg)' : 'rotate(0deg)',
+                lineHeight: 1
+              }}>
+                +
+              </span>
+            </div>
+            <div style={{ marginTop: '12px' }}>
+              <BadgeScoreboard earnedBadges={earnedBadges || []} />
+            </div>
+          </div>
+          {badgeGalleryExpanded && (
+            <div className="badge-gallery-content">
+              <div style={{ marginBottom: '12px' }}>
+                <button
+                  onClick={() => setShowBadgeExplanation(true)}
+                  style={{
+                    background: 'transparent',
+                    border: 'none',
+                    color: '#0066cc',
+                    fontSize: '13px',
+                    textDecoration: 'underline',
+                    cursor: 'pointer',
+                    padding: 0
+                  }}
+                >
+                  Entenda o sistema de badges
+                </button>
+              </div>
+              <BadgeHeader 
+                earnedBadges={earnedBadges || []}
+                completedTutorials={completedTutorials || { class1: [], class2: [] }}
+              />
+            </div>
+          )}
+        </div>
+      )}
     </div>
   )
 }
