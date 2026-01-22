@@ -103,7 +103,7 @@ function Card01_02_Selection({
             }
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1 }}>
             <span style={{ 
               fontSize: '14px', 
               fontWeight: 700, 
@@ -112,25 +112,35 @@ function Card01_02_Selection({
             }}>
               {tutorial.id}.
             </span>
-            <span style={{ 
-              fontSize: '16px', 
-              color: isLocked ? '#999999' : '#000000', 
-              fontWeight: 600 
-            }}>
-              {tutorial.name}
-            </span>
-            {isCompleted && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', flex: 1 }}>
               <span style={{ 
-                fontSize: '12px', 
-                color: '#4CAF50', 
-                fontWeight: 600,
-                display: 'flex',
-                alignItems: 'center',
-                gap: '4px'
+                fontSize: '16px', 
+                color: isLocked ? '#999999' : '#000000', 
+                fontWeight: 600 
               }}>
-                ✓ Concluído
+                {tutorial.name}
               </span>
-            )}
+              {isCompleted ? (
+                <span style={{ 
+                  fontSize: '12px', 
+                  color: '#4CAF50', 
+                  fontWeight: 500,
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '4px'
+                }}>
+                  ✓ Concluído
+                </span>
+              ) : isAvailable && !isLocked ? (
+                <span style={{ 
+                  fontSize: '12px', 
+                  color: '#666666', 
+                  fontWeight: 500
+                }}>
+                  Em andamento
+                </span>
+              ) : null}
+            </div>
           </div>
           <div
             style={{
@@ -159,18 +169,40 @@ function Card01_02_Selection({
 
   return (
     <div className="card card-selection" style={{ position: 'relative' }}>
-      <div style={{ padding: '40px 24px', position: 'relative' }}>
+      <div style={{ padding: '24px 24px', paddingTop: '80px', position: 'relative' }}>
         {earnedBadges && Array.isArray(earnedBadges) && earnedBadges.includes(1) && (
           <div style={{ position: 'absolute', top: '20px', right: '24px', zIndex: 10 }}>
             <CreatorStamp isVisible={true} />
           </div>
         )}
-        <h2 className="card-title" style={{ fontSize: '20px', paddingTop: '12px', margin: 0, marginBottom: '32px' }}>
-          Tutoriais Expedição Roblox
-        </h2>
-        <div className="card-content">
+        {/* Logo e Título - mesma posição do Card 00 */}
+        <div style={{ marginBottom: '32px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <img 
+            src="/logo.png" 
+            alt="Logo" 
+            style={{ 
+              maxWidth: '200px', 
+              maxHeight: '100px', 
+              width: 'auto', 
+              height: 'auto',
+              objectFit: 'contain'
+            }} 
+          />
+        </div>
+        <h3 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '24px', color: '#000000' }}>
+          Tutoriais Roblox Studios
+        </h3>
+        <div className="card-content" style={{ margin: 0, padding: 0, marginTop: '0px', display: 'flex', flexDirection: 'column', alignItems: 'stretch', gap: 0 }}>
           {/* Classe 1 - Acordeon */}
-          <div style={{ marginBottom: '24px', border: '1px solid #e0e0e0', borderRadius: '8px', overflow: 'hidden' }}>
+          <div style={{ 
+            margin: 0,
+            marginBottom: '24px',
+            border: '1px solid #e0e0e0', 
+            borderRadius: '8px', 
+            overflow: 'hidden', 
+            width: '100%',
+            flexShrink: 0
+          }}>
             <div
               style={{
                 padding: '16px 20px',
@@ -179,7 +211,12 @@ function Card01_02_Selection({
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                borderBottom: expandedClasses.class1 ? '1px solid #e0e0e0' : 'none'
+                borderBottom: expandedClasses.class1 ? '1px solid #e0e0e0' : 'none',
+                height: '56px',
+                minHeight: '56px',
+                maxHeight: '56px',
+                boxSizing: 'border-box',
+                margin: 0
               }}
               onClick={() => toggleClass(1)}
             >
@@ -187,7 +224,12 @@ function Card01_02_Selection({
                 fontSize: '18px', 
                 fontWeight: 700, 
                 margin: 0,
-                color: '#000000'
+                padding: 0,
+                color: '#000000',
+                flex: 1,
+                lineHeight: '24px',
+                display: 'flex',
+                alignItems: 'center'
               }}>
                 Os primeiros passos para se tornar Creator
               </h3>
@@ -195,7 +237,13 @@ function Card01_02_Selection({
                 fontSize: '20px', 
                 color: '#666666',
                 transition: 'transform 0.2s',
-                transform: expandedClasses.class1 ? 'rotate(180deg)' : 'rotate(0deg)'
+                transform: expandedClasses.class1 ? 'rotate(180deg)' : 'rotate(0deg)',
+                marginLeft: '12px',
+                flexShrink: 0,
+                display: 'flex',
+                alignItems: 'center',
+                height: '24px',
+                lineHeight: '24px'
               }}>
                 ▼
               </span>
@@ -208,7 +256,15 @@ function Card01_02_Selection({
           </div>
 
           {/* Classe 2 - Acordeon */}
-          <div style={{ marginBottom: '24px', border: '1px solid #e0e0e0', borderRadius: '8px', overflow: 'hidden' }}>
+          <div style={{ 
+            margin: 0,
+            marginBottom: '24px',
+            border: '1px solid #e0e0e0', 
+            borderRadius: '8px', 
+            overflow: 'hidden', 
+            width: '100%',
+            flexShrink: 0
+          }}>
             <div
               style={{
                 padding: '16px 20px',
@@ -217,7 +273,12 @@ function Card01_02_Selection({
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                borderBottom: expandedClasses.class2 ? '1px solid #e0e0e0' : 'none'
+                borderBottom: expandedClasses.class2 ? '1px solid #e0e0e0' : 'none',
+                height: '56px',
+                minHeight: '56px',
+                maxHeight: '56px',
+                boxSizing: 'border-box',
+                margin: 0
               }}
               onClick={() => toggleClass(2)}
             >
@@ -225,7 +286,12 @@ function Card01_02_Selection({
                 fontSize: '18px', 
                 fontWeight: 700, 
                 margin: 0,
-                color: '#000000'
+                padding: 0,
+                color: '#000000',
+                flex: 1,
+                lineHeight: '24px',
+                display: 'flex',
+                alignItems: 'center'
               }}>
                 Criações rápidas
               </h3>
@@ -233,7 +299,13 @@ function Card01_02_Selection({
                 fontSize: '20px', 
                 color: '#666666',
                 transition: 'transform 0.2s',
-                transform: expandedClasses.class2 ? 'rotate(180deg)' : 'rotate(0deg)'
+                transform: expandedClasses.class2 ? 'rotate(180deg)' : 'rotate(0deg)',
+                marginLeft: '12px',
+                flexShrink: 0,
+                display: 'flex',
+                alignItems: 'center',
+                height: '24px',
+                lineHeight: '24px'
               }}>
                 ▼
               </span>

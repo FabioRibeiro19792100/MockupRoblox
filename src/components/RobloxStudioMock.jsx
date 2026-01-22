@@ -19,7 +19,7 @@ const CARD_INSTRUCTIONS = {
     dataCollected: 'Nenhum dado é coletado. Apenas navegação entre telas.'
   },
   1: {
-    title: 'Seleção de Trilha - Tutoriais Expedição Roblox',
+    title: 'Seleção de Trilha',
     purpose: 'Permite escolher entre duas trilhas: "Os primeiros passos para se tornar Creator" ou "Criações rápidas".',
     howItWorks: 'Mostra dois botões azuis com os nomes das trilhas. Ao clicar em qualquer um, chama onNext() que muda currentCard de 1 para 2. Não armazena qual trilha foi escolhida.',
     buttonBehaviors: {
@@ -29,7 +29,7 @@ const CARD_INSTRUCTIONS = {
     dataCollected: 'Nenhum dado é coletado sobre qual trilha foi escolhida. Apenas navegação.'
   },
   2: {
-    title: 'Seleção de Tutorial - Tutoriais Expedição Roblox',
+    title: 'Seleção de Tutorial',
     purpose: 'Mostra lista de tutoriais disponíveis. O usuário pode escolher um tutorial para fazer.',
     howItWorks: 'Exibe uma lista de tutoriais (ex: "Construir um casa", "Criar um obstáculo", "Animar um avatar"). Ao clicar em um tutorial, chama onSelect(tutorial.name) que atualiza selectedTutorial no estado do TutorialPanel, depois chama onNext() que muda currentCard de 2 para 3.',
     buttonBehaviors: {
@@ -39,7 +39,7 @@ const CARD_INSTRUCTIONS = {
     dataCollected: 'Armazena selectedTutorial no estado do TutorialPanel. Este valor será usado no Card 04 para mostrar o nome do tutorial.'
   },
   3: {
-    title: 'Escolha de Modo - Tutoriais Expedição Roblox',
+    title: 'Escolha de Modo',
     purpose: 'Permite escolher entre modo demonstrativo ou interativo. Esta escolha define o fluxo do tutorial.',
     howItWorks: 'Mostra dois botões: "Modo demonstrativo" (azul, texto branco) e "Modo Interativo" (verde, texto preto). Ao clicar, chama onModeSelect(mode) que atualiza tutorialMode no App.jsx, depois chama onNext() automaticamente que muda currentCard de 3 para 4.',
     buttonBehaviors: {
@@ -62,7 +62,7 @@ const CARD_INSTRUCTIONS = {
   5: {
     title: 'Etapa do Tutorial - Antes da Ação',
     purpose: 'Card que exibe as instruções completas de uma etapa ANTES de ela ser demonstrada. Mostra o que o usuário precisa fazer e o que verá como resultado. É o card de preparação e ensino.',
-    howItWorks: 'Exibe: (1) Título "Tutoriais Expedição Roblox", (2) Box azul com "Construir um casa" e "ETAPA X/3" em duas linhas separadas por linha branca, (3) Barra branca com borda preta "AÇÃO | [título da etapa]" (ex: "AÇÃO | Montar o terreno"), (4) Seção "COMO FAZER NO ROBLOX STUDIOS" com lista numerada de passos (ex: "Clique no menu Insert", "Selecione Part", etc.), (5) Seção "O QUE VOCÊ VAI VER NA TELA" com descrição do resultado esperado, (6) Link opcional "Entender conceito | O QUE É UMA PART?" (só aparece se onShowConcept existir). Recebe stepNumber, totalSteps (3) e stepTitle do App.jsx baseado em currentStep. Ao clicar em "Demonstrar", executa a ação no mock do Studio (adiciona step-box) e depois avança automaticamente para Card 06.',
+    howItWorks: 'Exibe: (1) Box azul com "Construir um casa" e "ETAPA X/3" em duas linhas separadas por linha branca, (2) Barra branca com borda preta "AÇÃO | [título da etapa]" (ex: "AÇÃO | Montar o terreno"), (3) Seção "COMO FAZER NO ROBLOX STUDIOS" com lista numerada de passos (ex: "Clique no menu Insert", "Selecione Part", etc.), (4) Seção "O QUE VOCÊ VAI VER NA TELA" com descrição do resultado esperado, (5) Link opcional "Entender conceito | O QUE É UMA PART?" (só aparece se onShowConcept existir). Recebe stepNumber, totalSteps (3) e stepTitle do App.jsx baseado em currentStep. Ao clicar em "Demonstrar", executa a ação no mock do Studio (adiciona step-box) e depois avança automaticamente para Card 06.',
     buttonBehaviors: {
       'Voltar para menu': 'Chama onMenu() → handleMenu() → setCurrentCard(1), setTutorialMode(null), setCurrentStep(1), setStudioState("empty"). Volta para seleção de trilhas e reseta tudo.',
       'Reiniciar tutorial': 'Chama onRestart() → handleRestart() → setCurrentCard(4), setCurrentStep(1), setStudioState("empty"). Volta para introdução (Card 04) mantendo tutorial selecionado e modo escolhido.',
@@ -252,7 +252,7 @@ function RobloxStudioMock({ state, onRemoveBlocks, currentCard, tutorialMode, sh
           </div>
           {onResetGamification && (
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span style={{ fontSize: '12px', color: '#666666', whiteSpace: 'nowrap' }}>Resetar Gamificação</span>
+              <span style={{ fontSize: '12px', color: '#ff4444', fontWeight: 600, whiteSpace: 'nowrap' }}>Resetar Gamificação</span>
               <label className="toggle-switch">
                 <input
                   type="checkbox"
@@ -260,15 +260,16 @@ function RobloxStudioMock({ state, onRemoveBlocks, currentCard, tutorialMode, sh
                   onChange={(e) => {
                     if (e.target.checked) {
                       setResetToggle(true)
+                      // Executa o reset
                       onResetGamification()
-                      // Desmarca após resetar
+                      // Desmarca após resetar (tempo maior para garantir que o reset foi processado)
                       setTimeout(() => {
                         setResetToggle(false)
-                      }, 300)
+                      }, 500)
                     }
                   }}
                 />
-                <span className="toggle-slider"></span>
+                <span className="toggle-slider red"></span>
               </label>
             </div>
           )}

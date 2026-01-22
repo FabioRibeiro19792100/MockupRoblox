@@ -11,9 +11,8 @@ import Card08_UserAttempt from './cards/Card08_UserAttempt'
 import Card09_PositiveFeedback from './cards/Card09_PositiveFeedback'
 import Card10_NegativeFeedback from './cards/Card10_NegativeFeedback'
 import Card11_Completion from './cards/Card11_Completion'
-import Card12_QuickComplete from './cards/Card12_QuickComplete'
 import Card13_BadgeExplanation from './cards/Card13_BadgeExplanation'
-import BadgeNotification from './BadgeNotification'
+// import BadgeNotification from './BadgeNotification' // Removido - notificação desabilitada
 import BadgeDisplay from './BadgeDisplay'
 import BadgeHeader from './BadgeHeader'
 import BadgeScoreboard from './BadgeScoreboard'
@@ -53,12 +52,12 @@ function TutorialPanel({
   const [showBadgeExplanation, setShowBadgeExplanation] = useState(false)
   const [badgeGalleryExpanded, setBadgeGalleryExpanded] = useState(false)
 
-  // Expandir galeria automaticamente quando um badge é conquistado
-  useEffect(() => {
-    if (showBadgeNotification) {
-      setBadgeGalleryExpanded(true)
-    }
-  }, [showBadgeNotification])
+  // Expandir galeria automaticamente quando um badge é conquistado - REMOVIDO
+  // useEffect(() => {
+  //   if (showBadgeNotification) {
+  //     setBadgeGalleryExpanded(true)
+  //   }
+  // }, [showBadgeNotification])
   const [showConcept, setShowConcept] = useState(false)
   const [selectedTutorial, setSelectedTutorial] = useState(null)
 
@@ -77,12 +76,12 @@ function TutorialPanel({
     }
   }, [currentCard])
 
-  // Expandir galeria automaticamente quando um badge é conquistado
-  useEffect(() => {
-    if (showBadgeNotification) {
-      setBadgeGalleryExpanded(true)
-    }
-  }, [showBadgeNotification])
+  // Expandir galeria automaticamente quando um badge é conquistado - REMOVIDO
+  // useEffect(() => {
+  //   if (showBadgeNotification) {
+  //     setBadgeGalleryExpanded(true)
+  //   }
+  // }, [showBadgeNotification])
 
   const renderCard = () => {
     // Card 05.1 é opcional e pode aparecer após Card 05
@@ -117,14 +116,6 @@ function TutorialPanel({
             onTutorialClassSelect={onTutorialClassSelect}
             onTutorialSelect={onTutorialSelect}
             onBack={onMenu}
-            onMenu={onMenu}
-          />
-        )
-      case 12:
-        return (
-          <Card12_QuickComplete
-            tutorialName={selectedTutorial || 'Tutorial'}
-            onComplete={onQuickComplete || onTutorialComplete}
             onMenu={onMenu}
           />
         )
@@ -319,28 +310,27 @@ function TutorialPanel({
   }
 
   return (
-    <div className={`tutorial-panel ${currentCard === 0 ? 'no-padding-top' : ''} ${badgeGalleryExpanded ? 'badge-gallery-expanded' : ''}`} style={{ position: 'relative' }}>
+    <div className="tutorial-panel" style={{ position: 'relative' }}>
       <div className="tutorial-panel-content">
         {showBadgeExplanation ? (
           <Card13_BadgeExplanation onClose={() => setShowBadgeExplanation(false)} />
         ) : (
           renderCard()
         )}
-        {showBadgeNotification && (
-          <BadgeNotification 
-            badgeId={showBadgeNotification}
-            onClose={onCloseBadgeNotification}
-          />
-        )}
+        {/* Notificação de badge removida completamente */}
         {showCreatorPopup && (
           <CreatorPopup onClose={onCloseCreatorPopup} />
         )}
       </div>
-      {currentCard > 0 && currentCard !== 12 && !showBadgeExplanation && (
+      {!showBadgeExplanation && (
         <div className={`badge-gallery-fixed ${badgeGalleryExpanded ? 'expanded' : 'collapsed'}`}>
           <div 
             className="badge-gallery-header"
-            onClick={() => setBadgeGalleryExpanded(!badgeGalleryExpanded)}
+            onClick={(e) => {
+              e.stopPropagation()
+              console.log('Badge gallery clicked, current state:', badgeGalleryExpanded)
+              setBadgeGalleryExpanded(!badgeGalleryExpanded)
+            }}
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -348,7 +338,8 @@ function TutorialPanel({
               padding: '16px 24px',
               userSelect: 'none',
               minHeight: '100px',
-              position: 'relative'
+              position: 'relative',
+              zIndex: 101
             }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>

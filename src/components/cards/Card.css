@@ -8,6 +8,9 @@
   overflow-y: auto;
   background: #ffffff;
   color: #000000;
+  padding: 0;
+  margin: 0;
+  position: relative;
 }
 
 .card-content {
@@ -16,7 +19,7 @@
   flex: 1;
 }
 
-/* Header global com Menu e Reiniciar - MESMO GRID DO FOOTER */
+/* Header global com Menu e Reiniciar */
 .card-header-global {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -25,19 +28,31 @@
   padding-bottom: 16px;
   background: #ffffff;
   border-bottom: 1px solid #cccccc;
-  margin-bottom: 16px;
+  margin-bottom: 0;
+  margin-top: 0;
   gap: 8px;
   width: 100%;
   box-sizing: border-box;
   position: relative;
   z-index: 10;
+  flex-shrink: 0;
+  order: -1;
+}
+
+/* Headers em cards com background diferente precisam manter o background branco */
+.card-interactive .card-header-global,
+.card-feedback .card-header-global {
+  background: #ffffff;
 }
 
 .card-header-global.single-button-header {
   grid-template-columns: 1fr;
 }
 
-/* Badge numérico removido - era apenas referência de código */
+/* Quando há 3 botões, ajusta para 3 colunas */
+.card-header-global:has(button:nth-child(3)) {
+  grid-template-columns: 1fr 1fr 1fr;
+}
 
 .header-button {
   width: 100%;
@@ -81,13 +96,44 @@
   font-size: 24px;
   font-weight: 700;
   color: #000000;
-  margin-bottom: 40px;
+  margin-bottom: 0;
   line-height: 1.2;
 }
 
 .card-selection .card-content {
-  display: flex;
-  flex-direction: column;
+  display: flex !important;
+  flex-direction: column !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  align-items: stretch !important;
+  gap: 0 !important;
+}
+
+/* Garantir que ambos os acordeões comecem na mesma posição - ZERO margin/padding no topo */
+.card-selection .card-content > div:first-child {
+  margin-top: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  margin-bottom: 24px !important;
+  padding-top: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.card-selection .card-content > div:nth-child(2) {
+  margin-top: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  margin-bottom: 24px !important;
+  padding-top: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.card-selection .card-content > div:last-child {
+  margin-bottom: 0 !important;
 }
 
 .selection-button {
@@ -126,7 +172,7 @@
   font-size: 24px;
   font-weight: 700;
   color: #000000;
-  margin-bottom: 24px;
+  margin-bottom: 0;
 }
 
 .mode-button {
@@ -199,7 +245,7 @@
   font-size: 24px;
   font-weight: 700;
   color: #000000;
-  margin-bottom: 16px;
+  margin-bottom: 0;
   line-height: 1.2;
 }
 
@@ -346,17 +392,18 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
+  margin: 0;
   margin-top: 0;
   padding: 16px 24px;
   width: 100%;
   box-sizing: border-box;
   align-items: stretch;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
   background: #ffffff;
-  z-index: 10;
+  z-index: 50;
 }
 
 
@@ -436,7 +483,7 @@
   font-size: 24px;
   font-weight: 700;
   color: #000000;
-  margin-bottom: 16px;
+  margin-bottom: 0;
 }
 
 .card-concept .card-text {
@@ -513,12 +560,13 @@
 /* Card 07: Momento interativo */
 .card-interactive {
   background: #e0e0e0;
-  padding: 24px;
+  padding: 0;
 }
 
 .card-interactive-header {
   background: #e0e0e0;
   padding: 24px;
+  margin-top: 0;
 }
 
 .card-interactive-content {
@@ -531,7 +579,7 @@
   font-size: 24px;
   font-weight: 700;
   color: #000000;
-  margin-bottom: 24px;
+  margin-bottom: 0;
   line-height: 1.2;
 }
 
@@ -591,7 +639,7 @@
 /* Card 09-10: Feedback */
 .card-feedback {
   background: #e0e0e0;
-  padding: 24px;
+  padding: 0;
 }
 
 .card-feedback-header {
@@ -601,12 +649,13 @@
 
 .card-feedback-content {
   background: #ffffff;
-  padding: 40px 24px;
+  padding: 24px 24px;
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: 0;
 }
 
 .feedback-icon {
@@ -629,6 +678,13 @@
   color: #000000;
   margin-bottom: 32px;
   text-align: center;
+  position: absolute;
+  top: 300px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 48px);
+  padding: 0 24px;
+  box-sizing: border-box;
 }
 
 .feedback-actions {
@@ -636,6 +692,14 @@
   gap: 12px;
   width: 100%;
   max-width: 400px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 16px 24px;
+  box-sizing: border-box;
+  background: #ffffff;
+  z-index: 10;
 }
 
 .feedback-button-red {
@@ -673,14 +737,14 @@
 /* Card 11: Completion */
 .card-completion {
   background: #ffffff;
-  padding: 24px;
+  padding: 0;
 }
 
 .card-completion .card-title {
   font-size: 24px;
   font-weight: 700;
   color: #000000;
-  margin-bottom: 24px;
+  margin-bottom: 0;
 }
 
 .completion-button {

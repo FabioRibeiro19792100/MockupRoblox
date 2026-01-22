@@ -13,7 +13,7 @@ function Card12_QuickComplete({
 
   return (
     <div className="card">
-      <div className="card-header-global">
+      <div className="card-header-global single-button-header">
         <button className="header-button" onClick={onMenu}>
           Voltar para menu
         </button>

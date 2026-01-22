@@ -6,10 +6,7 @@ function Card03_ModeSelection({ onModeSelect, onMenu }) {
       <div className="card-header-global single-button-header">
         <button className="header-button" onClick={onMenu}>Voltar para menu</button>
       </div>
-      <div style={{ padding: '40px 24px' }}>
-        <h2 className="card-title" style={{ fontSize: '20px', paddingTop: '12px' }}>
-          Tutoriais Expedição Roblox
-        </h2>
+      <div style={{ padding: '24px 24px' }}>
         <h3 style={{ fontSize: '18px', fontWeight: 700, marginBottom: '24px', color: '#000000' }}>
           Escolha o modo:
         </h3>

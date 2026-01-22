@@ -1,0 +1,239 @@
+/* CardLayoutView.css - Estilos para visualização de cards em layout */
+/* IMPORTANTE: Todos os estilos aqui só se aplicam dentro de .card-layout-view */
+
+.card-layout-view {
+  width: 100%;
+  height: 100vh;
+  overflow-x: auto;
+  overflow-y: hidden;
+  background: #f5f5f5;
+  position: relative;
+}
+
+.card-layout-view .card-layout-container {
+  display: flex;
+  gap: 24px;
+  padding: 24px;
+  height: 100%;
+  align-items: flex-start;
+}
+
+/* Ajuste de padding apenas quando há sidebar */
+.card-layout-view:has(.card-layout-sidebar) .card-layout-container {
+  padding-left: 324px; /* Espaço para a sidebar */
+}
+
+.card-layout-view .card-layout-item {
+  flex-shrink: 0;
+  width: 400px;
+  height: 100vh;
+  position: relative;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.card-layout-view .card-layout-label {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #ffffff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.card-layout-view .card-layout-content {
+  width: 100%;
+  height: calc(100vh - 48px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.card-layout-view .card-layout-content .card {
+  height: auto !important;
+  overflow: visible !important;
+  overflow-y: visible !important;
+}
+
+/* Toolbar de controle */
+.card-layout-view .card-layout-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #1a1a1a;
+  color: #ffffff;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  z-index: 2000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card-layout-view .card-layout-toolbar select {
+  background: #333333;
+  color: #ffffff;
+  border: 1px solid #555555;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.card-layout-view .card-layout-toolbar label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.card-layout-view .card-layout-toolbar input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+/* Sidebar */
+.card-layout-view .card-layout-sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 300px;
+  height: 100vh;
+  background: #ffffff;
+  border-right: 1px solid #e0e0e0;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-layout-view .sidebar-header {
+  padding: 20px;
+  border-bottom: 1px solid #e0e0e0;
+  background: #f5f5f5;
+}
+
+.card-layout-view .sidebar-header h1 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #000000;
+}
+
+.card-layout-view .sidebar-controls {
+  padding: 20px;
+}
+
+.card-layout-view .control-group {
+  margin-bottom: 24px;
+}
+
+.card-layout-view .control-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333333;
+}
+
+.card-layout-view .layer-select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  font-size: 14px;
+  background: #ffffff;
+  color: #000000;
+}
+
+/* Estilos para diferentes layers - 10 layouts completamente novos */
+/* Layer 1 - Design Original (sem modificações) */
+
+/* Layers 2-10 - Removidos temporariamente para não quebrar o layout */
+
+
+/* Estilos da galeria de badges para os cards de layout */
+.card-layout-view .card-layout-item .badge-gallery-fixed {
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  z-index: 5;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
+  border-top: 2px solid #2196F3;
+  transition: all 0.3s ease;
+  overflow: visible;
+}
+
+.card-layout-view .card-layout-item .badge-gallery-fixed.collapsed {
+  max-height: 120px;
+  overflow: hidden;
+}
+
+.card-layout-view .card-layout-item .badge-gallery-fixed.expanded {
+  max-height: 350px;
+  min-height: 350px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.card-layout-view .card-layout-item .badge-gallery-header {
+  background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+  border-bottom: 1px solid #1565C0;
+  color: #ffffff;
+}
+
+.card-layout-view .card-layout-item .badge-gallery-content {
+  padding: 12px 24px;
+  padding-bottom: 24px;
+  animation: slideDown 0.3s ease;
+}
+
+/* Ajustes para cards de feedback (9 e 10) no layout mode */
+.card-layout-view .card-layout-item .card-feedback .card-title {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  transform: none !important;
+  margin-bottom: 24px !important;
+  margin-top: 24px !important;
+}
+
+.card-layout-view .card-layout-item .card-feedback .feedback-actions {
+  position: relative !important;
+  bottom: auto !important;
+  left: auto !important;
+  transform: none !important;
+  margin-top: 32px !important;
+  margin-bottom: 24px !important;
+}
+
+.card-layout-view .card-layout-item .card-feedback .card-feedback-content {
+  min-height: auto !important;
+  padding-bottom: 24px !important;
+}
+
+/* Ajustes para popups no layout mode */
+.card-layout-view .card-layout-item .creator-popup-overlay {
+  position: relative !important;
+  border-radius: 8px !important;
+  min-height: 400px !important;
+}
+
+.card-layout-view .card-layout-item .badge-notification {
+  position: relative !important;
+  top: auto !important;
+  right: auto !important;
+  display: block !important;
+  margin: 20px auto !important;
+  max-width: 400px !important;
+}

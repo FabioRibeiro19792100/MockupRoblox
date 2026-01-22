@@ -3,11 +3,21 @@ import './Card.css'
 function Card00_Cover({ onStart }) {
   return (
     <div className="card card-cover">
-      <div style={{ padding: '40px 24px', paddingBottom: '80px', display: 'flex', flexDirection: 'column', justifyContent: 'center', flex: 1 }}>
+      <div style={{ padding: '24px 24px', paddingBottom: '80px', display: 'flex', flexDirection: 'column', justifyContent: 'center', flex: 1 }}>
         <div className="card-content">
-          <h2 className="card-title" style={{ fontSize: '24px', fontWeight: 700, marginBottom: '8px', color: '#000000' }}>
-            Expedição Roblox
-          </h2>
+          <div style={{ marginBottom: '32px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <img 
+              src="/logo.png" 
+              alt="Logo" 
+              style={{ 
+                maxWidth: '200px', 
+                maxHeight: '100px', 
+                width: 'auto', 
+                height: 'auto',
+                objectFit: 'contain'
+              }} 
+            />
+          </div>
           <h3 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '24px', color: '#000000' }}>
             Tutoriais Roblox Studios
           </h3>
@@ -28,7 +38,7 @@ function Card00_Cover({ onStart }) {
       </div>
       <div className="card-actions single-button">
         <button className="primary-button" onClick={onStart}>
-          COMEÇAR
+          Começar
         </button>
       </div>
     </div>

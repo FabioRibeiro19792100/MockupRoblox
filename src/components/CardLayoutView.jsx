@@ -1,0 +1,2411 @@
+import React, { useState, useEffect, useRef } from 'react'
+import Card00_Cover from './cards/Card00_Cover'
+import Card01_02_Selection from './cards/Card01_02_Selection'
+import Card03_ModeSelection from './cards/Card03_ModeSelection'
+import Card04_Introduction from './cards/Card04_Introduction'
+import Card05_BeforeAction from './cards/Card05_BeforeAction'
+import Card05_1_Concept from './cards/Card05_1_Concept'
+import Card06_AfterAction from './cards/Card06_AfterAction'
+import Card07_InteractionInvite from './cards/Card07_InteractionInvite'
+import Card08_UserAttempt from './cards/Card08_UserAttempt'
+import Card09_PositiveFeedback from './cards/Card09_PositiveFeedback'
+import Card10_NegativeFeedback from './cards/Card10_NegativeFeedback'
+import Card11_Completion from './cards/Card11_Completion'
+import Card13_BadgeExplanation from './cards/Card13_BadgeExplanation'
+import BadgeHeader from './BadgeHeader'
+import BadgeScoreboard from './BadgeScoreboard'
+import CreatorPopup from './CreatorPopup'
+import CreatorStamp from './CreatorStamp'
+import ElementLabel from './ElementLabel'
+import BadgeNotification from './BadgeNotification'
+import './CardLayoutView.css'
+
+// Sistema de layers - 10 designs completamente novos
+const LAYER_STYLES = {
+  layer1: {
+    name: 'Design Original',
+    description: 'Design original sem modificações'
+  },
+  layer2: {
+    name: 'Futurista Neon',
+    description: 'Estilo cyberpunk com efeitos neon e animações'
+  },
+  layer3: {
+    name: 'Vintage Paper',
+    description: 'Aparência de papel antigo, estilo vintage'
+  },
+  layer4: {
+    name: 'Glassmorphism',
+    description: 'Efeito de vidro fosco com blur e transparência'
+  },
+  layer5: {
+    name: 'Brutalist',
+    description: 'Design brutalista com bordas grossas e cores vibrantes'
+  },
+  layer6: {
+    name: 'Organic Flow',
+    description: 'Formas orgânicas, gradientes suaves, bordas arredondadas'
+  },
+  layer7: {
+    name: 'Terminal/CLI',
+    description: 'Aparência de terminal de linha de comando'
+  },
+  layer8: {
+    name: 'Retro 80s',
+    description: 'Estilo retrô dos anos 80 com padrões e cores vibrantes'
+  },
+  layer9: {
+    name: 'Minimalist Japanese',
+    description: 'Minimalismo japonês, muito espaço em branco, tipografia limpa'
+  },
+  layer10: {
+    name: '3D Isometric',
+    description: 'Efeito 3D isométrico com perspectiva e sombras'
+  }
+}
+
+function CardLayoutView({ 
+  onCardAction,
+  onModeSelect,
+  onMenu,
+  onRestart,
+  completedTutorials,
+  earnedBadges,
+  onTutorialSelect,
+  onTutorialComplete,
+  onQuickComplete
+}) {
+  const [selectedTutorial, setSelectedTutorial] = useState('Construir uma casa')
+  const [showConcept, setShowConcept] = useState(false)
+  const [currentStep, setCurrentStep] = useState(1)
+  const [tutorialMode, setTutorialMode] = useState('demonstrative')
+  const [currentLayer, setCurrentLayer] = useState('layer1')
+  const [showLabels, setShowLabels] = useState(true)
+  const [showBadgeGallery, setShowBadgeGallery] = useState(true)
+  const [badgeGalleryExpanded, setBadgeGalleryExpanded] = useState(false) // Para controle global
+  const [expandedCards, setExpandedCards] = useState(new Set()) // Estado individual por card
+  const [showGrid, setShowGrid] = useState(false) // Grid quadriculado com linhas numeradas
+  
+  // Estados para edição de elementos
+  const [selectedElements, setSelectedElements] = useState(new Set())
+  const [instructionText, setInstructionText] = useState('')
+  const [isProcessing, setIsProcessing] = useState(false)
+  
+  // Estado para modal de edição rápida (clicando no elemento)
+  const [quickEditModal, setQuickEditModal] = useState(null) // { elementType, selector, label, cardId }
+  const [quickEditInstruction, setQuickEditInstruction] = useState('')
+  const [applyToAllCards, setApplyToAllCards] = useState(true) // true = todos os cards, false = apenas este card
+  
+  // Estado para coordenadas do elemento clicado
+  const [elementPosition, setElementPosition] = useState(null) // { label, position, cardId }
+  
+  // Chave para localStorage
+  const STORAGE_KEY = 'cardLayoutCustomStyles'
+  
+  // Função para aplicar estilos salvos (será definida depois de cards)
+  const applySavedStyles = (styles, cardsArray) => {
+    // Usar todos os cards disponíveis no DOM
+    const allCards = document.querySelectorAll('.card-layout-item')
+    allCards.forEach(cardItem => {
+      const cardId = cardItem.querySelector('.card-layout-content')?.id
+      if (!cardId) return
+      
+      const cardIdMatch = cardId.match(/card-content-(\d+)/)
+      if (!cardIdMatch) return
+      
+      const cardIdNum = parseInt(cardIdMatch[1])
+      const card = cardsArray?.find(c => c.id === cardIdNum)
+      if (!card || !card.elements) return
+      
+      const cardContainer = document.getElementById(cardId)
+      if (!cardContainer) return
+      
+      card.elements.forEach(element => {
+        const styleKey = `${element.type}-${element.selector}`
+        const savedStyle = styles[styleKey]
+        
+        if (savedStyle) {
+          const el = cardContainer.querySelector(element.selector)
+          if (el) {
+            Object.entries(savedStyle).forEach(([property, value]) => {
+              el.style[property] = value
+            })
+            console.log(`Aplicando estilos salvos para ${element.type}`)
+          }
+        }
+      })
+    })
+  }
+  
+  // Função para salvar estilos no localStorage
+  const saveStylesToStorage = (elementType, selector, property, value) => {
+    try {
+      const savedStyles = localStorage.getItem(STORAGE_KEY)
+      const styles = savedStyles ? JSON.parse(savedStyles) : {}
+      
+      const styleKey = `${elementType}-${selector}`
+      if (!styles[styleKey]) {
+        styles[styleKey] = {}
+      }
+      
+      styles[styleKey][property] = value
+      
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(styles))
+      console.log(`💾 Estilo salvo: ${elementType} -> ${property}: ${value}`)
+      
+      // Reaplicar estilos imediatamente após salvar
+      setTimeout(() => {
+        applySavedStyles(styles, cards)
+      }, 100)
+    } catch (error) {
+      console.error('❌ Erro ao salvar estilo:', error)
+    }
+  }
+  
+  // Função para limpar todos os estilos salvos
+  const clearSavedStyles = () => {
+    localStorage.removeItem(STORAGE_KEY)
+    // Recarregar a página para aplicar os estilos originais
+    window.location.reload()
+  }
+
+  const mockStepData = {
+    title: 'Montar o terreno',
+    description: 'Criar a base da casa'
+  }
+
+  // Função helper para renderizar a galeria de badges
+  const renderBadgeGallery = (cardContent, cardId) => {
+    if (!showBadgeGallery) {
+      return cardContent
+    }
+    
+    // Estado individual por card
+    const isCardExpanded = expandedCards.has(cardId)
+    
+    // Calcula a altura da galeria baseado no estado expandido/contraído
+    const galleryHeight = isCardExpanded ? 350 : 100
+    const buttonHeight = 80 // Altura dos botões de CTA
+    
+    const toggleCardGallery = () => {
+      setExpandedCards(prev => {
+        const newSet = new Set(prev)
+        if (newSet.has(cardId)) {
+          newSet.delete(cardId)
+        } else {
+          newSet.add(cardId)
+        }
+        return newSet
+      })
+    }
+    
+    return (
+      <div style={{ position: 'relative', height: '100%', width: '100%', overflow: 'visible' }}>
+        {/* Conteúdo do card - não é afetado pela galeria */}
+        <div style={{ 
+          height: '100%',
+          width: '100%',
+          overflow: 'auto',
+          position: 'relative',
+          paddingBottom: `${buttonHeight}px` // Espaço para os botões ficarem visíveis
+        }}>
+          {cardContent}
+        </div>
+        {/* Galeria de badges - overlay absoluto que não move nada, posicionada acima dos botões */}
+        <div className={`badge-gallery-fixed ${isCardExpanded ? 'expanded' : 'collapsed'}`} style={{ 
+          background: 'linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%)',
+          borderTop: '2px solid #2196F3',
+          boxShadow: '0 -2px 8px rgba(0, 0, 0, 0.15)',
+          position: 'absolute',
+          bottom: `${buttonHeight}px`, // Posiciona acima dos botões (80px)
+          left: 0,
+          right: 0,
+          zIndex: 100,
+          maxHeight: `${galleryHeight}px`,
+          minHeight: isCardExpanded ? '350px' : '100px',
+          overflow: 'hidden',
+          transition: 'max-height 0.3s ease, min-height 0.3s ease'
+        }}>
+          <div 
+            className="badge-gallery-header"
+            onClick={(e) => {
+              e.stopPropagation()
+              toggleCardGallery()
+            }}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              cursor: 'pointer',
+              padding: '16px 24px',
+              userSelect: 'none',
+              minHeight: '100px',
+              position: 'relative',
+              background: 'linear-gradient(135deg, #2196F3 0%, #1976D2 100%)',
+              borderBottom: '1px solid #1565C0',
+              color: '#ffffff',
+              zIndex: 101,
+              pointerEvents: 'auto'
+            }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+              <h2 style={{ fontSize: '20px', paddingTop: '0px', marginBottom: '0px', margin: 0, color: '#ffffff' }}>
+                Galeria de Badges
+              </h2>
+              <span style={{ 
+                fontSize: '24px', 
+                fontWeight: 700,
+                color: '#ffffff',
+                transition: 'transform 0.3s',
+                transform: isCardExpanded ? 'rotate(45deg)' : 'rotate(0deg)',
+                lineHeight: 1
+              }}>
+                +
+              </span>
+            </div>
+            <div style={{ marginTop: '12px' }}>
+              <BadgeScoreboard earnedBadges={earnedBadges || [1, 2]} />
+            </div>
+          </div>
+          {isCardExpanded && (
+            <div className="badge-gallery-content" style={{ 
+              padding: '12px 24px', 
+              background: '#f9f9f9',
+              maxHeight: `${galleryHeight - 100}px`, // Altura total menos o header (100px)
+              overflowY: 'auto'
+            }}>
+              <div style={{ marginBottom: '12px', padding: '12px 0', borderBottom: '1px solid #e0e0e0' }}>
+                <button
+                  style={{
+                    background: 'transparent',
+                    border: 'none',
+                    color: '#0066cc',
+                    fontSize: '13px',
+                    textDecoration: 'underline',
+                    cursor: 'pointer',
+                    padding: 0
+                  }}
+                >
+                  Entenda o sistema de badges
+                </button>
+              </div>
+              <div>
+                <BadgeHeader 
+                  earnedBadges={earnedBadges || [1, 2]} 
+                  completedTutorials={completedTutorials || { class1: [1, 2, 3, 4, 5], class2: [1, 2] }}
+                />
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    )
+  }
+
+  const cards = [
+    {
+      id: 0,
+      name: 'Card 00 - Capa',
+      component: <Card00_Cover onStart={() => {}} />,
+      elements: [
+        { type: 'title-1', selector: '.card-title', label: 'Título 1 - Principal' },
+        { type: 'title-2', selector: 'h3', label: 'Título 2 - Subtítulo' },
+        { type: 'body', selector: '.card-text', label: 'Corpo - Texto descritivo' },
+        { type: 'button-primary', selector: '.primary-button', label: 'Botão Primário - Ação Principal' },
+        { type: 'card-actions', selector: '.card-actions', label: 'Área de Ações - Footer' }
+      ]
+    },
+    {
+      id: 1,
+      name: 'Card 01 - Seleção (Em Andamento)',
+      component: renderBadgeGallery(
+        <Card01_02_Selection
+          cardNumber={1}
+          selectedTutorial={selectedTutorial}
+          onSelect={setSelectedTutorial}
+          onNext={() => {}}
+          completedTutorials={{ class1: [1, 2], class2: [] }}
+          earnedBadges={[1]}
+          currentTutorialClass={1}
+          onTutorialClassSelect={() => {}}
+          onTutorialSelect={onTutorialSelect || (() => {})}
+          onBack={onMenu || (() => {})}
+          onMenu={onMenu || (() => {})}
+        />,
+        1
+      ),
+      elements: [
+        { type: 'title-1', selector: '.card-title', label: 'Título 1 - Principal' },
+        { type: 'accordion-header', selector: 'h3', label: 'Cabeçalho do Acordeão - Título' },
+        { type: 'accordion-icon', selector: 'span[style*="transform"]', label: 'Ícone Expandir/Colapsar' },
+        { type: 'accordion-content', selector: 'div[style*="borderBottom"]', label: 'Conteúdo do Acordeão - Lista' },
+        { type: 'button-selection', selector: '.selection-button', label: 'Botão de Seleção' },
+        { type: 'tutorial-item', selector: 'div[style*="padding: \'24px\'"]', label: 'Item de Tutorial' },
+        { type: 'tutorial-status', selector: 'span[style*="✓ Concluído"]', label: 'Status - Concluído' },
+        { type: 'tutorial-lock', selector: 'span[style*="🔒"]', label: 'Ícone - Bloqueado' },
+        { type: 'header-global', selector: '.card-header-global', label: 'Header Global' },
+        { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' },
+        { type: 'badge-gallery', selector: '.badge-gallery-fixed', label: 'Galeria de Badges - Fixa' },
+        { type: 'badge-scoreboard', selector: '.badge-scoreboard', label: 'Placar de Badges' },
+        { type: 'badge-header', selector: '.badge-header', label: 'Galeria de Badges - Expandida' },
+        { type: 'badge-item', selector: '.badge-header-item', label: 'Item de Badge' },
+        { type: 'badge-description', selector: '.badge-description', label: 'Descrição do Badge' },
+        { type: 'creator-stamp', selector: '.creator-stamp-inline', label: 'Selo de Creator' }
+      ]
+    },
+    {
+      id: 2,
+      name: 'Card 01 - Seleção (Concluído)',
+      component: renderBadgeGallery(
+        <Card01_02_Selection
+          cardNumber={1}
+          selectedTutorial={selectedTutorial}
+          onSelect={setSelectedTutorial}
+          onNext={() => {}}
+          completedTutorials={{ class1: [1, 2, 3, 4, 5], class2: [1, 2, 3, 4, 5] }}
+          earnedBadges={[1, 2, 3]}
+          currentTutorialClass={1}
+          onTutorialClassSelect={() => {}}
+          onTutorialSelect={onTutorialSelect || (() => {})}
+          onBack={onMenu || (() => {})}
+          onMenu={onMenu || (() => {})}
+        />,
+        2
+      ),
+      elements: [
+        { type: 'title-1', selector: '.card-title', label: 'Título 1 - Principal' },
+        { type: 'accordion-header', selector: 'h3', label: 'Cabeçalho do Acordeão - Título' },
+        { type: 'accordion-icon', selector: 'span[style*="transform"]', label: 'Ícone Expandir/Colapsar' },
+        { type: 'accordion-content', selector: 'div[style*="borderBottom"]', label: 'Conteúdo do Acordeão - Lista' },
+        { type: 'button-selection', selector: '.selection-button', label: 'Botão de Seleção' },
+        { type: 'tutorial-item', selector: 'div[style*="padding: \'24px\'"]', label: 'Item de Tutorial' },
+        { type: 'tutorial-status', selector: 'span[style*="✓ Concluído"]', label: 'Status - Concluído' },
+        { type: 'header-global', selector: '.card-header-global', label: 'Header Global' },
+        { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' },
+        { type: 'badge-gallery', selector: '.badge-gallery-fixed', label: 'Galeria de Badges - Fixa' },
+        { type: 'badge-scoreboard', selector: '.badge-scoreboard', label: 'Placar de Badges' },
+        { type: 'badge-header', selector: '.badge-header', label: 'Galeria de Badges - Expandida' },
+        { type: 'badge-item', selector: '.badge-header-item', label: 'Item de Badge' },
+        { type: 'badge-description', selector: '.badge-description', label: 'Descrição do Badge' },
+        { type: 'creator-stamp', selector: '.creator-stamp-inline', label: 'Selo de Creator' }
+      ]
+    },
+    {
+      id: 3,
+      name: 'Card 03 - Modo',
+      component: (
+        <Card03_ModeSelection
+          onModeSelect={(mode) => {
+            setTutorialMode(mode)
+            if (onModeSelect) onModeSelect(mode)
+          }}
+          onMenu={onMenu || (() => {})}
+        />
+      ),
+      elements: [
+        { type: 'title-1', selector: '.card-title', label: 'Título 1' },
+        { type: 'button-mode', selector: '.mode-button', label: 'Botão de Modo' },
+        { type: 'title-2', selector: '.mode-title', label: 'Título 2 - Subtítulo' },
+        { type: 'body', selector: '.mode-description', label: 'Corpo - Descrição' },
+        { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' }
+      ]
+    },
+    {
+      id: 4,
+      name: 'Card 04 - Introdução',
+      component: renderBadgeGallery(
+        <Card04_Introduction
+          tutorialName={selectedTutorial}
+          onStart={() => {}}
+          onMenu={onMenu || (() => {})}
+          onRestart={onRestart || (() => {})}
+          currentTutorialId={1}
+          onCompleteAndMenu={() => {
+            if (onQuickComplete) onQuickComplete()
+            else if (onMenu) onMenu()
+          }}
+        />,
+        4
+      ),
+      elements: [
+        { type: 'title-2', selector: 'h3', label: 'Título 2 - Nome do Tutorial' },
+        { type: 'body', selector: '.card-text', label: 'Corpo - Texto descritivo' },
+        { type: 'button-primary', selector: '.primary-button', label: 'Botão Primário - Iniciar' },
+        { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' },
+        { type: 'header-global', selector: '.card-header-global', label: 'Header Global' },
+        { type: 'card-actions', selector: '.card-actions', label: 'Área de Ações - Footer' },
+        { type: 'badge-gallery', selector: '.badge-gallery-fixed', label: 'Galeria de Badges - Fixa' },
+        { type: 'badge-scoreboard', selector: '.badge-scoreboard', label: 'Placar de Badges' }
+      ]
+    },
+    {
+      id: 5,
+      name: 'Card 05 - Antes da Ação',
+      component: renderBadgeGallery(
+        <Card05_BeforeAction
+          stepNumber={currentStep}
+          totalSteps={3}
+          stepTitle={mockStepData.title}
+          onDemonstrate={() => {
+            if (onCardAction) onCardAction('demonstrate')
+          }}
+          onBack={() => setCurrentStep(Math.max(1, currentStep - 1))}
+          onShowConcept={() => setShowConcept(true)}
+          onMenu={onMenu || (() => {})}
+          onRestart={onRestart || (() => {})}
+        />,
+        5
+      ),
+      elements: [
+        { type: 'title-2', selector: '.card-title', label: 'Título 2 - Subtítulo' },
+        { type: 'theme-box', selector: '.theme-box', label: 'Theme Box - Container destacado' },
+        { type: 'step-counter', selector: '.step-counter', label: 'Contador de Passos' },
+        { type: 'step-title-bar', selector: '.step-title-bar', label: 'Barra de Título da Ação' },
+        { type: 'title-2', selector: '.section-title', label: 'Título 2 - Seção' },
+        { type: 'instructions-box', selector: '.instructions-box', label: 'Caixa de Instruções' },
+        { type: 'instructions-list', selector: '.instructions-list', label: 'Lista de Instruções' },
+        { type: 'body', selector: '.card-text', label: 'Corpo - Texto descritivo' },
+        { type: 'concept-link', selector: '.concept-title-bar', label: 'Link de Conceito' },
+        { type: 'button-secondary', selector: '.secondary-button', label: 'Botão Secundário - Voltar' },
+        { type: 'button-primary', selector: '.primary-button.demonstrate-button', label: 'Botão Primário - Demonstrar' },
+        { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' },
+        { type: 'card-actions', selector: '.card-actions', label: 'Área de Ações - Footer' },
+        { type: 'badge-gallery', selector: '.badge-gallery-fixed', label: 'Galeria de Badges - Fixa' },
+        { type: 'badge-scoreboard', selector: '.badge-scoreboard', label: 'Placar de Badges' }
+      ]
+    },
+    {
+      id: '5.1',
+      name: 'Card 05.1 - Conceito',
+      component: (
+        <Card05_1_Concept
+          onContinue={() => setShowConcept(false)}
+          onMenu={onMenu || (() => {})}
+          onRestart={onRestart || (() => {})}
+        />
+      ),
+      elements: [
+        { type: 'title-1', selector: '.card-title', label: 'Título 1' },
+        { type: 'body', selector: '.card-text', label: 'Corpo - Texto explicativo' },
+        { type: 'feedback-section', selector: '.feedback-section', label: 'Seção de Feedback' },
+        { type: 'button-feedback', selector: '.feedback-button.positive', label: 'Botão Feedback - Positivo 👍' },
+        { type: 'button-feedback', selector: '.feedback-button.negative', label: 'Botão Feedback - Negativo 👎' },
+        { type: 'button-primary', selector: '.primary-button', label: 'Botão Primário - Continuar' },
+        { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' }
+      ]
+    },
+    {
+      id: 6,
+      name: 'Card 06 - Após Ação',
+      component: renderBadgeGallery(
+        <Card06_AfterAction
+          stepNumber={currentStep}
+          totalSteps={3}
+          stepTitle={mockStepData.title}
+          onNextStep={() => setCurrentStep(Math.min(3, currentStep + 1))}
+          onBack={() => setCurrentStep(Math.max(1, currentStep - 1))}
+          onMenu={onMenu || (() => {})}
+          onRestart={onRestart || (() => {})}
+        />,
+        6
+      ),
+      elements: [
+        { type: 'title-2', selector: '.card-title', label: 'Título 2' },
+        { type: 'theme-box', selector: '.theme-box', label: 'Theme Box' },
+        { type: 'step-title-bar', selector: '.step-title-bar', label: 'Barra de Título' },
+        { type: 'button-secondary', selector: '.secondary-button', label: 'Botão Secundário - Voltar' },
+        { type: 'button-next', selector: '.next-step-button', label: 'Botão Próximo Passo' },
+        { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' },
+        { type: 'card-actions', selector: '.card-actions', label: 'Área de Ações - Footer' },
+        { type: 'badge-gallery', selector: '.badge-gallery-fixed', label: 'Galeria de Badges - Fixa' },
+        { type: 'badge-scoreboard', selector: '.badge-scoreboard', label: 'Placar de Badges' }
+      ]
+    },
+    {
+      id: 7,
+      name: 'Card 07 - Interação',
+      component: renderBadgeGallery(
+        <Card07_InteractionInvite
+          onTry={() => {}}
+          onContinue={() => {}}
+          onMenu={onMenu || (() => {})}
+          onRestart={onRestart || (() => {})}
+        />,
+        7
+      ),
+      elements: [
+        { type: 'title-1', selector: '.card-title', label: 'Título 1' },
+        { type: 'button-interactive', selector: '.interactive-button.try', label: 'Botão Interativo - Tentar' },
+        { type: 'button-interactive', selector: '.interactive-button.continue', label: 'Botão Interativo - Continuar' },
+        { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' },
+        { type: 'badge-gallery', selector: '.badge-gallery-fixed', label: 'Galeria de Badges - Fixa' },
+        { type: 'badge-scoreboard', selector: '.badge-scoreboard', label: 'Placar de Badges' }
+      ]
+    },
+    {
+      id: 8,
+      name: 'Card 08 - Tentativa',
+      component: renderBadgeGallery(
+        <Card08_UserAttempt
+          stepNumber={currentStep}
+          totalSteps={3}
+          stepTitle={mockStepData.title}
+          onCheckResult={() => {
+            if (onCardAction) onCardAction('demonstrate')
+          }}
+          onSkip={() => {}}
+          onMenu={onMenu || (() => {})}
+          onRestart={onRestart || (() => {})}
+        />,
+        8
+      ),
+      elements: [
+        { type: 'button-attempt', selector: '.user-attempt-button', label: 'Botão de Tentativa - Verificar' },
+        { type: 'link-skip', selector: '.skip-link', label: 'Link Pular' },
+        { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' },
+        { type: 'badge-gallery', selector: '.badge-gallery-fixed', label: 'Galeria de Badges - Fixa' },
+        { type: 'badge-scoreboard', selector: '.badge-scoreboard', label: 'Placar de Badges' }
+      ]
+    },
+    {
+      id: 9,
+      name: 'Card 09 - Feedback Positivo',
+      component: renderBadgeGallery(
+        <Card09_PositiveFeedback
+          onTryAgain={() => {}}
+          onContinue={() => {}}
+          onMenu={onMenu || (() => {})}
+          onRestart={onRestart || (() => {})}
+        />,
+        9
+      ),
+      elements: [
+        { type: 'feedback-icon', selector: '.feedback-icon', label: 'Ícone de Feedback' },
+        { type: 'title-1', selector: '.card-title', label: 'Título 1' },
+        { type: 'button-feedback', selector: '.feedback-button-red', label: 'Botão Feedback - Fazer de Novo' },
+        { type: 'button-feedback', selector: '.feedback-button-black', label: 'Botão Feedback - Continuar' },
+        { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' },
+        { type: 'badge-gallery', selector: '.badge-gallery-fixed', label: 'Galeria de Badges - Fixa' },
+        { type: 'badge-scoreboard', selector: '.badge-scoreboard', label: 'Placar de Badges' }
+      ]
+    },
+    {
+      id: 10,
+      name: 'Card 10 - Feedback Negativo',
+      component: renderBadgeGallery(
+        <Card10_NegativeFeedback
+          onTryAgain={() => {}}
+          onContinue={() => {}}
+          onMenu={onMenu || (() => {})}
+          onRestart={onRestart || (() => {})}
+        />,
+        10
+      ),
+      elements: [
+        { type: 'feedback-icon', selector: '.feedback-icon', label: 'Ícone de Feedback' },
+        { type: 'title-1', selector: '.card-title', label: 'Título 1' },
+        { type: 'button-feedback', selector: '.feedback-button-red', label: 'Botão Feedback - Fazer de Novo' },
+        { type: 'button-feedback', selector: '.feedback-button-black', label: 'Botão Feedback - Continuar' },
+        { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' },
+        { type: 'badge-gallery', selector: '.badge-gallery-fixed', label: 'Galeria de Badges - Fixa' },
+        { type: 'badge-scoreboard', selector: '.badge-scoreboard', label: 'Placar de Badges' }
+      ]
+    },
+    {
+      id: 11,
+      name: 'Card 11 - Conclusão',
+      component: renderBadgeGallery(
+        <Card11_Completion
+          onMenu={onMenu || (() => {})}
+          onRestart={onRestart || (() => {})}
+          onComplete={onTutorialComplete || (() => {})}
+          onCompleteAndMenu={onQuickComplete || (() => {})}
+        />,
+        11
+      ),
+      elements: [
+        { type: 'title-1', selector: '.card-title', label: 'Título 1' },
+        { type: 'button-completion', selector: '.completion-button', label: 'Botão Conclusão - Registrar' },
+        { type: 'body', selector: '.completion-text', label: 'Corpo - Texto final' },
+        { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' },
+        { type: 'badge-gallery', selector: '.badge-gallery-fixed', label: 'Galeria de Badges - Fixa' },
+        { type: 'badge-scoreboard', selector: '.badge-scoreboard', label: 'Placar de Badges' }
+      ]
+    },
+    {
+      id: 13,
+      name: 'Card 13 - Badges',
+      component: (
+        <Card13_BadgeExplanation
+          onClose={() => {}}
+        />
+      ),
+      elements: [
+        { type: 'title-1', selector: '.card-title', label: 'Título 1' },
+        { type: 'body', selector: '.card-text', label: 'Corpo' },
+        { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' }
+      ]
+    },
+    {
+      id: 16,
+      name: 'Badge Notification - Popup',
+      component: (
+        <div className="card" style={{ padding: '24px', background: '#ffffff', height: '100%', position: 'relative', overflow: 'visible', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+            <BadgeNotification badgeId={1} onClose={() => {}} />
+            <div style={{ position: 'absolute', top: '20px', right: '20px', zIndex: 10 }}>
+              <CreatorStamp isVisible={true} />
+            </div>
+          </div>
+        </div>
+      ),
+      elements: [
+        { type: 'badge-notification', selector: '.badge-notification', label: 'Notificação de Badge' },
+        { type: 'badge-icon', selector: '.badge-icon', label: 'Ícone de Badge' },
+        { type: 'title-1', selector: '.badge-text h3', label: 'Título - Notificação' },
+        { type: 'body', selector: '.badge-text p', label: 'Corpo - Nome do Badge' },
+        { type: 'button-close', selector: '.badge-close', label: 'Botão Fechar' }
+      ]
+    },
+    {
+      id: 17,
+      name: 'Creator Popup - Conquista',
+      component: (
+        <div className="card" style={{ padding: '24px', background: '#ffffff', height: '100%', position: 'relative', overflow: 'visible', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <CreatorPopup onClose={() => {}} />
+        </div>
+      ),
+      elements: [
+        { type: 'popup-overlay', selector: '.creator-popup-overlay', label: 'Overlay do Popup' },
+        { type: 'popup-content', selector: '.creator-popup-content', label: 'Conteúdo do Popup' },
+        { type: 'title-1', selector: '.creator-popup-title', label: 'Título 1 - Parabéns' },
+        { type: 'title-2', selector: '.creator-popup-creator', label: 'Título 2 - Creator' },
+        { type: 'body', selector: '.creator-popup-message', label: 'Corpo - Mensagem' },
+        { type: 'button-primary', selector: '.creator-popup-button', label: 'Botão Primário - Continuar' }
+      ]
+    },
+    {
+      id: 18,
+      name: 'Card 01 - Seleção (Acordeões Abertos)',
+      component: renderBadgeGallery(
+        <div className="card card-selection" style={{ position: 'relative' }}>
+          <div style={{ padding: '24px 24px', paddingTop: '80px', position: 'relative' }}>
+            {earnedBadges && Array.isArray(earnedBadges) && earnedBadges.includes(1) && (
+              <div style={{ position: 'absolute', top: '20px', right: '24px', zIndex: 10 }}>
+                <CreatorStamp isVisible={true} />
+              </div>
+            )}
+            {/* Logo e Título - mesma posição do Card 00 */}
+            <div style={{ marginBottom: '32px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <img 
+                src="/logo.png" 
+                alt="Logo" 
+                style={{ 
+                  maxWidth: '200px', 
+                  maxHeight: '100px', 
+                  width: 'auto', 
+                  height: 'auto',
+                  objectFit: 'contain'
+                }} 
+              />
+            </div>
+            <h3 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '24px', color: '#000000' }}>
+              Tutoriais Roblox Studios
+            </h3>
+            <div className="card-content" style={{ margin: 0, padding: 0, marginTop: '0px' }}>
+              {/* Classe 1 - Acordeon ABERTO */}
+              <div style={{ marginBottom: '24px', border: '1px solid #e0e0e0', borderRadius: '8px', overflow: 'hidden' }}>
+                <div
+                  style={{
+                    padding: '16px 20px',
+                    background: '#f5f5f5',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    borderBottom: '1px solid #e0e0e0'
+                  }}
+                >
+                  <h3 style={{ 
+                    fontSize: '18px', 
+                    fontWeight: 700, 
+                    margin: 0,
+                    color: '#000000'
+                  }}>
+                    Os primeiros passos para se tornar Creator
+                  </h3>
+                  <span style={{ 
+                    fontSize: '20px', 
+                    color: '#666666',
+                    transition: 'transform 0.2s',
+                    transform: 'rotate(180deg)'
+                  }}>
+                    ▼
+                  </span>
+                </div>
+                <div>
+                  {[
+                    { id: 1, name: 'Construir um casa', description: 'Aprenda a criar uma casa completa' },
+                    { id: 2, name: 'Criar um obstáculo', description: 'Domine a criação de obstáculos' },
+                    { id: 3, name: 'Animar um avatar', description: 'Aprenda a animar personagens' },
+                    { id: 4, name: 'Criar um portal', description: 'Aprenda a criar portais' },
+                    { id: 5, name: 'Adicionar efeitos', description: 'Aprenda a adicionar efeitos visuais' },
+                  ].map((tutorial) => {
+                    const isCompleted = (completedTutorials?.class1 || []).includes(tutorial.id)
+                    const isAvailable = tutorial.id === 1 || (completedTutorials?.class1 || []).includes(tutorial.id - 1)
+                    const isLocked = !isAvailable && !isCompleted
+                    
+                    return (
+                      <div
+                        key={`1-${tutorial.id}`}
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center',
+                          padding: '24px',
+                          borderBottom: '1px solid #e0e0e0',
+                          cursor: isLocked ? 'not-allowed' : 'pointer',
+                          opacity: isLocked ? 0.5 : (isCompleted ? 0.7 : 1),
+                          background: isLocked ? '#f5f5f5' : 'transparent',
+                        }}
+                      >
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1 }}>
+                          <span style={{ 
+                            fontSize: '14px', 
+                            fontWeight: 700, 
+                            color: isLocked ? '#999999' : '#000000',
+                            minWidth: '24px'
+                          }}>
+                            {tutorial.id}.
+                          </span>
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', flex: 1 }}>
+                            <span style={{ 
+                              fontSize: '16px', 
+                              color: isLocked ? '#999999' : '#000000', 
+                              fontWeight: 600 
+                            }}>
+                              {tutorial.name}
+                            </span>
+                            {isCompleted ? (
+                              <span style={{ 
+                                fontSize: '12px', 
+                                color: '#4CAF50', 
+                                fontWeight: 500,
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '4px'
+                              }}>
+                                ✓ Concluído
+                              </span>
+                            ) : isAvailable && !isLocked ? (
+                              <span style={{ 
+                                fontSize: '12px', 
+                                color: '#666666', 
+                                fontWeight: 500
+                              }}>
+                                Em andamento
+                              </span>
+                            ) : null}
+                          </div>
+                        </div>
+                        <div
+                          style={{
+                            width: '32px',
+                            height: '32px',
+                            borderRadius: '50%',
+                            background: isLocked ? '#cccccc' : (isCompleted ? '#4CAF50' : '#000000'),
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            cursor: isLocked ? 'not-allowed' : 'pointer',
+                          }}
+                        >
+                          {isLocked ? (
+                            <span style={{ color: '#ffffff', fontSize: '16px' }}>🔒</span>
+                          ) : isCompleted ? (
+                            <span style={{ color: '#ffffff', fontSize: '16px' }}>✓</span>
+                          ) : (
+                            <span style={{ color: '#ffffff', fontSize: '12px' }}>▶</span>
+                          )}
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+
+              {/* Classe 2 - Acordeon ABERTO */}
+              <div style={{ marginBottom: '24px', border: '1px solid #e0e0e0', borderRadius: '8px', overflow: 'hidden' }}>
+                <div
+                  style={{
+                    padding: '16px 20px',
+                    background: '#f5f5f5',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    borderBottom: '1px solid #e0e0e0'
+                  }}
+                >
+                  <h3 style={{ 
+                    fontSize: '18px', 
+                    fontWeight: 700, 
+                    margin: 0,
+                    color: '#000000'
+                  }}>
+                    Criações rápidas
+                  </h3>
+                  <span style={{ 
+                    fontSize: '20px', 
+                    color: '#666666',
+                    transition: 'transform 0.2s',
+                    transform: 'rotate(180deg)'
+                  }}>
+                    ▼
+                  </span>
+                </div>
+                <div>
+                  {[
+                    { id: 1, name: 'Criar um jogo simples', description: 'Aprenda a criar um jogo básico' },
+                    { id: 2, name: 'Adicionar física', description: 'Domine a física no Roblox' },
+                    { id: 3, name: 'Criar UI interativa', description: 'Aprenda a criar interfaces' },
+                    { id: 4, name: 'Publicar seu jogo', description: 'Aprenda a publicar jogos' },
+                    { id: 5, name: 'Monetizar criação', description: 'Aprenda a monetizar' },
+                  ].map((tutorial) => {
+                    const isCompleted = (completedTutorials?.class2 || []).includes(tutorial.id)
+                    const isAvailable = tutorial.id === 1 || (completedTutorials?.class2 || []).includes(tutorial.id - 1)
+                    const isLocked = !isAvailable && !isCompleted
+                    
+                    return (
+                      <div
+                        key={`2-${tutorial.id}`}
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center',
+                          padding: '24px',
+                          borderBottom: tutorial.id < 5 ? '1px solid #e0e0e0' : 'none',
+                          cursor: isLocked ? 'not-allowed' : 'pointer',
+                          opacity: isLocked ? 0.5 : (isCompleted ? 0.7 : 1),
+                          background: isLocked ? '#f5f5f5' : 'transparent',
+                        }}
+                      >
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1 }}>
+                          <span style={{ 
+                            fontSize: '14px', 
+                            fontWeight: 700, 
+                            color: isLocked ? '#999999' : '#000000',
+                            minWidth: '24px'
+                          }}>
+                            {tutorial.id}.
+                          </span>
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', flex: 1 }}>
+                            <span style={{ 
+                              fontSize: '16px', 
+                              color: isLocked ? '#999999' : '#000000', 
+                              fontWeight: 600 
+                            }}>
+                              {tutorial.name}
+                            </span>
+                            {isCompleted ? (
+                              <span style={{ 
+                                fontSize: '12px', 
+                                color: '#4CAF50', 
+                                fontWeight: 500,
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '4px'
+                              }}>
+                                ✓ Concluído
+                              </span>
+                            ) : isAvailable && !isLocked ? (
+                              <span style={{ 
+                                fontSize: '12px', 
+                                color: '#666666', 
+                                fontWeight: 500
+                              }}>
+                                Em andamento
+                              </span>
+                            ) : null}
+                          </div>
+                        </div>
+                        <div
+                          style={{
+                            width: '32px',
+                            height: '32px',
+                            borderRadius: '50%',
+                            background: isLocked ? '#cccccc' : (isCompleted ? '#4CAF50' : '#000000'),
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            cursor: isLocked ? 'not-allowed' : 'pointer',
+                          }}
+                        >
+                          {isLocked ? (
+                            <span style={{ color: '#ffffff', fontSize: '16px' }}>🔒</span>
+                          ) : isCompleted ? (
+                            <span style={{ color: '#ffffff', fontSize: '16px' }}>✓</span>
+                          ) : (
+                            <span style={{ color: '#ffffff', fontSize: '12px' }}>▶</span>
+                          )}
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>,
+        18
+      ),
+      elements: [
+        { type: 'title-1', selector: '.card-title', label: 'Título 1 - Principal' },
+        { type: 'accordion-header', selector: 'h3', label: 'Cabeçalho do Acordeão - Título' },
+        { type: 'accordion-icon', selector: 'span[style*="transform"]', label: 'Ícone Expandir/Colapsar' },
+        { type: 'accordion-content', selector: 'div[style*="borderBottom"]', label: 'Conteúdo do Acordeão - Lista' },
+        { type: 'tutorial-item', selector: 'div[style*="padding: \'24px\'"]', label: 'Item de Tutorial' },
+        { type: 'tutorial-status', selector: 'span[style*="✓ Concluído"]', label: 'Status - Concluído' },
+        { type: 'tutorial-lock', selector: 'span[style*="🔒"]', label: 'Ícone - Bloqueado' },
+        { type: 'tutorial-play', selector: 'span[style*="▶"]', label: 'Ícone - Play' },
+        { type: 'creator-stamp', selector: '.creator-stamp-inline', label: 'Selo de Creator' },
+        { type: 'badge-gallery', selector: '.badge-gallery-fixed', label: 'Galeria de Badges - Fixa' },
+        { type: 'badge-scoreboard', selector: '.badge-scoreboard', label: 'Placar de Badges' }
+      ]
+    }
+  ]
+
+  // Debug: verificar se o componente está renderizando
+  console.log('CardLayoutView renderizando', { completedTutorials, earnedBadges, cardsCount: cards.length })
+  
+  // Carregar e aplicar estilos customizados do localStorage sempre que os cards forem renderizados
+  useEffect(() => {
+    const applyStyles = () => {
+      const savedStyles = localStorage.getItem(STORAGE_KEY)
+      if (savedStyles && cards && cards.length > 0) {
+        try {
+          const styles = JSON.parse(savedStyles)
+          // Aplicar estilos salvos após um delay para garantir que os elementos existam no DOM
+          setTimeout(() => {
+            applySavedStyles(styles, cards)
+          }, 500)
+        } catch (error) {
+          console.error('Erro ao carregar estilos salvos:', error)
+        }
+      }
+    }
+    
+    // Aplicar imediatamente
+    applyStyles()
+    
+    // Também aplicar quando o DOM mudar (usando MutationObserver)
+    const observer = new MutationObserver(() => {
+      applyStyles()
+    })
+    
+    // Observar mudanças no container de cards
+    const container = document.querySelector('.card-layout-container')
+    if (container) {
+      observer.observe(container, {
+        childList: true,
+        subtree: true
+      })
+    }
+    
+    // Reaplicar periodicamente para garantir que os estilos sejam mantidos
+    const interval = setInterval(() => {
+      applyStyles()
+    }, 2000)
+    
+    return () => {
+      observer.disconnect()
+      clearInterval(interval)
+    }
+  }, [cards.length, showLabels]) // Re-executar quando cards forem carregados ou labels mudarem
+
+  // Extrair todos os elementos únicos agrupados por tipo
+  const allElements = React.useMemo(() => {
+    const elementMap = new Map()
+    cards.forEach(card => {
+      if (card.elements) {
+        card.elements.forEach((element) => {
+          // Usar apenas type como chave para agrupar elementos do mesmo tipo
+          const key = element.type
+          if (!elementMap.has(key)) {
+            elementMap.set(key, {
+              type: element.type,
+              label: element.label,
+              selector: element.selector
+            })
+          }
+        })
+      }
+    })
+    return Array.from(elementMap.values())
+  }, [cards])
+
+  // Função para processar instruções e aplicar mudanças
+  const handleProcessInstruction = async () => {
+    if (!instructionText.trim() || selectedElements.size === 0) {
+      alert('Por favor, selecione pelo menos um elemento e digite uma instrução.')
+      return
+    }
+
+    setIsProcessing(true)
+    
+    const instruction = instructionText.trim().toLowerCase()
+    const selectedTypes = Array.from(selectedElements)
+    
+    console.log('Processando instrução:', instruction)
+    console.log('Elementos selecionados:', selectedTypes)
+    
+    let changesApplied = 0
+    let unrecognized = false
+    
+    // Mapa de cores em português
+    const colorMap = {
+      'azul': '#2196F3',
+      'blue': '#2196F3',
+      'vermelho': '#f44336',
+      'red': '#f44336',
+      'verde': '#4CAF50',
+      'green': '#4CAF50',
+      'amarelo': '#FFC107',
+      'yellow': '#FFC107',
+      'preto': '#000000',
+      'black': '#000000',
+      'branco': '#ffffff',
+      'white': '#ffffff',
+      'roxo': '#9C27B0',
+      'purple': '#9C27B0',
+      'laranja': '#FF9800',
+      'orange': '#FF9800',
+      'rosa': '#E91E63',
+      'pink': '#E91E63',
+      'cinza': '#9E9E9E',
+      'gray': '#9E9E9E',
+      'grey': '#9E9E9E'
+    }
+    
+    // Função para extrair cor da instrução
+    const extractColor = (inst) => {
+      // Procurar por hex
+      const hexMatch = inst.match(/#[0-9a-f]{6}/i)
+      if (hexMatch) return hexMatch[0]
+      
+      // Procurar por rgb/rgba
+      const rgbMatch = inst.match(/rgba?\([^)]+\)/i)
+      if (rgbMatch) return rgbMatch[0]
+      
+      // Procurar por nome de cor em português/inglês
+      for (const [name, color] of Object.entries(colorMap)) {
+        if (inst.includes(name)) {
+          return color
+        }
+      }
+      
+      return null
+    }
+    
+    // Aplicar mudanças em todos os cards que contêm os elementos selecionados
+    try {
+      sortedCards.forEach(card => {
+        if (!card.elements) return
+        
+        const cardContainer = document.getElementById(`card-content-${card.id}`)
+        if (!cardContainer) return
+        
+        card.elements.forEach(element => {
+          if (selectedTypes.includes(element.type)) {
+            const el = cardContainer.querySelector(element.selector)
+            if (!el) return
+            
+            let applied = false
+          
+            // Processar diferentes tipos de instruções
+            if (instruction.includes('aumentar') && (instruction.includes('fonte') || instruction.includes('font'))) {
+              const match = instruction.match(/(\d+)\s*%/)
+              if (match) {
+                const percent = parseInt(match[1])
+                const currentSize = window.getComputedStyle(el).fontSize
+                const newSize = parseFloat(currentSize) * (1 + percent / 100)
+                const newSizeValue = `${newSize}px`
+                el.style.fontSize = newSizeValue
+                saveStylesToStorage(element.type, element.selector, 'fontSize', newSizeValue)
+                console.log(`Aumentando fonte de ${element.type} em ${percent}%`)
+                applied = true
+                changesApplied++
+              }
+            } else if (instruction.includes('diminuir') && (instruction.includes('fonte') || instruction.includes('font'))) {
+              const match = instruction.match(/(\d+)\s*%/)
+              if (match) {
+                const percent = parseInt(match[1])
+                const currentSize = window.getComputedStyle(el).fontSize
+                const newSize = parseFloat(currentSize) * (1 - percent / 100)
+                const newSizeValue = `${newSize}px`
+                el.style.fontSize = newSizeValue
+                saveStylesToStorage(element.type, element.selector, 'fontSize', newSizeValue)
+                console.log(`Diminuindo fonte de ${element.type} em ${percent}%`)
+                applied = true
+                changesApplied++
+              }
+            } else if ((instruction.includes('cor') || instruction.includes('color') || instruction.includes('fonte') || instruction.includes('font')) && (instruction.includes('pra') || instruction.includes('para') || instruction.includes('to'))) {
+              const color = extractColor(instruction)
+              if (color) {
+                el.style.color = color
+                saveStylesToStorage(element.type, element.selector, 'color', color)
+                console.log(`Mudando cor de ${element.type} para ${color}`)
+                applied = true
+                changesApplied++
+              }
+            } else if (instruction.includes('background') || instruction.includes('fundo')) {
+              const color = extractColor(instruction)
+              if (color) {
+                el.style.backgroundColor = color
+                saveStylesToStorage(element.type, element.selector, 'backgroundColor', color)
+                console.log(`Mudando fundo de ${element.type} para ${color}`)
+                applied = true
+                changesApplied++
+              }
+            } else if (instruction.includes('borda') || instruction.includes('border')) {
+              const match = instruction.match(/(\d+)\s*px/)
+              if (match) {
+                const width = match[1]
+                const borderValue = `${width}px solid #000`
+                el.style.border = borderValue
+                saveStylesToStorage(element.type, element.selector, 'border', borderValue)
+                console.log(`Adicionando borda de ${width}px em ${element.type}`)
+                applied = true
+                changesApplied++
+              }
+            } else if (instruction.includes('sombra') || instruction.includes('shadow')) {
+              const shadowValue = '0 4px 6px rgba(0, 0, 0, 0.1)'
+              el.style.boxShadow = shadowValue
+              saveStylesToStorage(element.type, element.selector, 'boxShadow', shadowValue)
+              console.log(`Adicionando sombra em ${element.type}`)
+              applied = true
+              changesApplied++
+            } else if (instruction.includes('espaçamento') || instruction.includes('padding')) {
+              const match = instruction.match(/(\d+)\s*px/)
+              if (match) {
+                const padding = match[1]
+                const paddingValue = `${padding}px`
+                el.style.padding = paddingValue
+                saveStylesToStorage(element.type, element.selector, 'padding', paddingValue)
+                console.log(`Ajustando padding de ${element.type} para ${padding}px`)
+                applied = true
+                changesApplied++
+              }
+            } else if (instruction.includes('margem') || instruction.includes('margin')) {
+              const match = instruction.match(/(\d+)\s*px/)
+              if (match) {
+                const margin = match[1]
+                const marginValue = `${margin}px`
+                el.style.margin = marginValue
+                saveStylesToStorage(element.type, element.selector, 'margin', marginValue)
+                console.log(`Ajustando margin de ${element.type} para ${margin}px`)
+                applied = true
+                changesApplied++
+              }
+            }
+            
+            if (!applied) {
+              unrecognized = true
+            }
+          }
+        })
+      })
+      
+      // Mostrar feedback apenas uma vez, no final
+      setTimeout(() => {
+        if (changesApplied > 0) {
+          console.log(`✅ ${changesApplied} mudança(s) aplicada(s) com sucesso!`)
+          // Não mostrar alert se mudanças foram aplicadas
+        } else if (unrecognized) {
+          // Só mostrar alert se nenhuma mudança foi aplicada
+          setTimeout(() => {
+            alert(`Instrução não reconhecida automaticamente.\n\n"${instructionText}"\n\nTente usar formatos como:\n- "mude a fonte para azul"\n- "mude a cor para azul"\n- "aumentar fonte em 20%"\n- "adicionar borda de 2px"`)
+          }, 100)
+        }
+        
+        setInstructionText('')
+        setSelectedElements(new Set())
+        setIsProcessing(false)
+      }, 300)
+      
+    } catch (error) {
+      console.error('Erro ao processar instrução:', error)
+      alert('Erro ao processar instrução. Verifique o console para mais detalhes.')
+      setIsProcessing(false)
+    }
+  }
+
+  // Função para lidar com Enter no campo de instruções
+  const handleInstructionKeyDown = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault()
+      handleProcessInstruction()
+    }
+  }
+  
+  // Estado para modo de arrastar
+  const [isDragging, setIsDragging] = useState(false)
+  const [draggedElement, setDraggedElement] = useState(null)
+  const [dropTarget, setDropTarget] = useState(null)
+  
+  // Função para capturar posição do elemento ao clicar (SEM abrir modal)
+  const handleElementClick = (elementInfo) => {
+    // Se estiver arrastando, não fazer nada ao clicar (usar setas)
+    if (isDragging) {
+      return
+    }
+    
+    console.log('Element clicked:', elementInfo)
+    
+    const cardIdMatch = elementInfo.containerId.match(/card-content-(\d+)/)
+    if (cardIdMatch) {
+      // Capturar informações de posição do elemento
+      const cardContainer = document.getElementById(elementInfo.containerId)
+      console.log('Card container:', cardContainer, 'Selector:', elementInfo.selector)
+      
+      if (cardContainer) {
+        const element = cardContainer.querySelector(elementInfo.selector)
+        console.log('Element found:', element)
+        
+        if (element) {
+          const rect = element.getBoundingClientRect()
+          const containerRect = cardContainer.getBoundingClientRect()
+          
+          // Calcular posição relativa ao container
+          const position = {
+            top: Math.round(rect.top - containerRect.top),
+            left: Math.round(rect.left - containerRect.left),
+            width: Math.round(rect.width),
+            height: Math.round(rect.height),
+            right: Math.round(rect.right - containerRect.left),
+            bottom: Math.round(rect.bottom - containerRect.top),
+            // Linha do grid (cada 20px)
+            gridLine: Math.round((rect.top - containerRect.top) / 20)
+          }
+          
+          console.log('Position calculated:', position)
+          
+          // Atualizar estado de posição para mostrar no box (SEM abrir modal)
+          setElementPosition({
+            label: elementInfo.label,
+            type: elementInfo.type,
+            cardId: parseInt(cardIdMatch[1]),
+            position: position
+          })
+        } else {
+          console.warn('Element not found with selector:', elementInfo.selector)
+          // Mesmo sem encontrar, mostra o box com informações básicas
+          setElementPosition({
+            label: elementInfo.label,
+            type: elementInfo.type,
+            cardId: parseInt(cardIdMatch[1]),
+            position: null
+          })
+        }
+      } else {
+        console.warn('Card container not found:', elementInfo.containerId)
+        // Mesmo sem encontrar, mostra o box com informações básicas
+        setElementPosition({
+          label: elementInfo.label,
+          type: elementInfo.type,
+          cardId: parseInt(cardIdMatch[1]),
+          position: null
+        })
+      }
+    }
+  }
+  
+  // Função para excluir elemento
+  const handleDeleteElement = () => {
+    if (!quickEditModal) return
+    
+    const { type, selector, cardId } = quickEditModal
+    
+    if (applyToAllCards) {
+      // Excluir em todos os cards
+      const cardsToProcess = cards.filter(card => card.elements?.some(el => el.type === type))
+      cardsToProcess.forEach(card => {
+        const cardContainer = document.getElementById(`card-content-${card.id}`)
+        if (!cardContainer) return
+        
+        const element = card.elements?.find(el => el.type === type)
+        if (!element) return
+        
+        const el = cardContainer.querySelector(element.selector)
+        if (el) {
+          el.style.display = 'none'
+          // Salvar no localStorage
+          const savedStyles = localStorage.getItem(STORAGE_KEY)
+          const styles = savedStyles ? JSON.parse(savedStyles) : {}
+          const styleKey = `${type}-${element.selector}`
+          if (!styles[styleKey]) styles[styleKey] = {}
+          styles[styleKey]['display'] = 'none'
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(styles))
+        }
+      })
+    } else {
+      // Excluir apenas no card atual
+      const cardContainer = document.getElementById(`card-content-${cardId}`)
+      if (cardContainer) {
+        const el = cardContainer.querySelector(selector)
+        if (el) {
+          el.style.display = 'none'
+          // Salvar no localStorage
+          const savedStyles = localStorage.getItem(STORAGE_KEY)
+          const styles = savedStyles ? JSON.parse(savedStyles) : {}
+          const styleKey = `${type}-${selector}`
+          if (!styles[styleKey]) styles[styleKey] = {}
+          styles[styleKey]['display'] = 'none'
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(styles))
+        }
+      }
+    }
+    
+    setQuickEditModal(null)
+    alert('Elemento excluído! (Use "Resetar Todos os Estilos Customizados" para restaurar)')
+  }
+  
+  // Função para ativar modo de arrastar
+  const handleStartDrag = () => {
+    if (!quickEditModal) return
+    
+    const draggedInfo = { ...quickEditModal }
+    const sourceCardId = draggedInfo.cardId
+    const sourceSelector = draggedInfo.selector
+    
+    setIsDragging(true)
+    setDraggedElement(draggedInfo)
+    setQuickEditModal(null)
+    
+    // Função para limpar indicadores visuais
+    const clearVisualIndicators = () => {
+      cards.forEach(card => {
+        const cardContainer = document.getElementById(`card-content-${card.id}`)
+        if (cardContainer) {
+          card.elements?.forEach(element => {
+            const el = cardContainer.querySelector(element.selector)
+            if (el) {
+              el.style.cursor = ''
+              el.style.outline = ''
+              el.style.outlineOffset = ''
+              el.style.boxShadow = ''
+              el.style.opacity = ''
+              el.style.transform = ''
+              el.removeAttribute('data-drop-target')
+            }
+          })
+        }
+      })
+    }
+    
+    // Função para mover elemento com setas
+    const handleArrowKeys = (e) => {
+      // Verificar se é uma tecla de seta ou ESC
+      if (!['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Escape'].includes(e.key)) {
+        return
+      }
+      
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        setIsDragging(false)
+        setDraggedElement(null)
+        setDropTarget(null)
+        clearVisualIndicators()
+        document.removeEventListener('keydown', handleArrowKeys)
+        return
+      }
+      
+      e.preventDefault()
+      
+      const sourceCardContainer = document.getElementById(`card-content-${sourceCardId}`)
+      if (!sourceCardContainer) {
+        console.warn('Card container não encontrado:', `card-content-${sourceCardId}`)
+        return
+      }
+      
+      const sourceEl = sourceCardContainer.querySelector(sourceSelector)
+      if (!sourceEl) {
+        console.warn('Elemento não encontrado:', sourceSelector)
+        return
+      }
+      
+      const parent = sourceEl.parentNode
+      if (!parent) {
+        console.warn('Parent não encontrado')
+        return
+      }
+      
+      let moved = false
+      
+      if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+        // Mover para cima (antes do elemento anterior)
+        const prevSibling = sourceEl.previousElementSibling
+        if (prevSibling) {
+          parent.insertBefore(sourceEl, prevSibling)
+          moved = true
+          console.log('Movido para cima')
+        } else {
+          console.log('Não há elemento anterior para mover')
+        }
+      } else if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+        // Mover para baixo (depois do próximo elemento)
+        const nextSibling = sourceEl.nextElementSibling
+        if (nextSibling) {
+          parent.insertBefore(sourceEl, nextSibling.nextElementSibling)
+          moved = true
+          console.log('Movido para baixo')
+        } else {
+          // Se não tem próximo, mover para o final
+          parent.appendChild(sourceEl)
+          moved = true
+          console.log('Movido para o final')
+        }
+      }
+      
+      if (moved) {
+        // Salvar posição no localStorage
+        const savedStyles = localStorage.getItem(STORAGE_KEY)
+        const styles = savedStyles ? JSON.parse(savedStyles) : {}
+        const styleKey = `${draggedInfo.type}-${draggedInfo.selector}`
+        if (!styles[styleKey]) styles[styleKey] = {}
+        styles[styleKey]['moved'] = true
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(styles))
+      }
+    }
+    
+    // Adicionar listener para setas
+    console.log('Adicionando listener de setas para arrastar elemento')
+    document.addEventListener('keydown', handleArrowKeys)
+    
+    // Adicionar estilo visual ao elemento que está sendo arrastado
+    setTimeout(() => {
+      const sourceCardContainer = document.getElementById(`card-content-${sourceCardId}`)
+      const sourceEl = sourceCardContainer?.querySelector(sourceSelector)
+      
+      // Destacar o elemento que está sendo arrastado
+      if (sourceEl) {
+        sourceEl.style.opacity = '0.7'
+        sourceEl.style.cursor = 'grabbing'
+        sourceEl.style.transition = 'all 0.2s'
+        sourceEl.style.outline = '3px solid #4CAF50'
+        sourceEl.style.outlineOffset = '4px'
+        sourceEl.style.boxShadow = '0 0 10px rgba(76, 175, 80, 0.5)'
+      }
+    }, 100)
+  }
+  
+  
+  // Efeito para limpar estado de arrastar quando necessário
+  useEffect(() => {
+    if (!isDragging) {
+      // Limpar indicadores visuais
+      cards.forEach(card => {
+        const cardContainer = document.getElementById(`card-content-${card.id}`)
+        if (cardContainer) {
+          card.elements?.forEach(element => {
+            const el = cardContainer.querySelector(element.selector)
+            if (el) {
+              el.style.cursor = ''
+              el.style.outline = ''
+              el.style.outlineOffset = ''
+              el.style.boxShadow = ''
+              el.style.opacity = ''
+              el.removeAttribute('data-drop-target')
+            }
+          })
+        }
+      })
+    }
+  }, [isDragging, cards])
+  
+  // Função para processar instrução rápida (do modal)
+  const handleQuickEdit = async () => {
+    if (!quickEditInstruction.trim() || !quickEditModal) {
+      console.log('❌ handleQuickEdit: Instrução vazia ou modal não existe')
+      return
+    }
+    
+    setIsProcessing(true)
+    
+    const instruction = quickEditInstruction.trim().toLowerCase()
+    const { type, selector, cardId } = quickEditModal
+    
+    console.log('🔍 Processando edição rápida:', { type, selector, cardId, instruction, applyToAllCards })
+    
+    // Determinar quais cards processar (usar cards diretamente, não sortedCards que pode não estar definido ainda)
+    const cardsToProcess = applyToAllCards 
+      ? cards.filter(card => card.elements?.some(el => el.type === type))
+      : cards.filter(card => card.id === cardId)
+    
+    console.log(`📋 Processando ${cardsToProcess.length} card(s)`)
+    
+    if (cardsToProcess.length === 0) {
+      alert('Nenhum card encontrado para processar')
+      setIsProcessing(false)
+      return
+    }
+    
+    // Mapa de cores
+    const colorMap = {
+      'azul': '#2196F3', 'blue': '#2196F3',
+      'vermelho': '#f44336', 'red': '#f44336',
+      'verde': '#4CAF50', 'green': '#4CAF50',
+      'amarelo': '#FFC107', 'yellow': '#FFC107',
+      'preto': '#000000', 'black': '#000000',
+      'branco': '#ffffff', 'white': '#ffffff',
+      'roxo': '#9C27B0', 'purple': '#9C27B0',
+      'laranja': '#FF9800', 'orange': '#FF9800',
+      'rosa': '#E91E63', 'pink': '#E91E63',
+      'cinza': '#9E9E9E', 'gray': '#9E9E9E', 'grey': '#9E9E9E'
+    }
+    
+    const extractColor = (inst) => {
+      const hexMatch = inst.match(/#[0-9a-f]{6}/i)
+      if (hexMatch) return hexMatch[0]
+      const rgbMatch = inst.match(/rgba?\([^)]+\)/i)
+      if (rgbMatch) return rgbMatch[0]
+      for (const [name, color] of Object.entries(colorMap)) {
+        if (inst.includes(name)) return color
+      }
+      return null
+    }
+    
+    let applied = false
+    let changesCount = 0
+    
+    try {
+      // Processar cada card
+      cardsToProcess.forEach(card => {
+        const cardContainer = document.getElementById(`card-content-${card.id}`)
+        if (!cardContainer) return
+        
+        // Encontrar o elemento neste card
+        const element = card.elements?.find(el => el.type === type)
+        if (!element) return
+        
+        const el = cardContainer.querySelector(element.selector)
+        if (!el) return
+        
+        // Processar instruções
+        if (instruction.includes('aumentar') && (instruction.includes('fonte') || instruction.includes('font'))) {
+          const match = instruction.match(/(\d+)\s*%/)
+          if (match) {
+            const percent = parseInt(match[1])
+            const currentSize = window.getComputedStyle(el).fontSize
+            const newSize = parseFloat(currentSize) * (1 + percent / 100)
+            const newSizeValue = `${newSize}px`
+            el.style.fontSize = newSizeValue
+            saveStylesToStorage(type, element.selector, 'fontSize', newSizeValue)
+            applied = true
+            changesCount++
+          }
+        } else if (instruction.includes('diminuir') && (instruction.includes('fonte') || instruction.includes('font'))) {
+          const match = instruction.match(/(\d+)\s*%/)
+          if (match) {
+            const percent = parseInt(match[1])
+            const currentSize = window.getComputedStyle(el).fontSize
+            const newSize = parseFloat(currentSize) * (1 - percent / 100)
+            const newSizeValue = `${newSize}px`
+            el.style.fontSize = newSizeValue
+            saveStylesToStorage(type, element.selector, 'fontSize', newSizeValue)
+            applied = true
+            changesCount++
+          }
+        } else if ((instruction.includes('cor') || instruction.includes('color') || instruction.includes('fonte') || instruction.includes('font')) && (instruction.includes('pra') || instruction.includes('para') || instruction.includes('to'))) {
+          const color = extractColor(instruction)
+          if (color) {
+            el.style.color = color
+            saveStylesToStorage(type, element.selector, 'color', color)
+            applied = true
+            changesCount++
+          }
+        } else if (instruction.includes('background') || instruction.includes('fundo')) {
+          const color = extractColor(instruction)
+          if (color) {
+            el.style.backgroundColor = color
+            saveStylesToStorage(type, element.selector, 'backgroundColor', color)
+            applied = true
+            changesCount++
+          }
+        } else if (instruction.includes('borda') || instruction.includes('border')) {
+          const match = instruction.match(/(\d+)\s*px/)
+          if (match) {
+            const width = match[1]
+            const borderValue = `${width}px solid #000`
+            el.style.border = borderValue
+            saveStylesToStorage(type, element.selector, 'border', borderValue)
+            applied = true
+            changesCount++
+          }
+        } else if (instruction.includes('sombra') || instruction.includes('shadow')) {
+          const shadowValue = '0 4px 6px rgba(0, 0, 0, 0.1)'
+          el.style.boxShadow = shadowValue
+          saveStylesToStorage(type, element.selector, 'boxShadow', shadowValue)
+          applied = true
+          changesCount++
+        } else if (instruction.includes('espaçamento') || instruction.includes('padding')) {
+          const match = instruction.match(/(\d+)\s*px/)
+          if (match) {
+            const padding = match[1]
+            const paddingValue = `${padding}px`
+            el.style.padding = paddingValue
+            saveStylesToStorage(type, element.selector, 'padding', paddingValue)
+            applied = true
+            changesCount++
+          }
+        } else if (instruction.includes('margem') || instruction.includes('margin')) {
+          const match = instruction.match(/(\d+)\s*px/)
+          if (match) {
+            const margin = match[1]
+            const marginValue = `${margin}px`
+            el.style.margin = marginValue
+            saveStylesToStorage(type, element.selector, 'margin', marginValue)
+            applied = true
+            changesCount++
+          }
+        }
+      })
+      
+      if (applied) {
+        console.log(`✅ ${changesCount} mudança(s) aplicada(s) com sucesso em ${cardsToProcess.length} card(s)!`)
+        setTimeout(() => {
+          setQuickEditModal(null)
+          setQuickEditInstruction('')
+          setApplyToAllCards(true) // Reset para padrão
+          setIsProcessing(false)
+        }, 300)
+      } else {
+        console.log('❌ Instrução não reconhecida:', instruction)
+        alert(`Instrução não reconhecida: "${quickEditInstruction}"\n\nTente formatos como:\n- "mude a cor para azul"\n- "mude a fonte para azul"\n- "aumentar fonte em 20%"\n- "adicionar borda de 2px"\n- "adicionar sombra"`)
+        setIsProcessing(false)
+      }
+    } catch (error) {
+      console.error('❌ Erro ao processar edição rápida:', error)
+      alert(`Erro ao processar instrução: ${error.message}\n\nVerifique o console para mais detalhes.`)
+      setIsProcessing(false)
+    }
+  }
+
+  // Ordenar cards na ordem da experiência do usuário
+  const sortedCards = [...cards].sort((a, b) => {
+    // Ordem específica da experiência: 0, 1, 18, 2, 3, 4, 5, 5.1, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
+    const order = [0, 1, 18, 3, 4, 5, '5.1', 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17]
+    const indexA = order.indexOf(a.id)
+    const indexB = order.indexOf(b.id)
+    // Se não estiver na lista de ordem, coloca no final
+    if (indexA === -1 && indexB === -1) return 0
+    if (indexA === -1) return 1
+    if (indexB === -1) return -1
+    return indexA - indexB
+  })
+  
+  console.log('Cards ordenados:', sortedCards.map(c => ({ id: c.id, name: c.name })))
+
+  try {
+    return (
+      <div className={`card-layout-view layer-${currentLayer}`}>
+      <div className="card-layout-sidebar">
+        <div className="sidebar-header">
+          <h1>Design System Layers</h1>
+        </div>
+        
+        {/* Box de Coordenadas - NO TOPO DA SIDEBAR */}
+        {elementPosition && (
+          <div style={{
+            margin: '12px',
+            padding: '12px',
+            backgroundColor: elementPosition.position ? '#e3f2fd' : '#fff3cd',
+            borderRadius: '6px',
+            border: `2px solid ${elementPosition.position ? '#2196F3' : '#ffc107'}`,
+            fontSize: '11px',
+            fontFamily: 'monospace',
+            position: 'sticky',
+            top: '0',
+            zIndex: 100
+          }}>
+            <div style={{ 
+              fontWeight: '700', 
+              marginBottom: '8px', 
+              color: elementPosition.position ? '#1976d2' : '#856404',
+              fontSize: '12px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '6px'
+            }}>
+              <span>📍 {elementPosition.label}</span>
+              <button
+                onClick={() => setElementPosition(null)}
+                style={{
+                  padding: '2px 6px',
+                  backgroundColor: 'transparent',
+                  color: elementPosition.position ? '#1976d2' : '#856404',
+                  border: 'none',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                  fontWeight: 'bold'
+                }}
+              >
+                ×
+              </button>
+            </div>
+            {elementPosition.position ? (
+              <>
+                <div style={{ 
+                  display: 'grid', 
+                  gridTemplateColumns: '1fr 1fr', 
+                  gap: '4px',
+                  color: '#333',
+                  fontSize: '10px'
+                }}>
+                  <div><strong>Top:</strong> {elementPosition.position.top}px</div>
+                  <div><strong>Left:</strong> {elementPosition.position.left}px</div>
+                  <div><strong>Width:</strong> {elementPosition.position.width}px</div>
+                  <div><strong>Height:</strong> {elementPosition.position.height}px</div>
+                  <div><strong>Right:</strong> {elementPosition.position.right}px</div>
+                  <div><strong>Bottom:</strong> {elementPosition.position.bottom}px</div>
+                </div>
+                <div style={{ 
+                  marginTop: '8px', 
+                  paddingTop: '8px', 
+                  borderTop: '1px solid #90caf9',
+                  fontSize: '11px',
+                  fontWeight: '600',
+                  color: '#1976d2'
+                }}>
+                  Linha do Grid: <span style={{ color: '#333' }}>{elementPosition.position.gridLine}</span>
+                </div>
+              </>
+            ) : (
+              <div style={{ 
+                color: '#856404',
+                fontSize: '10px',
+                fontStyle: 'italic'
+              }}>
+                Posição não calculada. Verifique o console.
+              </div>
+            )}
+          </div>
+        )}
+        
+        <div className="sidebar-controls">
+          <div className="control-group">
+            <label>Layer Atual:</label>
+            <select 
+              value={currentLayer} 
+              onChange={(e) => setCurrentLayer(e.target.value)}
+              className="layer-select"
+            >
+              {Object.entries(LAYER_STYLES).map(([key, value]) => {
+                console.log('Layer option:', key, value.name)
+                return (
+                  <option key={key} value={key}>{value.name}</option>
+                )
+              })}
+            </select>
+          </div>
+          <div className="control-group">
+            <label>
+              <input 
+                type="checkbox" 
+                checked={showLabels} 
+                onChange={(e) => setShowLabels(e.target.checked)}
+              />
+              Mostrar Labels
+            </label>
+          </div>
+          <div className="control-group">
+            <label>
+              <input 
+                type="checkbox" 
+                checked={showGrid} 
+                onChange={(e) => setShowGrid(e.target.checked)}
+              />
+              📐 Mostrar Grid (Folha Quadriculada)
+            </label>
+            {showGrid && (
+              <p style={{ fontSize: '11px', color: '#666', marginTop: '4px', fontStyle: 'italic' }}>
+                Use as linhas numeradas para dar instruções de posicionamento
+              </p>
+            )}
+          </div>
+          {/* Estilos aplicados automaticamente quando layer muda */}
+          <div className="control-group">
+            <label>
+              <input 
+                type="checkbox" 
+                checked={showBadgeGallery} 
+                onChange={(e) => setShowBadgeGallery(e.target.checked)}
+              />
+              Mostrar Galeria de Badges
+            </label>
+          </div>
+          {showBadgeGallery && (
+            <div className="control-group">
+              <label>
+                <input 
+                  type="checkbox" 
+                  checked={badgeGalleryExpanded} 
+                  onChange={(e) => setBadgeGalleryExpanded(e.target.checked)}
+                />
+                Galeria Expandida
+              </label>
+            </div>
+          )}
+          
+          {/* Seção de Edição de Elementos */}
+          <div className="control-group" style={{ marginTop: '20px', paddingTop: '20px', borderTop: '2px solid #e0e0e0' }}>
+            <label style={{ fontWeight: 'bold', marginBottom: '12px', display: 'block', fontSize: '14px' }}>
+              Editar Elementos:
+            </label>
+            
+            {/* Lista de Elementos */}
+            <div style={{ 
+              maxHeight: '200px', 
+              overflowY: 'auto', 
+              border: '1px solid #e0e0e0', 
+              borderRadius: '4px',
+              padding: '8px',
+              marginBottom: '12px',
+              backgroundColor: '#f9f9f9'
+            }}>
+              {allElements.map((element) => (
+                <label 
+                  key={element.type}
+                  style={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    gap: '8px', 
+                    marginBottom: '6px',
+                    padding: '6px',
+                    cursor: 'pointer',
+                    backgroundColor: selectedElements.has(element.type) ? '#e3f2fd' : 'transparent',
+                    borderRadius: '4px',
+                    transition: 'background-color 0.2s',
+                    border: selectedElements.has(element.type) ? '2px solid #2196F3' : '2px solid transparent'
+                  }}
+                >
+                  <input 
+                    type="checkbox" 
+                    checked={selectedElements.has(element.type)} 
+                    onChange={(e) => {
+                      const newSelected = new Set(selectedElements)
+                      if (e.target.checked) {
+                        newSelected.add(element.type)
+                      } else {
+                        newSelected.delete(element.type)
+                      }
+                      setSelectedElements(newSelected)
+                    }}
+                  />
+                  <span style={{ fontSize: '12px', flex: 1 }}>
+                    {element.label}
+                  </span>
+                </label>
+              ))}
+            </div>
+            
+            {/* Campo de Instruções */}
+            <label style={{ fontWeight: 'bold', marginBottom: '8px', display: 'block', fontSize: '13px' }}>
+              Instruções ({selectedElements.size} elemento{selectedElements.size !== 1 ? 's' : ''} selecionado{selectedElements.size !== 1 ? 's' : ''}):
+            </label>
+            <textarea
+              value={instructionText}
+              onChange={(e) => setInstructionText(e.target.value)}
+              onKeyDown={handleInstructionKeyDown}
+              placeholder="Ex: 'Aumentar o tamanho da fonte em 20%' ou 'Mudar a cor para vermelho' ou 'Adicionar sombra'..."
+              disabled={selectedElements.size === 0 || isProcessing}
+              style={{
+                width: '100%',
+                minHeight: '80px',
+                padding: '8px',
+                fontSize: '12px',
+                border: '1px solid #e0e0e0',
+                borderRadius: '4px',
+                resize: 'vertical',
+                fontFamily: 'inherit',
+                backgroundColor: selectedElements.size === 0 ? '#f5f5f5' : '#ffffff',
+                cursor: selectedElements.size === 0 ? 'not-allowed' : 'text'
+              }}
+            />
+            {selectedElements.size === 0 && (
+              <div style={{ marginTop: '4px', fontSize: '11px', color: '#999', fontStyle: 'italic' }}>
+                Selecione pelo menos um elemento acima para editar
+              </div>
+            )}
+            {selectedElements.size > 0 && (
+              <div style={{ marginTop: '8px', display: 'flex', gap: '8px', alignItems: 'center' }}>
+                <button
+                  onClick={handleProcessInstruction}
+                  disabled={!instructionText.trim() || isProcessing}
+                  style={{
+                    flex: 1,
+                    padding: '8px 16px',
+                    backgroundColor: instructionText.trim() && !isProcessing ? '#2196F3' : '#ccc',
+                    color: '#ffffff',
+                    border: 'none',
+                    borderRadius: '4px',
+                    cursor: instructionText.trim() && !isProcessing ? 'pointer' : 'not-allowed',
+                    fontSize: '12px',
+                    fontWeight: '600',
+                    transition: 'background-color 0.2s'
+                  }}
+                >
+                  {isProcessing ? 'Processando...' : 'Aplicar Instrução (Enter)'}
+                </button>
+                <button
+                  onClick={() => {
+                    setSelectedElements(new Set())
+                    setInstructionText('')
+                  }}
+                  style={{
+                    padding: '8px 12px',
+                    backgroundColor: '#f5f5f5',
+                    color: '#333',
+                    border: '1px solid #e0e0e0',
+                    borderRadius: '4px',
+                    cursor: 'pointer',
+                    fontSize: '12px'
+                  }}
+                >
+                  Limpar
+                </button>
+              </div>
+            )}
+            {/* Botão para resetar todos os estilos salvos */}
+            <div style={{ marginTop: '12px', paddingTop: '12px', borderTop: '1px solid #e0e0e0' }}>
+              <button
+                onClick={() => {
+                  if (confirm('Tem certeza que deseja resetar todos os estilos customizados? Esta ação não pode ser desfeita.')) {
+                    clearSavedStyles()
+                  }
+                }}
+                style={{
+                  width: '100%',
+                  padding: '8px 16px',
+                  backgroundColor: '#f44336',
+                  color: '#ffffff',
+                  border: 'none',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  fontSize: '12px',
+                  fontWeight: '600',
+                  transition: 'background-color 0.2s'
+                }}
+                onMouseEnter={(e) => e.target.style.backgroundColor = '#d32f2f'}
+                onMouseLeave={(e) => e.target.style.backgroundColor = '#f44336'}
+              >
+                🔄 Resetar Todos os Estilos Customizados
+              </button>
+              <div style={{ marginTop: '4px', fontSize: '11px', color: '#666', fontStyle: 'italic' }}>
+                Remove todas as alterações salvas e recarrega a página
+              </div>
+              </div>
+            )}
+            {selectedElements.size > 0 && (
+              <div style={{ marginTop: '8px', padding: '8px', backgroundColor: '#fff3cd', borderRadius: '4px', fontSize: '11px', color: '#856404' }}>
+                <strong>💡 Dica:</strong> Descreva o que você quer fazer com o(s) elemento(s) selecionado(s). Exemplos:
+                <ul style={{ margin: '4px 0 0 20px', padding: 0 }}>
+                  <li>"Aumentar tamanho da fonte em 20%"</li>
+                  <li>"Mudar cor para #FF0000"</li>
+                  <li>"Adicionar borda de 2px"</li>
+                  <li>"Aumentar espaçamento"</li>
+                </ul>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+      <div className="card-layout-container">
+        {sortedCards.map((card) => (
+          <div key={card.id} className="card-layout-item">
+            <div className="card-layout-label">{card.name}</div>
+            <div className="card-layout-content" id={`card-content-${card.id}`}>
+              {card.component}
+              {showLabels && card.elements && (
+                <ElementLabel 
+                  elements={card.elements.map(el => ({
+                    ...el,
+                    highlighted: selectedElements.has(el.type)
+                  }))} 
+                  containerId={`card-content-${card.id}`}
+                  onElementClick={handleElementClick}
+                />
+              )}
+              {showGrid && (
+                <GridOverlay cardId={card.id} />
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      {/* Modal de Edição Rápida - REMOVIDO para não bloquear interação */}
+      {false && quickEditModal && (
+        <div 
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 10000
+          }}
+          onClick={() => setQuickEditModal(null)}
+        >
+          <div 
+            style={{
+              backgroundColor: '#ffffff',
+              borderRadius: '8px',
+              padding: '24px',
+              maxWidth: '500px',
+              width: '90%',
+              boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)'
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div style={{ marginBottom: '16px' }}>
+              <h3 style={{ margin: '0 0 8px 0', fontSize: '18px', fontWeight: '600' }}>
+                Editar: {quickEditModal.label}
+              </h3>
+              <p style={{ margin: 0, fontSize: '12px', color: '#666' }}>
+                Digite uma instrução para modificar este elemento
+              </p>
+              
+              {/* Informações de posição */}
+              {quickEditModal.position ? (
+                <div style={{ 
+                  marginTop: '12px', 
+                  padding: '12px', 
+                  backgroundColor: '#e3f2fd', 
+                  borderRadius: '4px',
+                  fontSize: '12px',
+                  fontFamily: 'monospace',
+                  border: '1px solid #90caf9'
+                }}>
+                  <div style={{ fontWeight: '600', marginBottom: '8px', color: '#1976d2' }}>
+                    📍 Posição do Elemento:
+                  </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4px', color: '#333' }}>
+                    <div><strong>Top:</strong> {quickEditModal.position.top}px</div>
+                    <div><strong>Left:</strong> {quickEditModal.position.left}px</div>
+                    <div><strong>Width:</strong> {quickEditModal.position.width}px</div>
+                    <div><strong>Height:</strong> {quickEditModal.position.height}px</div>
+                    <div><strong>Right:</strong> {quickEditModal.position.right}px</div>
+                    <div><strong>Bottom:</strong> {quickEditModal.position.bottom}px</div>
+                    <div style={{ gridColumn: '1 / -1', marginTop: '4px', paddingTop: '4px', borderTop: '1px solid #90caf9' }}>
+                      <strong>Linha do Grid (20px):</strong> {quickEditModal.position.gridLine}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div style={{ 
+                  marginTop: '12px', 
+                  padding: '12px', 
+                  backgroundColor: '#fff3cd', 
+                  borderRadius: '4px',
+                  fontSize: '12px',
+                  border: '1px solid #ffc107',
+                  color: '#856404'
+                }}>
+                  ⚠️ Não foi possível calcular a posição do elemento. Verifique o console para mais detalhes.
+                </div>
+              )}
+            </div>
+            
+            {/* Botões de ação rápida */}
+            <div style={{ marginBottom: '16px', display: 'flex', gap: '8px' }}>
+              <button
+                onClick={handleStartDrag}
+                style={{
+                  flex: 1,
+                  padding: '10px 16px',
+                  backgroundColor: '#4CAF50',
+                  color: '#ffffff',
+                  border: 'none',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  fontSize: '13px',
+                  fontWeight: '600',
+                  transition: 'background-color 0.2s'
+                }}
+                onMouseEnter={(e) => e.target.style.backgroundColor = '#45a049'}
+                onMouseLeave={(e) => e.target.style.backgroundColor = '#4CAF50'}
+              >
+                📦 Arrastar Elemento
+              </button>
+              <button
+                onClick={() => {
+                  if (confirm(`Tem certeza que deseja excluir "${quickEditModal.label}"?\n\nEsta ação pode ser revertida usando "Resetar Todos os Estilos Customizados".`)) {
+                    handleDeleteElement()
+                  }
+                }}
+                style={{
+                  flex: 1,
+                  padding: '10px 16px',
+                  backgroundColor: '#f44336',
+                  color: '#ffffff',
+                  border: 'none',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  fontSize: '13px',
+                  fontWeight: '600',
+                  transition: 'background-color 0.2s'
+                }}
+                onMouseEnter={(e) => e.target.style.backgroundColor = '#d32f2f'}
+                onMouseLeave={(e) => e.target.style.backgroundColor = '#f44336'}
+              >
+                🗑️ Excluir Elemento
+              </button>
+            </div>
+            
+            {/* Opção de escopo */}
+            <div style={{ marginBottom: '16px', padding: '12px', backgroundColor: '#f5f5f5', borderRadius: '4px' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '14px' }}>
+                <input
+                  type="checkbox"
+                  checked={applyToAllCards}
+                  onChange={(e) => setApplyToAllCards(e.target.checked)}
+                  disabled={isProcessing}
+                />
+                <span>
+                  <strong>Aplicar em todos os cards</strong> com este tipo de elemento
+                </span>
+              </label>
+              {!applyToAllCards && (
+                <p style={{ margin: '8px 0 0 24px', fontSize: '12px', color: '#666', fontStyle: 'italic' }}>
+                  Aplicará apenas no card atual
+                </p>
+              )}
+              {applyToAllCards && (
+                <p style={{ margin: '8px 0 0 24px', fontSize: '12px', color: '#666', fontStyle: 'italic' }}>
+                  Aplicará em todos os cards que contêm "{quickEditModal.label}"
+                </p>
+              )}
+            </div>
+            
+            <textarea
+              value={quickEditInstruction}
+              onChange={(e) => setQuickEditInstruction(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !e.shiftKey && !isProcessing) {
+                  e.preventDefault()
+                  handleQuickEdit()
+                }
+              }}
+              placeholder="Ex: 'mude a cor para azul', 'aumentar fonte em 20%', 'adicionar borda de 2px'..."
+              disabled={isProcessing}
+              autoFocus
+              style={{
+                width: '100%',
+                minHeight: '100px',
+                padding: '12px',
+                fontSize: '14px',
+                border: '2px solid #e0e0e0',
+                borderRadius: '4px',
+                resize: 'vertical',
+                fontFamily: 'inherit',
+                marginBottom: '16px'
+              }}
+            />
+            
+            <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
+              <button
+                onClick={() => {
+                  setQuickEditModal(null)
+                  setQuickEditInstruction('')
+                }}
+                disabled={isProcessing}
+                style={{
+                  padding: '10px 20px',
+                  backgroundColor: '#f5f5f5',
+                  color: '#333',
+                  border: '1px solid #e0e0e0',
+                  borderRadius: '4px',
+                  cursor: isProcessing ? 'not-allowed' : 'pointer',
+                  fontSize: '14px',
+                  fontWeight: '600'
+                }}
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={handleQuickEdit}
+                disabled={!quickEditInstruction.trim() || isProcessing}
+                style={{
+                  padding: '10px 20px',
+                  backgroundColor: quickEditInstruction.trim() && !isProcessing ? '#2196F3' : '#ccc',
+                  color: '#ffffff',
+                  border: 'none',
+                  borderRadius: '4px',
+                  cursor: quickEditInstruction.trim() && !isProcessing ? 'pointer' : 'not-allowed',
+                  fontSize: '14px',
+                  fontWeight: '600',
+                  transition: 'background-color 0.2s'
+                }}
+              >
+                {isProcessing ? 'Aplicando...' : 'Aplicar (Enter)'}
+              </button>
+            </div>
+            
+            <div style={{ marginTop: '12px', padding: '8px', backgroundColor: '#fff3cd', borderRadius: '4px', fontSize: '11px', color: '#856404' }}>
+              <strong>💡 Dica:</strong> Exemplos de instruções:
+              <ul style={{ margin: '4px 0 0 20px', padding: 0 }}>
+                <li>"mude a cor para azul"</li>
+                <li>"aumentar fonte em 20%"</li>
+                <li>"adicionar borda de 2px"</li>
+                <li>"adicionar sombra"</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      )}
+      
+      {/* Indicador de modo de arrastar */}
+      {isDragging && draggedElement && (
+        <div 
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(76, 175, 80, 0.1)',
+            zIndex: 9999,
+            pointerEvents: 'none',
+            display: 'flex',
+            alignItems: 'flex-start',
+            justifyContent: 'center',
+            paddingTop: '20px'
+          }}
+        >
+          <div 
+            style={{
+              backgroundColor: '#4CAF50',
+              color: '#ffffff',
+              padding: '16px 24px',
+              borderRadius: '8px',
+              boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)',
+              fontSize: '16px',
+              fontWeight: '600',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
+              pointerEvents: 'auto'
+            }}
+          >
+            <span style={{ fontSize: '24px' }}>📦</span>
+            <div>
+              <div>Modo de Arrastar Ativo</div>
+              <div style={{ fontSize: '12px', opacity: 0.9, marginTop: '4px' }}>
+                Use as <strong>setas ↑↓ ou ←→</strong> para mover "{draggedElement.label}"
+              </div>
+              <div style={{ fontSize: '11px', opacity: 0.8, marginTop: '4px' }}>
+                Pressione ESC para cancelar
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+    )
+  } catch (error) {
+    console.error('Erro ao renderizar CardLayoutView:', error)
+    return (
+      <div style={{ padding: '20px', color: 'red', background: '#fff' }}>
+        <h2>Erro ao carregar modo layout</h2>
+        <p>{error.message}</p>
+        <pre style={{ fontSize: '12px', overflow: 'auto' }}>{error.stack}</pre>
+      </div>
+    )
+  }
+}
+
+// Componente de Grid Overlay - Folha Quadriculada
+function GridOverlay({ cardId }) {
+  const overlayRef = useRef(null)
+  const [lines, setLines] = useState([])
+  
+  useEffect(() => {
+    const container = document.getElementById(`card-content-${cardId}`)
+    if (!container || !overlayRef.current) return
+    
+    // Criar linhas a cada 20px (grid de 20px)
+    const containerHeight = container.scrollHeight || container.clientHeight || 1000
+    const lineHeight = 20 // Altura de cada linha do grid
+    const numLines = Math.ceil(containerHeight / lineHeight)
+    
+    const newLines = []
+    for (let i = 0; i <= numLines; i++) {
+      const top = i * lineHeight
+      newLines.push({
+        top,
+        number: i
+      })
+    }
+    
+    setLines(newLines)
+  }, [cardId])
+  
+  return (
+    <div 
+      ref={overlayRef}
+      style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        pointerEvents: 'none',
+        zIndex: 9999,
+        opacity: 0.5
+      }}
+    >
+      {lines.map((line) => (
+        <div
+          key={line.number}
+          style={{
+            position: 'absolute',
+            top: `${line.top}px`,
+            left: 0,
+            right: 0,
+            height: '1px',
+            backgroundColor: '#cccccc',
+            borderTop: '1px solid #e0e0e0',
+            display: 'flex',
+            alignItems: 'center',
+            paddingLeft: '4px'
+          }}
+        >
+          <span
+            style={{
+              fontSize: '9px',
+              fontWeight: '600',
+              color: '#666666',
+              backgroundColor: 'rgba(255, 255, 255, 0.95)',
+              padding: '1px 4px',
+              borderRadius: '2px',
+              marginLeft: '-2px',
+              marginTop: '-7px',
+              border: '1px solid #cccccc',
+              fontFamily: 'monospace'
+            }}
+          >
+            {line.number}
+          </span>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+export default CardLayoutView

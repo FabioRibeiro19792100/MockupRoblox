@@ -7,7 +7,7 @@ function Card10_NegativeFeedback({ onTryAgain, onContinue, onMenu, onRestart }) 
         <button className="header-button" onClick={onMenu}>Voltar para menu</button>
         <button className="header-button" onClick={onRestart}>Reiniciar tutorial</button>
       </div>
-      <div className="card-feedback-content" style={{ paddingTop: '40px' }}>
+      <div className="card-feedback-content">
         <div className="feedback-icon error" style={{ fontSize: '80px' }}>✗</div>
         <h2 className="card-title">Ops! Algo não saiu como esperado</h2>
         <div className="feedback-actions">

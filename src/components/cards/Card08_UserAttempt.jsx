@@ -8,9 +8,6 @@ function Card08_UserAttempt({ stepNumber, totalSteps, stepTitle, onCheckResult, 
         <button className="header-button" onClick={onRestart}>Reiniciar tutorial</button>
       </div>
       <div style={{ padding: '0 24px 24px 24px' }}>
-        <h2 className="card-title" style={{ fontSize: '16px', fontWeight: 700, marginBottom: '16px', paddingTop: '4px' }}>
-          Tutoriais Expedição Roblox
-        </h2>
         <div className="card-step-header" style={{ marginBottom: '16px' }}>
           <div className="theme-box">
             <div>Construir um casa</div>

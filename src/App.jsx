@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import TutorialPanel from './components/TutorialPanel'
 import RobloxStudioMock from './components/RobloxStudioMock'
+import CardLayoutView from './components/CardLayoutView'
 import BadgeHeader from './components/BadgeHeader'
 import CreatorStamp from './components/CreatorStamp'
 import './App.css'
@@ -31,6 +32,7 @@ function App() {
   const [showCreatorPopup, setShowCreatorPopup] = useState(false) // Mostrar popup de Creator
   const [currentTutorialClass, setCurrentTutorialClass] = useState(null) // 1 ou 2
   const [currentTutorialId, setCurrentTutorialId] = useState(null) // ID do tutorial atual (1-5 dentro de cada classe)
+  const [layoutMode, setLayoutMode] = useState(false) // Modo layout para visualizar todos os cards
 
   // Reset Studio state apenas nos cards iniciais
   useEffect(() => {
@@ -156,8 +158,9 @@ function App() {
         setShowCreatorPopup(true)
       }
       // Mostrar notificação do primeiro badge
-      setShowBadgeNotification(newBadges[0])
-      setTimeout(() => setShowBadgeNotification(null), 5000)
+      // Desabilitado: notificação de badge
+      // setShowBadgeNotification(newBadges[0])
+      // setTimeout(() => setShowBadgeNotification(null), 5000)
     }
   }
 
@@ -217,6 +220,7 @@ function App() {
     })
     setEarnedBadges([])
     setShowBadgeNotification(null)
+    setShowCreatorPopup(false)
     // Volta para o menu
     handleMenu()
   }
@@ -294,78 +298,152 @@ function App() {
     return TUTORIAL_STEPS.find(s => s.id === currentStep) || TUTORIAL_STEPS[0]
   }
 
+  console.log('App renderizando, layoutMode:', layoutMode)
+  
   return (
     <div className="app">
-      <TutorialPanel
-        currentCard={currentCard}
-        tutorialMode={tutorialMode}
-        currentStep={currentStep}
-        totalSteps={3}
-        stepData={getCurrentStepData()}
-        onNext={handleNext}
-        onBack={handleBack}
-        onCardAction={handleCardAction}
-        onModeSelect={setTutorialMode}
-        onSkipToNextStep={handleSkipToNextStep}
-        onMenu={handleMenu}
-        onRestart={handleRestart}
-        onShowConceptChange={setShowConcept}
-        completedTutorials={completedTutorials}
-        earnedBadges={earnedBadges}
-        currentTutorialClass={currentTutorialClass}
-        currentTutorialId={currentTutorialId}
-        onTutorialClassSelect={setCurrentTutorialClass}
-        onTutorialSelect={(tutorialId, tutorialClass) => {
-          setCurrentTutorialId(tutorialId)
-          // Se passou a classe, usa ela, senão tenta determinar pela classe atual
-          const classToUse = tutorialClass || currentTutorialClass
-          if (classToUse) {
-            setCurrentTutorialClass(classToUse)
-          }
-          // Verificar se é mockado (tutoriais 2-5 da classe 1 e 1-5 da classe 2 são mockados)
-          const isMocked = (classToUse === 1 && tutorialId > 1) || (classToUse === 2)
-          if (isMocked) {
-            setCurrentCard(12)
-          } else {
-            // Tutorial 1 da classe 1 - vai para seleção de modo
-            setCurrentCard(3)
-          }
-        }}
-        onTutorialComplete={handleTutorialComplete}
-        onQuickComplete={() => {
-          // Marca como completo primeiro
-          handleTutorialComplete()
-          // Volta ao menu imediatamente (Card 1) para ver o status atualizado
-          setCurrentCard(1)
-          setTutorialMode(null)
-          setCurrentStep(1)
-          setStudioState('empty')
-          setCurrentTutorialId(null) // Reseta apenas o ID do tutorial
-        }}
-        onCompleteAndMenu={() => {
-          // Marca como completo primeiro
-          handleTutorialComplete()
-          // Volta ao menu imediatamente (Card 1) para ver o status atualizado
-          setCurrentCard(1)
-          setTutorialMode(null)
-          setCurrentStep(1)
-          setStudioState('empty')
-          setCurrentTutorialId(null) // Reseta apenas o ID do tutorial
-        }}
-        onResetGamification={handleResetGamification}
-        showBadgeNotification={showBadgeNotification}
-        onCloseBadgeNotification={() => setShowBadgeNotification(null)}
-        showCreatorPopup={showCreatorPopup}
-        onCloseCreatorPopup={() => setShowCreatorPopup(false)}
-      />
-      <RobloxStudioMock 
-        state={studioState} 
-        onRemoveBlocks={removeBlocksRef}
-        currentCard={currentCard}
-        tutorialMode={tutorialMode}
-        showConcept={showConcept}
-        onResetGamification={handleResetGamification}
-      />
+      {layoutMode ? (
+        <CardLayoutView
+          onCardAction={handleCardAction}
+          onModeSelect={setTutorialMode}
+          onMenu={handleMenu}
+          onRestart={handleRestart}
+          completedTutorials={completedTutorials}
+          earnedBadges={earnedBadges}
+          onTutorialSelect={handleTutorialSelect}
+          onTutorialComplete={handleTutorialComplete}
+          onQuickComplete={() => {
+            handleTutorialComplete()
+            setCurrentCard(1)
+            setTutorialMode(null)
+            setCurrentStep(1)
+            setStudioState('empty')
+            setCurrentTutorialId(null)
+          }}
+        />
+      ) : (
+        <>
+          <TutorialPanel
+            currentCard={currentCard}
+            tutorialMode={tutorialMode}
+            currentStep={currentStep}
+            totalSteps={3}
+            stepData={getCurrentStepData()}
+            onNext={handleNext}
+            onBack={handleBack}
+            onCardAction={handleCardAction}
+            onModeSelect={setTutorialMode}
+            onSkipToNextStep={handleSkipToNextStep}
+            onMenu={handleMenu}
+            onRestart={handleRestart}
+            onShowConceptChange={setShowConcept}
+            completedTutorials={completedTutorials}
+            earnedBadges={earnedBadges}
+            currentTutorialClass={currentTutorialClass}
+            currentTutorialId={currentTutorialId}
+            onTutorialClassSelect={setCurrentTutorialClass}
+            onTutorialSelect={(tutorialId, tutorialClass) => {
+              setCurrentTutorialId(tutorialId)
+              // Se passou a classe, usa ela, senão tenta determinar pela classe atual
+              const classToUse = tutorialClass || currentTutorialClass
+              if (classToUse) {
+                setCurrentTutorialClass(classToUse)
+              }
+              // Verificar se é mockado (tutoriais 2-5 da classe 1 e 1-5 da classe 2 são mockados)
+              const isMocked = (classToUse === 1 && tutorialId > 1) || (classToUse === 2)
+              if (isMocked) {
+                setCurrentCard(12)
+              } else {
+                // Tutorial 1 da classe 1 - vai para seleção de modo
+                setCurrentCard(3)
+              }
+            }}
+            onTutorialComplete={handleTutorialComplete}
+            onQuickComplete={() => {
+              // Marca como completo primeiro
+              handleTutorialComplete()
+              // Volta ao menu imediatamente (Card 1) para ver o status atualizado
+              setCurrentCard(1)
+              setTutorialMode(null)
+              setCurrentStep(1)
+              setStudioState('empty')
+              setCurrentTutorialId(null) // Reseta apenas o ID do tutorial
+            }}
+            onCompleteAndMenu={() => {
+              // Marca como completo primeiro
+              handleTutorialComplete()
+              // Volta ao menu imediatamente (Card 1) para ver o status atualizado
+              setCurrentCard(1)
+              setTutorialMode(null)
+              setCurrentStep(1)
+              setStudioState('empty')
+              setCurrentTutorialId(null) // Reseta apenas o ID do tutorial
+            }}
+            onResetGamification={handleResetGamification}
+            showBadgeNotification={showBadgeNotification}
+            onCloseBadgeNotification={() => setShowBadgeNotification(null)}
+            showCreatorPopup={showCreatorPopup}
+            onCloseCreatorPopup={() => setShowCreatorPopup(false)}
+          />
+          <RobloxStudioMock 
+            state={studioState} 
+            onRemoveBlocks={removeBlocksRef}
+            currentCard={currentCard}
+            tutorialMode={tutorialMode}
+            showConcept={showConcept}
+            onResetGamification={handleResetGamification}
+            layoutMode={layoutMode}
+            onLayoutModeToggle={setLayoutMode}
+          />
+        </>
+      )}
+      {!layoutMode && (
+        <button 
+          onClick={() => {
+            console.log('Botão Modo Layout clicado, mudando para:', !layoutMode)
+            setLayoutMode(true)
+          }}
+          style={{
+            position: 'fixed',
+            top: '20px',
+            right: '20px',
+            zIndex: 10000,
+            padding: '10px 20px',
+            background: '#002DCC',
+            color: '#ffffff',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer',
+            fontWeight: 600,
+            fontSize: '14px',
+            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)'
+          }}
+        >
+          Modo Layout
+        </button>
+      )}
+      {layoutMode && (
+        <button 
+          onClick={() => setLayoutMode(!layoutMode)}
+          style={{
+            position: 'fixed',
+            top: '20px',
+            right: '20px',
+            zIndex: 1000,
+            padding: '10px 20px',
+            background: '#4CAF50',
+            color: '#ffffff',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer',
+            fontWeight: 600,
+            fontSize: '14px',
+            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)'
+          }}
+        >
+          Modo Normal
+        </button>
+      )}
     </div>
   )
 }

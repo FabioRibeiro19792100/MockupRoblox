@@ -1,6 +1,10 @@
 import './BadgeNotification.css'
 
 function BadgeNotification({ badgeId, onClose }) {
+  // Componente desabilitado - não renderizar notificação
+  return null
+  
+  /* Código original comentado
   const badgeNames = {
     1: 'Primeiro Passo',
     2: 'Criador Iniciante',
@@ -21,6 +25,7 @@ function BadgeNotification({ badgeId, onClose }) {
       </div>
     </div>
   )
+  */
 }
 
 export default BadgeNotification

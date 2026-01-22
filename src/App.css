@@ -3,6 +3,15 @@
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  position: relative;
 }
 
 /* Ajuste do Studio para 70% quando painel é 30% */
+
+/* Modo layout ocupa 100% da tela */
+.app > div:first-child {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+

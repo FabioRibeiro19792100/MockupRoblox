@@ -1,0 +1,229 @@
+.element-label-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.element-label {
+  position: absolute;
+  background: rgba(255, 0, 0, 0.8);
+  color: #ffffff;
+  padding: 2px 6px;
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 3px;
+  white-space: nowrap;
+  z-index: 1001;
+  pointer-events: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Cores diferentes por tipo de elemento */
+.element-label-title-1 {
+  background: rgba(255, 0, 0, 0.8);
+}
+
+.element-label-title-2 {
+  background: rgba(255, 165, 0, 0.8);
+}
+
+.element-label-body {
+  background: rgba(0, 128, 0, 0.8);
+}
+
+.element-label-button-primary {
+  background: rgba(0, 0, 255, 0.8);
+}
+
+.element-label-button-secondary {
+  background: rgba(128, 0, 128, 0.8);
+}
+
+.element-label-button-selection {
+  background: rgba(0, 150, 255, 0.8);
+}
+
+.element-label-button-mode {
+  background: rgba(200, 100, 0, 0.8);
+}
+
+.element-label-button-interactive {
+  background: rgba(0, 200, 100, 0.8);
+}
+
+.element-label-button-attempt {
+  background: rgba(0, 200, 100, 0.8);
+}
+
+.element-label-button-completion {
+  background: rgba(0, 200, 100, 0.8);
+}
+
+.element-label-button-next {
+  background: rgba(0, 0, 200, 0.8);
+}
+
+.element-label-button-feedback {
+  background: rgba(255, 100, 100, 0.8);
+}
+
+.element-label-theme-box {
+  background: rgba(255, 192, 203, 0.8);
+  color: #000000;
+}
+
+.element-label-step-counter {
+  background: rgba(0, 255, 255, 0.8);
+  color: #000000;
+}
+
+.element-label-step-title-bar {
+  background: rgba(200, 200, 0, 0.8);
+  color: #000000;
+}
+
+.element-label-instructions-box {
+  background: rgba(255, 255, 0, 0.8);
+  color: #000000;
+}
+
+.element-label-instructions-list {
+  background: rgba(255, 200, 0, 0.8);
+  color: #000000;
+}
+
+.element-label-concept-link {
+  background: rgba(255, 140, 0, 0.8);
+}
+
+.element-label-header-global {
+  background: rgba(100, 100, 200, 0.8);
+}
+
+.element-label-feedback-section {
+  background: rgba(200, 150, 200, 0.8);
+}
+
+.element-label-feedback-icon {
+  background: rgba(255, 50, 50, 0.8);
+}
+
+.element-label-link-skip {
+  background: rgba(150, 150, 150, 0.8);
+}
+
+.element-label-button-header {
+  background: rgba(100, 50, 200, 0.8);
+}
+
+.element-label-card-actions {
+  background: rgba(150, 100, 50, 0.8);
+}
+
+.element-label-badge-header {
+  background: rgba(255, 200, 0, 0.8);
+  color: #000000;
+}
+
+.element-label-badge-item {
+  background: rgba(255, 150, 0, 0.8);
+  color: #000000;
+}
+
+.element-label-badge-description {
+  background: rgba(200, 255, 0, 0.8);
+  color: #000000;
+}
+
+.element-label-badge-scoreboard {
+  background: rgba(0, 200, 255, 0.8);
+}
+
+.element-label-badge-scoreboard-item {
+  background: rgba(0, 150, 255, 0.8);
+}
+
+.element-label-badge-notification {
+  background: rgba(255, 100, 100, 0.8);
+}
+
+.element-label-popup-overlay {
+  background: rgba(100, 100, 100, 0.8);
+}
+
+.element-label-popup-content {
+  background: rgba(150, 150, 200, 0.8);
+}
+
+.element-label-creator-stamp {
+  background: rgba(255, 200, 100, 0.8);
+  color: #000000;
+}
+
+.element-label-button-close {
+  background: rgba(200, 50, 50, 0.8);
+}
+
+.element-label-badge-gallery-header {
+  background: rgba(100, 150, 200, 0.8);
+}
+
+.element-label-badge-gallery-content {
+  background: rgba(150, 200, 150, 0.8);
+}
+
+/* Accordion specific labels */
+.element-label-accordion-header {
+  background: rgba(100, 200, 255, 0.8);
+}
+
+.element-label-accordion-icon {
+  background: rgba(150, 200, 255, 0.8);
+}
+
+.element-label-accordion-content {
+  background: rgba(200, 220, 255, 0.8);
+}
+
+.element-label-tutorial-item {
+  background: rgba(255, 220, 100, 0.8);
+  color: #000000;
+}
+
+.element-label-tutorial-status {
+  background: rgba(76, 175, 80, 0.8);
+}
+
+.element-label-tutorial-lock {
+  background: rgba(200, 200, 200, 0.8);
+  color: #000000;
+}
+
+.element-label-tutorial-play {
+  background: rgba(100, 150, 200, 0.8);
+}
+
+/* Estilo para elementos destacados (selecionados) */
+.element-label-highlighted {
+  background: rgba(33, 150, 243, 0.95) !important;
+  color: #ffffff !important;
+  font-weight: 900 !important;
+  border: 2px solid #ffffff !important;
+  box-shadow: 0 0 10px rgba(33, 150, 243, 0.8) !important;
+  transform: scale(1.05);
+  animation: pulse-highlight 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-highlight {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(33, 150, 243, 0.8);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(33, 150, 243, 1);
+  }
+}
