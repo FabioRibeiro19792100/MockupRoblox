@@ -34,7 +34,7 @@ function App() {
   const [showBadgePopup3, setShowBadgePopup3] = useState(false) // Mostrar popup de Badge 3 (Criador Avançado)
   const [currentTutorialClass, setCurrentTutorialClass] = useState(null) // 1 ou 2
   const [currentTutorialId, setCurrentTutorialId] = useState(null) // ID do tutorial atual (1-5 dentro de cada classe)
-  const [layoutMode, setLayoutMode] = useState(false) // Modo layout para visualizar todos os cards
+  const [layoutMode, setLayoutMode] = useState(true) // Modo layout para visualizar todos os cards
 
   // Reset Studio state apenas nos cards iniciais
   useEffect(() => {
