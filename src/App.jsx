@@ -209,6 +209,16 @@ function App() {
     }
   }
 
+  const handleModeSelect = (mode) => {
+    setTutorialMode(mode)
+    // Após selecionar o modo, vai para o card de transição correspondente
+    if (mode === 'demonstrative') {
+      setCurrentCard(3.5) // Card de transição do modo observador
+    } else if (mode === 'interactive') {
+      setCurrentCard(3.6) // Card de transição do modo aprendizado
+    }
+  }
+
   const handleMenu = () => {
     // Volta para Card 01 (seleção de categorias)
     setCurrentCard(1)
@@ -313,7 +323,7 @@ function App() {
       {layoutMode ? (
         <CardLayoutView
           onCardAction={handleCardAction}
-          onModeSelect={setTutorialMode}
+            onModeSelect={handleModeSelect}
           onMenu={handleMenu}
           onRestart={handleRestart}
           completedTutorials={completedTutorials}
@@ -328,6 +338,35 @@ function App() {
             setStudioState('empty')
             setCurrentTutorialId(null)
           }}
+          onNavigateToCard={(cardId) => {
+            // Mapeia IDs do layout para IDs do fluxo normal
+            const cardMapping = {
+              0: 0,   // Capa
+              1: 1,   // Seleção (Em Andamento)
+              2: 1,   // Seleção (Aberto) -> vai para Card 1
+              3: 1,   // Seleção (Concluído) -> vai para Card 1
+              1.5: 3, // Modo Observador -> vai para Card 3
+              4: 3,   // Modo -> vai para Card 3
+              5: 4,   // Introdução -> vai para Card 4
+              6: 5,   // Antes da Ação -> vai para Card 5
+              '5.1': 5, // Conceito -> vai para Card 5 (mostra conceito)
+              7: 6,   // Após Ação -> vai para Card 6
+              8: 7,   // Interação -> vai para Card 7
+              8.5: 7, // Modo Aprendizado -> vai para Card 7
+              9: 8,   // Tentativa -> vai para Card 8
+              10: 9,  // Feedback Positivo -> vai para Card 9
+              11: 10, // Feedback Negativo -> vai para Card 10
+              12: 11, // Conclusão -> vai para Card 11
+              13: 13  // Badges -> vai para Card 13
+            }
+            const targetCard = cardMapping[cardId] !== undefined ? cardMapping[cardId] : 0
+            setCurrentCard(targetCard)
+            setLayoutMode(false)
+            // Se for o card de conceito, mostra o conceito
+            if (cardId === '5.1') {
+              setShowConcept(true)
+            }
+          }}
         />
       ) : (
         <div className="app-normal-mode-wrapper" style={{ display: 'flex', width: '100%', height: '100%', flexDirection: 'row', alignItems: 'flex-start' }}>
@@ -340,11 +379,12 @@ function App() {
             onNext={handleNext}
             onBack={handleBack}
             onCardAction={handleCardAction}
-            onModeSelect={setTutorialMode}
+            onModeSelect={handleModeSelect}
             onSkipToNextStep={handleSkipToNextStep}
             onMenu={handleMenu}
             onRestart={handleRestart}
             onShowConceptChange={setShowConcept}
+            setCurrentCard={setCurrentCard}
             completedTutorials={completedTutorials}
             earnedBadges={earnedBadges}
             currentTutorialClass={currentTutorialClass}

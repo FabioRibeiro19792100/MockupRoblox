@@ -1070,9 +1070,28 @@
   pointer-events: none;
 }
 
+/* Cards de transição - sem imagem, fundo verde sólido */
+.card-transition::before {
+  display: none !important;
+  content: none !important;
+}
+
 .card-interactive > * {
   position: relative;
   z-index: 2;
+}
+
+/* Cards de transição - fundo verde sólido sem imagem */
+.card-transition {
+  background: #4caf50 !important;
+  background-image: none !important;
+  background-size: auto !important;
+}
+
+.card-transition::before {
+  display: none !important;
+  content: none !important;
+  background: transparent !important;
 }
 
 .card-interactive-header {

@@ -8,6 +8,10 @@ import Card05_1_Concept from './cards/Card05_1_Concept'
 import Card06_AfterAction from './cards/Card06_AfterAction'
 import Card07_InteractionInvite from './cards/Card07_InteractionInvite'
 import Card07_5_LearningMode from './cards/Card07_5_LearningMode'
+import CardTransition_Demonstrative from './cards/CardTransition_Demonstrative'
+import CardTransition_Interactive from './cards/CardTransition_Interactive'
+import CardTransition_Reunion from './cards/CardTransition_Reunion'
+import CardTransition_Badges from './cards/CardTransition_Badges'
 import Card08_UserAttempt from './cards/Card08_UserAttempt'
 import Card09_PositiveFeedback from './cards/Card09_PositiveFeedback'
 import Card10_NegativeFeedback from './cards/Card10_NegativeFeedback'
@@ -80,6 +84,8 @@ function CardLayoutView({
   const [tutorialMode, setTutorialMode] = useState('demonstrative')
   const [currentLayer, setCurrentLayer] = useState('layer9')
   const [showLabels, setShowLabels] = useState(false)
+  const [activeCardId, setActiveCardId] = useState(null) // Card atualmente visualizado
+  const [currentLayoutCard, setCurrentLayoutCard] = useState(0) // Card atual no layout mode
   const [showBadgeGallery, setShowBadgeGallery] = useState(true)
   const [badgeGalleryExpanded, setBadgeGalleryExpanded] = useState(false) // Para controle global
   const [expandedCards, setExpandedCards] = useState(new Set()) // Estado individual por card
@@ -431,11 +437,28 @@ function CardLayoutView({
     )
   }
 
+  // Função para navegar para o próximo card no layout
+  const navigateToNextCard = (currentId) => {
+    const order = [0, 1, 2, 3, 1.5, 5, 6, '5.1', 7, 8.4, 8, 8.5, 9, 10, 11, 12, 13, 16, 17, 19, 20]
+    const currentIndex = order.indexOf(currentId)
+    if (currentIndex !== -1 && currentIndex < order.length - 1) {
+      const nextId = order[currentIndex + 1]
+      setCurrentLayoutCard(nextId)
+      setActiveCardId(nextId)
+      setTimeout(() => {
+        const targetElement = document.getElementById(`card-content-${nextId}`)
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        }
+      }, 100)
+    }
+  }
+
   const cards = [
     {
       id: 0,
-      name: 'Card 00 - Capa',
-      component: <Card00_Cover onStart={() => {}} />,
+      name: 'Card 01 - Capa',
+      component: <Card00_Cover onStart={() => navigateToNextCard(0)} />,
       elements: [
         { type: 'title-1', selector: '.card-title', label: 'Título 1 - Principal' },
         { type: 'title-2', selector: 'h3', label: 'Título 2 - Subtítulo' },
@@ -446,18 +469,21 @@ function CardLayoutView({
     },
     {
       id: 1,
-      name: 'Card 01 - Seleção (Em Andamento)',
+      name: 'Card 02 - Seleção (Em Andamento)',
       component: renderBadgeGallery(
         <Card01_02_Selection
           cardNumber={1}
           selectedTutorial={selectedTutorial}
           onSelect={setSelectedTutorial}
-          onNext={() => {}}
+          onNext={() => navigateToNextCard(1)}
           completedTutorials={{ class1: [1, 2], class2: [] }}
           earnedBadges={[1]}
           currentTutorialClass={1}
           onTutorialClassSelect={() => {}}
-          onTutorialSelect={onTutorialSelect || (() => {})}
+          onTutorialSelect={(tutorialId, tutorialClass) => {
+            if (onTutorialSelect) onTutorialSelect(tutorialId, tutorialClass)
+            navigateToNextCard(1)
+          }}
           onBack={onMenu || (() => {})}
           onMenu={onMenu || (() => {})}
           stampOpacity={0.05}
@@ -485,18 +511,21 @@ function CardLayoutView({
     },
     {
       id: 2,
-      name: 'Card 01 - Seleção (Aberto)',
+      name: 'Card 03 - Seleção (Aberto)',
       component: renderBadgeGallery(
         <Card01_02_Selection
           cardNumber={1}
           selectedTutorial={selectedTutorial}
           onSelect={setSelectedTutorial}
-          onNext={() => {}}
+          onNext={() => navigateToNextCard(3)}
           completedTutorials={{ class1: [1, 2], class2: [] }}
           earnedBadges={[1]}
           currentTutorialClass={1}
           onTutorialClassSelect={() => {}}
-          onTutorialSelect={onTutorialSelect || (() => {})}
+          onTutorialSelect={(tutorialId, tutorialClass) => {
+            if (onTutorialSelect) onTutorialSelect(tutorialId, tutorialClass)
+            navigateToNextCard(3)
+          }}
           onBack={onMenu || (() => {})}
           onMenu={onMenu || (() => {})}
           defaultExpanded={true}
@@ -524,23 +553,26 @@ function CardLayoutView({
     },
     {
       id: 3,
-      name: 'Card 01 - Seleção (Concluído)',
+      name: 'Card 04 - Seleção (Concluído)',
       component: renderBadgeGallery(
         <Card01_02_Selection
           cardNumber={1}
           selectedTutorial={selectedTutorial}
           onSelect={setSelectedTutorial}
-          onNext={() => {}}
+          onNext={() => navigateToNextCard(1.4)}
           completedTutorials={{ class1: [1, 2, 3, 4, 5], class2: [1, 2, 3, 4, 5] }}
           earnedBadges={[1, 2, 3]}
           currentTutorialClass={1}
           onTutorialClassSelect={() => {}}
-          onTutorialSelect={onTutorialSelect || (() => {})}
+          onTutorialSelect={(tutorialId, tutorialClass) => {
+            if (onTutorialSelect) onTutorialSelect(tutorialId, tutorialClass)
+            navigateToNextCard(1.4)
+          }}
           onBack={onMenu || (() => {})}
           onMenu={onMenu || (() => {})}
           defaultExpanded={true}
         />,
-        2
+        3
       ),
       elements: [
         { type: 'title-1', selector: '.card-title', label: 'Título 1 - Principal' },
@@ -561,15 +593,29 @@ function CardLayoutView({
       ]
     },
     {
-      id: 4,
-      name: 'Card 03 - Modo',
+      id: 1.4,
+      name: 'Card de Transição - Modo Observador',
+      component: (
+        <CardTransition_Demonstrative
+          onContinue={() => navigateToNextCard(1.4)}
+          onMenu={onMenu || (() => {})}
+        />
+      ),
+      elements: [
+        { type: 'title-1', selector: 'h3', label: 'Título - MODO OBSERVADOR' },
+        { type: 'body', selector: 'p', label: 'Corpo - Texto explicativo' },
+        { type: 'button-primary', selector: '.primary-button', label: 'Botão - ISSO NÃO FAZ PARTE DO LAYOUT' }
+      ]
+    },
+    {
+      id: 1.5,
+      name: 'Card 05 - Modo Observador (Demonstração)',
       component: (
         <Card03_ModeSelection
-          onModeSelect={(mode) => {
-            setTutorialMode(mode)
-            if (onModeSelect) onModeSelect(mode)
-          }}
+          onModeSelect={null}
           onMenu={onMenu || (() => {})}
+          initialMode="demonstrative"
+          dimmedOpacity={0.2}
         />
       ),
       elements: [
@@ -582,11 +628,11 @@ function CardLayoutView({
     },
     {
       id: 5,
-      name: 'Card 04 - Introdução',
+      name: 'Card 07 - Introdução',
       component: renderBadgeGallery(
         <Card04_Introduction
           tutorialName={selectedTutorial}
-          onStart={() => {}}
+          onStart={() => navigateToNextCard(5)}
           onMenu={onMenu || (() => {})}
           onRestart={onRestart || (() => {})}
           currentTutorialId={1}
@@ -610,7 +656,7 @@ function CardLayoutView({
     },
     {
       id: 6,
-      name: 'Card 05 - Antes da Ação',
+      name: 'Card 08 - Antes da Ação',
       component: renderBadgeGallery(
         <Card05_BeforeAction
           stepNumber={currentStep}
@@ -618,9 +664,13 @@ function CardLayoutView({
           stepTitle={mockStepData.title}
           onDemonstrate={() => {
             if (onCardAction) onCardAction('demonstrate')
+            navigateToNextCard(6)
           }}
           onBack={() => setCurrentStep(Math.max(1, currentStep - 1))}
-          onShowConcept={() => setShowConcept(true)}
+          onShowConcept={() => {
+            setShowConcept(true)
+            navigateToNextCard(6)
+          }}
           onMenu={onMenu || (() => {})}
           onRestart={onRestart || (() => {})}
         />,
@@ -646,10 +696,13 @@ function CardLayoutView({
     },
     {
       id: '5.1',
-      name: 'Card 05.1 - Conceito',
+      name: 'Card 09 - Conceito',
       component: (
         <Card05_1_Concept
-          onContinue={() => setShowConcept(false)}
+          onContinue={() => {
+            setShowConcept(false)
+            navigateToNextCard('5.1')
+          }}
           onMenu={onMenu || (() => {})}
           onRestart={onRestart || (() => {})}
         />
@@ -666,13 +719,16 @@ function CardLayoutView({
     },
     {
       id: 7,
-      name: 'Card 06 - Após Ação',
+      name: 'Card 10 - Após Ação',
       component: renderBadgeGallery(
         <Card06_AfterAction
           stepNumber={currentStep}
           totalSteps={3}
           stepTitle={mockStepData.title}
-          onNextStep={() => setCurrentStep(Math.min(3, currentStep + 1))}
+          onNextStep={() => {
+            setCurrentStep(Math.min(3, currentStep + 1))
+            navigateToNextCard(8.4)
+          }}
           onBack={() => setCurrentStep(Math.max(1, currentStep - 1))}
           onMenu={onMenu || (() => {})}
           onRestart={onRestart || (() => {})}
@@ -692,12 +748,51 @@ function CardLayoutView({
       ]
     },
     {
+      id: 7.6,
+      name: 'Card de Transição - Modo Aprendizado',
+      component: (
+        <CardTransition_Interactive
+          onContinue={() => navigateToNextCard(7.6)}
+          onMenu={onMenu || (() => {})}
+        />
+      ),
+      elements: [
+        { type: 'title-1', selector: 'h3', label: 'Título - MODO APRENDIZADO' },
+        { type: 'body', selector: 'p', label: 'Corpo - Texto explicativo' },
+        { type: 'button-primary', selector: '.interactive-button', label: 'Botão - Continuar no Fluxo' },
+        { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' }
+      ]
+    },
+    {
+      id: 8.4,
+      name: 'Card 12 - Modo Aprendizado (Demonstração)',
+      component: (
+        <Card03_ModeSelection
+          onModeSelect={(mode) => {
+            setTutorialMode(mode)
+            if (onModeSelect) onModeSelect(mode)
+            navigateToNextCard(8.4)
+          }}
+          onMenu={onMenu || (() => {})}
+          initialMode="interactive"
+          dimmedOpacity={0.15}
+        />
+      ),
+      elements: [
+        { type: 'title-1', selector: '.card-title', label: 'Título 1' },
+        { type: 'button-mode', selector: '.mode-button', label: 'Botão de Modo' },
+        { type: 'title-2', selector: '.mode-title', label: 'Título 2 - Subtítulo' },
+        { type: 'body', selector: '.mode-description', label: 'Corpo - Descrição' },
+        { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' }
+      ]
+    },
+    {
       id: 8,
-      name: 'Card 07 - Interação',
+      name: 'Card 11 - Interação',
       component: renderBadgeGallery(
         <Card07_InteractionInvite
-          onTry={() => {}}
-          onContinue={() => {}}
+          onTry={() => navigateToNextCard(8.5)}
+          onContinue={() => navigateToNextCard(8.5)}
           onMenu={onMenu || (() => {})}
           onRestart={onRestart || (() => {})}
         />,
@@ -714,10 +809,10 @@ function CardLayoutView({
     },
     {
       id: 8.5,
-      name: 'Card 07.5 - Modo Aprendizado',
+      name: 'Card 12 - Modo Aprendizado',
       component: renderBadgeGallery(
         <Card07_5_LearningMode
-          onContinue={() => {}}
+          onContinue={() => navigateToNextCard(8.5)}
           onMenu={onMenu || (() => {})}
           onRestart={onRestart || (() => {})}
         />,
@@ -734,7 +829,7 @@ function CardLayoutView({
     },
     {
       id: 9,
-      name: 'Card 08 - Tentativa',
+      name: 'Card 13 - Tentativa',
       component: renderBadgeGallery(
         <Card08_UserAttempt
           stepNumber={currentStep}
@@ -742,8 +837,9 @@ function CardLayoutView({
           stepTitle={mockStepData.title}
           onCheckResult={() => {
             if (onCardAction) onCardAction('demonstrate')
+            navigateToNextCard(9)
           }}
-          onSkip={() => {}}
+          onSkip={() => navigateToNextCard(9)}
           onMenu={onMenu || (() => {})}
           onRestart={onRestart || (() => {})}
         />,
@@ -759,11 +855,11 @@ function CardLayoutView({
     },
     {
       id: 10,
-      name: 'Card 09 - Feedback Positivo',
+      name: 'Card 14 - Feedback Positivo',
       component: renderBadgeGallery(
         <Card09_PositiveFeedback
-          onTryAgain={() => {}}
-          onContinue={() => {}}
+          onTryAgain={() => navigateToNextCard(9)}
+          onContinue={() => navigateToNextCard(11.5)}
           onMenu={onMenu || (() => {})}
           onRestart={onRestart || (() => {})}
         />,
@@ -781,11 +877,11 @@ function CardLayoutView({
     },
     {
       id: 11,
-      name: 'Card 10 - Feedback Negativo',
+      name: 'Card 15 - Feedback Negativo',
       component: renderBadgeGallery(
         <Card10_NegativeFeedback
-          onTryAgain={() => {}}
-          onContinue={() => {}}
+          onTryAgain={() => navigateToNextCard(9)}
+          onContinue={() => navigateToNextCard(11.5)}
           onMenu={onMenu || (() => {})}
           onRestart={onRestart || (() => {})}
         />,
@@ -802,14 +898,35 @@ function CardLayoutView({
       ]
     },
     {
+      id: 11.5,
+      name: 'Card de Transição - Fluxos se Encontram',
+      component: (
+        <CardTransition_Reunion
+          onContinue={() => navigateToNextCard(11.5)}
+          onMenu={onMenu || (() => {})}
+        />
+      ),
+      elements: [
+        { type: 'title-1', selector: 'h3', label: 'Título - FLUXOS SE ENCONTRAM' },
+        { type: 'body', selector: 'p', label: 'Corpo - Texto explicativo' },
+        { type: 'button-primary', selector: '.primary-button', label: 'Botão - ISSO NÃO FAZ PARTE DO LAYOUT' }
+      ]
+    },
+    {
       id: 12,
-      name: 'Card 11 - Conclusão',
+      name: 'Card 16 - Conclusão',
       component: renderBadgeGallery(
         <Card11_Completion
           onMenu={onMenu || (() => {})}
           onRestart={onRestart || (() => {})}
-          onComplete={onTutorialComplete || (() => {})}
-          onCompleteAndMenu={onQuickComplete || (() => {})}
+          onComplete={() => {
+            if (onTutorialComplete) onTutorialComplete()
+            navigateToNextCard(12.5)
+          }}
+          onCompleteAndMenu={() => {
+            if (onQuickComplete) onQuickComplete()
+            navigateToNextCard(12.5)
+          }}
         />,
         12
       ),
@@ -823,11 +940,26 @@ function CardLayoutView({
       ]
     },
     {
+      id: 12.5,
+      name: 'Card de Transição - Badges e Conquistas',
+      component: (
+        <CardTransition_Badges
+          onContinue={() => navigateToNextCard(12.5)}
+          onMenu={onMenu || (() => {})}
+        />
+      ),
+      elements: [
+        { type: 'title-1', selector: 'h3', label: 'Título - BADGES E CONQUISTAS' },
+        { type: 'body', selector: 'p', label: 'Corpo - Texto explicativo' },
+        { type: 'button-primary', selector: '.primary-button', label: 'Botão - ISSO NÃO FAZ PARTE DO LAYOUT' }
+      ]
+    },
+    {
       id: 13,
-      name: 'Card 13 - Badges',
+      name: 'Card 17 - Badges',
       component: (
         <Card13_BadgeExplanation
-          onClose={() => {}}
+          onClose={() => navigateToNextCard(13)}
         />
       ),
       elements: [
@@ -949,6 +1081,7 @@ function CardLayoutView({
       document.body.classList.remove('layer-layer1', 'layer-layer2', 'layer-layer3', 'layer-layer4', 'layer-layer5', 'layer-layer7', 'layer-layer8', 'layer-layer9', 'layer-layer10', 'layer-layer11')
     }
   }, [currentLayer])
+
 
 
   // Extrair todos os elementos únicos agrupados por tipo
@@ -1621,8 +1754,8 @@ function CardLayoutView({
 
   // Ordenar cards na ordem da experiência do usuário
   const sortedCards = [...cards].sort((a, b) => {
-    // Ordem específica da experiência: 0, 1, 2, 3, 4, 5, 5.1, 6, 7, 8, 8.5, 9, 10, 11, 12, 13, 16, 17, 19, 20
-    const order = [0, 1, 2, 3, 4, 5, '5.1', 6, 7, 8, 8.5, 9, 10, 11, 12, 13, 16, 17, 19, 20]
+    // Ordem específica da experiência: 0, 1, 2, 3, 1.4, 1.5, 5, 6, 5.1, 7, 7.6, 8.4, 8, 8.5, 9, 10, 11, 11.5, 12, 12.5, 13, 16, 17, 19, 20
+    const order = [0, 1, 2, 3, 1.4, 1.5, 5, 6, '5.1', 7, 7.6, 8.4, 8, 8.5, 9, 10, 11, 11.5, 12, 12.5, 13, 16, 17, 19, 20]
     const indexA = order.indexOf(a.id)
     const indexB = order.indexOf(b.id)
     // Se não estiver na lista de ordem, coloca no final
@@ -1807,9 +1940,48 @@ function CardLayoutView({
       <div className="card-layout-container">
         {sortedCards.map((card) => (
           <div key={card.id} className="card-layout-wrapper">
-            <div className="card-layout-label">{card.name}</div>
+            <div 
+              className="card-layout-label"
+              onClick={() => {
+                setActiveCardId(card.id)
+                setTimeout(() => {
+                  const targetElement = document.getElementById(`card-content-${card.id}`)
+                  if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
+                  }
+                }, 50)
+              }}
+              style={{ 
+                cursor: 'pointer',
+                userSelect: 'none',
+                transition: 'all 0.2s',
+                backgroundColor: activeCardId === card.id ? 'rgba(253, 187, 44, 0.2)' : 'transparent',
+                padding: '8px',
+                borderRadius: '4px'
+              }}
+              onMouseEnter={(e) => {
+                if (activeCardId !== card.id) {
+                  e.target.style.backgroundColor = 'rgba(253, 187, 44, 0.1)'
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (activeCardId !== card.id) {
+                  e.target.style.backgroundColor = 'transparent'
+                }
+              }}
+            >
+              {card.name}
+            </div>
             <div className="card-layout-item">
-              <div className="card-layout-content" id={`card-content-${card.id}`}>
+              <div 
+                className="card-layout-content" 
+                id={`card-content-${card.id}`}
+                style={{
+                  outline: activeCardId === card.id ? '2px solid rgb(253, 187, 44)' : 'none',
+                  outlineOffset: '4px',
+                  transition: 'outline 0.2s'
+                }}
+              >
                 {card.component}
                 {showLabels && card.elements && (
                   <ElementLabel 

@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import Card00_Cover from './cards/Card00_Cover'
 import Card01_02_Selection from './cards/Card01_02_Selection'
 import Card03_ModeSelection from './cards/Card03_ModeSelection'
+import CardTransition_Demonstrative from './cards/CardTransition_Demonstrative'
+import CardTransition_Interactive from './cards/CardTransition_Interactive'
 import Card04_Introduction from './cards/Card04_Introduction'
 import Card05_BeforeAction from './cards/Card05_BeforeAction'
 import Card05_1_Concept from './cards/Card05_1_Concept'
@@ -48,11 +50,13 @@ function TutorialPanel({
   onQuickComplete,
   onResetGamification,
   showCreatorPopup,
+  onNavigateToLayout,
   onCloseCreatorPopup,
   showBadgePopup2,
   onCloseBadgePopup2,
   showBadgePopup3,
-  onCloseBadgePopup3
+  onCloseBadgePopup3,
+  setCurrentCard
 }) {
   const [showBadges, setShowBadges] = useState(true)
   const [showBadgeExplanation, setShowBadgeExplanation] = useState(false)
@@ -130,7 +134,36 @@ function TutorialPanel({
           <Card03_ModeSelection
             onModeSelect={(mode) => {
               onModeSelect(mode)
-              onNext()
+            }}
+            onMenu={onMenu}
+          />
+        )
+      case 3.5:
+        // Card de transição para modo demonstrativo
+        return (
+          <CardTransition_Demonstrative
+            onContinue={() => {
+              // Após o card de transição, vai para o card 4 (introdução)
+              if (setCurrentCard) {
+                setCurrentCard(4)
+              } else {
+                onNext()
+              }
+            }}
+            onMenu={onMenu}
+          />
+        )
+      case 3.6:
+        // Card de transição para modo interativo
+        return (
+          <CardTransition_Interactive
+            onContinue={() => {
+              // Após o card de transição, vai para o card 4 (introdução)
+              if (setCurrentCard) {
+                setCurrentCard(4)
+              } else {
+                onNext()
+              }
             }}
             onMenu={onMenu}
           />
