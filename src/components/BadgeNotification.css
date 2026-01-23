@@ -20,6 +20,17 @@
 
 .badge-icon {
   font-size: 64px;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .badge-text {

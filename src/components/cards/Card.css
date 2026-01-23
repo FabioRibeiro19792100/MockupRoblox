@@ -400,7 +400,7 @@
   border: none;
   text-align: left;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.2s;
   margin-bottom: 16px;
   font-size: 16px;
   font-weight: 600;
@@ -408,10 +408,12 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  box-shadow: 0 0 15px rgba(253, 187, 44, 0.6), 0 0 30px rgba(253, 187, 44, 0.4), 0 0 45px rgba(253, 187, 44, 0.2);
 }
 
 .selection-button:hover {
   background: rgb(90, 150, 200);
+  box-shadow: 0 0 20px rgba(253, 187, 44, 0.8), 0 0 40px rgba(253, 187, 44, 0.6), 0 0 60px rgba(253, 187, 44, 0.4);
 }
 
 /* Card 03: Modo - Fundo branco, retângulos cinza */
@@ -500,6 +502,8 @@
 
 .mode-button-interactive {
   background: rgb(253, 187, 44) !important;
+  box-shadow: 0 0 15px rgba(253, 187, 44, 0.6), 0 0 30px rgba(253, 187, 44, 0.4), 0 0 45px rgba(253, 187, 44, 0.2) !important;
+  transition: all 0.2s !important;
 }
 
 .mode-button-interactive .mode-title,
@@ -509,6 +513,7 @@
 
 .mode-button-interactive:hover {
   background: rgb(230, 170, 40) !important;
+  box-shadow: 0 0 20px rgba(253, 187, 44, 0.8), 0 0 40px rgba(253, 187, 44, 0.6), 0 0 60px rgba(253, 187, 44, 0.4) !important;
 }
 
 .mode-title {
@@ -579,10 +584,13 @@
   height: 32px;
   box-sizing: border-box;
   white-space: nowrap;
+  box-shadow: 0 0 10px rgba(253, 187, 44, 0.6), 0 0 20px rgba(253, 187, 44, 0.4), 0 0 30px rgba(253, 187, 44, 0.2);
+  transition: all 0.2s;
 }
 
 .intro-start-button:hover {
   background: rgb(90, 150, 200);
+  box-shadow: 0 0 15px rgba(253, 187, 44, 0.8), 0 0 30px rgba(253, 187, 44, 0.6), 0 0 45px rgba(253, 187, 44, 0.4);
 }
 
 .card-intro .card-text {
@@ -855,25 +863,30 @@
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.2s;
   box-sizing: border-box;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 0 15px rgba(253, 187, 44, 0.6), 0 0 30px rgba(253, 187, 44, 0.4), 0 0 45px rgba(253, 187, 44, 0.2);
 }
 
 .primary-button:hover {
   background: rgb(230, 170, 40);
+  box-shadow: 0 0 20px rgba(253, 187, 44, 0.8), 0 0 40px rgba(253, 187, 44, 0.6), 0 0 60px rgba(253, 187, 44, 0.4);
 }
 
 .next-step-button {
   background: rgb(253, 187, 44) !important;
   color: #000000 !important;
+  box-shadow: 0 0 15px rgba(253, 187, 44, 0.6), 0 0 30px rgba(253, 187, 44, 0.4), 0 0 45px rgba(253, 187, 44, 0.2) !important;
+  transition: all 0.2s !important;
 }
 
 .next-step-button:hover {
   background: rgb(230, 170, 40) !important;
+  box-shadow: 0 0 20px rgba(253, 187, 44, 0.8), 0 0 40px rgba(253, 187, 44, 0.6), 0 0 60px rgba(253, 187, 44, 0.4) !important;
 }
 
 .secondary-button {
@@ -902,10 +915,13 @@
 .demonstrate-button {
   background: rgb(253, 187, 44) !important;
   color: #000000 !important;
+  box-shadow: 0 0 15px rgba(253, 187, 44, 0.6), 0 0 30px rgba(253, 187, 44, 0.4), 0 0 45px rgba(253, 187, 44, 0.2) !important;
+  transition: all 0.2s !important;
 }
 
 .demonstrate-button:hover {
   background: rgb(230, 170, 40) !important;
+  box-shadow: 0 0 20px rgba(253, 187, 44, 0.8), 0 0 40px rgba(253, 187, 44, 0.6), 0 0 60px rgba(253, 187, 44, 0.4) !important;
 }
 
 /* Card 05.1: Conceito - Fundo branco */
@@ -1055,6 +1071,8 @@
 .interactive-button.try {
   background: rgb(253, 187, 44);
   color: #000000;
+  box-shadow: 0 0 15px rgba(253, 187, 44, 0.6), 0 0 30px rgba(253, 187, 44, 0.4), 0 0 45px rgba(253, 187, 44, 0.2);
+  transition: all 0.2s;
 }
 
 .interactive-button.continue {
@@ -1065,6 +1083,11 @@
 
 .interactive-button:hover {
   opacity: 0.9;
+}
+
+.interactive-button.try:hover {
+  opacity: 1;
+  box-shadow: 0 0 20px rgba(253, 187, 44, 0.8), 0 0 40px rgba(253, 187, 44, 0.6), 0 0 60px rgba(253, 187, 44, 0.4);
 }
 
 /* Card 08: Tentativa do usuário */
@@ -1080,10 +1103,13 @@
   margin-bottom: 12px;
   text-align: left;
   white-space: nowrap;
+  box-shadow: 0 0 15px rgba(253, 187, 44, 0.6), 0 0 30px rgba(253, 187, 44, 0.4), 0 0 45px rgba(253, 187, 44, 0.2);
+  transition: all 0.2s;
 }
 
 .user-attempt-button:hover {
   background: rgb(230, 170, 40);
+  box-shadow: 0 0 20px rgba(253, 187, 44, 0.8), 0 0 40px rgba(253, 187, 44, 0.6), 0 0 60px rgba(253, 187, 44, 0.4);
 }
 
 .skip-link {
@@ -1187,10 +1213,13 @@
   font-weight: 600;
   cursor: pointer;
   height: 44px;
+  box-shadow: 0 0 15px rgba(253, 187, 44, 0.6), 0 0 30px rgba(253, 187, 44, 0.4), 0 0 45px rgba(253, 187, 44, 0.2);
+  transition: all 0.2s;
 }
 
 .feedback-button-black:hover {
   background: rgb(90, 150, 200);
+  box-shadow: 0 0 20px rgba(253, 187, 44, 0.8), 0 0 40px rgba(253, 187, 44, 0.6), 0 0 60px rgba(253, 187, 44, 0.4);
 }
 
 /* Card 11: Completion */
@@ -1240,10 +1269,13 @@
   cursor: pointer;
   margin-bottom: 16px;
   text-align: left;
+  box-shadow: 0 0 15px rgba(253, 187, 44, 0.6), 0 0 30px rgba(253, 187, 44, 0.4), 0 0 45px rgba(253, 187, 44, 0.2);
+  transition: all 0.2s;
 }
 
 .completion-button:hover {
   background: rgb(230, 170, 40);
+  box-shadow: 0 0 20px rgba(253, 187, 44, 0.8), 0 0 40px rgba(253, 187, 44, 0.6), 0 0 60px rgba(253, 187, 44, 0.4);
 }
 
 .completion-text {

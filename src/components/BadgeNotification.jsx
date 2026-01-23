@@ -1,14 +1,16 @@
 import './BadgeNotification.css'
 
 function BadgeNotification({ badgeId, onClose }) {
-  // Componente desabilitado - não renderizar notificação
-  return null
-  
-  /* Código original comentado
   const badgeNames = {
     1: 'Primeiro Passo',
     2: 'Criador Iniciante',
     3: 'Criador Avançado'
+  }
+
+  const badgeImages = {
+    1: '/badge1-removebg-preview.png',
+    2: '/badge2-removebg-preview.png',
+    3: '/badge3-removebg-preview.png'
   }
 
   if (!badgeId) return null
@@ -16,7 +18,17 @@ function BadgeNotification({ badgeId, onClose }) {
   return (
     <div className="badge-notification">
       <div className="badge-notification-content">
-        <div className="badge-icon">🏆</div>
+        <div className="badge-icon">
+          <img 
+            src={badgeImages[badgeId] || badgeImages[1]} 
+            alt={badgeNames[badgeId]}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'contain'
+            }}
+          />
+        </div>
         <div className="badge-text">
           <h3>Novo Badge Desbloqueado!</h3>
           <p>{badgeNames[badgeId]}</p>
@@ -25,7 +37,6 @@ function BadgeNotification({ badgeId, onClose }) {
       </div>
     </div>
   )
-  */
 }
 
 export default BadgeNotification

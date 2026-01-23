@@ -319,7 +319,7 @@
    VARIAÇÕES DE ESTILO - LAYERS
    ============================================ */
 
-/* Layer 6: Original Arredondado - Design original com botões arredondados */
+/* Layer 6: Original Arredondado - Design original com botões arredondados - SEM BACKGROUND */
 .card-layout-view.layer-layer6 {
   background: #f5f5f5;
 }
@@ -334,6 +334,25 @@
   background: #ffffff;
   color: #000000;
   border-radius: 12px;
+}
+
+.card-layout-view.layer-layer6 .card-layout-item .card.card-cover,
+.card-layout-view.layer-layer6 .card-layout-item .card.card-selection,
+.card-layout-view.layer-layer6 .card-layout-item .card.card-mode,
+.card-layout-view.layer-layer6 .card-layout-item .card.card-interactive,
+.card-layout-view.layer-layer6 .card-layout-item .card.card-intro,
+.card-layout-view.layer-layer6 .card-layout-item .card.card-completion {
+  background-image: none !important;
+  background-color: #ffffff !important;
+}
+
+.card-layout-view.layer-layer6 .card-layout-item .card.card-cover::before,
+.card-layout-view.layer-layer6 .card-layout-item .card.card-selection::before,
+.card-layout-view.layer-layer6 .card-layout-item .card.card-mode::before,
+.card-layout-view.layer-layer6 .card-layout-item .card.card-interactive::before,
+.card-layout-view.layer-layer6 .card-layout-item .card.card-intro::before,
+.card-layout-view.layer-layer6 .card-layout-item .card.card-completion::before {
+  display: none !important;
 }
 
 /* Todos os botões arredondados - aplica a TODOS os botões incluindo card 05 */
@@ -744,6 +763,26 @@
 /* ============================================
    POPUPS - APLICAR BACKGROUNDS DOS LAYERS
    ============================================ */
+
+/* Layer 6: Original Arredondado - POPUPS CINZA ESCURO */
+.card-layout-view.layer-layer6 .creator-popup-overlay,
+.layer-layer6 .creator-popup-overlay,
+body:has(.card-layout-view.layer-layer6) .creator-popup-overlay {
+  background: #424242 !important;
+}
+
+.card-layout-view.layer-layer6 .creator-popup-content,
+.layer-layer6 .creator-popup-content,
+body:has(.card-layout-view.layer-layer6) .creator-popup-content {
+  background-image: none !important;
+  background-color: #424242 !important;
+}
+
+.card-layout-view.layer-layer6 .creator-popup-content::before,
+.layer-layer6 .creator-popup-content::before,
+body:has(.card-layout-view.layer-layer6) .creator-popup-content::before {
+  display: none !important;
+}
 
 /* Layer 1: Design Original - SEM BACKGROUND nos popups */
 .card-layout-view.layer-layer1 .creator-popup-content,

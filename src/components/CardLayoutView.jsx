@@ -820,27 +820,6 @@ function CardLayoutView({
       ]
     },
     {
-      id: 16,
-      name: 'Badge Notification - Popup',
-      component: (
-        <div className="card" style={{ padding: '24px', background: '#ffffff', height: '100%', position: 'relative', overflow: 'visible', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-            <BadgeNotification badgeId={1} onClose={() => {}} />
-            <div style={{ position: 'absolute', top: '20px', right: '20px', zIndex: 10 }}>
-              <CreatorStamp isVisible={true} />
-            </div>
-          </div>
-        </div>
-      ),
-      elements: [
-        { type: 'badge-notification', selector: '.badge-notification', label: 'Notificação de Badge' },
-        { type: 'badge-icon', selector: '.badge-icon', label: 'Ícone de Badge' },
-        { type: 'title-1', selector: '.badge-text h3', label: 'Título - Notificação' },
-        { type: 'body', selector: '.badge-text p', label: 'Corpo - Nome do Badge' },
-        { type: 'button-close', selector: '.badge-close', label: 'Botão Fechar' }
-      ]
-    },
-    {
       id: 17,
       name: 'Creator Popup - Conquista',
       component: (
