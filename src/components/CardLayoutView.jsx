@@ -22,7 +22,7 @@ import ElementLabel from './ElementLabel'
 import BadgeNotification from './BadgeNotification'
 import './CardLayoutView.css'
 
-// Sistema de layers - Design Original + Bold
+// Sistema de layers - Design Original + Bold + Pixel Art
 const LAYER_STYLES = {
   layer1: {
     name: 'Design Original',
@@ -31,6 +31,10 @@ const LAYER_STYLES = {
   layer2: {
     name: 'Bold',
     description: 'Tipografia pesada, destaque em negrito'
+  },
+  layer3: {
+    name: 'Pixel Art',
+    description: 'Estilo pixel-art retrô com bordas douradas e painéis bege'
   }
 }
 
