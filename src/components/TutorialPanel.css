@@ -97,10 +97,13 @@
     max-height: none !important;
     margin-top: 0 !important;
     border-radius: 0 !important;
+    overflow: visible !important;
   }
 
   .tutorial-panel-content {
     padding-bottom: 200px;
+    overflow-y: visible !important;
+    overflow-x: hidden !important;
   }
 
   .badge-gallery-fixed {

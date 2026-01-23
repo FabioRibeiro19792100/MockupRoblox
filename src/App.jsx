@@ -330,7 +330,7 @@ function App() {
           }}
         />
       ) : (
-        <div style={{ display: 'flex', width: '100%', height: '100%', flexDirection: 'row', alignItems: 'flex-start' }}>
+        <div className="app-normal-mode-wrapper" style={{ display: 'flex', width: '100%', height: '100%', flexDirection: 'row', alignItems: 'flex-start' }}>
           <TutorialPanel
             currentCard={currentCard}
             tutorialMode={tutorialMode}

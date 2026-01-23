@@ -221,6 +221,7 @@
     max-height: none !important;
     margin-top: 0 !important;
     flex: none !important;
+    overflow: visible !important;
   }
 
   .studio-toolbar {

@@ -17,3 +17,19 @@ body {
   width: 100vw;
   height: 100vh;
 }
+
+/* Media queries para mobile - permitir scroll */
+@media (max-width: 768px) {
+  body {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    height: auto !important;
+    min-height: 100vh !important;
+  }
+
+  #root {
+    height: auto !important;
+    min-height: 100vh !important;
+    max-height: none !important;
+  }
+}
