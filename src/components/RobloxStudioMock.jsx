@@ -228,8 +228,26 @@ function RobloxStudioMock({ state, onRemoveBlocks, currentCard, tutorialMode, sh
 
   const instructions = getCardInstructions()
 
+  console.log('RobloxStudioMock renderizando', { state, currentCard })
+
   return (
-    <div className="roblox-studio-mock">
+    <div className="roblox-studio-mock" style={{ 
+      display: 'flex', 
+      flex: '1 1 auto', 
+      minWidth: '500px',
+      width: 'auto',
+      height: '85vh',
+      maxHeight: '85vh',
+      background: '#e0e0e0',
+      flexDirection: 'column',
+      marginTop: '48px',
+      marginLeft: '0',
+      position: 'relative',
+      zIndex: 10,
+      visibility: 'visible',
+      opacity: 1,
+      border: '2px solid red' // DEBUG - remover depois
+    }}>
       <div className="studio-toolbar">
         <div className="toolbar-item">File</div>
         <div className="toolbar-item">Edit</div>

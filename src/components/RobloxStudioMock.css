@@ -1,9 +1,20 @@
 .roblox-studio-mock {
-  width: 70%;
-  height: 100vh;
-  background: #e0e0e0;
-  display: flex;
-  flex-direction: column;
+  flex: 1 !important;
+  width: auto !important;
+  min-width: 500px !important;
+  height: 85vh !important;
+  max-height: 85vh !important;
+  background: #e0e0e0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  flex-shrink: 1 !important;
+  align-self: flex-start !important;
+  margin-top: 48px !important;
+  margin-left: 0 !important;
+  position: relative !important;
+  z-index: 1 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .studio-toolbar {

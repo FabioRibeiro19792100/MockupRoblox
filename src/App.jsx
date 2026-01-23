@@ -330,7 +330,7 @@ function App() {
           }}
         />
       ) : (
-        <>
+        <div style={{ display: 'flex', width: '100%', height: '100%', flexDirection: 'row', alignItems: 'flex-start' }}>
           <TutorialPanel
             currentCard={currentCard}
             tutorialMode={tutorialMode}
@@ -407,7 +407,7 @@ function App() {
             layoutMode={layoutMode}
             onLayoutModeToggle={setLayoutMode}
           />
-        </>
+        </div>
       )}
       {!layoutMode && (
         <button 
