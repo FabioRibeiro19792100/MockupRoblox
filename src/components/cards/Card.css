@@ -7,8 +7,7 @@
   min-height: 85vh;
   width: 100%;
   box-sizing: border-box;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden;
   background: #ffffff;
   color: #000000;
   padding: 0;
@@ -17,6 +16,12 @@
   font-size: 90%; /* Redução de 10% em todas as fontes - aplica proporcionalmente */
   border: 1px solid #000000;
   border-radius: 8px;
+}
+
+/* Cards que não são card-step mantêm scroll no próprio card */
+.card:not(.card-step) {
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 /* Forçar remoção de cores verdes - substituir por preto */
@@ -39,11 +44,18 @@
 /* Toggle da galeria de badges - posicionado logo após o header */
 .card-with-badge-toggle {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
 }
 
 .card-with-badge-toggle .card {
   display: flex;
   flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
 }
 
 .card-with-badge-toggle .card-header-global {
@@ -51,6 +63,7 @@
   grid-template-columns: 1fr 1fr !important;
   align-items: stretch !important;
   position: relative;
+  flex-shrink: 0;
 }
 
 .card-with-badge-toggle .card-header-global.single-button-header {
@@ -59,11 +72,6 @@
 
 .card-with-badge-toggle .card-header-global:has(button:nth-child(3)) {
   grid-template-columns: 1fr 1fr 1fr !important;
-}
-
-.card-with-badge-toggle {
-  position: relative;
-  padding-bottom: 60px;
 }
 
 .card-with-badge-toggle .badge-gallery-toggle {
@@ -77,6 +85,16 @@
   margin-top: 0;
   background: rgb(113, 180, 233);
   border-top: 1px solid #e0e0e0;
+  height: 60px;
+}
+
+/* Conteúdo scrollável entre header e botões */
+.card-with-badge-toggle .card > div:not(.card-header-global):not(.card-actions) {
+  flex: 1;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  min-height: 0;
+  padding-bottom: 140px !important; /* Espaço para botões (80px) + toggle (60px) */
 }
 
 .card-content {
@@ -98,6 +116,7 @@
   margin-top: 0;
   gap: 8px;
   width: 100%;
+  flex-shrink: 0;
   box-sizing: border-box;
   position: relative;
   z-index: 10;
@@ -243,14 +262,15 @@
 
 .mode-button {
   width: 100%;
-  padding: 12px 16px;
+  padding: 16px 20px;
   background: #e0e0e0;
   color: #000000;
   border: none;
   text-align: left;
   cursor: pointer;
   transition: all 0.2s;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
+  border-radius: 4px;
 }
 
 .mode-button:hover {
@@ -285,16 +305,18 @@
 }
 
 .mode-title {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
   color: #000000;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+  letter-spacing: -0.1px;
 }
 
 .mode-description {
-  font-size: 12px;
-  color: #666666;
-  line-height: 1.3;
+  font-size: 14px;
+  color: #000000;
+  line-height: 1.4;
+  font-weight: 400;
 }
 
 /* Card 04: Introdução - Painel branco */
@@ -343,24 +365,61 @@
 /* Card 05-06: Etapa do tutorial */
 .card-step {
   background: #ffffff;
-  padding-bottom: 80px; /* Espaço para os botões fixos */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
 }
 
 .card-step .card-content {
   display: flex;
   flex-direction: column;
   flex: 1;
+  overflow: hidden;
 }
 
+/* Container scrollável do conteúdo do card-step - área entre header e actions */
+.card-step > div:not(.card-header-global):not(.card-actions) {
+  flex: 1 1 auto;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  min-height: 0;
+  max-height: none;
+  padding-bottom: 80px !important; /* Espaço para os botões */
+}
+
+/* Container único que envolve theme-box + step-title-bar */
 .card-step-header {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-bottom: 0;
+  margin-bottom: 12px;
 }
 
-.card-step-header + .step-title-bar {
-  margin-top: -2px !important;
+/* Box único que contém theme-box + step-title-bar */
+.theme-action-box {
+  width: 100%;
+  border: 2px solid #000000;
+  border-radius: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.theme-action-box .theme-box {
+  border: none !important;
+  margin-bottom: 0 !important;
+  width: 100%;
+  border-radius: 0;
+}
+
+.theme-action-box .step-title-bar {
+  border: none !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  width: 100%;
+  border-radius: 0;
 }
 
 .theme-box {
@@ -378,15 +437,26 @@
   flex-direction: column;
   gap: 3px;
   min-height: 40px;
+  height: 40px;
   line-height: 1.5;
   align-items: flex-start;
   justify-content: center;
+  margin-bottom: 0;
+  border-radius: 0;
+}
+
+/* Quando dentro do theme-action-box, remove bordas */
+.theme-action-box .theme-box {
+  border: none !important;
+  height: 40px;
+  min-height: 40px;
 }
 
 .step-counter {
   font-size: 20px;
   color: #000000;
   font-weight: 700;
+  margin-bottom: 12px;
 }
 
 .step-title-bar {
@@ -401,10 +471,20 @@
   font-size: 16px;
   font-weight: 700;
   min-height: 40px;
+  height: 40px;
   line-height: 1.5;
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  border-radius: 0;
+}
+
+/* Quando dentro do theme-action-box, remove bordas */
+.theme-action-box .step-title-bar {
+  border: none !important;
+  margin-bottom: 0 !important;
+  height: 40px;
+  min-height: 40px;
 }
 
 .instructions-section {
@@ -439,13 +519,13 @@
 }
 
 .instructions-list li {
-  margin-bottom: 2px;
-  padding-bottom: 4px;
-  border-bottom: 1px solid #000000;
+  margin-bottom: 12px;
+  padding-bottom: 0;
+  border-bottom: none;
 }
 
 .instructions-list li:last-child {
-  border-bottom: none;
+  margin-bottom: 0;
   padding-bottom: 0;
 }
 
@@ -482,17 +562,25 @@
   grid-template-columns: 1fr 1fr;
   gap: 12px;
   margin: 0;
-  margin-top: 0;
+  margin-top: auto;
   padding: 16px 24px;
   width: 100%;
   box-sizing: border-box;
   align-items: stretch;
+  flex-shrink: 0;
+  background: #ffffff;
+  border-top: 1px solid #cccccc;
+  z-index: 50;
+}
+
+/* Quando está dentro de card-with-badge-toggle, fica fixo acima do toggle */
+.card-with-badge-toggle .card-actions {
   position: absolute !important;
   bottom: 60px !important;
   left: 0 !important;
   right: 0 !important;
-  background: #ffffff;
-  z-index: 50;
+  margin-top: 0 !important;
+  z-index: 52 !important;
 }
 
 
@@ -712,6 +800,7 @@
   cursor: pointer;
   margin-bottom: 12px;
   text-align: left;
+  white-space: nowrap;
 }
 
 .user-attempt-button:hover {

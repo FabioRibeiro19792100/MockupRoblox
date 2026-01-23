@@ -8,14 +8,16 @@ function Card05_BeforeAction({ stepNumber, totalSteps, stepTitle, onDemonstrate,
         <button className="header-button" onClick={onRestart}>Reiniciar tutorial</button>
       </div>
       <div style={{ padding: '0 24px 24px 24px' }}>
-        <div className="card-step-header" style={{ marginBottom: '0', marginTop: '24px' }}>
+        <div className="card-step-header" style={{ marginBottom: '12px', marginTop: '24px' }}>
           <div className="step-counter" style={{ marginBottom: '8px' }}>ETAPA {stepNumber}/{totalSteps}</div>
-          <div className="theme-box">
-            <div>Tutorial → Construir uma casa</div>
+          <div className="theme-action-box">
+            <div className="theme-box">
+              <div>Tutorial → Construir uma casa</div>
+            </div>
+            <div className="step-title-bar">
+              Ação → {stepTitle || 'Montar o terreno'}
+            </div>
           </div>
-        </div>
-        <div className="step-title-bar">
-          Ação → {stepTitle || 'Montar o terreno'}
         </div>
         <div className="instructions-section">
           <div className="section-title">COMO FAZER NO ROBLOX STUDIO</div>

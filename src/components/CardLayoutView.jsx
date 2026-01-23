@@ -32,9 +32,9 @@ const LAYER_STYLES = {
     name: 'Bold',
     description: 'Tipografia pesada, destaque em negrito'
   },
-  layer3: {
-    name: 'Pixel Art',
-    description: 'Estilo pixel-art retrô com bordas douradas e painéis bege'
+  layer6: {
+    name: 'Original Arredondado',
+    description: 'Design original com botões totalmente arredondados'
   }
 }
 

@@ -22,17 +22,11 @@ function Card00_Cover({ onStart }) {
             Tutoriais Roblox Studio
           </h3>
           <div style={{ borderBottom: '1px solid #cccccc', marginBottom: '40px' }}></div>
-          <p className="card-text" style={{ fontSize: '18px', lineHeight: '1.12', marginBottom: '24px' }}>
-            Ao longo de 2026, 10 mil jovens de 13 a 18 anos vão transformar sua relação com os jogos em criação.
+          <p className="card-text" style={{ fontSize: '18px', lineHeight: '1.12', marginBottom: '24px', fontWeight: 700 }}>
+            Bem vindos e bem vindas à Expedição Roblox!
           </p>
-          <p className="card-text" style={{ fontSize: '18px', lineHeight: '1.12', marginBottom: '24px' }}>
-            Eles vão aprender a usar o Roblox Studio para construir, testar e publicar seus próprios jogos, entendendo como ideias viram experiências jogáveis.
-          </p>
-          <p className="card-text" style={{ fontSize: '18px', lineHeight: '1.12', marginBottom: '24px' }}>
-            Este tutorial faz parte dessa jornada.
-          </p>
-          <p className="card-text" style={{ fontSize: '18px', lineHeight: '1.12', marginBottom: '40px' }}>
-            Aqui, você aprende criando, passo a passo, dentro do próprio Roblox Studio...
+          <p className="card-text" style={{ fontSize: '18px', lineHeight: '1.12', marginBottom: '40px', fontWeight: 700 }}>
+            Aprenda a criar experiências incríveis com tutoriais interativos dentro do Roblox Studio!
           </p>
         </div>
       </div>
