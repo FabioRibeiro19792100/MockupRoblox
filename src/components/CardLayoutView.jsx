@@ -24,10 +24,6 @@ import './CardLayoutView.css'
 
 // Sistema de layers - Design Original + Arredondado + Variações de Background
 const LAYER_STYLES = {
-  layer1: {
-    name: 'Design Original',
-    description: 'Design original sem modificações'
-  },
   layer6: {
     name: 'Original Arredondado',
     description: 'Design original com botões totalmente arredondados'
@@ -85,7 +81,7 @@ function CardLayoutView({
   const [showConcept, setShowConcept] = useState(false)
   const [currentStep, setCurrentStep] = useState(1)
   const [tutorialMode, setTutorialMode] = useState('demonstrative')
-  const [currentLayer, setCurrentLayer] = useState('layer1')
+  const [currentLayer, setCurrentLayer] = useState('layer6')
   const [showLabels, setShowLabels] = useState(false)
   const [showBadgeGallery, setShowBadgeGallery] = useState(true)
   const [badgeGalleryExpanded, setBadgeGalleryExpanded] = useState(false) // Para controle global
@@ -1746,9 +1742,7 @@ function CardLayoutView({
             >
               {Object.entries(LAYER_STYLES)
                 .sort(([keyA], [keyB]) => {
-                  // Colocar layer1 e layer6 no topo
-                  if (keyA === 'layer1') return -1
-                  if (keyB === 'layer1') return 1
+                  // Colocar layer6 no topo
                   if (keyA === 'layer6') return -1
                   if (keyB === 'layer6') return 1
                   // Ordenar os demais por número

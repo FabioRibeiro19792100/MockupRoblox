@@ -1,10 +1,10 @@
 import './BadgeScoreboard.css'
 
 function BadgeScoreboard({ earnedBadges }) {
-  const badgeSymbols = {
-    1: '⭐',
-    2: '🏅',
-    3: '👑'
+  const badgeImages = {
+    1: '/badge1-removebg-preview.png',
+    2: '/badge2-removebg-preview.png',
+    3: '/badge3-removebg-preview.png'
   }
 
   const earnedCount = earnedBadges ? earnedBadges.length : 0
@@ -21,7 +21,15 @@ function BadgeScoreboard({ earnedBadges }) {
               className={`badge-scoreboard-item ${isEarned ? 'earned' : ''}`}
               title={isEarned ? `Badge ${badgeId} conquistado` : `Badge ${badgeId} não conquistado`}
             >
-              <span>{badgeSymbols[badgeId]}</span>
+              <img 
+                src={badgeImages[badgeId]} 
+                alt={`Badge ${badgeId}`}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain'
+                }}
+              />
               {isEarned && <span className="badge-scoreboard-check">✓</span>}
             </div>
           )

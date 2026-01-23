@@ -24,9 +24,10 @@ function Card03_ModeSelection({ onModeSelect, onMenu }) {
           <button
             className="mode-button mode-button-demonstrative"
             onClick={() => onModeSelect('demonstrative')}
+            style={{ background: 'rgb(113, 180, 233)' }}
           >
-            <div className="mode-title">Modo observador</div>
-            <div className="mode-description">você vai apenas entender como se dá o processo de construção no Studio</div>
+            <div className="mode-title" style={{ color: '#000000' }}>Modo observador</div>
+            <div className="mode-description" style={{ color: '#000000' }}>você vai apenas entender como se dá o processo de construção no Studio</div>
           </button>
           <button
             className="mode-button mode-button-interactive"

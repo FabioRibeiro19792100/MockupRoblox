@@ -22,9 +22,19 @@
 
 .badge-scoreboard-item {
   position: relative;
-  font-size: 28px;
+  width: 28px;
+  height: 28px;
   opacity: 0.3;
   transition: opacity 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge-scoreboard-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .badge-scoreboard-item.earned {

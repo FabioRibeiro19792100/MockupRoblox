@@ -214,7 +214,25 @@
 }
 
 /* Estilos para diferentes layers - 10 layouts completamente novos */
-/* Layer 1 - Design Original (sem modificações) */
+/* Layer 1 - Design Original (sem modificações) - SEM BACKGROUND */
+.card-layout-view.layer-layer1 .card-layout-item .card.card-cover,
+.card-layout-view.layer-layer1 .card-layout-item .card.card-selection,
+.card-layout-view.layer-layer1 .card-layout-item .card.card-mode,
+.card-layout-view.layer-layer1 .card-layout-item .card.card-interactive,
+.card-layout-view.layer-layer1 .card-layout-item .card.card-intro,
+.card-layout-view.layer-layer1 .card-layout-item .card.card-completion {
+  background-image: none !important;
+  background-color: #ffffff !important;
+}
+
+.card-layout-view.layer-layer1 .card-layout-item .card.card-cover::before,
+.card-layout-view.layer-layer1 .card-layout-item .card.card-selection::before,
+.card-layout-view.layer-layer1 .card-layout-item .card.card-mode::before,
+.card-layout-view.layer-layer1 .card-layout-item .card.card-interactive::before,
+.card-layout-view.layer-layer1 .card-layout-item .card.card-intro::before,
+.card-layout-view.layer-layer1 .card-layout-item .card.card-completion::before {
+  display: none !important;
+}
 
 /* Layers 2-10 - Removidos temporariamente para não quebrar o layout */
 
@@ -726,6 +744,20 @@
 /* ============================================
    POPUPS - APLICAR BACKGROUNDS DOS LAYERS
    ============================================ */
+
+/* Layer 1: Design Original - SEM BACKGROUND nos popups */
+.card-layout-view.layer-layer1 .creator-popup-content,
+.layer-layer1 .creator-popup-content,
+body:has(.card-layout-view.layer-layer1) .creator-popup-content {
+  background-image: none !important;
+  background-color: #ffffff !important;
+}
+
+.card-layout-view.layer-layer1 .creator-popup-content::before,
+.layer-layer1 .creator-popup-content::before,
+body:has(.card-layout-view.layer-layer1) .creator-popup-content::before {
+  display: none !important;
+}
 
 /* Layer 2: Variação Back02 - back02.jpg nos popups */
 .card-layout-view.layer-layer2 .creator-popup-content,

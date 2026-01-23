@@ -63,20 +63,34 @@
   color: #ffffff !important;
 }
 
+/* Exceção: Cards de feedback (9 e 10) devem ter TODOS os textos pretos - DEVE VIR ANTES DA REGRA GLOBAL */
+.card-feedback,
+.card-feedback *,
+.card-feedback .card-title,
+.card-feedback h1,
+.card-feedback h2,
+.card-feedback h3,
+.card-feedback h2.card-title,
+.card-feedback p,
+.card-feedback span,
+.card-feedback div,
+.card-feedback .feedback-icon,
+.card-feedback-content,
+.card-feedback-content *,
+.card-feedback-content h2,
+.card-feedback-content .card-title,
+.card.card-feedback h2,
+.card.card-feedback h3,
+.card.card-feedback .card-title {
+  color: #000000 !important;
+}
+
 /* Forçar cor branca em TODOS os títulos para garantir que não haja verde */
 .card h1,
 .card h2,
 .card h3,
 .card .card-title {
   color: #ffffff !important;
-}
-
-/* Exceção: Cards de feedback (9 e 10) devem ter títulos pretos */
-.card-feedback .card-title,
-.card-feedback h1,
-.card-feedback h2,
-.card-feedback h3 {
-  color: #000000 !important;
 }
 
 /* Exceção: Card de conceito (05.1) deve ter títulos pretos */
@@ -230,7 +244,7 @@
 
 /* Card 00: Capa */
 .card-cover {
-  background-image: url('/background.png');
+  background-image: url('/Back01.png');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -264,7 +278,7 @@
 
 /* Card 01-02: Seleção - Fundo branco, botões laranja */
 .card-selection {
-  background-image: url('/background.png');
+  background-image: url('/Back01.png');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -402,7 +416,7 @@
 
 /* Card 03: Modo - Fundo branco, retângulos cinza */
 .card-mode {
-  background-image: url('/background.png');
+  background-image: url('/Back01.png');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -472,7 +486,7 @@
 }
 
 .mode-button-demonstrative {
-  background: rgb(253, 187, 44) !important;
+  background: rgb(113, 180, 233) !important;
 }
 
 .mode-button-demonstrative .mode-title,
@@ -481,7 +495,7 @@
 }
 
 .mode-button-demonstrative:hover {
-  background: rgb(230, 170, 40) !important;
+  background: rgb(100, 160, 210) !important;
 }
 
 .mode-button-interactive {
@@ -514,7 +528,7 @@
 
 /* Card 04: Introdução - Painel branco */
 .card.card-intro {
-  background-image: url('/background.png');
+  background-image: url('/Back01.png');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -981,7 +995,7 @@
 /* Card 07: Momento interativo */
 .card-interactive {
   background: #ffffff;
-  background-image: url('/background.png');
+  background-image: url('/Back01.png');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -1110,11 +1124,11 @@
 }
 
 .feedback-icon.success {
-  color: #000000;
+  color: #000000 !important;
 }
 
 .feedback-icon.error {
-  color: #f44336;
+  color: #f44336 !important;
 }
 
 .card-feedback .card-title {
@@ -1181,7 +1195,7 @@
 
 /* Card 11: Completion */
 .card-completion {
-  background-image: url('/background.png');
+  background-image: url('/Back01.png');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;

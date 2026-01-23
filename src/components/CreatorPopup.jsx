@@ -6,12 +6,18 @@ function CreatorPopup({ onClose }) {
       <div className="creator-popup-content" onClick={(e) => e.stopPropagation()}>
         <div className="creator-popup-close" onClick={onClose}>×</div>
         <div className="creator-popup-animation">
-          <div className="creator-popup-star">⭐</div>
-          <div className="creator-popup-confetti">
-            <span>🎉</span>
-            <span>✨</span>
-            <span>🎊</span>
-            <span>🌟</span>
+          <div className="creator-popup-star">
+            <img 
+              src="/badge1-removebg-preview.png" 
+              alt="Badge Primeiro Passo"
+              style={{
+                background: 'transparent',
+                border: 'none',
+                outline: 'none',
+                boxShadow: 'none',
+                display: 'block'
+              }}
+            />
           </div>
         </div>
         <h2 className="creator-popup-title">Parabéns!</h2>

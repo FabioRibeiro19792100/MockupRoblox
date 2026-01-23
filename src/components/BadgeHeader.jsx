@@ -10,7 +10,7 @@ function BadgeHeader({ earnedBadges, completedTutorials }) {
     {
       id: 1,
       name: 'Primeiro Passo',
-      symbol: '⭐',
+      image: '/badge1-removebg-preview.png',
       requirement: 'Tutorial 1 da classe 1',
       requirementDetail: 'Completar: Construir um casa',
       earned: earnedBadges.includes(1),
@@ -20,7 +20,7 @@ function BadgeHeader({ earnedBadges, completedTutorials }) {
     {
       id: 2,
       name: 'Criador Iniciante',
-      symbol: '🏅',
+      image: '/badge2-removebg-preview.png',
       requirement: 'Tutoriais 1-5 da classe 1',
       requirementDetail: 'Completar todos os tutoriais de "Transforme-se num Creator"',
       earned: earnedBadges.includes(2),
@@ -30,7 +30,7 @@ function BadgeHeader({ earnedBadges, completedTutorials }) {
     {
       id: 3,
       name: 'Criador Avançado',
-      symbol: '👑',
+      image: '/badge3-removebg-preview.png',
       requirement: 'Tutoriais 1-5 da classe 2',
       requirementDetail: 'Completar todos os tutoriais de "Criações rápidas"',
       earned: earnedBadges.includes(3),
@@ -52,7 +52,15 @@ function BadgeHeader({ earnedBadges, completedTutorials }) {
             onMouseLeave={() => setHoveredBadge(null)}
           >
             <div className="badge-header-icon">
-              <span>{badge.symbol}</span>
+              <img 
+                src={badge.image} 
+                alt={badge.name}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain'
+                }}
+              />
               {badge.earned && <span className="badge-check">✓</span>}
             </div>
           </div>

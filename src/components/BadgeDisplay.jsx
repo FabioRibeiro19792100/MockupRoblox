@@ -7,6 +7,12 @@ function BadgeDisplay({ earnedBadges }) {
     3: 'Criador Avançado'
   }
 
+  const badgeImages = {
+    1: '/badge1-removebg-preview.png',
+    2: '/badge2-removebg-preview.png',
+    3: '/badge3-removebg-preview.png'
+  }
+
   return (
     <div className="badge-display">
       <h3 className="badge-display-title">
@@ -21,8 +27,15 @@ function BadgeDisplay({ earnedBadges }) {
               className={`badge-item ${isEarned ? 'earned' : 'locked'}`}
               title={badgeNames[badgeId]}
             >
-              <span className="badge-emoji">🏆</span>
-              <span className="badge-number">{badgeId}</span>
+              <img 
+                src={badgeImages[badgeId]} 
+                alt={badgeNames[badgeId]}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain'
+                }}
+              />
               {isEarned && <span className="badge-check">✓</span>}
             </div>
           )
