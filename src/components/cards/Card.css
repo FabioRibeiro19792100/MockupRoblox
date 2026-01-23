@@ -79,6 +79,27 @@
   color: #000000 !important;
 }
 
+/* Exceção: Card de conceito (05.1) deve ter títulos pretos */
+.card-concept .card-title,
+.card-concept h1,
+.card-concept h2,
+.card-concept h3 {
+  color: #000000 !important;
+}
+
+/* Exceção: Card 13 (Badge Explanation) - TODAS as fontes devem ser pretas */
+.card-badge-explanation,
+.card-badge-explanation *,
+.card-badge-explanation p,
+.card-badge-explanation span,
+.card-badge-explanation strong,
+.card-badge-explanation h1,
+.card-badge-explanation h2,
+.card-badge-explanation h3,
+.card-badge-explanation .card-title {
+  color: #000000 !important;
+}
+
 /* Toggle da galeria de badges - posicionado logo após o header */
 .card-with-badge-toggle {
   position: relative;

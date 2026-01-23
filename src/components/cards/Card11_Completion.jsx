@@ -1,18 +1,13 @@
-import { useState } from 'react'
 import './Card.css'
 
-function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, onNextTutorial }) {
-  const [selectedOption, setSelectedOption] = useState(null)
-
+function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu }) {
   const handleKeepMap = () => {
-    setSelectedOption('keep')
     if (onComplete) {
       onComplete()
     }
   }
 
   const handleClearAndExit = () => {
-    setSelectedOption('clear')
     if (onCompleteAndMenu) {
       onCompleteAndMenu()
     } else if (onMenu) {
@@ -21,183 +16,102 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, o
   }
 
   return (
-    <div className="card card-completion">
-      <div style={{ 
-        padding: '40px 24px 24px 24px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        textAlign: 'center'
-      }}>
-        {/* Selo circular com checkmark */}
-        <div style={{
-          width: '120px',
-          height: '120px',
-          borderRadius: '50%',
-          background: '#e0e0e0',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          marginBottom: '24px',
-          fontSize: '60px',
-          color: '#000000'
-        }}>
-          ✓
-        </div>
-
-        {/* Parabéns */}
-        <h2 style={{
-          fontSize: '28px',
-          fontWeight: 700,
-          color: '#ffffff',
-          margin: '0 0 12px 0'
-        }}>
-          Parabéns!
-        </h2>
-
-        {/* Mensagem de conclusão */}
-        <p style={{
-          fontSize: '16px',
-          color: '#cccccc',
-          margin: '0 0 40px 0',
-          lineHeight: '1.5'
-        }}>
-          Você concluiu o tutorial 'Construindo sua casa no Roblox Studio'!
-        </p>
-
-        {/* Modal com opções */}
-        <div style={{
-          background: '#ffffff',
-          borderRadius: '12px',
-          padding: '24px',
-          width: '100%',
-          maxWidth: '400px',
-          marginBottom: '24px',
-          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
-        }}>
-          <h3 style={{
-            fontSize: '20px',
-            fontWeight: 700,
+    <div className="card card-completion" style={{ position: 'relative' }}>
+      <div className="card-header-global">
+        <button className="header-button" onClick={onMenu}>Voltar para menu</button>
+        <button 
+          className="header-button" 
+          onClick={onRestart}
+          style={{
+            background: 'rgb(253, 187, 44)',
             color: '#000000',
-            margin: '0 0 12px 0',
+            border: '1px solid #000000'
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.background = 'rgb(230, 170, 40)'
+            e.target.style.color = '#000000'
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.background = 'rgb(253, 187, 44)'
+            e.target.style.color = '#000000'
+          }}
+        >
+          Próximo tutorial
+        </button>
+      </div>
+      <div style={{ padding: '24px', paddingTop: '12px', position: 'relative' }}>
+        <div style={{
+          position: 'relative',
+          marginBottom: '24px',
+          paddingTop: '12px'
+        }}>
+          <h3 style={{ 
+            fontSize: '20px', 
+            fontWeight: 700, 
+            margin: 0, 
+            color: '#ffffff', 
+            padding: 0,
+            position: 'relative',
             textAlign: 'left'
           }}>
-            Manter o mapa?
+            Parabéns, você conclui o tutorial "Construir uma Casa"
           </h3>
-          <p style={{
-            fontSize: '14px',
-            color: '#000000',
-            margin: '0 0 24px 0',
-            textAlign: 'left'
-          }}>
-            O que deseja fazer com o mapa que você construiu?
-          </p>
-
-          <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '12px'
-          }}>
-            {/* Botão Manter mapa */}
-            <button
-              onClick={handleKeepMap}
-              style={{
-                width: '100%',
-                padding: '14px 20px',
-                background: 'rgb(253, 187, 44)',
-                color: '#000000',
-                border: 'none',
-                borderRadius: '8px',
-                fontSize: '16px',
-                fontWeight: 600,
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '12px',
-                transition: 'background 0.2s'
-              }}
-              onMouseEnter={(e) => e.target.style.background = 'rgb(230, 170, 40)'}
-              onMouseLeave={(e) => e.target.style.background = 'rgb(253, 187, 44)'}
-            >
-              <span style={{ fontSize: '20px' }}>✓</span>
-              <span>Manter mapa</span>
-            </button>
-
-            {/* Botão Limpar e sair */}
-            <button
-              onClick={handleClearAndExit}
-              style={{
-                width: '100%',
-                padding: '14px 20px',
-                background: '#f44336',
-                color: '#ffffff',
-                border: 'none',
-                borderRadius: '8px',
-                fontSize: '16px',
-                fontWeight: 600,
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '12px',
-                transition: 'background 0.2s'
-              }}
-              onMouseEnter={(e) => e.target.style.background = '#d32f2f'}
-              onMouseLeave={(e) => e.target.style.background = '#f44336'}
-            >
-              <span style={{ fontSize: '20px' }}>🗑️</span>
-              <span>Limpar e sair</span>
-            </button>
-          </div>
         </div>
-
-        {/* Botões de navegação */}
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '12px',
-          width: '100%',
-          maxWidth: '400px'
-        }}>
-          <button
-            onClick={onMenu}
-            style={{
-              width: '100%',
-              padding: '14px 20px',
-              background: '#e0e0e0',
-              color: '#666666',
-              border: 'none',
-              borderRadius: '8px',
+        <div className="card-content" style={{ marginTop: '24px', position: 'relative' }}>
+          {/* Modal com opções da criação */}
+          <div style={{
+            background: 'transparent',
+            borderRadius: '12px',
+            padding: '24px 0',
+            marginTop: '24px'
+          }}>
+            <h3 style={{
+              fontSize: '20px',
+              fontWeight: 700,
+              color: '#ffffff',
+              margin: '0 0 12px 0',
+              textAlign: 'left'
+            }}>
+              Manter a criação?
+            </h3>
+            <p style={{
               fontSize: '16px',
-              fontWeight: 600,
-              cursor: 'pointer',
-              transition: 'background 0.2s'
-            }}
-            onMouseEnter={(e) => e.target.style.background = '#d0d0d0'}
-            onMouseLeave={(e) => e.target.style.background = '#e0e0e0'}
-          >
-            Voltar para Menu
-          </button>
+              color: '#ffffff',
+              margin: '0 0 24px 0',
+              textAlign: 'left'
+            }}>
+              O que deseja fazer com a criação que você construiu?
+            </p>
 
-          <button
-            onClick={onNextTutorial || (() => {})}
-            style={{
+            <div style={{
+              display: 'flex',
+              gap: '12px',
               width: '100%',
-              padding: '14px 20px',
-              background: 'rgb(253, 187, 44)',
-              color: '#000000',
-              border: 'none',
-              borderRadius: '8px',
-              fontSize: '16px',
-              fontWeight: 600,
-              cursor: 'pointer',
-              transition: 'background 0.2s',
-              opacity: 0.7
-            }}
-            onMouseEnter={(e) => e.target.style.background = 'rgb(230, 170, 40)'}
-            onMouseLeave={(e) => e.target.style.background = 'rgb(253, 187, 44)'}
-          >
-            Próximo Tutorial
-          </button>
+              maxWidth: '400px'
+            }}>
+              {/* Botão Manter criação - Amarelo */}
+              <button
+                className="feedback-button-black"
+                onClick={handleKeepMap}
+                style={{
+                  background: 'rgb(253, 187, 44)',
+                  color: '#000000'
+                }}
+                onMouseEnter={(e) => e.target.style.background = 'rgb(230, 170, 40)'}
+                onMouseLeave={(e) => e.target.style.background = 'rgb(253, 187, 44)'}
+              >
+                Manter criação
+              </button>
+
+              {/* Botão Limpar e sair - Vermelho */}
+              <button
+                className="feedback-button-red"
+                onClick={handleClearAndExit}
+              >
+                Limpar e sair
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
