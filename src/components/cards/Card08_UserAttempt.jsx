@@ -37,7 +37,7 @@ function Card08_UserAttempt({ stepNumber, totalSteps, stepTitle, onCheckResult, 
             </p>
           </div>
         </div>
-        <div style={{ marginTop: '24px', textAlign: 'left' }}>
+        <div style={{ marginTop: '8px', textAlign: 'left' }}>
           <button className="user-attempt-button" onClick={onCheckResult} style={{ textAlign: 'left' }}>
             Já fez?<br />Clique para ver o resultado
           </button>

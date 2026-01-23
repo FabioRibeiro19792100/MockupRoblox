@@ -244,3 +244,95 @@
   margin: 20px auto !important;
   max-width: 400px !important;
 }
+
+/* ============================================
+   VARIAÇÕES DE ESTILO - LAYERS
+   ============================================ */
+
+/* Layer 2: Bold - Tipografia pesada */
+.card-layout-view.layer-layer2 {
+  background: #ffffff;
+}
+
+.card-layout-view.layer-layer2 .card-layout-item {
+  background: #ffffff;
+  border: 2px solid #000000;
+}
+
+.card-layout-view.layer-layer2 .card-layout-item .card {
+  font-weight: 600;
+}
+
+.card-layout-view.layer-layer2 .card-layout-item .card-title,
+.card-layout-view.layer-layer2 .card-layout-item h1,
+.card-layout-view.layer-layer2 .card-layout-item h2,
+.card-layout-view.layer-layer2 .card-layout-item h3 {
+  font-weight: 900 !important;
+  letter-spacing: -0.5px;
+}
+
+.card-layout-view.layer-layer2 .card-layout-item .section-title {
+  font-weight: 800 !important;
+  font-size: 18px !important;
+}
+
+.card-layout-view.layer-layer2 .card-layout-item .theme-box,
+.card-layout-view.layer-layer2 .card-layout-item .step-title-bar {
+  font-weight: 700 !important;
+  border: 3px solid #000000;
+}
+
+.card-layout-view.layer-layer2 .card-layout-item .card-header-global {
+  border-bottom: 3px solid #000000;
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  align-items: stretch !important;
+  gap: 8px !important;
+  padding: 16px 24px !important;
+  padding-bottom: 16px !important;
+}
+
+.card-layout-view.layer-layer2 .card-layout-item .card-header-global .header-button {
+  height: auto !important;
+  min-height: 40px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 8px 16px !important;
+}
+
+.card-layout-view.layer-layer2 .card-layout-item .header-button,
+.card-layout-view.layer-layer2 .card-layout-item .primary-button,
+.card-layout-view.layer-layer2 .card-layout-item .selection-button,
+.card-layout-view.layer-layer2 .card-layout-item .secondary-button,
+.card-layout-view.layer-layer2 .card-layout-item .next-step-button,
+.card-layout-view.layer-layer2 .card-layout-item .demonstrate-button,
+.card-layout-view.layer-layer2 .card-layout-item .feedback-button,
+.card-layout-view.layer-layer2 .card-layout-item .interactive-button,
+.card-layout-view.layer-layer2 .card-layout-item .completion-button,
+.card-layout-view.layer-layer2 .card-layout-item .user-attempt-button,
+.card-layout-view.layer-layer2 .card-layout-item .concept-continue-button,
+.card-layout-view.layer-layer2 .card-layout-item .intro-start-button,
+.card-layout-view.layer-layer2 .card-layout-item .mode-button,
+.card-layout-view.layer-layer2 .card-layout-item button {
+  font-weight: 700 !important;
+  font-size: 12px !important;
+  padding: 8px 16px !important;
+  border: 2px solid #000000;
+  text-transform: uppercase !important;
+  letter-spacing: 0.3px;
+}
+
+.card-layout-view.layer-layer2 .card-layout-item .primary-button,
+.card-layout-view.layer-layer2 .card-layout-item .selection-button {
+  font-weight: 800 !important;
+  border: 3px solid #000000;
+}
+
+.card-layout-view.layer-layer2 .card-layout-item .instructions-list li {
+  font-weight: 600;
+}
+
+.card-layout-view.layer-layer2 .card-layout-item p {
+  font-weight: 500;
+}

@@ -22,11 +22,15 @@ import ElementLabel from './ElementLabel'
 import BadgeNotification from './BadgeNotification'
 import './CardLayoutView.css'
 
-// Sistema de layers - Design Original
+// Sistema de layers - Design Original + Bold
 const LAYER_STYLES = {
   layer1: {
     name: 'Design Original',
     description: 'Design original sem modificações'
+  },
+  layer2: {
+    name: 'Bold',
+    description: 'Tipografia pesada, destaque em negrito'
   }
 }
 
