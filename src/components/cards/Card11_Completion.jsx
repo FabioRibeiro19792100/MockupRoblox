@@ -20,7 +20,7 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu })
       <div className="card-header-global">
         <button className="header-button" onClick={onMenu}>Voltar para menu</button>
         <button 
-          className="header-button" 
+          className="header-button next-tutorial-button" 
           onClick={onRestart}
           style={{
             background: 'rgb(253, 187, 44)',
@@ -39,11 +39,24 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu })
           Próximo tutorial
         </button>
       </div>
-      <div style={{ padding: '24px', paddingTop: '12px', position: 'relative' }}>
+      <div style={{ padding: '24px', paddingTop: '24px', position: 'relative' }}>
+        {/* Logo */}
+        <div style={{ marginBottom: '20px', display: 'flex', justifyContent: 'flex-start', alignItems: 'center', gap: '24px' }}>
+          <img 
+            src="/logo.png" 
+            alt="Logo" 
+            style={{ 
+              maxWidth: '120px', 
+              maxHeight: '60px', 
+              width: 'auto', 
+              height: 'auto',
+              objectFit: 'contain'
+            }} 
+          />
+        </div>
         <div style={{
           position: 'relative',
-          marginBottom: '24px',
-          paddingTop: '12px'
+          marginBottom: '16px'
         }}>
           <h3 style={{ 
             fontSize: '20px', 
@@ -57,7 +70,7 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu })
             Parabéns, você conclui o tutorial "Construir uma Casa"
           </h3>
         </div>
-        <div className="card-content" style={{ marginTop: '24px', position: 'relative' }}>
+        <div className="card-content" style={{ marginTop: '16px', position: 'relative' }}>
           {/* Modal com opções da criação */}
           <div style={{
             background: 'transparent',

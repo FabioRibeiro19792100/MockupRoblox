@@ -4,23 +4,36 @@ function Card13_BadgeExplanation({ onClose }) {
   return (
     <div className="card card-badge-explanation">
       <div className="card-header-global single-button-header">
-        <button className="header-button" onClick={onClose}>
+        <button className="header-button badge-close-button" onClick={onClose}>
           Fechar
         </button>
       </div>
-      <div style={{ padding: '24px', paddingTop: '12px' }}>
-        <h3 style={{ 
-          fontSize: '20px', 
-          fontWeight: 700, 
-          margin: 0, 
-          color: '#000000', 
-          marginBottom: '24px', 
-          paddingTop: '12px',
-          borderBottom: '1px solid #000000',
-          paddingBottom: '8px'
-        }}>
-          Sistema de<br />Badges
-        </h3>
+      <div style={{ padding: '24px', paddingTop: '24px' }}>
+        {/* Título à esquerda e Logo à direita */}
+        <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+          <h3 style={{ 
+            fontSize: '20px', 
+            fontWeight: 700, 
+            margin: 0, 
+            color: '#000000',
+            textDecoration: 'underline',
+            textDecorationThickness: '1px',
+            textUnderlineOffset: '12px'
+          }}>
+            Sistema de Badges
+          </h3>
+          <img 
+            src="/logo.png" 
+            alt="Logo" 
+            style={{ 
+              maxWidth: '120px', 
+              maxHeight: '60px', 
+              width: 'auto', 
+              height: 'auto',
+              objectFit: 'contain'
+            }} 
+          />
+        </div>
         <div className="card-content" style={{ marginTop: '24px' }}>
           <p style={{ fontSize: '16px', lineHeight: '1.12', marginBottom: '24px', marginTop: '16px', color: '#000000' }}>
             Os badges são conquistas que você ganha ao completar tutoriais. Cada badge representa um marco importante na sua jornada de aprendizado.

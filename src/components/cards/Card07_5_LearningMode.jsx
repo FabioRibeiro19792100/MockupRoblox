@@ -1,6 +1,6 @@
 import './Card.css'
 
-function Card07_InteractionInvite({ onTry, onContinue, onMenu, onRestart }) {
+function Card07_5_LearningMode({ onContinue, onMenu, onRestart }) {
   return (
     <div className="card card-interactive">
       <div className="card-header-global">
@@ -32,25 +32,25 @@ function Card07_InteractionInvite({ onTry, onContinue, onMenu, onRestart }) {
           textDecorationThickness: '1px',
           textUnderlineOffset: '12px'
         }}>
-          Este é o seu momento de Creator
+          Como usar o Modo Aprendizado
         </h3>
         <div className="card-interactive-content" style={{ marginTop: '16px' }}>
-        <p style={{ fontSize: '18px', lineHeight: '1.12', color: '#ffffff', marginBottom: '16px' }}>
-          Para treinar suas habilidades você pode tentar executar esse mesmo passo com as instruções dadas.
-        </p>
-        <p style={{ fontSize: '18px', lineHeight: '1.12', fontWeight: 700, color: '#ffffff', marginBottom: '24px' }}>
-          Quer tentar?
-        </p>
-        <button className="interactive-button try" onClick={onTry}>
-          Sim, quero tentar.
-        </button>
-        <button className="interactive-button continue" onClick={onContinue}>
-          Pular essa interação
-        </button>
+          <p style={{ fontSize: '16px', lineHeight: '1.4', color: '#ffffff', marginBottom: '16px', fontWeight: 700 }}>
+            Agora, após a demonstração, você terá a oportunidade de repetir os passos apresentados e compreender, em profundidade, como funciona o processo de criação no Roblox Studio.
+          </p>
+          <p style={{ fontSize: '14px', lineHeight: '1.4', color: '#ffffff', marginBottom: '16px' }}>
+            Em seguida, você será convidado(a) a reconstruir a experiência por conta própria. Durante o percurso, poderá pedir dicas e verificar se conseguiu cumprir a missão.
+          </p>
+          <p style={{ fontSize: '16px', lineHeight: '1.4', fontWeight: 700, color: '#ffffff', marginBottom: '32px' }}>
+            E aí? Preparado(a)?
+          </p>
+          <button className="interactive-button try" onClick={onContinue}>
+            Continuar
+          </button>
         </div>
       </div>
     </div>
   )
 }
 
-export default Card07_InteractionInvite
+export default Card07_5_LearningMode

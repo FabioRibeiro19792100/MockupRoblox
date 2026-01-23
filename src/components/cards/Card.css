@@ -242,6 +242,29 @@
   color: #ffffff;
 }
 
+/* Botão "Próximo tutorial" com efeito luminoso */
+.next-tutorial-button {
+  box-shadow: 0 0 15px rgba(253, 187, 44, 0.6), 0 0 30px rgba(253, 187, 44, 0.4), 0 0 45px rgba(253, 187, 44, 0.2) !important;
+}
+
+.next-tutorial-button:hover {
+  box-shadow: 0 0 20px rgba(253, 187, 44, 0.8), 0 0 40px rgba(253, 187, 44, 0.6), 0 0 60px rgba(253, 187, 44, 0.4) !important;
+}
+
+/* Botão "Fechar" do Card 13 com estilo amarelo */
+.badge-close-button {
+  background: rgb(253, 187, 44) !important;
+  color: #000000 !important;
+  border: none !important;
+  box-shadow: 0 0 15px rgba(253, 187, 44, 0.6), 0 0 30px rgba(253, 187, 44, 0.4), 0 0 45px rgba(253, 187, 44, 0.2) !important;
+}
+
+.badge-close-button:hover {
+  background: rgb(230, 170, 40) !important;
+  color: #000000 !important;
+  box-shadow: 0 0 20px rgba(253, 187, 44, 0.8), 0 0 40px rgba(253, 187, 44, 0.6), 0 0 60px rgba(253, 187, 44, 0.4) !important;
+}
+
 /* Card 00: Capa */
 .card-cover {
   background-image: url('/Back01.png');
@@ -345,6 +368,21 @@
 .card-selection .card-content > div > div:first-child {
   background: rgb(253, 187, 44) !important;
   opacity: 1 !important;
+  box-shadow: 0 0 15px rgba(253, 187, 44, 0.6), 0 0 30px rgba(253, 187, 44, 0.4), 0 0 45px rgba(253, 187, 44, 0.2) !important;
+  transition: all 0.2s !important;
+}
+
+.card-selection .card-content > div > div:first-child:hover {
+  box-shadow: 0 0 20px rgba(253, 187, 44, 0.8), 0 0 40px rgba(253, 187, 44, 0.6), 0 0 60px rgba(253, 187, 44, 0.4) !important;
+}
+
+/* Botão do popup de tutorial bloqueado */
+.selection-popup-button {
+  box-shadow: 0 0 15px rgba(253, 187, 44, 0.6), 0 0 30px rgba(253, 187, 44, 0.4), 0 0 45px rgba(253, 187, 44, 0.2) !important;
+}
+
+.selection-popup-button:hover {
+  box-shadow: 0 0 20px rgba(253, 187, 44, 0.8), 0 0 40px rgba(253, 187, 44, 0.6), 0 0 60px rgba(253, 187, 44, 0.4) !important;
 }
 
 /* Quando acordeão está aberto, fundo mais opaco (mais branco) */

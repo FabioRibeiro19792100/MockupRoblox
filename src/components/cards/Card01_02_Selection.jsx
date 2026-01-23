@@ -201,7 +201,7 @@ function Card01_02_Selection({
           />
           {earnedBadges && Array.isArray(earnedBadges) && earnedBadges.includes(1) && (
             <div style={{ opacity: stampOpacity }}>
-              <CreatorStamp isVisible={true} hideText={stampOpacity < 1} />
+              <CreatorStamp isVisible={true} hideText={stampOpacity < 1} badgeImage="/badge1-removebg-preview.png" />
             </div>
           )}
         </div>
@@ -430,6 +430,7 @@ function Card01_02_Selection({
             </div>
             <button
               onClick={() => setLockedTutorialInfo(null)}
+              className="selection-popup-button"
               style={{
                 marginTop: '24px',
                 width: '100%',
@@ -441,7 +442,7 @@ function Card01_02_Selection({
                 fontSize: '16px',
                 fontWeight: 600,
                 cursor: 'pointer',
-                transition: 'background 0.2s'
+                transition: 'all 0.2s'
               }}
               onMouseEnter={(e) => e.target.style.background = 'rgb(230, 170, 40)'}
               onMouseLeave={(e) => e.target.style.background = 'rgb(253, 187, 44)'}

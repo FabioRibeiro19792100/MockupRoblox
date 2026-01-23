@@ -7,6 +7,7 @@ import Card05_BeforeAction from './cards/Card05_BeforeAction'
 import Card05_1_Concept from './cards/Card05_1_Concept'
 import Card06_AfterAction from './cards/Card06_AfterAction'
 import Card07_InteractionInvite from './cards/Card07_InteractionInvite'
+import Card07_5_LearningMode from './cards/Card07_5_LearningMode'
 import Card08_UserAttempt from './cards/Card08_UserAttempt'
 import Card09_PositiveFeedback from './cards/Card09_PositiveFeedback'
 import Card10_NegativeFeedback from './cards/Card10_NegativeFeedback'
@@ -24,10 +25,6 @@ import './CardLayoutView.css'
 
 // Sistema de layers - Design Original + Arredondado + Variações de Background
 const LAYER_STYLES = {
-  layer6: {
-    name: 'Original Arredondado',
-    description: 'Design original com botões totalmente arredondados'
-  },
   layer2: {
     name: 'Variação Back02',
     description: 'Background back02.jpg aplicado em cards selecionados'
@@ -81,7 +78,7 @@ function CardLayoutView({
   const [showConcept, setShowConcept] = useState(false)
   const [currentStep, setCurrentStep] = useState(1)
   const [tutorialMode, setTutorialMode] = useState('demonstrative')
-  const [currentLayer, setCurrentLayer] = useState('layer6')
+  const [currentLayer, setCurrentLayer] = useState('layer9')
   const [showLabels, setShowLabels] = useState(false)
   const [showBadgeGallery, setShowBadgeGallery] = useState(true)
   const [badgeGalleryExpanded, setBadgeGalleryExpanded] = useState(false) // Para controle global
@@ -405,12 +402,12 @@ function CardLayoutView({
               maxHeight: `${galleryHeight - 100}px`, // Altura total menos o header (100px)
               overflowY: 'auto'
             }}>
-              <div style={{ marginBottom: '12px', padding: '12px 0', borderBottom: '1px solid #e0e0e0' }}>
+              <div style={{ marginBottom: '12px', padding: '6px 0', borderBottom: '1px solid #e0e0e0' }}>
                 <button
                   style={{
                     background: 'transparent',
                     border: 'none',
-                    color: 'rgb(113, 180, 233)',
+                    color: '#000000',
                     fontSize: '13px',
                     textDecoration: 'underline',
                     cursor: 'pointer',
@@ -716,6 +713,26 @@ function CardLayoutView({
       ]
     },
     {
+      id: 8.5,
+      name: 'Card 07.5 - Modo Aprendizado',
+      component: renderBadgeGallery(
+        <Card07_5_LearningMode
+          onContinue={() => {}}
+          onMenu={onMenu || (() => {})}
+          onRestart={onRestart || (() => {})}
+        />,
+        8.5
+      ),
+      elements: [
+        { type: 'title-1', selector: 'h3', label: 'Título - Como usar o MODO APRENDIZADO' },
+        { type: 'body', selector: '.card-interactive-content p', label: 'Corpo - Texto explicativo' },
+        { type: 'button-interactive', selector: '.interactive-button.try', label: 'Botão Interativo - Continuar' },
+        { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' },
+        { type: 'badge-gallery', selector: '.badge-gallery-fixed', label: 'Galeria de Badges - Fixa' },
+        { type: 'badge-scoreboard', selector: '.badge-scoreboard', label: 'Placar de Badges' }
+      ]
+    },
+    {
       id: 9,
       name: 'Card 08 - Tentativa',
       component: renderBadgeGallery(
@@ -923,13 +940,13 @@ function CardLayoutView({
   // Aplicar classe do layer no body para que popups também sejam afetados
   useEffect(() => {
     // Remove todas as classes de layer do body
-    document.body.classList.remove('layer-layer1', 'layer-layer2', 'layer-layer3', 'layer-layer4', 'layer-layer5', 'layer-layer6', 'layer-layer7', 'layer-layer8', 'layer-layer9', 'layer-layer10', 'layer-layer11')
+    document.body.classList.remove('layer-layer1', 'layer-layer2', 'layer-layer3', 'layer-layer4', 'layer-layer5', 'layer-layer7', 'layer-layer8', 'layer-layer9', 'layer-layer10', 'layer-layer11')
     // Adiciona a classe do layer atual
     document.body.classList.add(`layer-${currentLayer}`)
     
     return () => {
       // Limpa ao desmontar
-      document.body.classList.remove('layer-layer1', 'layer-layer2', 'layer-layer3', 'layer-layer4', 'layer-layer5', 'layer-layer6', 'layer-layer7', 'layer-layer8', 'layer-layer9', 'layer-layer10', 'layer-layer11')
+      document.body.classList.remove('layer-layer1', 'layer-layer2', 'layer-layer3', 'layer-layer4', 'layer-layer5', 'layer-layer7', 'layer-layer8', 'layer-layer9', 'layer-layer10', 'layer-layer11')
     }
   }, [currentLayer])
 
@@ -1604,8 +1621,8 @@ function CardLayoutView({
 
   // Ordenar cards na ordem da experiência do usuário
   const sortedCards = [...cards].sort((a, b) => {
-    // Ordem específica da experiência: 0, 1, 2, 3, 4, 5, 5.1, 6, 7, 8, 9, 10, 11, 12, 13, 16, 17, 19, 20
-    const order = [0, 1, 2, 3, 4, 5, '5.1', 6, 7, 8, 9, 10, 11, 12, 13, 16, 17, 19, 20]
+    // Ordem específica da experiência: 0, 1, 2, 3, 4, 5, 5.1, 6, 7, 8, 8.5, 9, 10, 11, 12, 13, 16, 17, 19, 20
+    const order = [0, 1, 2, 3, 4, 5, '5.1', 6, 7, 8, 8.5, 9, 10, 11, 12, 13, 16, 17, 19, 20]
     const indexA = order.indexOf(a.id)
     const indexB = order.indexOf(b.id)
     // Se não estiver na lista de ordem, coloca no final
@@ -1721,16 +1738,13 @@ function CardLayoutView({
             >
               {Object.entries(LAYER_STYLES)
                 .sort(([keyA], [keyB]) => {
-                  // Colocar layer6 no topo
-                  if (keyA === 'layer6') return -1
-                  if (keyB === 'layer6') return 1
-                  // Ordenar os demais por número
+                  // Ordenar por número
                   const numA = parseInt(keyA.replace('layer', '')) || 0
                   const numB = parseInt(keyB.replace('layer', '')) || 0
                   return numA - numB
                 })
                 .map(([key, value]) => {
-                  const isPreferred = key === 'layer6' || key === 'layer9' || key === 'layer11'
+                  const isPreferred = key === 'layer9' || key === 'layer11'
                   return (
                     <button
                       key={key}
