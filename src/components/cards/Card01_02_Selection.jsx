@@ -434,7 +434,7 @@ function Card01_02_Selection({
                 marginTop: '24px',
                 width: '100%',
                 padding: '12px 24px',
-                background: 'rgb(113, 180, 233)',
+                background: 'rgb(253, 187, 44)',
                 color: '#000000',
                 border: 'none',
                 borderRadius: '6px',
@@ -443,8 +443,8 @@ function Card01_02_Selection({
                 cursor: 'pointer',
                 transition: 'background 0.2s'
               }}
-              onMouseEnter={(e) => e.target.style.background = 'rgb(100, 160, 210)'}
-              onMouseLeave={(e) => e.target.style.background = 'rgb(113, 180, 233)'}
+              onMouseEnter={(e) => e.target.style.background = 'rgb(230, 170, 40)'}
+              onMouseLeave={(e) => e.target.style.background = 'rgb(253, 187, 44)'}
             >
               Entendi
             </button>

@@ -24,21 +24,59 @@
   overflow-x: hidden;
 }
 
-/* Forçar remoção de cores verdes - substituir por preto */
+/* Forçar remoção de cores verdes - substituir por branco */
 .card * {
   color: inherit;
 }
 
+/* Remover TODAS as cores verdes de TODOS os elementos, especialmente títulos */
 .card span[style*="green"],
 .card span[style*="verde"],
 .card span[style*="#4CAF50"],
 .card span[style*="#66BB6A"],
 .card span[style*="rgb(76, 175, 80)"],
-.card span[style*="rgb(102, 187, 106)"] {
+.card span[style*="rgb(102, 187, 106)"],
+.card h1[style*="green"],
+.card h1[style*="verde"],
+.card h1[style*="#4CAF50"],
+.card h1[style*="#66BB6A"],
+.card h1[style*="rgb(76, 175, 80)"],
+.card h1[style*="rgb(102, 187, 106)"],
+.card h2[style*="green"],
+.card h2[style*="verde"],
+.card h2[style*="#4CAF50"],
+.card h2[style*="#66BB6A"],
+.card h2[style*="rgb(76, 175, 80)"],
+.card h2[style*="rgb(102, 187, 106)"],
+.card h3[style*="green"],
+.card h3[style*="verde"],
+.card h3[style*="#4CAF50"],
+.card h3[style*="#66BB6A"],
+.card h3[style*="rgb(76, 175, 80)"],
+.card h3[style*="rgb(102, 187, 106)"],
+.card .card-title[style*="green"],
+.card .card-title[style*="verde"],
+.card .card-title[style*="#4CAF50"],
+.card .card-title[style*="#66BB6A"],
+.card .card-title[style*="rgb(76, 175, 80)"],
+.card .card-title[style*="rgb(102, 187, 106)"] {
+  color: #ffffff !important;
+}
+
+/* Forçar cor branca em TODOS os títulos para garantir que não haja verde */
+.card h1,
+.card h2,
+.card h3,
+.card .card-title {
+  color: #ffffff !important;
+}
+
+/* Exceção: Cards de feedback (9 e 10) devem ter títulos pretos */
+.card-feedback .card-title,
+.card-feedback h1,
+.card-feedback h2,
+.card-feedback h3 {
   color: #000000 !important;
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 4px;
 }
 
 /* Toggle da galeria de badges - posicionado logo após o header */
@@ -166,11 +204,11 @@
 
 /* Card 00: Capa */
 .card-cover {
-  background: #ffffff;
   background-image: url('/background.png');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
+  background-color: #ffffff;
   position: relative;
   color: #ffffff;
 }
@@ -200,11 +238,11 @@
 
 /* Card 01-02: Seleção - Fundo branco, botões laranja */
 .card-selection {
-  background: #ffffff;
   background-image: url('/background.png');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
+  background-color: #ffffff;
   position: relative;
   color: #ffffff;
 }
@@ -258,7 +296,7 @@
 
 /* Botões de acordeão mantêm fundo sólido (não transparente) */
 .card-selection .selection-button {
-  background: rgb(113, 180, 233) !important;
+  background: rgb(253, 187, 44) !important;
   color: #000000 !important;
   opacity: 1 !important;
 }
@@ -317,7 +355,7 @@
 .selection-button {
   width: 100%;
   padding: 24px;
-  background: rgb(113, 180, 233);
+  background: rgb(253, 187, 44);
   color: #000000;
   border: none;
   text-align: left;
@@ -338,11 +376,11 @@
 
 /* Card 03: Modo - Fundo branco, retângulos cinza */
 .card-mode {
-  background: #ffffff;
   background-image: url('/background.png');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
+  background-color: #ffffff;
   position: relative;
   color: #ffffff;
 }
@@ -408,7 +446,7 @@
 }
 
 .mode-button-demonstrative {
-  background: rgb(113, 180, 233) !important;
+  background: rgb(253, 187, 44) !important;
 }
 
 .mode-button-demonstrative .mode-title,
@@ -417,7 +455,7 @@
 }
 
 .mode-button-demonstrative:hover {
-  background: rgb(90, 150, 200) !important;
+  background: rgb(230, 170, 40) !important;
 }
 
 .mode-button-interactive {
@@ -450,13 +488,36 @@
 
 /* Card 04: Introdução - Painel branco */
 .card.card-intro {
-  background: #ffffff !important;
+  background-image: url('/background.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: #ffffff;
+  position: relative;
+  color: #ffffff;
+}
+
+.card-intro::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.card-intro > * {
+  position: relative;
+  z-index: 2;
 }
 
 .card-intro .card-content {
   display: flex;
   flex-direction: column;
-  background: #ffffff;
+  background: transparent;
 }
 
 .card-intro .card-title {
@@ -469,7 +530,7 @@
 
 .intro-start-button {
   padding: 6px 12px;
-  background: rgb(113, 180, 233);
+  background: rgb(253, 187, 44);
   color: #000000;
   border: none;
   font-size: 12px;
@@ -487,7 +548,7 @@
 .card-intro .card-text {
   font-size: 18px;
   line-height: 1.12;
-  color: #000000;
+  color: #ffffff;
   margin-bottom: 16px;
 }
 
@@ -554,7 +615,7 @@
 .theme-box {
   width: 100%;
   padding: 6px 14px;
-  background: rgb(113, 180, 233);
+  background: rgb(253, 187, 44);
   border: 2px solid #000000;
   border-bottom: none;
   font-size: 16px;
@@ -748,7 +809,7 @@
   width: 100%;
   height: 48px;
   padding: 0;
-  background: rgb(113, 180, 233);
+  background: rgb(253, 187, 44);
   color: #000000;
   border: none;
   font-size: 14px;
@@ -763,16 +824,16 @@
 }
 
 .primary-button:hover {
-  background: rgb(90, 150, 200);
+  background: rgb(230, 170, 40);
 }
 
 .next-step-button {
-  background: rgb(113, 180, 233) !important;
+  background: rgb(253, 187, 44) !important;
   color: #000000 !important;
 }
 
 .next-step-button:hover {
-  background: rgb(90, 150, 200) !important;
+  background: rgb(230, 170, 40) !important;
 }
 
 .secondary-button {
@@ -799,12 +860,12 @@
 }
 
 .demonstrate-button {
-  background: rgb(113, 180, 233) !important;
+  background: rgb(253, 187, 44) !important;
   color: #000000 !important;
 }
 
 .demonstrate-button:hover {
-  background: rgb(90, 150, 200) !important;
+  background: rgb(230, 170, 40) !important;
 }
 
 /* Card 05.1: Conceito - Fundo branco */
@@ -877,7 +938,7 @@
 
 .concept-continue-button {
   padding: 12px 24px;
-  background: rgb(113, 180, 233);
+  background: rgb(253, 187, 44);
   color: #000000;
   border: none;
   font-size: 14px;
@@ -1033,7 +1094,7 @@
 .card-feedback .card-title {
   font-size: 24px;
   font-weight: 700;
-  color: #000000;
+  color: #000000 !important;
   margin-bottom: 32px;
   text-align: center;
   position: absolute;
@@ -1079,7 +1140,7 @@
 .feedback-button-black {
   flex: 1;
   padding: 12px 24px;
-  background: rgb(113, 180, 233);
+  background: rgb(253, 187, 44);
   color: #000000;
   border: none;
   font-size: 14px;
@@ -1094,8 +1155,31 @@
 
 /* Card 11: Completion */
 .card-completion {
-  background: #ffffff;
+  background-image: url('/background.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: #ffffff;
+  position: relative;
   padding: 0;
+  color: #ffffff;
+}
+
+.card-completion::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.card-completion > * {
+  position: relative;
+  z-index: 2;
 }
 
 .card-completion .card-title {
@@ -1124,7 +1208,7 @@
 
 .completion-text {
   font-size: 14px;
-  color: #666666;
+  color: #ffffff;
   line-height: 1.12;
   text-align: left;
 }

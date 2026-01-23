@@ -118,6 +118,7 @@
   background: #ffffff;
   border-right: 1px solid #e0e0e0;
   overflow-y: auto;
+  overflow-x: visible;
   z-index: 1000;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
 }
@@ -137,10 +138,14 @@
 
 .card-layout-view .sidebar-controls {
   padding: 20px;
+  position: relative;
+  z-index: 1001;
 }
 
 .card-layout-view .control-group {
   margin-bottom: 24px;
+  position: relative;
+  z-index: 1001;
 }
 
 .card-layout-view .control-group label {
@@ -151,6 +156,11 @@
   color: #333333;
 }
 
+.card-layout-view .control-group select {
+  position: relative;
+  z-index: 1001;
+}
+
 .card-layout-view .layer-select {
   width: 100%;
   padding: 8px 12px;
@@ -159,6 +169,48 @@
   font-size: 14px;
   background: #ffffff;
   color: #000000;
+  position: relative;
+  z-index: 1001;
+  cursor: pointer;
+  appearance: auto;
+  -webkit-appearance: menulist;
+  -moz-appearance: menulist;
+}
+
+.card-layout-view .layer-select-button {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  font-size: 14px;
+  background: #ffffff;
+  color: #000000;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.card-layout-view .layer-select-button:hover {
+  border-color: #999999;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-layout-view .layer-menu-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  margin-top: 4px;
+  max-height: 400px;
+  overflow-y: auto;
+  z-index: 1002;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* Estilos para diferentes layers - 10 layouts completamente novos */
@@ -476,7 +528,9 @@
 .card-layout-view.layer-layer2 .card-layout-item .card.card-cover,
 .card-layout-view.layer-layer2 .card-layout-item .card.card-selection,
 .card-layout-view.layer-layer2 .card-layout-item .card.card-mode,
-.card-layout-view.layer-layer2 .card-layout-item .card.card-interactive {
+.card-layout-view.layer-layer2 .card-layout-item .card.card-interactive,
+.card-layout-view.layer-layer2 .card-layout-item .card.card-intro,
+.card-layout-view.layer-layer2 .card-layout-item .card.card-completion {
   background-image: url('/back02.jpg') !important;
   background-size: cover !important;
   background-position: center center !important;
@@ -486,7 +540,9 @@
 .card-layout-view.layer-layer2 .card-layout-item .card.card-cover::before,
 .card-layout-view.layer-layer2 .card-layout-item .card.card-selection::before,
 .card-layout-view.layer-layer2 .card-layout-item .card.card-mode::before,
-.card-layout-view.layer-layer2 .card-layout-item .card.card-interactive::before {
+.card-layout-view.layer-layer2 .card-layout-item .card.card-interactive::before,
+.card-layout-view.layer-layer2 .card-layout-item .card.card-intro::before,
+.card-layout-view.layer-layer2 .card-layout-item .card.card-completion::before {
   background: rgba(0, 0, 0, 0.6) !important;
 }
 
@@ -494,7 +550,9 @@
 .card-layout-view.layer-layer3 .card-layout-item .card.card-cover,
 .card-layout-view.layer-layer3 .card-layout-item .card.card-selection,
 .card-layout-view.layer-layer3 .card-layout-item .card.card-mode,
-.card-layout-view.layer-layer3 .card-layout-item .card.card-interactive {
+.card-layout-view.layer-layer3 .card-layout-item .card.card-interactive,
+.card-layout-view.layer-layer3 .card-layout-item .card.card-intro,
+.card-layout-view.layer-layer3 .card-layout-item .card.card-completion {
   background-image: url('/back04.png') !important;
   background-size: cover !important;
   background-position: center center !important;
@@ -504,7 +562,9 @@
 .card-layout-view.layer-layer3 .card-layout-item .card.card-cover::before,
 .card-layout-view.layer-layer3 .card-layout-item .card.card-selection::before,
 .card-layout-view.layer-layer3 .card-layout-item .card.card-mode::before,
-.card-layout-view.layer-layer3 .card-layout-item .card.card-interactive::before {
+.card-layout-view.layer-layer3 .card-layout-item .card.card-interactive::before,
+.card-layout-view.layer-layer3 .card-layout-item .card.card-intro::before,
+.card-layout-view.layer-layer3 .card-layout-item .card.card-completion::before {
   background: rgba(0, 0, 0, 0.6) !important;
 }
 
@@ -512,7 +572,9 @@
 .card-layout-view.layer-layer4 .card-layout-item .card.card-cover,
 .card-layout-view.layer-layer4 .card-layout-item .card.card-selection,
 .card-layout-view.layer-layer4 .card-layout-item .card.card-mode,
-.card-layout-view.layer-layer4 .card-layout-item .card.card-interactive {
+.card-layout-view.layer-layer4 .card-layout-item .card.card-interactive,
+.card-layout-view.layer-layer4 .card-layout-item .card.card-intro,
+.card-layout-view.layer-layer4 .card-layout-item .card.card-completion {
   background-image: url('/back05.png') !important;
   background-size: cover !important;
   background-position: center center !important;
@@ -522,7 +584,9 @@
 .card-layout-view.layer-layer4 .card-layout-item .card.card-cover::before,
 .card-layout-view.layer-layer4 .card-layout-item .card.card-selection::before,
 .card-layout-view.layer-layer4 .card-layout-item .card.card-mode::before,
-.card-layout-view.layer-layer4 .card-layout-item .card.card-interactive::before {
+.card-layout-view.layer-layer4 .card-layout-item .card.card-interactive::before,
+.card-layout-view.layer-layer4 .card-layout-item .card.card-intro::before,
+.card-layout-view.layer-layer4 .card-layout-item .card.card-completion::before {
   background: rgba(0, 0, 0, 0.6) !important;
 }
 
@@ -530,7 +594,9 @@
 .card-layout-view.layer-layer5 .card-layout-item .card.card-cover,
 .card-layout-view.layer-layer5 .card-layout-item .card.card-selection,
 .card-layout-view.layer-layer5 .card-layout-item .card.card-mode,
-.card-layout-view.layer-layer5 .card-layout-item .card.card-interactive {
+.card-layout-view.layer-layer5 .card-layout-item .card.card-interactive,
+.card-layout-view.layer-layer5 .card-layout-item .card.card-intro,
+.card-layout-view.layer-layer5 .card-layout-item .card.card-completion {
   background-image: url('/back06.png') !important;
   background-size: cover !important;
   background-position: center center !important;
@@ -540,7 +606,9 @@
 .card-layout-view.layer-layer5 .card-layout-item .card.card-cover::before,
 .card-layout-view.layer-layer5 .card-layout-item .card.card-selection::before,
 .card-layout-view.layer-layer5 .card-layout-item .card.card-mode::before,
-.card-layout-view.layer-layer5 .card-layout-item .card.card-interactive::before {
+.card-layout-view.layer-layer5 .card-layout-item .card.card-interactive::before,
+.card-layout-view.layer-layer5 .card-layout-item .card.card-intro::before,
+.card-layout-view.layer-layer5 .card-layout-item .card.card-completion::before {
   background: rgba(0, 0, 0, 0.6) !important;
 }
 
@@ -548,7 +616,9 @@
 .card-layout-view.layer-layer7 .card-layout-item .card.card-cover,
 .card-layout-view.layer-layer7 .card-layout-item .card.card-selection,
 .card-layout-view.layer-layer7 .card-layout-item .card.card-mode,
-.card-layout-view.layer-layer7 .card-layout-item .card.card-interactive {
+.card-layout-view.layer-layer7 .card-layout-item .card.card-interactive,
+.card-layout-view.layer-layer7 .card-layout-item .card.card-intro,
+.card-layout-view.layer-layer7 .card-layout-item .card.card-completion {
   background-image: url('/back07.jpg') !important;
   background-size: cover !important;
   background-position: center center !important;
@@ -558,7 +628,9 @@
 .card-layout-view.layer-layer7 .card-layout-item .card.card-cover::before,
 .card-layout-view.layer-layer7 .card-layout-item .card.card-selection::before,
 .card-layout-view.layer-layer7 .card-layout-item .card.card-mode::before,
-.card-layout-view.layer-layer7 .card-layout-item .card.card-interactive::before {
+.card-layout-view.layer-layer7 .card-layout-item .card.card-interactive::before,
+.card-layout-view.layer-layer7 .card-layout-item .card.card-intro::before,
+.card-layout-view.layer-layer7 .card-layout-item .card.card-completion::before {
   background: rgba(0, 0, 0, 0.6) !important;
 }
 
@@ -566,7 +638,9 @@
 .card-layout-view.layer-layer8 .card-layout-item .card.card-cover,
 .card-layout-view.layer-layer8 .card-layout-item .card.card-selection,
 .card-layout-view.layer-layer8 .card-layout-item .card.card-mode,
-.card-layout-view.layer-layer8 .card-layout-item .card.card-interactive {
+.card-layout-view.layer-layer8 .card-layout-item .card.card-interactive,
+.card-layout-view.layer-layer8 .card-layout-item .card.card-intro,
+.card-layout-view.layer-layer8 .card-layout-item .card.card-completion {
   background-image: url('/back08.jpg') !important;
   background-size: cover !important;
   background-position: center center !important;
@@ -576,7 +650,76 @@
 .card-layout-view.layer-layer8 .card-layout-item .card.card-cover::before,
 .card-layout-view.layer-layer8 .card-layout-item .card.card-selection::before,
 .card-layout-view.layer-layer8 .card-layout-item .card.card-mode::before,
-.card-layout-view.layer-layer8 .card-layout-item .card.card-interactive::before {
+.card-layout-view.layer-layer8 .card-layout-item .card.card-interactive::before,
+.card-layout-view.layer-layer8 .card-layout-item .card.card-intro::before,
+.card-layout-view.layer-layer8 .card-layout-item .card.card-completion::before {
+  background: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Layer 9: Variação Back09 - back09.jpg em TODOS os cards com background */
+.card-layout-view.layer-layer9 .card-layout-item .card.card-cover,
+.card-layout-view.layer-layer9 .card-layout-item .card.card-selection,
+.card-layout-view.layer-layer9 .card-layout-item .card.card-mode,
+.card-layout-view.layer-layer9 .card-layout-item .card.card-interactive,
+.card-layout-view.layer-layer9 .card-layout-item .card.card-intro,
+.card-layout-view.layer-layer9 .card-layout-item .card.card-completion {
+  background-image: url('/back09.jpg') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+.card-layout-view.layer-layer9 .card-layout-item .card.card-cover::before,
+.card-layout-view.layer-layer9 .card-layout-item .card.card-selection::before,
+.card-layout-view.layer-layer9 .card-layout-item .card.card-mode::before,
+.card-layout-view.layer-layer9 .card-layout-item .card.card-interactive::before,
+.card-layout-view.layer-layer9 .card-layout-item .card.card-intro::before,
+.card-layout-view.layer-layer9 .card-layout-item .card.card-completion::before {
+  background: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Layer 10: Variação Back10 - back10.jpg em TODOS os cards com background */
+.card-layout-view.layer-layer10 .card-layout-item .card.card-cover,
+.card-layout-view.layer-layer10 .card-layout-item .card.card-selection,
+.card-layout-view.layer-layer10 .card-layout-item .card.card-mode,
+.card-layout-view.layer-layer10 .card-layout-item .card.card-interactive,
+.card-layout-view.layer-layer10 .card-layout-item .card.card-intro,
+.card-layout-view.layer-layer10 .card-layout-item .card.card-completion {
+  background-image: url('/back10.jpg') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+.card-layout-view.layer-layer10 .card-layout-item .card.card-cover::before,
+.card-layout-view.layer-layer10 .card-layout-item .card.card-selection::before,
+.card-layout-view.layer-layer10 .card-layout-item .card.card-mode::before,
+.card-layout-view.layer-layer10 .card-layout-item .card.card-interactive::before,
+.card-layout-view.layer-layer10 .card-layout-item .card.card-intro::before,
+.card-layout-view.layer-layer10 .card-layout-item .card.card-completion::before {
+  background: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Layer 11: Variação Back11 - Back11.png em TODOS os cards com background */
+.card-layout-view.layer-layer11 .card-layout-item .card.card-cover,
+.card-layout-view.layer-layer11 .card-layout-item .card.card-selection,
+.card-layout-view.layer-layer11 .card-layout-item .card.card-mode,
+.card-layout-view.layer-layer11 .card-layout-item .card.card-interactive,
+.card-layout-view.layer-layer11 .card-layout-item .card.card-intro,
+.card-layout-view.layer-layer11 .card-layout-item .card.card-completion {
+  background-image: url('/Back11.png') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-color: #ffffff !important;
+}
+
+.card-layout-view.layer-layer11 .card-layout-item .card.card-cover::before,
+.card-layout-view.layer-layer11 .card-layout-item .card.card-selection::before,
+.card-layout-view.layer-layer11 .card-layout-item .card.card-mode::before,
+.card-layout-view.layer-layer11 .card-layout-item .card.card-interactive::before,
+.card-layout-view.layer-layer11 .card-layout-item .card.card-intro::before,
+.card-layout-view.layer-layer11 .card-layout-item .card.card-completion::before {
   background: rgba(0, 0, 0, 0.6) !important;
 }
 
@@ -680,17 +823,68 @@ body:has(.card-layout-view.layer-layer8) .creator-popup-content::before {
   background: rgba(0, 0, 0, 0.6) !important;
 }
 
+/* Layer 9: Variação Back09 - back09.jpg nos popups */
+.card-layout-view.layer-layer9 .creator-popup-content,
+.layer-layer9 .creator-popup-content,
+body:has(.card-layout-view.layer-layer9) .creator-popup-content {
+  background-image: url('/back09.jpg') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+.card-layout-view.layer-layer9 .creator-popup-content::before,
+.layer-layer9 .creator-popup-content::before,
+body:has(.card-layout-view.layer-layer9) .creator-popup-content::before {
+  background: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Layer 10: Variação Back10 - back10.jpg nos popups */
+.card-layout-view.layer-layer10 .creator-popup-content,
+.layer-layer10 .creator-popup-content,
+body:has(.card-layout-view.layer-layer10) .creator-popup-content {
+  background-image: url('/back10.jpg') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+.card-layout-view.layer-layer10 .creator-popup-content::before,
+.layer-layer10 .creator-popup-content::before,
+body:has(.card-layout-view.layer-layer10) .creator-popup-content::before {
+  background: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Layer 11: Variação Back11 - Back11.png nos popups */
+.card-layout-view.layer-layer11 .creator-popup-content,
+.layer-layer11 .creator-popup-content,
+body:has(.card-layout-view.layer-layer11) .creator-popup-content {
+  background-image: url('/Back11.png') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+.card-layout-view.layer-layer11 .creator-popup-content::before,
+.layer-layer11 .creator-popup-content::before,
+body:has(.card-layout-view.layer-layer11) .creator-popup-content::before {
+  background: rgba(0, 0, 0, 0.6) !important;
+}
+
 /* ============================================
-   ESTILOS ARREDONDADOS PARA LAYERS 2, 3, 4, 5, 7, 8
+   ESTILOS ARREDONDADOS PARA LAYERS 2, 3, 4, 5, 7, 8, 9, 10, 11
    ============================================ */
 
-/* Layers 2, 3, 4, 5, 7, 8 - Aplicar estilos arredondados */
+/* Layers 2, 3, 4, 5, 7, 8, 9, 10, 11 - Aplicar estilos arredondados */
 .card-layout-view.layer-layer2 .card-layout-item,
 .card-layout-view.layer-layer3 .card-layout-item,
 .card-layout-view.layer-layer4 .card-layout-item,
 .card-layout-view.layer-layer5 .card-layout-item,
 .card-layout-view.layer-layer7 .card-layout-item,
-.card-layout-view.layer-layer8 .card-layout-item {
+.card-layout-view.layer-layer8 .card-layout-item,
+.card-layout-view.layer-layer9 .card-layout-item,
+.card-layout-view.layer-layer10 .card-layout-item,
+.card-layout-view.layer-layer11 .card-layout-item {
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
@@ -700,7 +894,10 @@ body:has(.card-layout-view.layer-layer8) .creator-popup-content::before {
 .card-layout-view.layer-layer4 .card-layout-item .card,
 .card-layout-view.layer-layer5 .card-layout-item .card,
 .card-layout-view.layer-layer7 .card-layout-item .card,
-.card-layout-view.layer-layer8 .card-layout-item .card {
+.card-layout-view.layer-layer8 .card-layout-item .card,
+.card-layout-view.layer-layer9 .card-layout-item .card,
+.card-layout-view.layer-layer10 .card-layout-item .card,
+.card-layout-view.layer-layer11 .card-layout-item .card {
   border-radius: 12px;
 }
 
@@ -794,7 +991,52 @@ body:has(.card-layout-view.layer-layer8) .creator-popup-content::before {
 .card-layout-view.layer-layer8 .card-layout-item .intro-start-button,
 .card-layout-view.layer-layer8 .card-layout-item .mode-button,
 .card-layout-view.layer-layer8 .card-layout-item button,
-.card-layout-view.layer-layer8 .card-layout-item .card-actions button {
+.card-layout-view.layer-layer8 .card-layout-item .card-actions button,
+.card-layout-view.layer-layer9 .card-layout-item .header-button,
+.card-layout-view.layer-layer9 .card-layout-item .primary-button,
+.card-layout-view.layer-layer9 .card-layout-item .selection-button,
+.card-layout-view.layer-layer9 .card-layout-item .secondary-button,
+.card-layout-view.layer-layer9 .card-layout-item .next-step-button,
+.card-layout-view.layer-layer9 .card-layout-item .demonstrate-button,
+.card-layout-view.layer-layer9 .card-layout-item .feedback-button,
+.card-layout-view.layer-layer9 .card-layout-item .interactive-button,
+.card-layout-view.layer-layer9 .card-layout-item .completion-button,
+.card-layout-view.layer-layer9 .card-layout-item .user-attempt-button,
+.card-layout-view.layer-layer9 .card-layout-item .concept-continue-button,
+.card-layout-view.layer-layer9 .card-layout-item .intro-start-button,
+.card-layout-view.layer-layer9 .card-layout-item .mode-button,
+.card-layout-view.layer-layer9 .card-layout-item button,
+.card-layout-view.layer-layer9 .card-layout-item .card-actions button,
+.card-layout-view.layer-layer10 .card-layout-item .header-button,
+.card-layout-view.layer-layer10 .card-layout-item .primary-button,
+.card-layout-view.layer-layer10 .card-layout-item .selection-button,
+.card-layout-view.layer-layer10 .card-layout-item .secondary-button,
+.card-layout-view.layer-layer10 .card-layout-item .next-step-button,
+.card-layout-view.layer-layer10 .card-layout-item .demonstrate-button,
+.card-layout-view.layer-layer10 .card-layout-item .feedback-button,
+.card-layout-view.layer-layer10 .card-layout-item .interactive-button,
+.card-layout-view.layer-layer10 .card-layout-item .completion-button,
+.card-layout-view.layer-layer10 .card-layout-item .user-attempt-button,
+.card-layout-view.layer-layer10 .card-layout-item .concept-continue-button,
+.card-layout-view.layer-layer10 .card-layout-item .intro-start-button,
+.card-layout-view.layer-layer10 .card-layout-item .mode-button,
+.card-layout-view.layer-layer10 .card-layout-item button,
+.card-layout-view.layer-layer10 .card-layout-item .card-actions button,
+.card-layout-view.layer-layer11 .card-layout-item .header-button,
+.card-layout-view.layer-layer11 .card-layout-item .primary-button,
+.card-layout-view.layer-layer11 .card-layout-item .selection-button,
+.card-layout-view.layer-layer11 .card-layout-item .secondary-button,
+.card-layout-view.layer-layer11 .card-layout-item .next-step-button,
+.card-layout-view.layer-layer11 .card-layout-item .demonstrate-button,
+.card-layout-view.layer-layer11 .card-layout-item .feedback-button,
+.card-layout-view.layer-layer11 .card-layout-item .interactive-button,
+.card-layout-view.layer-layer11 .card-layout-item .completion-button,
+.card-layout-view.layer-layer11 .card-layout-item .user-attempt-button,
+.card-layout-view.layer-layer11 .card-layout-item .concept-continue-button,
+.card-layout-view.layer-layer11 .card-layout-item .intro-start-button,
+.card-layout-view.layer-layer11 .card-layout-item .mode-button,
+.card-layout-view.layer-layer11 .card-layout-item button,
+.card-layout-view.layer-layer11 .card-layout-item .card-actions button {
   border-radius: 50px !important;
   padding: 12px 24px !important;
   transition: all 0.3s ease !important;
@@ -805,7 +1047,10 @@ body:has(.card-layout-view.layer-layer8) .creator-popup-content::before {
 .card-layout-view.layer-layer4 .card-layout-item .header-button,
 .card-layout-view.layer-layer5 .card-layout-item .header-button,
 .card-layout-view.layer-layer7 .card-layout-item .header-button,
-.card-layout-view.layer-layer8 .card-layout-item .header-button {
+.card-layout-view.layer-layer8 .card-layout-item .header-button,
+.card-layout-view.layer-layer9 .card-layout-item .header-button,
+.card-layout-view.layer-layer10 .card-layout-item .header-button,
+.card-layout-view.layer-layer11 .card-layout-item .header-button {
   border-radius: 50px !important;
   height: auto !important;
   min-height: 44px !important;
@@ -823,7 +1068,13 @@ body:has(.card-layout-view.layer-layer8) .creator-popup-content::before {
 .card-layout-view.layer-layer7 .card-layout-item .primary-button,
 .card-layout-view.layer-layer7 .card-layout-item .selection-button,
 .card-layout-view.layer-layer8 .card-layout-item .primary-button,
-.card-layout-view.layer-layer8 .card-layout-item .selection-button {
+.card-layout-view.layer-layer8 .card-layout-item .selection-button,
+.card-layout-view.layer-layer9 .card-layout-item .primary-button,
+.card-layout-view.layer-layer9 .card-layout-item .selection-button,
+.card-layout-view.layer-layer10 .card-layout-item .primary-button,
+.card-layout-view.layer-layer10 .card-layout-item .selection-button,
+.card-layout-view.layer-layer11 .card-layout-item .primary-button,
+.card-layout-view.layer-layer11 .card-layout-item .selection-button {
   border-radius: 50px !important;
   padding: 14px 28px !important;
   font-weight: 600 !important;
@@ -834,7 +1085,10 @@ body:has(.card-layout-view.layer-layer8) .creator-popup-content::before {
 .card-layout-view.layer-layer4 .card-layout-item .secondary-button,
 .card-layout-view.layer-layer5 .card-layout-item .secondary-button,
 .card-layout-view.layer-layer7 .card-layout-item .secondary-button,
-.card-layout-view.layer-layer8 .card-layout-item .secondary-button {
+.card-layout-view.layer-layer8 .card-layout-item .secondary-button,
+.card-layout-view.layer-layer9 .card-layout-item .secondary-button,
+.card-layout-view.layer-layer10 .card-layout-item .secondary-button,
+.card-layout-view.layer-layer11 .card-layout-item .secondary-button {
   border-radius: 50px !important;
   padding: 12px 24px !important;
 }
@@ -844,7 +1098,10 @@ body:has(.card-layout-view.layer-layer8) .creator-popup-content::before {
 .card-layout-view.layer-layer4 .card-layout-item .mode-button,
 .card-layout-view.layer-layer5 .card-layout-item .mode-button,
 .card-layout-view.layer-layer7 .card-layout-item .mode-button,
-.card-layout-view.layer-layer8 .card-layout-item .mode-button {
+.card-layout-view.layer-layer8 .card-layout-item .mode-button,
+.card-layout-view.layer-layer9 .card-layout-item .mode-button,
+.card-layout-view.layer-layer10 .card-layout-item .mode-button,
+.card-layout-view.layer-layer11 .card-layout-item .mode-button {
   border-radius: 16px !important;
   padding: 16px 24px !important;
 }
@@ -933,7 +1190,49 @@ body:has(.card-layout-view.layer-layer8) .creator-popup-content::before {
 .card-layout-view.layer-layer8 .card-layout-item .concept-continue-button:hover,
 .card-layout-view.layer-layer8 .card-layout-item .intro-start-button:hover,
 .card-layout-view.layer-layer8 .card-layout-item .mode-button:hover,
-.card-layout-view.layer-layer8 .card-layout-item button:hover {
+.card-layout-view.layer-layer8 .card-layout-item button:hover,
+.card-layout-view.layer-layer9 .card-layout-item .header-button:hover,
+.card-layout-view.layer-layer9 .card-layout-item .primary-button:hover,
+.card-layout-view.layer-layer9 .card-layout-item .selection-button:hover,
+.card-layout-view.layer-layer9 .card-layout-item .secondary-button:hover,
+.card-layout-view.layer-layer9 .card-layout-item .next-step-button:hover,
+.card-layout-view.layer-layer9 .card-layout-item .demonstrate-button:hover,
+.card-layout-view.layer-layer9 .card-layout-item .feedback-button:hover,
+.card-layout-view.layer-layer9 .card-layout-item .interactive-button:hover,
+.card-layout-view.layer-layer9 .card-layout-item .completion-button:hover,
+.card-layout-view.layer-layer9 .card-layout-item .user-attempt-button:hover,
+.card-layout-view.layer-layer9 .card-layout-item .concept-continue-button:hover,
+.card-layout-view.layer-layer9 .card-layout-item .intro-start-button:hover,
+.card-layout-view.layer-layer9 .card-layout-item .mode-button:hover,
+.card-layout-view.layer-layer9 .card-layout-item button:hover,
+.card-layout-view.layer-layer10 .card-layout-item .header-button:hover,
+.card-layout-view.layer-layer10 .card-layout-item .primary-button:hover,
+.card-layout-view.layer-layer10 .card-layout-item .selection-button:hover,
+.card-layout-view.layer-layer10 .card-layout-item .secondary-button:hover,
+.card-layout-view.layer-layer10 .card-layout-item .next-step-button:hover,
+.card-layout-view.layer-layer10 .card-layout-item .demonstrate-button:hover,
+.card-layout-view.layer-layer10 .card-layout-item .feedback-button:hover,
+.card-layout-view.layer-layer10 .card-layout-item .interactive-button:hover,
+.card-layout-view.layer-layer10 .card-layout-item .completion-button:hover,
+.card-layout-view.layer-layer10 .card-layout-item .user-attempt-button:hover,
+.card-layout-view.layer-layer10 .card-layout-item .concept-continue-button:hover,
+.card-layout-view.layer-layer10 .card-layout-item .intro-start-button:hover,
+.card-layout-view.layer-layer10 .card-layout-item .mode-button:hover,
+.card-layout-view.layer-layer10 .card-layout-item button:hover,
+.card-layout-view.layer-layer11 .card-layout-item .header-button:hover,
+.card-layout-view.layer-layer11 .card-layout-item .primary-button:hover,
+.card-layout-view.layer-layer11 .card-layout-item .selection-button:hover,
+.card-layout-view.layer-layer11 .card-layout-item .secondary-button:hover,
+.card-layout-view.layer-layer11 .card-layout-item .next-step-button:hover,
+.card-layout-view.layer-layer11 .card-layout-item .demonstrate-button:hover,
+.card-layout-view.layer-layer11 .card-layout-item .feedback-button:hover,
+.card-layout-view.layer-layer11 .card-layout-item .interactive-button:hover,
+.card-layout-view.layer-layer11 .card-layout-item .completion-button:hover,
+.card-layout-view.layer-layer11 .card-layout-item .user-attempt-button:hover,
+.card-layout-view.layer-layer11 .card-layout-item .concept-continue-button:hover,
+.card-layout-view.layer-layer11 .card-layout-item .intro-start-button:hover,
+.card-layout-view.layer-layer11 .card-layout-item .mode-button:hover,
+.card-layout-view.layer-layer11 .card-layout-item button:hover {
   transform: translateY(-2px) !important;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
 }
@@ -962,7 +1261,19 @@ body:has(.card-layout-view.layer-layer8) .creator-popup-content::before {
 .card-layout-view.layer-layer8 .card-layout-item input[type="text"],
 .card-layout-view.layer-layer8 .card-layout-item input[type="email"],
 .card-layout-view.layer-layer8 .card-layout-item textarea,
-.card-layout-view.layer-layer8 .card-layout-item select {
+.card-layout-view.layer-layer8 .card-layout-item select,
+.card-layout-view.layer-layer9 .card-layout-item input[type="text"],
+.card-layout-view.layer-layer9 .card-layout-item input[type="email"],
+.card-layout-view.layer-layer9 .card-layout-item textarea,
+.card-layout-view.layer-layer9 .card-layout-item select,
+.card-layout-view.layer-layer10 .card-layout-item input[type="text"],
+.card-layout-view.layer-layer10 .card-layout-item input[type="email"],
+.card-layout-view.layer-layer10 .card-layout-item textarea,
+.card-layout-view.layer-layer10 .card-layout-item select,
+.card-layout-view.layer-layer11 .card-layout-item input[type="text"],
+.card-layout-view.layer-layer11 .card-layout-item input[type="email"],
+.card-layout-view.layer-layer11 .card-layout-item textarea,
+.card-layout-view.layer-layer11 .card-layout-item select {
   border-radius: 50px !important;
   padding: 12px 20px !important;
 }
@@ -983,7 +1294,10 @@ body:has(.card-layout-view.layer-layer8) .creator-popup-content::before {
 .card-layout-view.layer-layer4 .card-layout-item .theme-action-box,
 .card-layout-view.layer-layer5 .card-layout-item .theme-action-box,
 .card-layout-view.layer-layer7 .card-layout-item .theme-action-box,
-.card-layout-view.layer-layer8 .card-layout-item .theme-action-box {
+.card-layout-view.layer-layer8 .card-layout-item .theme-action-box,
+.card-layout-view.layer-layer9 .card-layout-item .theme-action-box,
+.card-layout-view.layer-layer10 .card-layout-item .theme-action-box,
+.card-layout-view.layer-layer11 .card-layout-item .theme-action-box {
   border-radius: 16px !important;
 }
 
@@ -998,7 +1312,13 @@ body:has(.card-layout-view.layer-layer8) .creator-popup-content::before {
 .card-layout-view.layer-layer7 .card-layout-item .theme-action-box .theme-box,
 .card-layout-view.layer-layer7 .card-layout-item .theme-action-box .step-title-bar,
 .card-layout-view.layer-layer8 .card-layout-item .theme-action-box .theme-box,
-.card-layout-view.layer-layer8 .card-layout-item .theme-action-box .step-title-bar {
+.card-layout-view.layer-layer8 .card-layout-item .theme-action-box .step-title-bar,
+.card-layout-view.layer-layer9 .card-layout-item .theme-action-box .theme-box,
+.card-layout-view.layer-layer9 .card-layout-item .theme-action-box .step-title-bar,
+.card-layout-view.layer-layer10 .card-layout-item .theme-action-box .theme-box,
+.card-layout-view.layer-layer10 .card-layout-item .theme-action-box .step-title-bar,
+.card-layout-view.layer-layer11 .card-layout-item .theme-action-box .theme-box,
+.card-layout-view.layer-layer11 .card-layout-item .theme-action-box .step-title-bar {
   border-radius: 0 !important;
 }
 
@@ -1007,7 +1327,10 @@ body:has(.card-layout-view.layer-layer8) .creator-popup-content::before {
 .card-layout-view.layer-layer4 .card-layout-item .theme-action-box .step-title-bar,
 .card-layout-view.layer-layer5 .card-layout-item .theme-action-box .step-title-bar,
 .card-layout-view.layer-layer7 .card-layout-item .theme-action-box .step-title-bar,
-.card-layout-view.layer-layer8 .card-layout-item .theme-action-box .step-title-bar {
+.card-layout-view.layer-layer8 .card-layout-item .theme-action-box .step-title-bar,
+.card-layout-view.layer-layer9 .card-layout-item .theme-action-box .step-title-bar,
+.card-layout-view.layer-layer10 .card-layout-item .theme-action-box .step-title-bar,
+.card-layout-view.layer-layer11 .card-layout-item .theme-action-box .step-title-bar {
   padding: 12px 20px !important;
 }
 
@@ -1022,7 +1345,13 @@ body:has(.card-layout-view.layer-layer8) .creator-popup-content::before {
 .card-layout-view.layer-layer7 .card-layout-item .theme-box,
 .card-layout-view.layer-layer7 .card-layout-item .instructions-box,
 .card-layout-view.layer-layer8 .card-layout-item .theme-box,
-.card-layout-view.layer-layer8 .card-layout-item .instructions-box {
+.card-layout-view.layer-layer8 .card-layout-item .instructions-box,
+.card-layout-view.layer-layer9 .card-layout-item .theme-box,
+.card-layout-view.layer-layer9 .card-layout-item .instructions-box,
+.card-layout-view.layer-layer10 .card-layout-item .theme-box,
+.card-layout-view.layer-layer10 .card-layout-item .instructions-box,
+.card-layout-view.layer-layer11 .card-layout-item .theme-box,
+.card-layout-view.layer-layer11 .card-layout-item .instructions-box {
   border-radius: 16px !important;
 }
 

@@ -55,6 +55,18 @@ const LAYER_STYLES = {
   layer8: {
     name: 'Variação Back08',
     description: 'Background back08.jpg aplicado em cards selecionados'
+  },
+  layer9: {
+    name: 'Variação Back09',
+    description: 'Background back09.jpg aplicado em cards selecionados'
+  },
+  layer10: {
+    name: 'Variação Back10',
+    description: 'Background back10.jpg aplicado em cards selecionados'
+  },
+  layer11: {
+    name: 'Variação Back11',
+    description: 'Background Back11.png aplicado em cards selecionados'
   }
 }
 
@@ -936,15 +948,16 @@ function CardLayoutView({
   // Aplicar classe do layer no body para que popups também sejam afetados
   useEffect(() => {
     // Remove todas as classes de layer do body
-    document.body.classList.remove('layer-layer1', 'layer-layer2', 'layer-layer3', 'layer-layer4', 'layer-layer5', 'layer-layer6', 'layer-layer7', 'layer-layer8')
+    document.body.classList.remove('layer-layer1', 'layer-layer2', 'layer-layer3', 'layer-layer4', 'layer-layer5', 'layer-layer6', 'layer-layer7', 'layer-layer8', 'layer-layer9', 'layer-layer10', 'layer-layer11')
     // Adiciona a classe do layer atual
     document.body.classList.add(`layer-${currentLayer}`)
     
     return () => {
       // Limpa ao desmontar
-      document.body.classList.remove('layer-layer1', 'layer-layer2', 'layer-layer3', 'layer-layer4', 'layer-layer5', 'layer-layer6', 'layer-layer7', 'layer-layer8')
+      document.body.classList.remove('layer-layer1', 'layer-layer2', 'layer-layer3', 'layer-layer4', 'layer-layer5', 'layer-layer6', 'layer-layer7', 'layer-layer8', 'layer-layer9', 'layer-layer10', 'layer-layer11')
     }
   }, [currentLayer])
+
 
   // Extrair todos os elementos únicos agrupados por tipo
   const allElements = React.useMemo(() => {
@@ -1417,7 +1430,7 @@ function CardLayoutView({
         sourceEl.style.transition = 'all 0.2s'
         sourceEl.style.outline = '3px solid rgb(253, 187, 44)'
         sourceEl.style.outlineOffset = '4px'
-        sourceEl.style.boxShadow = '0 0 10px rgba(76, 175, 80, 0.5)'
+        sourceEl.style.boxShadow = '0 0 10px rgba(253, 187, 44, 0.5)'
       }
     }, 100)
   }
@@ -1719,19 +1732,78 @@ function CardLayoutView({
         
         <div className="sidebar-controls">
           <div className="control-group">
-            <label>Layer Atual:</label>
-            <select 
-              value={currentLayer} 
-              onChange={(e) => setCurrentLayer(e.target.value)}
-              className="layer-select"
+            <label>Selecione o Layer:</label>
+            <div 
+              className="layer-list"
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '8px',
+                maxHeight: 'none',
+                overflowY: 'visible',
+                padding: '4px 0'
+              }}
             >
-              {Object.entries(LAYER_STYLES).map(([key, value]) => {
-                console.log('Layer option:', key, value.name)
-                return (
-                  <option key={key} value={key}>{value.name}</option>
-                )
-              })}
-            </select>
+              {Object.entries(LAYER_STYLES)
+                .sort(([keyA], [keyB]) => {
+                  // Colocar layer1 e layer6 no topo
+                  if (keyA === 'layer1') return -1
+                  if (keyB === 'layer1') return 1
+                  if (keyA === 'layer6') return -1
+                  if (keyB === 'layer6') return 1
+                  // Ordenar os demais por número
+                  const numA = parseInt(keyA.replace('layer', '')) || 0
+                  const numB = parseInt(keyB.replace('layer', '')) || 0
+                  return numA - numB
+                })
+                .map(([key, value]) => {
+                  const isPreferred = key === 'layer6' || key === 'layer9' || key === 'layer11'
+                  return (
+                    <button
+                      key={key}
+                      onClick={() => setCurrentLayer(key)}
+                      style={{
+                        width: '100%',
+                        padding: '12px 16px',
+                        border: currentLayer === key ? '2px solid #000000' : '1px solid #cccccc',
+                        borderRadius: '4px',
+                        background: currentLayer === key ? '#f0f0f0' : '#ffffff',
+                        color: '#000000',
+                        fontSize: '14px',
+                        textAlign: 'left',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s',
+                        fontWeight: currentLayer === key ? '600' : '400',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        gap: '8px'
+                      }}
+                      onMouseEnter={(e) => {
+                        if (currentLayer !== key) {
+                          e.target.style.background = '#f5f5f5'
+                          e.target.style.borderColor = '#999999'
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (currentLayer !== key) {
+                          e.target.style.background = '#ffffff'
+                          e.target.style.borderColor = '#cccccc'
+                        }
+                      }}
+                    >
+                      <span>{value.name}</span>
+                      {isPreferred && (
+                        <span style={{
+                          fontSize: '16px',
+                          color: '#FFC107',
+                          fontWeight: 'bold'
+                        }}>⭐</span>
+                      )}
+                    </button>
+                  )
+                })}
+            </div>
           </div>
           <div className="control-group">
             <label>
@@ -2002,7 +2074,7 @@ function CardLayoutView({
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundColor: 'rgba(76, 175, 80, 0.1)',
+            backgroundColor: 'rgba(253, 187, 44, 0.1)',
             zIndex: 9999,
             pointerEvents: 'none',
             display: 'flex',

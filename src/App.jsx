@@ -443,7 +443,7 @@ function App() {
             right: '20px',
             zIndex: 1000,
             padding: '10px 20px',
-            background: '#4CAF50',
+            background: 'rgb(253, 187, 44)',
             color: '#ffffff',
             border: 'none',
             borderRadius: '4px',

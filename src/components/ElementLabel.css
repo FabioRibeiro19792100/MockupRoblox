@@ -33,7 +33,7 @@
 }
 
 .element-label-body {
-  background: rgba(0, 128, 0, 0.8);
+  background: rgba(0, 0, 0, 0.8);
 }
 
 .element-label-button-primary {
@@ -53,15 +53,15 @@
 }
 
 .element-label-button-interactive {
-  background: rgba(0, 200, 100, 0.8);
+  background: rgba(253, 187, 44, 0.8);
 }
 
 .element-label-button-attempt {
-  background: rgba(0, 200, 100, 0.8);
+  background: rgba(253, 187, 44, 0.8);
 }
 
 .element-label-button-completion {
-  background: rgba(0, 200, 100, 0.8);
+  background: rgba(253, 187, 44, 0.8);
 }
 
 .element-label-button-next {
@@ -136,7 +136,7 @@
 }
 
 .element-label-badge-description {
-  background: rgba(200, 255, 0, 0.8);
+  background: rgba(255, 200, 0, 0.8);
   color: #000000;
 }
 
@@ -174,7 +174,7 @@
 }
 
 .element-label-badge-gallery-content {
-  background: rgba(150, 200, 150, 0.8);
+  background: rgba(200, 200, 150, 0.8);
 }
 
 /* Accordion specific labels */
@@ -196,7 +196,7 @@
 }
 
 .element-label-tutorial-status {
-  background: rgba(76, 175, 80, 0.8);
+  background: rgba(253, 187, 44, 0.8);
 }
 
 .element-label-tutorial-lock {

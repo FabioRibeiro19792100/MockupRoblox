@@ -53,7 +53,7 @@
 
 .progress-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, #4CAF50 0%, #66BB6A 100%);
+  background: linear-gradient(90deg, rgb(253, 187, 44) 0%, rgb(230, 170, 40) 100%);
   border-radius: 12px;
   transition: width 0.5s ease;
   position: relative;
@@ -150,11 +150,11 @@
 }
 
 .timeline-connector-completed {
-  background: linear-gradient(180deg, #4CAF50 0%, #66BB6A 100%);
+  background: linear-gradient(180deg, rgb(253, 187, 44) 0%, rgb(230, 170, 40) 100%);
 }
 
 .timeline-connector-current {
-  background: linear-gradient(180deg, #4CAF50 0%, rgb(113, 180, 233) 50%, #cccccc 100%);
+  background: linear-gradient(180deg, rgb(253, 187, 44) 0%, rgb(113, 180, 233) 50%, #cccccc 100%);
 }
 
 .timeline-connector-available,
@@ -179,9 +179,9 @@
 }
 
 .timeline-step-completed .timeline-step-circle {
-  background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
-  border-color: #4CAF50;
-  color: #ffffff;
+  background: linear-gradient(135deg, rgb(253, 187, 44) 0%, rgb(230, 170, 40) 100%);
+  border-color: rgb(253, 187, 44);
+  color: #000000;
 }
 
 .timeline-step-current .timeline-step-circle {
@@ -244,8 +244,8 @@
   border-radius: 12px;
   font-size: 12px;
   font-weight: 600;
-  background: #4CAF50;
-  color: #ffffff;
+  background: rgb(253, 187, 44);
+  color: #000000;
   width: fit-content;
   text-transform: uppercase;
 }

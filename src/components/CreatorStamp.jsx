@@ -6,7 +6,7 @@ function CreatorStamp({ isVisible, hideText = false }) {
   return (
     <div className="creator-stamp-inline">
       <img 
-        src="/Selo.png" 
+        src="/Selo2.png" 
         alt="Selo de Creator" 
         className="creator-stamp-image"
       />

@@ -1,70 +1,203 @@
 import { useState } from 'react'
 import './Card.css'
 
-function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu }) {
-  const [showThankYou, setShowThankYou] = useState(false)
+function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, onNextTutorial }) {
+  const [selectedOption, setSelectedOption] = useState(null)
 
-  const handleRegister = () => {
-    // Coleta silenciosa: os logs já foram coletados durante o tutorial
-    // Apenas mostra mensagem de agradecimento
-    setShowThankYou(true)
-    // Marcar tutorial como completo (mas não volta ao menu ainda)
+  const handleKeepMap = () => {
+    setSelectedOption('keep')
     if (onComplete) {
       onComplete()
     }
   }
 
-  const handleCompleteAndMenu = () => {
-    // Marca como completo e volta ao menu
+  const handleClearAndExit = () => {
+    setSelectedOption('clear')
     if (onCompleteAndMenu) {
       onCompleteAndMenu()
-    } else if (onComplete) {
-      onComplete()
-      // Fallback: volta ao menu após um delay
-      setTimeout(() => {
-        if (onMenu) {
-          onMenu()
-        }
-      }, 3000)
+    } else if (onMenu) {
+      onMenu()
     }
   }
 
   return (
     <div className="card card-completion">
-      <div className="card-header-global">
-        <button className="header-button" onClick={onMenu}>Voltar para menu</button>
-        <button className="header-button" onClick={onRestart}>Reiniciar tutorial</button>
-      </div>
-      <div style={{ padding: '24px', paddingTop: '12px' }}>
-        <h3 style={{ 
-          fontSize: '20px', 
-          fontWeight: 700, 
-          margin: 0, 
-          color: '#000000', 
-          marginBottom: '24px', 
-          paddingTop: '12px',
-          borderBottom: '1px solid #000000',
-          paddingBottom: '8px'
+      <div style={{ 
+        padding: '40px 24px 24px 24px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'center'
+      }}>
+        {/* Selo circular com checkmark */}
+        <div style={{
+          width: '120px',
+          height: '120px',
+          borderRadius: '50%',
+          background: '#e0e0e0',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginBottom: '24px',
+          fontSize: '60px',
+          color: '#000000'
         }}>
-          Você chegou<br />ao fim deste tutorial
-        </h3>
-        <div className="card-content" style={{ marginTop: '24px' }}>
-          {!showThankYou ? (
-            <>
-              <button className="completion-button" onClick={handleRegister} style={{ textAlign: 'left', marginTop: '60px' }}>
-                Clique aqui para registrar sua experiência
-              </button>
-            </>
-          ) : (
-            <div style={{ padding: '24px', textAlign: 'left' }}>
-              <h3 style={{ fontSize: '20px', fontWeight: 700, color: '#000000', marginBottom: '16px' }}>
-                Obrigado!
-              </h3>
-              <p className="completion-text" style={{ marginBottom: '16px' }}>
-                Sua experiência foi registrada. Os logs da sua jornada de aprendizado foram coletados silenciosamente durante o tutorial.
-              </p>
-            </div>
-          )}
+          ✓
+        </div>
+
+        {/* Parabéns */}
+        <h2 style={{
+          fontSize: '28px',
+          fontWeight: 700,
+          color: '#ffffff',
+          margin: '0 0 12px 0'
+        }}>
+          Parabéns!
+        </h2>
+
+        {/* Mensagem de conclusão */}
+        <p style={{
+          fontSize: '16px',
+          color: '#cccccc',
+          margin: '0 0 40px 0',
+          lineHeight: '1.5'
+        }}>
+          Você concluiu o tutorial 'Construindo sua casa no Roblox Studio'!
+        </p>
+
+        {/* Modal com opções */}
+        <div style={{
+          background: '#ffffff',
+          borderRadius: '12px',
+          padding: '24px',
+          width: '100%',
+          maxWidth: '400px',
+          marginBottom: '24px',
+          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
+        }}>
+          <h3 style={{
+            fontSize: '20px',
+            fontWeight: 700,
+            color: '#000000',
+            margin: '0 0 12px 0',
+            textAlign: 'left'
+          }}>
+            Manter o mapa?
+          </h3>
+          <p style={{
+            fontSize: '14px',
+            color: '#000000',
+            margin: '0 0 24px 0',
+            textAlign: 'left'
+          }}>
+            O que deseja fazer com o mapa que você construiu?
+          </p>
+
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '12px'
+          }}>
+            {/* Botão Manter mapa */}
+            <button
+              onClick={handleKeepMap}
+              style={{
+                width: '100%',
+                padding: '14px 20px',
+                background: 'rgb(253, 187, 44)',
+                color: '#000000',
+                border: 'none',
+                borderRadius: '8px',
+                fontSize: '16px',
+                fontWeight: 600,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px',
+                transition: 'background 0.2s'
+              }}
+              onMouseEnter={(e) => e.target.style.background = 'rgb(230, 170, 40)'}
+              onMouseLeave={(e) => e.target.style.background = 'rgb(253, 187, 44)'}
+            >
+              <span style={{ fontSize: '20px' }}>✓</span>
+              <span>Manter mapa</span>
+            </button>
+
+            {/* Botão Limpar e sair */}
+            <button
+              onClick={handleClearAndExit}
+              style={{
+                width: '100%',
+                padding: '14px 20px',
+                background: '#f44336',
+                color: '#ffffff',
+                border: 'none',
+                borderRadius: '8px',
+                fontSize: '16px',
+                fontWeight: 600,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px',
+                transition: 'background 0.2s'
+              }}
+              onMouseEnter={(e) => e.target.style.background = '#d32f2f'}
+              onMouseLeave={(e) => e.target.style.background = '#f44336'}
+            >
+              <span style={{ fontSize: '20px' }}>🗑️</span>
+              <span>Limpar e sair</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Botões de navegação */}
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '12px',
+          width: '100%',
+          maxWidth: '400px'
+        }}>
+          <button
+            onClick={onMenu}
+            style={{
+              width: '100%',
+              padding: '14px 20px',
+              background: '#e0e0e0',
+              color: '#666666',
+              border: 'none',
+              borderRadius: '8px',
+              fontSize: '16px',
+              fontWeight: 600,
+              cursor: 'pointer',
+              transition: 'background 0.2s'
+            }}
+            onMouseEnter={(e) => e.target.style.background = '#d0d0d0'}
+            onMouseLeave={(e) => e.target.style.background = '#e0e0e0'}
+          >
+            Voltar para Menu
+          </button>
+
+          <button
+            onClick={onNextTutorial || (() => {})}
+            style={{
+              width: '100%',
+              padding: '14px 20px',
+              background: 'rgb(253, 187, 44)',
+              color: '#000000',
+              border: 'none',
+              borderRadius: '8px',
+              fontSize: '16px',
+              fontWeight: 600,
+              cursor: 'pointer',
+              transition: 'background 0.2s',
+              opacity: 0.7
+            }}
+            onMouseEnter={(e) => e.target.style.background = 'rgb(230, 170, 40)'}
+            onMouseLeave={(e) => e.target.style.background = 'rgb(253, 187, 44)'}
+          >
+            Próximo Tutorial
+          </button>
         </div>
       </div>
     </div>
