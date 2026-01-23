@@ -210,3 +210,43 @@
 .toggle-switch input:focus + .toggle-slider {
   box-shadow: 0 0 1px rgb(113, 180, 233);
 }
+
+/* Media queries para mobile */
+@media (max-width: 768px) {
+  .roblox-studio-mock {
+    width: 100% !important;
+    min-width: 100% !important;
+    height: auto !important;
+    min-height: 400px !important;
+    max-height: none !important;
+    margin-top: 0 !important;
+    flex: none !important;
+  }
+
+  .studio-toolbar {
+    padding: 8px 12px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .toolbar-item {
+    font-size: 12px;
+    padding: 4px 6px;
+  }
+
+  .steps-container {
+    grid-template-columns: 1fr !important;
+    padding: 20px;
+    gap: 12px;
+  }
+
+  .step-box {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  .dev-instructions-panel {
+    height: auto;
+    max-height: 300px;
+  }
+}

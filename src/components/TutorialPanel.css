@@ -85,3 +85,31 @@
     transform: translateY(0);
   }
 }
+
+/* Media queries para mobile */
+@media (max-width: 768px) {
+  .tutorial-panel {
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    margin-top: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  .tutorial-panel-content {
+    padding-bottom: 200px;
+  }
+
+  .badge-gallery-fixed {
+    position: relative !important;
+    margin-top: 0;
+  }
+
+  .badge-gallery-fixed.expanded {
+    max-height: 300px;
+    min-height: 300px;
+  }
+}
