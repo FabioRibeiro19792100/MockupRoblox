@@ -19,6 +19,8 @@ function CreatorPopup({ onClose }) {
         <h1 className="creator-popup-creator">CREATOR ROBLOX</h1>
         <p className="creator-popup-message">
           Você completou seu primeiro tutorial e ganhou o selo de Creator!
+        </p>
+        <p className="creator-popup-message">
           Continue aprendendo para desbloquear mais conquistas.
         </p>
         <button className="creator-popup-button" onClick={onClose}>

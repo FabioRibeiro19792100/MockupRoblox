@@ -22,7 +22,7 @@ import ElementLabel from './ElementLabel'
 import BadgeNotification from './BadgeNotification'
 import './CardLayoutView.css'
 
-// Sistema de layers - Design Original + Arredondado
+// Sistema de layers - Design Original + Arredondado + Variações de Background
 const LAYER_STYLES = {
   layer1: {
     name: 'Design Original',
@@ -31,6 +31,30 @@ const LAYER_STYLES = {
   layer6: {
     name: 'Original Arredondado',
     description: 'Design original com botões totalmente arredondados'
+  },
+  layer2: {
+    name: 'Variação Back02',
+    description: 'Background back02.jpg aplicado em cards selecionados'
+  },
+  layer3: {
+    name: 'Variação Back04',
+    description: 'Background back04.png aplicado em cards selecionados'
+  },
+  layer4: {
+    name: 'Variação Back05',
+    description: 'Background back05.png aplicado em cards selecionados'
+  },
+  layer5: {
+    name: 'Variação Back06',
+    description: 'Background back06.png aplicado em cards selecionados'
+  },
+  layer7: {
+    name: 'Variação Back07',
+    description: 'Background back07.jpg aplicado em cards selecionados'
+  },
+  layer8: {
+    name: 'Variação Back08',
+    description: 'Background back08.jpg aplicado em cards selecionados'
   }
 }
 
@@ -211,6 +235,11 @@ function CardLayoutView({
       })
     }
     
+    // Todos os toggles usam o mesmo estilo preto
+    const toggleBackground = '#000000'
+    const toggleHoverBackground = '#333333'
+    const toggleBorder = '1px solid #e0e0e0'
+    
     // Toggle switch da galeria de badges - será inserido logo após o header via CSS
     const badgeToggle = (
       <div 
@@ -224,17 +253,17 @@ function CardLayoutView({
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '12px 24px',
-          background: 'rgb(113, 180, 233)',
-          borderBottom: '1px solid #e0e0e0',
+          background: toggleBackground,
+          borderBottom: toggleBorder,
           cursor: 'pointer',
           userSelect: 'none',
           transition: 'background 0.2s',
           flexShrink: 0
         }}
-        onMouseEnter={(e) => e.currentTarget.style.background = 'rgb(100, 160, 210)'}
-        onMouseLeave={(e) => e.currentTarget.style.background = 'rgb(113, 180, 233)'}
+        onMouseEnter={(e) => e.currentTarget.style.background = toggleHoverBackground}
+        onMouseLeave={(e) => e.currentTarget.style.background = toggleBackground}
       >
-        <span style={{ fontSize: '14px', fontWeight: 600, color: '#000000' }}>
+        <span style={{ fontSize: '14px', fontWeight: 600, color: '#ffffff' }}>
           Conquiste seus badges de Creator
         </span>
         {/* Toggle Switch */}
@@ -255,7 +284,7 @@ function CardLayoutView({
               width: '44px',
               height: '24px',
               borderRadius: '12px',
-              background: isAnyGalleryVisible ? 'rgb(113, 180, 233)' : '#cccccc',
+              background: isAnyGalleryVisible ? '#ffffff' : '#666666',
               position: 'relative',
               transition: 'background 0.3s',
               cursor: 'pointer',
@@ -267,7 +296,7 @@ function CardLayoutView({
                 width: '20px',
                 height: '20px',
                 borderRadius: '50%',
-                background: '#ffffff',
+                background: isAnyGalleryVisible ? '#000000' : '#ffffff',
                 position: 'absolute',
                 top: '2px',
                 left: isAnyGalleryVisible ? '22px' : '2px',
@@ -903,6 +932,19 @@ function CardLayoutView({
       clearInterval(interval)
     }
   }, [cards.length, showLabels]) // Re-executar quando cards forem carregados ou labels mudarem
+
+  // Aplicar classe do layer no body para que popups também sejam afetados
+  useEffect(() => {
+    // Remove todas as classes de layer do body
+    document.body.classList.remove('layer-layer1', 'layer-layer2', 'layer-layer3', 'layer-layer4', 'layer-layer5', 'layer-layer6', 'layer-layer7', 'layer-layer8')
+    // Adiciona a classe do layer atual
+    document.body.classList.add(`layer-${currentLayer}`)
+    
+    return () => {
+      // Limpa ao desmontar
+      document.body.classList.remove('layer-layer1', 'layer-layer2', 'layer-layer3', 'layer-layer4', 'layer-layer5', 'layer-layer6', 'layer-layer7', 'layer-layer8')
+    }
+  }, [currentLayer])
 
   // Extrair todos os elementos únicos agrupados por tipo
   const allElements = React.useMemo(() => {

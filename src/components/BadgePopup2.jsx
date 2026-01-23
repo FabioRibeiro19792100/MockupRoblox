@@ -18,7 +18,9 @@ function BadgePopup2({ onClose }) {
         <p className="creator-popup-subtitle">Você conquistou o badge</p>
         <h1 className="creator-popup-creator">CRIADOR INICIANTE</h1>
         <p className="creator-popup-message">
-              Você completou todos os tutoriais de "Transforme-se num Creator"!
+          Você completou todos os tutoriais de "Transforme-se num Creator"!
+        </p>
+        <p className="creator-popup-message">
           Continue aprendendo para desbloquear mais conquistas.
         </p>
         <button className="creator-popup-button" onClick={onClose}>

@@ -9,7 +9,7 @@ function Card05_BeforeAction({ stepNumber, totalSteps, stepTitle, onDemonstrate,
       </div>
       <div style={{ padding: '0 24px 24px 24px' }}>
         <div className="card-step-header" style={{ marginBottom: '12px', marginTop: '24px' }}>
-          <div className="step-counter" style={{ marginBottom: '8px' }}>ETAPA {stepNumber}/{totalSteps}</div>
+          <div className="step-counter" style={{ marginBottom: '8px', marginTop: '-16px' }}>ETAPA {stepNumber}/{totalSteps}</div>
           <div className="theme-action-box">
             <div className="theme-box">
               <div>Tutorial → Construir uma casa</div>

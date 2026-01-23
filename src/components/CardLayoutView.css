@@ -310,7 +310,7 @@
 }
 
 .card-layout-view.layer-layer6 .card-layout-item .mode-button {
-  border-radius: 50px !important;
+  border-radius: 16px !important;
   padding: 16px 24px !important;
 }
 
@@ -466,5 +466,594 @@
     max-height: none !important;
     overflow-y: auto !important;
   }
+}
+
+/* ============================================
+   VARIAÇÕES DE BACKGROUND - LAYERS 2, 3, 4, 5
+   ============================================ */
+
+/* Layer 2: Variação Back02 - back02.jpg em TODOS os cards com background */
+.card-layout-view.layer-layer2 .card-layout-item .card.card-cover,
+.card-layout-view.layer-layer2 .card-layout-item .card.card-selection,
+.card-layout-view.layer-layer2 .card-layout-item .card.card-mode,
+.card-layout-view.layer-layer2 .card-layout-item .card.card-interactive {
+  background-image: url('/back02.jpg') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+.card-layout-view.layer-layer2 .card-layout-item .card.card-cover::before,
+.card-layout-view.layer-layer2 .card-layout-item .card.card-selection::before,
+.card-layout-view.layer-layer2 .card-layout-item .card.card-mode::before,
+.card-layout-view.layer-layer2 .card-layout-item .card.card-interactive::before {
+  background: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Layer 3: Variação Back04 - back04.png em TODOS os cards com background */
+.card-layout-view.layer-layer3 .card-layout-item .card.card-cover,
+.card-layout-view.layer-layer3 .card-layout-item .card.card-selection,
+.card-layout-view.layer-layer3 .card-layout-item .card.card-mode,
+.card-layout-view.layer-layer3 .card-layout-item .card.card-interactive {
+  background-image: url('/back04.png') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+.card-layout-view.layer-layer3 .card-layout-item .card.card-cover::before,
+.card-layout-view.layer-layer3 .card-layout-item .card.card-selection::before,
+.card-layout-view.layer-layer3 .card-layout-item .card.card-mode::before,
+.card-layout-view.layer-layer3 .card-layout-item .card.card-interactive::before {
+  background: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Layer 4: Variação Back05 - back05.png em TODOS os cards com background */
+.card-layout-view.layer-layer4 .card-layout-item .card.card-cover,
+.card-layout-view.layer-layer4 .card-layout-item .card.card-selection,
+.card-layout-view.layer-layer4 .card-layout-item .card.card-mode,
+.card-layout-view.layer-layer4 .card-layout-item .card.card-interactive {
+  background-image: url('/back05.png') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+.card-layout-view.layer-layer4 .card-layout-item .card.card-cover::before,
+.card-layout-view.layer-layer4 .card-layout-item .card.card-selection::before,
+.card-layout-view.layer-layer4 .card-layout-item .card.card-mode::before,
+.card-layout-view.layer-layer4 .card-layout-item .card.card-interactive::before {
+  background: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Layer 5: Variação Back06 - back06.png em TODOS os cards com background */
+.card-layout-view.layer-layer5 .card-layout-item .card.card-cover,
+.card-layout-view.layer-layer5 .card-layout-item .card.card-selection,
+.card-layout-view.layer-layer5 .card-layout-item .card.card-mode,
+.card-layout-view.layer-layer5 .card-layout-item .card.card-interactive {
+  background-image: url('/back06.png') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+.card-layout-view.layer-layer5 .card-layout-item .card.card-cover::before,
+.card-layout-view.layer-layer5 .card-layout-item .card.card-selection::before,
+.card-layout-view.layer-layer5 .card-layout-item .card.card-mode::before,
+.card-layout-view.layer-layer5 .card-layout-item .card.card-interactive::before {
+  background: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Layer 7: Variação Back07 - back07.jpg em TODOS os cards com background */
+.card-layout-view.layer-layer7 .card-layout-item .card.card-cover,
+.card-layout-view.layer-layer7 .card-layout-item .card.card-selection,
+.card-layout-view.layer-layer7 .card-layout-item .card.card-mode,
+.card-layout-view.layer-layer7 .card-layout-item .card.card-interactive {
+  background-image: url('/back07.jpg') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+.card-layout-view.layer-layer7 .card-layout-item .card.card-cover::before,
+.card-layout-view.layer-layer7 .card-layout-item .card.card-selection::before,
+.card-layout-view.layer-layer7 .card-layout-item .card.card-mode::before,
+.card-layout-view.layer-layer7 .card-layout-item .card.card-interactive::before {
+  background: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Layer 8: Variação Back08 - back08.jpg em TODOS os cards com background */
+.card-layout-view.layer-layer8 .card-layout-item .card.card-cover,
+.card-layout-view.layer-layer8 .card-layout-item .card.card-selection,
+.card-layout-view.layer-layer8 .card-layout-item .card.card-mode,
+.card-layout-view.layer-layer8 .card-layout-item .card.card-interactive {
+  background-image: url('/back08.jpg') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+.card-layout-view.layer-layer8 .card-layout-item .card.card-cover::before,
+.card-layout-view.layer-layer8 .card-layout-item .card.card-selection::before,
+.card-layout-view.layer-layer8 .card-layout-item .card.card-mode::before,
+.card-layout-view.layer-layer8 .card-layout-item .card.card-interactive::before {
+  background: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* ============================================
+   POPUPS - APLICAR BACKGROUNDS DOS LAYERS
+   ============================================ */
+
+/* Layer 2: Variação Back02 - back02.jpg nos popups */
+.card-layout-view.layer-layer2 .creator-popup-content,
+.layer-layer2 .creator-popup-content,
+body:has(.card-layout-view.layer-layer2) .creator-popup-content {
+  background-image: url('/back02.jpg') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+.card-layout-view.layer-layer2 .creator-popup-content::before,
+.layer-layer2 .creator-popup-content::before,
+body:has(.card-layout-view.layer-layer2) .creator-popup-content::before {
+  background: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Layer 3: Variação Back04 - back04.png nos popups */
+.card-layout-view.layer-layer3 .creator-popup-content,
+.layer-layer3 .creator-popup-content,
+body:has(.card-layout-view.layer-layer3) .creator-popup-content {
+  background-image: url('/back04.png') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+.card-layout-view.layer-layer3 .creator-popup-content::before,
+.layer-layer3 .creator-popup-content::before,
+body:has(.card-layout-view.layer-layer3) .creator-popup-content::before {
+  background: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Layer 4: Variação Back05 - back05.png nos popups */
+.card-layout-view.layer-layer4 .creator-popup-content,
+.layer-layer4 .creator-popup-content,
+body:has(.card-layout-view.layer-layer4) .creator-popup-content {
+  background-image: url('/back05.png') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+.card-layout-view.layer-layer4 .creator-popup-content::before,
+.layer-layer4 .creator-popup-content::before,
+body:has(.card-layout-view.layer-layer4) .creator-popup-content::before {
+  background: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Layer 5: Variação Back06 - back06.png nos popups */
+.card-layout-view.layer-layer5 .creator-popup-content,
+.layer-layer5 .creator-popup-content,
+body:has(.card-layout-view.layer-layer5) .creator-popup-content {
+  background-image: url('/back06.png') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+.card-layout-view.layer-layer5 .creator-popup-content::before,
+.layer-layer5 .creator-popup-content::before,
+body:has(.card-layout-view.layer-layer5) .creator-popup-content::before {
+  background: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Layer 7: Variação Back07 - back07.jpg nos popups */
+.card-layout-view.layer-layer7 .creator-popup-content,
+.layer-layer7 .creator-popup-content,
+body:has(.card-layout-view.layer-layer7) .creator-popup-content {
+  background-image: url('/back07.jpg') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+.card-layout-view.layer-layer7 .creator-popup-content::before,
+.layer-layer7 .creator-popup-content::before,
+body:has(.card-layout-view.layer-layer7) .creator-popup-content::before {
+  background: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Layer 8: Variação Back08 - back08.jpg nos popups */
+.card-layout-view.layer-layer8 .creator-popup-content,
+.layer-layer8 .creator-popup-content,
+body:has(.card-layout-view.layer-layer8) .creator-popup-content {
+  background-image: url('/back08.jpg') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+.card-layout-view.layer-layer8 .creator-popup-content::before,
+.layer-layer8 .creator-popup-content::before,
+body:has(.card-layout-view.layer-layer8) .creator-popup-content::before {
+  background: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* ============================================
+   ESTILOS ARREDONDADOS PARA LAYERS 2, 3, 4, 5, 7, 8
+   ============================================ */
+
+/* Layers 2, 3, 4, 5, 7, 8 - Aplicar estilos arredondados */
+.card-layout-view.layer-layer2 .card-layout-item,
+.card-layout-view.layer-layer3 .card-layout-item,
+.card-layout-view.layer-layer4 .card-layout-item,
+.card-layout-view.layer-layer5 .card-layout-item,
+.card-layout-view.layer-layer7 .card-layout-item,
+.card-layout-view.layer-layer8 .card-layout-item {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card-layout-view.layer-layer2 .card-layout-item .card,
+.card-layout-view.layer-layer3 .card-layout-item .card,
+.card-layout-view.layer-layer4 .card-layout-item .card,
+.card-layout-view.layer-layer5 .card-layout-item .card,
+.card-layout-view.layer-layer7 .card-layout-item .card,
+.card-layout-view.layer-layer8 .card-layout-item .card {
+  border-radius: 12px;
+}
+
+/* Todos os botões arredondados - aplica a TODOS os botões */
+.card-layout-view.layer-layer2 .card-layout-item .header-button,
+.card-layout-view.layer-layer2 .card-layout-item .primary-button,
+.card-layout-view.layer-layer2 .card-layout-item .selection-button,
+.card-layout-view.layer-layer2 .card-layout-item .secondary-button,
+.card-layout-view.layer-layer2 .card-layout-item .next-step-button,
+.card-layout-view.layer-layer2 .card-layout-item .demonstrate-button,
+.card-layout-view.layer-layer2 .card-layout-item .feedback-button,
+.card-layout-view.layer-layer2 .card-layout-item .interactive-button,
+.card-layout-view.layer-layer2 .card-layout-item .completion-button,
+.card-layout-view.layer-layer2 .card-layout-item .user-attempt-button,
+.card-layout-view.layer-layer2 .card-layout-item .concept-continue-button,
+.card-layout-view.layer-layer2 .card-layout-item .intro-start-button,
+.card-layout-view.layer-layer2 .card-layout-item .mode-button,
+.card-layout-view.layer-layer2 .card-layout-item button,
+.card-layout-view.layer-layer2 .card-layout-item .card-actions button,
+.card-layout-view.layer-layer3 .card-layout-item .header-button,
+.card-layout-view.layer-layer3 .card-layout-item .primary-button,
+.card-layout-view.layer-layer3 .card-layout-item .selection-button,
+.card-layout-view.layer-layer3 .card-layout-item .secondary-button,
+.card-layout-view.layer-layer3 .card-layout-item .next-step-button,
+.card-layout-view.layer-layer3 .card-layout-item .demonstrate-button,
+.card-layout-view.layer-layer3 .card-layout-item .feedback-button,
+.card-layout-view.layer-layer3 .card-layout-item .interactive-button,
+.card-layout-view.layer-layer3 .card-layout-item .completion-button,
+.card-layout-view.layer-layer3 .card-layout-item .user-attempt-button,
+.card-layout-view.layer-layer3 .card-layout-item .concept-continue-button,
+.card-layout-view.layer-layer3 .card-layout-item .intro-start-button,
+.card-layout-view.layer-layer3 .card-layout-item .mode-button,
+.card-layout-view.layer-layer3 .card-layout-item button,
+.card-layout-view.layer-layer3 .card-layout-item .card-actions button,
+.card-layout-view.layer-layer4 .card-layout-item .header-button,
+.card-layout-view.layer-layer4 .card-layout-item .primary-button,
+.card-layout-view.layer-layer4 .card-layout-item .selection-button,
+.card-layout-view.layer-layer4 .card-layout-item .secondary-button,
+.card-layout-view.layer-layer4 .card-layout-item .next-step-button,
+.card-layout-view.layer-layer4 .card-layout-item .demonstrate-button,
+.card-layout-view.layer-layer4 .card-layout-item .feedback-button,
+.card-layout-view.layer-layer4 .card-layout-item .interactive-button,
+.card-layout-view.layer-layer4 .card-layout-item .completion-button,
+.card-layout-view.layer-layer4 .card-layout-item .user-attempt-button,
+.card-layout-view.layer-layer4 .card-layout-item .concept-continue-button,
+.card-layout-view.layer-layer4 .card-layout-item .intro-start-button,
+.card-layout-view.layer-layer4 .card-layout-item .mode-button,
+.card-layout-view.layer-layer4 .card-layout-item button,
+.card-layout-view.layer-layer4 .card-layout-item .card-actions button,
+.card-layout-view.layer-layer5 .card-layout-item .header-button,
+.card-layout-view.layer-layer5 .card-layout-item .primary-button,
+.card-layout-view.layer-layer5 .card-layout-item .selection-button,
+.card-layout-view.layer-layer5 .card-layout-item .secondary-button,
+.card-layout-view.layer-layer5 .card-layout-item .next-step-button,
+.card-layout-view.layer-layer5 .card-layout-item .demonstrate-button,
+.card-layout-view.layer-layer5 .card-layout-item .feedback-button,
+.card-layout-view.layer-layer5 .card-layout-item .interactive-button,
+.card-layout-view.layer-layer5 .card-layout-item .completion-button,
+.card-layout-view.layer-layer5 .card-layout-item .user-attempt-button,
+.card-layout-view.layer-layer5 .card-layout-item .concept-continue-button,
+.card-layout-view.layer-layer5 .card-layout-item .intro-start-button,
+.card-layout-view.layer-layer5 .card-layout-item .mode-button,
+.card-layout-view.layer-layer5 .card-layout-item button,
+.card-layout-view.layer-layer5 .card-layout-item .card-actions button,
+.card-layout-view.layer-layer7 .card-layout-item .header-button,
+.card-layout-view.layer-layer7 .card-layout-item .primary-button,
+.card-layout-view.layer-layer7 .card-layout-item .selection-button,
+.card-layout-view.layer-layer7 .card-layout-item .secondary-button,
+.card-layout-view.layer-layer7 .card-layout-item .next-step-button,
+.card-layout-view.layer-layer7 .card-layout-item .demonstrate-button,
+.card-layout-view.layer-layer7 .card-layout-item .feedback-button,
+.card-layout-view.layer-layer7 .card-layout-item .interactive-button,
+.card-layout-view.layer-layer7 .card-layout-item .completion-button,
+.card-layout-view.layer-layer7 .card-layout-item .user-attempt-button,
+.card-layout-view.layer-layer7 .card-layout-item .concept-continue-button,
+.card-layout-view.layer-layer7 .card-layout-item .intro-start-button,
+.card-layout-view.layer-layer7 .card-layout-item .mode-button,
+.card-layout-view.layer-layer7 .card-layout-item button,
+.card-layout-view.layer-layer7 .card-layout-item .card-actions button,
+.card-layout-view.layer-layer8 .card-layout-item .header-button,
+.card-layout-view.layer-layer8 .card-layout-item .primary-button,
+.card-layout-view.layer-layer8 .card-layout-item .selection-button,
+.card-layout-view.layer-layer8 .card-layout-item .secondary-button,
+.card-layout-view.layer-layer8 .card-layout-item .next-step-button,
+.card-layout-view.layer-layer8 .card-layout-item .demonstrate-button,
+.card-layout-view.layer-layer8 .card-layout-item .feedback-button,
+.card-layout-view.layer-layer8 .card-layout-item .interactive-button,
+.card-layout-view.layer-layer8 .card-layout-item .completion-button,
+.card-layout-view.layer-layer8 .card-layout-item .user-attempt-button,
+.card-layout-view.layer-layer8 .card-layout-item .concept-continue-button,
+.card-layout-view.layer-layer8 .card-layout-item .intro-start-button,
+.card-layout-view.layer-layer8 .card-layout-item .mode-button,
+.card-layout-view.layer-layer8 .card-layout-item button,
+.card-layout-view.layer-layer8 .card-layout-item .card-actions button {
+  border-radius: 50px !important;
+  padding: 12px 24px !important;
+  transition: all 0.3s ease !important;
+}
+
+.card-layout-view.layer-layer2 .card-layout-item .header-button,
+.card-layout-view.layer-layer3 .card-layout-item .header-button,
+.card-layout-view.layer-layer4 .card-layout-item .header-button,
+.card-layout-view.layer-layer5 .card-layout-item .header-button,
+.card-layout-view.layer-layer7 .card-layout-item .header-button,
+.card-layout-view.layer-layer8 .card-layout-item .header-button {
+  border-radius: 50px !important;
+  height: auto !important;
+  min-height: 44px !important;
+  padding: 12px 24px !important;
+}
+
+.card-layout-view.layer-layer2 .card-layout-item .primary-button,
+.card-layout-view.layer-layer2 .card-layout-item .selection-button,
+.card-layout-view.layer-layer3 .card-layout-item .primary-button,
+.card-layout-view.layer-layer3 .card-layout-item .selection-button,
+.card-layout-view.layer-layer4 .card-layout-item .primary-button,
+.card-layout-view.layer-layer4 .card-layout-item .selection-button,
+.card-layout-view.layer-layer5 .card-layout-item .primary-button,
+.card-layout-view.layer-layer5 .card-layout-item .selection-button,
+.card-layout-view.layer-layer7 .card-layout-item .primary-button,
+.card-layout-view.layer-layer7 .card-layout-item .selection-button,
+.card-layout-view.layer-layer8 .card-layout-item .primary-button,
+.card-layout-view.layer-layer8 .card-layout-item .selection-button {
+  border-radius: 50px !important;
+  padding: 14px 28px !important;
+  font-weight: 600 !important;
+}
+
+.card-layout-view.layer-layer2 .card-layout-item .secondary-button,
+.card-layout-view.layer-layer3 .card-layout-item .secondary-button,
+.card-layout-view.layer-layer4 .card-layout-item .secondary-button,
+.card-layout-view.layer-layer5 .card-layout-item .secondary-button,
+.card-layout-view.layer-layer7 .card-layout-item .secondary-button,
+.card-layout-view.layer-layer8 .card-layout-item .secondary-button {
+  border-radius: 50px !important;
+  padding: 12px 24px !important;
+}
+
+.card-layout-view.layer-layer2 .card-layout-item .mode-button,
+.card-layout-view.layer-layer3 .card-layout-item .mode-button,
+.card-layout-view.layer-layer4 .card-layout-item .mode-button,
+.card-layout-view.layer-layer5 .card-layout-item .mode-button,
+.card-layout-view.layer-layer7 .card-layout-item .mode-button,
+.card-layout-view.layer-layer8 .card-layout-item .mode-button {
+  border-radius: 16px !important;
+  padding: 16px 24px !important;
+}
+
+/* Hover suave nos botões arredondados */
+.card-layout-view.layer-layer2 .card-layout-item .header-button:hover,
+.card-layout-view.layer-layer2 .card-layout-item .primary-button:hover,
+.card-layout-view.layer-layer2 .card-layout-item .selection-button:hover,
+.card-layout-view.layer-layer2 .card-layout-item .secondary-button:hover,
+.card-layout-view.layer-layer2 .card-layout-item .next-step-button:hover,
+.card-layout-view.layer-layer2 .card-layout-item .demonstrate-button:hover,
+.card-layout-view.layer-layer2 .card-layout-item .feedback-button:hover,
+.card-layout-view.layer-layer2 .card-layout-item .interactive-button:hover,
+.card-layout-view.layer-layer2 .card-layout-item .completion-button:hover,
+.card-layout-view.layer-layer2 .card-layout-item .user-attempt-button:hover,
+.card-layout-view.layer-layer2 .card-layout-item .concept-continue-button:hover,
+.card-layout-view.layer-layer2 .card-layout-item .intro-start-button:hover,
+.card-layout-view.layer-layer2 .card-layout-item .mode-button:hover,
+.card-layout-view.layer-layer2 .card-layout-item button:hover,
+.card-layout-view.layer-layer3 .card-layout-item .header-button:hover,
+.card-layout-view.layer-layer3 .card-layout-item .primary-button:hover,
+.card-layout-view.layer-layer3 .card-layout-item .selection-button:hover,
+.card-layout-view.layer-layer3 .card-layout-item .secondary-button:hover,
+.card-layout-view.layer-layer3 .card-layout-item .next-step-button:hover,
+.card-layout-view.layer-layer3 .card-layout-item .demonstrate-button:hover,
+.card-layout-view.layer-layer3 .card-layout-item .feedback-button:hover,
+.card-layout-view.layer-layer3 .card-layout-item .interactive-button:hover,
+.card-layout-view.layer-layer3 .card-layout-item .completion-button:hover,
+.card-layout-view.layer-layer3 .card-layout-item .user-attempt-button:hover,
+.card-layout-view.layer-layer3 .card-layout-item .concept-continue-button:hover,
+.card-layout-view.layer-layer3 .card-layout-item .intro-start-button:hover,
+.card-layout-view.layer-layer3 .card-layout-item .mode-button:hover,
+.card-layout-view.layer-layer3 .card-layout-item button:hover,
+.card-layout-view.layer-layer4 .card-layout-item .header-button:hover,
+.card-layout-view.layer-layer4 .card-layout-item .primary-button:hover,
+.card-layout-view.layer-layer4 .card-layout-item .selection-button:hover,
+.card-layout-view.layer-layer4 .card-layout-item .secondary-button:hover,
+.card-layout-view.layer-layer4 .card-layout-item .next-step-button:hover,
+.card-layout-view.layer-layer4 .card-layout-item .demonstrate-button:hover,
+.card-layout-view.layer-layer4 .card-layout-item .feedback-button:hover,
+.card-layout-view.layer-layer4 .card-layout-item .interactive-button:hover,
+.card-layout-view.layer-layer4 .card-layout-item .completion-button:hover,
+.card-layout-view.layer-layer4 .card-layout-item .user-attempt-button:hover,
+.card-layout-view.layer-layer4 .card-layout-item .concept-continue-button:hover,
+.card-layout-view.layer-layer4 .card-layout-item .intro-start-button:hover,
+.card-layout-view.layer-layer4 .card-layout-item .mode-button:hover,
+.card-layout-view.layer-layer4 .card-layout-item button:hover,
+.card-layout-view.layer-layer5 .card-layout-item .header-button:hover,
+.card-layout-view.layer-layer5 .card-layout-item .primary-button:hover,
+.card-layout-view.layer-layer5 .card-layout-item .selection-button:hover,
+.card-layout-view.layer-layer5 .card-layout-item .secondary-button:hover,
+.card-layout-view.layer-layer5 .card-layout-item .next-step-button:hover,
+.card-layout-view.layer-layer5 .card-layout-item .demonstrate-button:hover,
+.card-layout-view.layer-layer5 .card-layout-item .feedback-button:hover,
+.card-layout-view.layer-layer5 .card-layout-item .interactive-button:hover,
+.card-layout-view.layer-layer5 .card-layout-item .completion-button:hover,
+.card-layout-view.layer-layer5 .card-layout-item .user-attempt-button:hover,
+.card-layout-view.layer-layer5 .card-layout-item .concept-continue-button:hover,
+.card-layout-view.layer-layer5 .card-layout-item .intro-start-button:hover,
+.card-layout-view.layer-layer5 .card-layout-item .mode-button:hover,
+.card-layout-view.layer-layer5 .card-layout-item button:hover,
+.card-layout-view.layer-layer7 .card-layout-item .header-button:hover,
+.card-layout-view.layer-layer7 .card-layout-item .primary-button:hover,
+.card-layout-view.layer-layer7 .card-layout-item .selection-button:hover,
+.card-layout-view.layer-layer7 .card-layout-item .secondary-button:hover,
+.card-layout-view.layer-layer7 .card-layout-item .next-step-button:hover,
+.card-layout-view.layer-layer7 .card-layout-item .demonstrate-button:hover,
+.card-layout-view.layer-layer7 .card-layout-item .feedback-button:hover,
+.card-layout-view.layer-layer7 .card-layout-item .interactive-button:hover,
+.card-layout-view.layer-layer7 .card-layout-item .completion-button:hover,
+.card-layout-view.layer-layer7 .card-layout-item .user-attempt-button:hover,
+.card-layout-view.layer-layer7 .card-layout-item .concept-continue-button:hover,
+.card-layout-view.layer-layer7 .card-layout-item .intro-start-button:hover,
+.card-layout-view.layer-layer7 .card-layout-item .mode-button:hover,
+.card-layout-view.layer-layer7 .card-layout-item button:hover,
+.card-layout-view.layer-layer8 .card-layout-item .header-button:hover,
+.card-layout-view.layer-layer8 .card-layout-item .primary-button:hover,
+.card-layout-view.layer-layer8 .card-layout-item .selection-button:hover,
+.card-layout-view.layer-layer8 .card-layout-item .secondary-button:hover,
+.card-layout-view.layer-layer8 .card-layout-item .next-step-button:hover,
+.card-layout-view.layer-layer8 .card-layout-item .demonstrate-button:hover,
+.card-layout-view.layer-layer8 .card-layout-item .feedback-button:hover,
+.card-layout-view.layer-layer8 .card-layout-item .interactive-button:hover,
+.card-layout-view.layer-layer8 .card-layout-item .completion-button:hover,
+.card-layout-view.layer-layer8 .card-layout-item .user-attempt-button:hover,
+.card-layout-view.layer-layer8 .card-layout-item .concept-continue-button:hover,
+.card-layout-view.layer-layer8 .card-layout-item .intro-start-button:hover,
+.card-layout-view.layer-layer8 .card-layout-item .mode-button:hover,
+.card-layout-view.layer-layer8 .card-layout-item button:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Inputs e outros elementos também arredondados */
+.card-layout-view.layer-layer2 .card-layout-item input[type="text"],
+.card-layout-view.layer-layer2 .card-layout-item input[type="email"],
+.card-layout-view.layer-layer2 .card-layout-item textarea,
+.card-layout-view.layer-layer2 .card-layout-item select,
+.card-layout-view.layer-layer3 .card-layout-item input[type="text"],
+.card-layout-view.layer-layer3 .card-layout-item input[type="email"],
+.card-layout-view.layer-layer3 .card-layout-item textarea,
+.card-layout-view.layer-layer3 .card-layout-item select,
+.card-layout-view.layer-layer4 .card-layout-item input[type="text"],
+.card-layout-view.layer-layer4 .card-layout-item input[type="email"],
+.card-layout-view.layer-layer4 .card-layout-item textarea,
+.card-layout-view.layer-layer4 .card-layout-item select,
+.card-layout-view.layer-layer5 .card-layout-item input[type="text"],
+.card-layout-view.layer-layer5 .card-layout-item input[type="email"],
+.card-layout-view.layer-layer5 .card-layout-item textarea,
+.card-layout-view.layer-layer5 .card-layout-item select,
+.card-layout-view.layer-layer7 .card-layout-item input[type="text"],
+.card-layout-view.layer-layer7 .card-layout-item input[type="email"],
+.card-layout-view.layer-layer7 .card-layout-item textarea,
+.card-layout-view.layer-layer7 .card-layout-item select,
+.card-layout-view.layer-layer8 .card-layout-item input[type="text"],
+.card-layout-view.layer-layer8 .card-layout-item input[type="email"],
+.card-layout-view.layer-layer8 .card-layout-item textarea,
+.card-layout-view.layer-layer8 .card-layout-item select {
+  border-radius: 50px !important;
+  padding: 12px 20px !important;
+}
+
+/* Cards de seleção com bordas arredondadas */
+.card-layout-view.layer-layer2 .card-layout-item .selection-button,
+.card-layout-view.layer-layer3 .card-layout-item .selection-button,
+.card-layout-view.layer-layer4 .card-layout-item .selection-button,
+.card-layout-view.layer-layer5 .card-layout-item .selection-button,
+.card-layout-view.layer-layer7 .card-layout-item .selection-button,
+.card-layout-view.layer-layer8 .card-layout-item .selection-button {
+  border-radius: 50px !important;
+}
+
+/* Theme boxes e containers também com cantos mais arredondados */
+.card-layout-view.layer-layer2 .card-layout-item .theme-action-box,
+.card-layout-view.layer-layer3 .card-layout-item .theme-action-box,
+.card-layout-view.layer-layer4 .card-layout-item .theme-action-box,
+.card-layout-view.layer-layer5 .card-layout-item .theme-action-box,
+.card-layout-view.layer-layer7 .card-layout-item .theme-action-box,
+.card-layout-view.layer-layer8 .card-layout-item .theme-action-box {
+  border-radius: 16px !important;
+}
+
+.card-layout-view.layer-layer2 .card-layout-item .theme-action-box .theme-box,
+.card-layout-view.layer-layer2 .card-layout-item .theme-action-box .step-title-bar,
+.card-layout-view.layer-layer3 .card-layout-item .theme-action-box .theme-box,
+.card-layout-view.layer-layer3 .card-layout-item .theme-action-box .step-title-bar,
+.card-layout-view.layer-layer4 .card-layout-item .theme-action-box .theme-box,
+.card-layout-view.layer-layer4 .card-layout-item .theme-action-box .step-title-bar,
+.card-layout-view.layer-layer5 .card-layout-item .theme-action-box .theme-box,
+.card-layout-view.layer-layer5 .card-layout-item .theme-action-box .step-title-bar,
+.card-layout-view.layer-layer7 .card-layout-item .theme-action-box .theme-box,
+.card-layout-view.layer-layer7 .card-layout-item .theme-action-box .step-title-bar,
+.card-layout-view.layer-layer8 .card-layout-item .theme-action-box .theme-box,
+.card-layout-view.layer-layer8 .card-layout-item .theme-action-box .step-title-bar {
+  border-radius: 0 !important;
+}
+
+.card-layout-view.layer-layer2 .card-layout-item .theme-action-box .step-title-bar,
+.card-layout-view.layer-layer3 .card-layout-item .theme-action-box .step-title-bar,
+.card-layout-view.layer-layer4 .card-layout-item .theme-action-box .step-title-bar,
+.card-layout-view.layer-layer5 .card-layout-item .theme-action-box .step-title-bar,
+.card-layout-view.layer-layer7 .card-layout-item .theme-action-box .step-title-bar,
+.card-layout-view.layer-layer8 .card-layout-item .theme-action-box .step-title-bar {
+  padding: 12px 20px !important;
+}
+
+.card-layout-view.layer-layer2 .card-layout-item .theme-box,
+.card-layout-view.layer-layer2 .card-layout-item .instructions-box,
+.card-layout-view.layer-layer3 .card-layout-item .theme-box,
+.card-layout-view.layer-layer3 .card-layout-item .instructions-box,
+.card-layout-view.layer-layer4 .card-layout-item .theme-box,
+.card-layout-view.layer-layer4 .card-layout-item .instructions-box,
+.card-layout-view.layer-layer5 .card-layout-item .theme-box,
+.card-layout-view.layer-layer5 .card-layout-item .instructions-box,
+.card-layout-view.layer-layer7 .card-layout-item .theme-box,
+.card-layout-view.layer-layer7 .card-layout-item .instructions-box,
+.card-layout-view.layer-layer8 .card-layout-item .theme-box,
+.card-layout-view.layer-layer8 .card-layout-item .instructions-box {
+  border-radius: 16px !important;
+}
+
+.card-layout-view.layer-layer2 .card-layout-item .step-title-bar,
+.card-layout-view.layer-layer3 .card-layout-item .step-title-bar,
+.card-layout-view.layer-layer4 .card-layout-item .step-title-bar,
+.card-layout-view.layer-layer5 .card-layout-item .step-title-bar,
+.card-layout-view.layer-layer7 .card-layout-item .step-title-bar,
+.card-layout-view.layer-layer8 .card-layout-item .step-title-bar {
+  border-radius: 50px !important;
+  padding: 12px 20px !important;
+}
+
+.card-layout-view.layer-layer2 .card-layout-item .card-actions .primary-button,
+.card-layout-view.layer-layer2 .card-layout-item .card-actions .secondary-button,
+.card-layout-view.layer-layer2 .card-layout-item .card-actions .demonstrate-button,
+.card-layout-view.layer-layer3 .card-layout-item .card-actions .primary-button,
+.card-layout-view.layer-layer3 .card-layout-item .card-actions .secondary-button,
+.card-layout-view.layer-layer3 .card-layout-item .card-actions .demonstrate-button,
+.card-layout-view.layer-layer4 .card-layout-item .card-actions .primary-button,
+.card-layout-view.layer-layer4 .card-layout-item .card-actions .secondary-button,
+.card-layout-view.layer-layer4 .card-layout-item .card-actions .demonstrate-button,
+.card-layout-view.layer-layer5 .card-layout-item .card-actions .primary-button,
+.card-layout-view.layer-layer5 .card-layout-item .card-actions .secondary-button,
+.card-layout-view.layer-layer5 .card-layout-item .card-actions .demonstrate-button,
+.card-layout-view.layer-layer7 .card-layout-item .card-actions .primary-button,
+.card-layout-view.layer-layer7 .card-layout-item .card-actions .secondary-button,
+.card-layout-view.layer-layer7 .card-layout-item .card-actions .demonstrate-button,
+.card-layout-view.layer-layer8 .card-layout-item .card-actions .primary-button,
+.card-layout-view.layer-layer8 .card-layout-item .card-actions .secondary-button,
+.card-layout-view.layer-layer8 .card-layout-item .card-actions .demonstrate-button {
+  border-radius: 50px !important;
 }
 

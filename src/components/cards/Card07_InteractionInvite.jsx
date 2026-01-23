@@ -12,19 +12,20 @@ function Card07_InteractionInvite({ onTry, onContinue, onMenu, onRestart }) {
           fontSize: '20px', 
           fontWeight: 700, 
           margin: 0, 
-          color: '#000000', 
+          color: '#ffffff', 
           marginBottom: '24px', 
           paddingTop: '12px',
-          borderBottom: '1px solid #000000',
-          paddingBottom: '8px'
+          textDecoration: 'underline',
+          textDecorationThickness: '1px',
+          textUnderlineOffset: '12px'
         }}>
           Este é o seu momento de Creator
         </h3>
         <div className="card-interactive-content" style={{ marginTop: '24px' }}>
-        <p style={{ fontSize: '14px', lineHeight: '1.12', color: '#000000', marginBottom: '16px' }}>
+        <p style={{ fontSize: '18px', lineHeight: '1.12', color: '#ffffff', marginBottom: '16px' }}>
           Para treinar suas habilidades você pode tentar executar esse mesmo passo com as instruções dadas.
         </p>
-        <p style={{ fontSize: '16px', fontWeight: 700, color: '#000000', marginBottom: '24px' }}>
+        <p style={{ fontSize: '18px', lineHeight: '1.12', fontWeight: 700, color: '#ffffff', marginBottom: '24px' }}>
           Quer tentar?
         </p>
         <button className="interactive-button try" onClick={onTry}>

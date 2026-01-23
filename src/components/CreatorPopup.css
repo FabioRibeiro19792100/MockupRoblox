@@ -4,7 +4,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,7 +14,12 @@
 }
 
 .creator-popup-content {
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  background: #ffffff;
+  background-image: url('/background.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: relative;
   border-radius: 20px;
   padding: 32px 40px 48px 40px;
   max-width: 500px;
@@ -23,8 +28,7 @@
   height: 600px;
   max-height: 600px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-  position: relative;
-  text-align: center;
+  text-align: left;
   animation: slideUp 0.5s ease-out;
   margin: 20px;
   display: flex;
@@ -32,6 +36,25 @@
   justify-content: flex-start;
   box-sizing: border-box;
   overflow: hidden;
+  color: #ffffff;
+}
+
+.creator-popup-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+  pointer-events: none;
+  border-radius: 20px;
+}
+
+.creator-popup-content > * {
+  position: relative;
+  z-index: 2;
 }
 
 .creator-popup-close {
@@ -63,14 +86,14 @@
   margin-bottom: 16px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-shrink: 0;
 }
 
 .creator-popup-star {
   font-size: 80px;
   animation: starSpin 1s ease-out, starPulse 2s ease-in-out infinite 1s;
-  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
+  filter: none;
 }
 
 .creator-popup-confetti {
@@ -107,56 +130,61 @@
 }
 
 .creator-popup-title {
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 700;
-  color: #000000;
-  margin: 0 0 4px 0;
+  color: #ffffff;
+  margin: 0 0 12px 0;
   animation: fadeInUp 0.6s ease-out 0.3s both;
   flex-shrink: 0;
+  text-align: left;
 }
 
 .creator-popup-subtitle {
   font-size: 18px;
-  color: #666666;
-  margin: 0 0 4px 0;
+  color: #ffffff;
+  margin: 0 0 16px 0;
   animation: fadeInUp 0.6s ease-out 0.4s both;
   flex-shrink: 0;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 8px;
+  text-align: left;
 }
 
 .creator-popup-creator {
-  font-size: 48px;
-  font-weight: 900;
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin: 0 0 16px 0;
+  font-size: 36px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 24px 0;
   letter-spacing: 1px;
-  line-height: 1.1;
-  text-shadow: 2px 2px 4px rgba(255, 215, 0, 0.3);
-  animation: fadeInUp 0.6s ease-out 0.5s both, creatorGlow 2s ease-in-out infinite 1s;
+  line-height: 1.2;
+  text-shadow: none;
+  animation: fadeInUp 0.6s ease-out 0.5s both;
   flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  text-align: left;
 }
 
 .creator-popup-message {
-  font-size: 13px;
+  font-size: 12px;
   line-height: 1.6;
-  color: #333333;
-  margin: 0;
-  padding: 0 16px;
+  color: #ffffff;
+  margin: 0 0 12px 0;
+  padding: 0;
+  text-align: left;
   animation: fadeInUp 0.6s ease-out 0.6s both;
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-shrink: 0;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  min-height: 80px;
-  max-height: 80px;
+}
+
+.creator-popup-message:last-of-type {
+  margin-bottom: 24px;
 }
 
 .creator-popup-button {
-  background: linear-gradient(135deg, rgb(113, 180, 233) 0%, rgb(100, 160, 210) 100%);
+  background: #ffffff;
   color: #000000;
   border: none;
   border-radius: 8px;
@@ -168,8 +196,8 @@
   flex-shrink: 0;
   position: absolute;
   bottom: 48px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 40px;
+  transform: none;
   width: calc(100% - 80px);
   max-width: 300px;
   margin: 0;
@@ -183,18 +211,18 @@
 @keyframes buttonFadeInUp {
   from {
     opacity: 0;
-    transform: translateX(-50%) translateY(20px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
-    transform: translateX(-50%) translateY(0);
+    transform: translateY(0);
   }
 }
 
 .creator-popup-button:hover {
-  background: linear-gradient(135deg, rgb(100, 160, 210) 0%, rgb(90, 140, 190) 100%);
-  transform: translateX(-50%) translateY(-2px);
-  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
+  background: #f0f0f0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 @keyframes fadeIn {
@@ -257,11 +285,3 @@
   }
 }
 
-@keyframes creatorGlow {
-  0%, 100% {
-    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
-  }
-  50% {
-    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8));
-  }
-}

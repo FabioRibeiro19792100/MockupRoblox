@@ -11,11 +11,12 @@ function Card03_ModeSelection({ onModeSelect, onMenu }) {
           fontSize: '20px', 
           fontWeight: 700, 
           margin: 0, 
-          color: '#000000', 
+          color: '#ffffff', 
           marginBottom: '24px', 
           paddingTop: '12px',
-          borderBottom: '1px solid #000000',
-          paddingBottom: '8px'
+          textDecoration: 'underline',
+          textDecorationThickness: '1px',
+          textUnderlineOffset: '12px'
         }}>
           Escolha o modo:
         </h3>

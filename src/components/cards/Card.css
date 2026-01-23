@@ -83,10 +83,12 @@
   flex-shrink: 0;
   display: block;
   margin-top: 0;
-  background: rgb(113, 180, 233);
+  background: #000000;
   border-top: 1px solid #e0e0e0;
   height: 60px;
+  color: #ffffff;
 }
+
 
 /* Conteúdo scrollável entre header e botões */
 .card-with-badge-toggle .card > div:not(.card-header-global):not(.card-actions) {
@@ -143,13 +145,13 @@
   width: 100%;
   height: 48px;
   padding: 0;
-  background: #000000;
-  color: #ffffff;
-  border: none;
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid #000000;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.2s;
   box-sizing: border-box;
   text-align: center;
   display: flex;
@@ -158,12 +160,36 @@
 }
 
 .header-button:hover {
-  background: #333333;
+  background: #000000;
+  color: #ffffff;
 }
 
 /* Card 00: Capa */
 .card-cover {
   background: #ffffff;
+  background-image: url('/background.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: relative;
+  color: #ffffff;
+}
+
+.card-cover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.card-cover > * {
+  position: relative;
+  z-index: 2;
 }
 
 .card-cover .card-content {
@@ -175,14 +201,81 @@
 /* Card 01-02: Seleção - Fundo branco, botões laranja */
 .card-selection {
   background: #ffffff;
+  background-image: url('/background.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: relative;
+  color: #ffffff;
+}
+
+.card-selection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.card-selection > * {
+  position: relative;
+  z-index: 2;
 }
 
 .card-selection .card-title {
   font-size: 24px;
   font-weight: 700;
-  color: #000000;
+  color: #ffffff;
   margin-bottom: 0;
   line-height: 0.84;
+}
+
+/* Textos brancos no card-selection, exceto botões e títulos dos acordeões */
+.card-selection h1,
+.card-selection h2,
+.card-selection p {
+  color: #ffffff !important;
+}
+
+/* Títulos dos acordeões ficam pretos */
+.card-selection .card-content > div > div:first-child h3 {
+  color: #000000 !important;
+}
+
+.card-selection .card-content h3 {
+  color: #ffffff !important;
+}
+
+/* Títulos dentro dos acordeões (headers) ficam pretos */
+.card-selection .card-content > div > div:first-child h3,
+.card-selection .card-content > div > div:first-child span {
+  color: #000000 !important;
+}
+
+/* Botões de acordeão mantêm fundo sólido (não transparente) */
+.card-selection .selection-button {
+  background: rgb(113, 180, 233) !important;
+  color: #000000 !important;
+  opacity: 1 !important;
+}
+
+/* Acordeões mantêm fundo sólido - força fundo amarelo nos headers */
+.card-selection .card-content > div > div:first-child {
+  background: rgb(253, 187, 44) !important;
+  opacity: 1 !important;
+}
+
+/* Quando acordeão está aberto, fundo mais opaco (mais branco) */
+.card-selection .card-content > div > div:not(:first-child) {
+  background: rgba(255, 255, 255, 0.95) !important;
+}
+
+.card-selection .card-content > div > div > div {
+  background: rgba(255, 255, 255, 0.95) !important;
 }
 
 .card-selection .card-content {
@@ -246,6 +339,42 @@
 /* Card 03: Modo - Fundo branco, retângulos cinza */
 .card-mode {
   background: #ffffff;
+  background-image: url('/background.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: relative;
+  color: #ffffff;
+}
+
+.card-mode::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.card-mode > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Textos pretos nos botões de modo */
+.card-mode .mode-title,
+.card-mode .mode-description {
+  color: #000000 !important;
+}
+
+.card-mode .mode-button-demonstrative .mode-title,
+.card-mode .mode-button-demonstrative .mode-description,
+.card-mode .mode-button-interactive .mode-title,
+.card-mode .mode-button-interactive .mode-description {
+  color: #000000 !important;
 }
 
 .card-mode .card-content {
@@ -270,7 +399,7 @@
   cursor: pointer;
   transition: all 0.2s;
   margin-bottom: 14px;
-  border-radius: 4px;
+  border-radius: 12px;
 }
 
 .mode-button:hover {
@@ -400,7 +529,7 @@
 /* Box único que contém theme-box + step-title-bar */
 .theme-action-box {
   width: 100%;
-  border: 2px solid #000000;
+  border: 1px solid #000000;
   border-radius: 0;
   overflow: hidden;
   display: flex;
@@ -453,10 +582,24 @@
 }
 
 .step-counter {
-  font-size: 20px;
+  font-size: 14px;
   color: #000000;
   font-weight: 700;
   margin-bottom: 12px;
+  margin-top: -16px;
+  text-transform: uppercase;
+  position: relative;
+  padding-left: 20px;
+}
+
+.step-counter::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  font-size: 16px;
+  font-weight: 300;
+  color: #000000;
+  line-height: 1;
 }
 
 .step-title-bar {
@@ -497,6 +640,18 @@
   color: #000000;
   text-transform: uppercase;
   margin-bottom: 12px;
+  position: relative;
+  padding-left: 20px;
+}
+
+.section-title::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  font-size: 16px;
+  font-weight: 300;
+  color: #000000;
+  line-height: 1;
 }
 
 .instructions-box {
@@ -739,17 +894,40 @@
 /* Card 07: Momento interativo */
 .card-interactive {
   background: #ffffff;
+  background-image: url('/background.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: relative;
   padding: 0;
+  color: #ffffff;
+}
+
+.card-interactive::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.card-interactive > * {
+  position: relative;
+  z-index: 2;
 }
 
 .card-interactive-header {
-  background: #ffffff;
+  background: transparent;
   padding: 24px;
   margin-top: 0;
 }
 
 .card-interactive-content {
-  background: #ffffff;
+  background: transparent;
   padding: 24px;
   flex: 1;
 }

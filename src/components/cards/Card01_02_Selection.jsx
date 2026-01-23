@@ -85,7 +85,7 @@ function Card01_02_Selection({
             justifyContent: 'space-between',
             alignItems: 'center',
             padding: '24px',
-            borderBottom: index === 0 ? 'none' : '1px solid #e0e0e0',
+            borderBottom: '1px solid #666666',
             cursor: isLocked ? 'not-allowed' : 'pointer',
             opacity: isLocked ? 0.5 : (isCompleted ? 0.7 : 1),
             background: isLocked ? '#f5f5f5' : 'transparent',
@@ -205,7 +205,15 @@ function Card01_02_Selection({
             </div>
           )}
         </div>
-        <h3 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '24px', color: '#000000' }}>
+        <h3 style={{ 
+          fontSize: '20px', 
+          fontWeight: 600, 
+          marginBottom: '24px', 
+          color: '#ffffff',
+          textDecoration: 'underline',
+          textDecorationThickness: '1px',
+          textUnderlineOffset: '12px'
+        }}>
           Tutoriais Roblox Studio
         </h3>
         <div className="card-content" style={{ margin: 0, padding: 0, marginTop: '0px', display: 'flex', flexDirection: 'column', alignItems: 'stretch', gap: 0 }}>
@@ -214,7 +222,7 @@ function Card01_02_Selection({
             margin: 0,
             marginBottom: '24px',
             border: '1px solid #000000', 
-            borderRadius: '0', 
+            borderRadius: '12px', 
             overflow: 'hidden', 
             width: '100%',
             flexShrink: 0
@@ -222,7 +230,7 @@ function Card01_02_Selection({
             <div
               style={{
                 padding: '16px 20px',
-                background: '#f5f5f5',
+                background: 'rgb(253, 187, 44)',
                 cursor: 'pointer',
                 display: 'flex',
                 justifyContent: 'space-between',
@@ -276,7 +284,7 @@ function Card01_02_Selection({
             margin: 0,
             marginBottom: '24px',
             border: '1px solid #000000', 
-            borderRadius: '0', 
+            borderRadius: '12px', 
             overflow: 'hidden', 
             width: '100%',
             flexShrink: 0
@@ -284,7 +292,7 @@ function Card01_02_Selection({
             <div
               style={{
                 padding: '16px 20px',
-                background: '#f5f5f5',
+                background: 'rgb(253, 187, 44)',
                 cursor: 'pointer',
                 display: 'flex',
                 justifyContent: 'space-between',

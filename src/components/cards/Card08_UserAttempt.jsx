@@ -9,7 +9,7 @@ function Card08_UserAttempt({ stepNumber, totalSteps, stepTitle, onCheckResult, 
       </div>
       <div style={{ padding: '0 24px 24px 24px' }}>
         <div className="card-step-header" style={{ marginBottom: '12px', marginTop: '24px' }}>
-          <div className="step-counter" style={{ marginBottom: '8px' }}>ETAPA {stepNumber || 1}/{totalSteps || 3}</div>
+          <div className="step-counter" style={{ marginBottom: '8px', marginTop: '-16px' }}>ETAPA {stepNumber || 1}/{totalSteps || 3}</div>
           <div className="theme-action-box">
             <div className="theme-box">
               <div>Tutorial → Construir uma casa</div>

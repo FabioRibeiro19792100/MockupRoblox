@@ -19,6 +19,8 @@ function BadgePopup3({ onClose }) {
         <h1 className="creator-popup-creator">CRIADOR AVANÇADO</h1>
         <p className="creator-popup-message">
           Você completou todos os tutoriais de "Criações rápidas"!
+        </p>
+        <p className="creator-popup-message">
           Você está se tornando um verdadeiro Creator!
         </p>
         <button className="creator-popup-button" onClick={onClose}>
