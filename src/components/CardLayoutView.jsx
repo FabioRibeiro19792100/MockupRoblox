@@ -50,7 +50,6 @@ function CardLayoutView({
   const [showBadgeGallery, setShowBadgeGallery] = useState(true)
   const [badgeGalleryExpanded, setBadgeGalleryExpanded] = useState(false) // Para controle global
   const [expandedCards, setExpandedCards] = useState(new Set()) // Estado individual por card
-  const [showGrid, setShowGrid] = useState(false) // Grid quadriculado com linhas numeradas
   
   // Estados para edição de elementos
   const [selectedElements, setSelectedElements] = useState(new Set())
@@ -1698,77 +1697,6 @@ function CardLayoutView({
               Mostrar Labels
             </label>
           </div>
-          <div className="control-group">
-            <label>
-              <input 
-                type="checkbox" 
-                checked={showGrid} 
-                onChange={(e) => setShowGrid(e.target.checked)}
-              />
-              📐 Mostrar Grid (Folha Quadriculada)
-            </label>
-            {showGrid && (
-              <p style={{ fontSize: '11px', color: '#666', marginTop: '4px', fontStyle: 'italic' }}>
-                Use as linhas numeradas para dar instruções de posicionamento
-              </p>
-            )}
-          </div>
-          {/* Controle do Toggle de Badges */}
-          <div className="control-group">
-            <label style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-              <span>Toggle de Badges</span>
-              <div 
-                onClick={(e) => {
-                  e.stopPropagation()
-                  const isAnyVisible = badgeGalleryVisible.size > 0
-                  if (isAnyVisible) {
-                    // Desliga todos
-                    setBadgeGalleryVisible(new Set())
-                  } else {
-                    // Liga todos
-                    const allCards = new Set()
-                    for (let i = 0; i < 21; i++) {
-                      allCards.add(i)
-                    }
-                    setBadgeGalleryVisible(allCards)
-                  }
-                }}
-                style={{ 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  gap: '8px',
-                  cursor: 'pointer'
-                }}
-              >
-                <div 
-                  style={{
-                    width: '44px',
-                    height: '24px',
-                    borderRadius: '12px',
-                    background: badgeGalleryVisible.size > 0 ? 'rgb(113, 180, 233)' : '#cccccc',
-                    position: 'relative',
-                    transition: 'background 0.3s',
-                    cursor: 'pointer',
-                    flexShrink: 0
-                  }}
-                >
-                  <div
-                    style={{
-                      width: '20px',
-                      height: '20px',
-                      borderRadius: '50%',
-                      background: '#ffffff',
-                      position: 'absolute',
-                      top: '2px',
-                      left: badgeGalleryVisible.size > 0 ? '22px' : '2px',
-                      transition: 'left 0.3s',
-                      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)'
-                    }}
-                  />
-                </div>
-              </div>
-            </label>
-          </div>
         </div>
       </div>
       <div className="card-layout-container">
@@ -1787,9 +1715,6 @@ function CardLayoutView({
                     containerId={`card-content-${card.id}`}
                     onElementClick={handleElementClick}
                   />
-                )}
-                {showGrid && (
-                  <GridOverlay cardId={card.id} />
                 )}
               </div>
             </div>

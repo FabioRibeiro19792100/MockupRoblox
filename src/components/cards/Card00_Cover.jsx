@@ -19,7 +19,7 @@ function Card00_Cover({ onStart }) {
             />
           </div>
           <h3 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '24px', color: '#000000' }}>
-            Tutoriais Roblox Studios
+            Tutoriais Roblox Studio
           </h3>
           <div style={{ borderBottom: '1px solid #cccccc', marginBottom: '40px' }}></div>
           <p className="card-text" style={{ fontSize: '18px', lineHeight: '1.12', marginBottom: '24px' }}>

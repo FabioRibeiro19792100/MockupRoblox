@@ -206,7 +206,7 @@ function Card01_02_Selection({
           )}
         </div>
         <h3 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '24px', color: '#000000' }}>
-          Tutoriais Roblox Studios
+          Tutoriais Roblox Studio
         </h3>
         <div className="card-content" style={{ margin: 0, padding: 0, marginTop: '0px', display: 'flex', flexDirection: 'column', alignItems: 'stretch', gap: 0 }}>
           {/* Classe 1 - Acordeon */}

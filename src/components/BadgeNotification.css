@@ -8,20 +8,18 @@
 }
 
 .badge-notification-content {
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  background: #f5f5f5;
   border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: center;
   gap: 16px;
   min-width: 300px;
-  border: 2px solid #FFD700;
+  border: 1px solid #e0e0e0;
 }
 
 .badge-icon {
-  font-size: 48px;
-  animation: bounce 0.6s ease-in-out;
+  font-size: 64px;
 }
 
 .badge-text {

@@ -18,7 +18,7 @@ function Card08_UserAttempt({ stepNumber, totalSteps, stepTitle, onCheckResult, 
           Ação → {stepTitle || 'Montar o terreno'}
         </div>
         <div className="instructions-section">
-          <div className="section-title">COMO FAZER NO ROBLOX STUDIOS</div>
+          <div className="section-title">COMO FAZER NO ROBLOX STUDIO</div>
           <div className="instructions-box">
             <ol className="instructions-list">
               <li>Clique no menu "Insert"</li>
