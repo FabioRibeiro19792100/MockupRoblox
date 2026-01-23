@@ -29,7 +29,9 @@ function App() {
   })
   const [earnedBadges, setEarnedBadges] = useState([]) // IDs dos badges ganhos (1-3)
   const [showBadgeNotification, setShowBadgeNotification] = useState(null) // Badge ID para mostrar notificação
-  const [showCreatorPopup, setShowCreatorPopup] = useState(false) // Mostrar popup de Creator
+  const [showCreatorPopup, setShowCreatorPopup] = useState(false) // Mostrar popup de Creator (badge 1)
+  const [showBadgePopup2, setShowBadgePopup2] = useState(false) // Mostrar popup de Badge 2 (Criador Iniciante)
+  const [showBadgePopup3, setShowBadgePopup3] = useState(false) // Mostrar popup de Badge 3 (Criador Avançado)
   const [currentTutorialClass, setCurrentTutorialClass] = useState(null) // 1 ou 2
   const [currentTutorialId, setCurrentTutorialId] = useState(null) // ID do tutorial atual (1-5 dentro de cada classe)
   const [layoutMode, setLayoutMode] = useState(false) // Modo layout para visualizar todos os cards
@@ -153,9 +155,15 @@ function App() {
     
     if (newBadges.length > 0) {
       setEarnedBadges([...earnedBadges, ...newBadges])
-      // Se ganhou o badge 1 (primeiro badge), mostrar popup de Creator
+      // Mostrar popup correspondente ao badge conquistado
       if (newBadges.includes(1)) {
         setShowCreatorPopup(true)
+      }
+      if (newBadges.includes(2)) {
+        setShowBadgePopup2(true)
+      }
+      if (newBadges.includes(3)) {
+        setShowBadgePopup3(true)
       }
       // Mostrar notificação do primeiro badge
       // Desabilitado: notificação de badge
@@ -384,6 +392,10 @@ function App() {
             onCloseBadgeNotification={() => setShowBadgeNotification(null)}
             showCreatorPopup={showCreatorPopup}
             onCloseCreatorPopup={() => setShowCreatorPopup(false)}
+            showBadgePopup2={showBadgePopup2}
+            onCloseBadgePopup2={() => setShowBadgePopup2(false)}
+            showBadgePopup3={showBadgePopup3}
+            onCloseBadgePopup3={() => setShowBadgePopup3(false)}
           />
           <RobloxStudioMock 
             state={studioState} 

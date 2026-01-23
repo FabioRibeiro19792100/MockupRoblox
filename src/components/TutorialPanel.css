@@ -26,7 +26,7 @@
   background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
   z-index: 100;
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
-  border-top: 2px solid #2196F3;
+  border-top: 2px solid rgb(113, 180, 233);
   transition: max-height 0.3s ease, min-height 0.3s ease;
   overflow: visible;
 }
@@ -44,9 +44,9 @@
 }
 
 .badge-gallery-header {
-  background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
-  border-bottom: 1px solid #1565C0;
-  color: #ffffff;
+  background: linear-gradient(135deg, rgb(113, 180, 233) 0%, rgb(100, 160, 210) 100%);
+  border-bottom: 1px solid rgb(90, 140, 190);
+  color: #000000;
   pointer-events: auto;
   z-index: 101;
   position: relative;

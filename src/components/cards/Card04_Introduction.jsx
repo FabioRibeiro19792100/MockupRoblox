@@ -12,22 +12,20 @@ function Card04_Introduction({ tutorialName, onStart, onMenu, onRestart, current
 
   return (
     <div className="card card-intro">
-      <div className="card-header-global">
+      <div className="card-header-global single-button-header">
         <button className="header-button" onClick={onMenu}>Voltar para menu</button>
-        <button 
-          className="header-button" 
-          onClick={handleComplete}
-          style={{
-            background: '#4CAF50',
-            color: '#ffffff',
-            fontWeight: 600
-          }}
-        >
-          ✓ Marcar completo
-        </button>
       </div>
       <div style={{ padding: '24px', paddingBottom: '80px' }}>
-        <h3 style={{ fontSize: '20px', fontWeight: 700, margin: 0, color: '#000000', marginBottom: '24px', paddingTop: '12px' }}>
+        <h3 style={{ 
+          fontSize: '20px', 
+          fontWeight: 700, 
+          margin: 0, 
+          color: '#000000', 
+          marginBottom: '24px', 
+          paddingTop: '12px',
+          borderBottom: '1px solid #000000',
+          paddingBottom: '8px'
+        }}>
           {tutorialName}
         </h3>
         <div className="card-content">

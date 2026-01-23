@@ -8,16 +8,14 @@ function Card05_BeforeAction({ stepNumber, totalSteps, stepTitle, onDemonstrate,
         <button className="header-button" onClick={onRestart}>Reiniciar tutorial</button>
       </div>
       <div style={{ padding: '0 24px 24px 24px' }}>
-        <div className="card-step-header" style={{ marginBottom: '16px' }}>
+        <div className="card-step-header" style={{ marginBottom: '0', marginTop: '24px' }}>
+          <div className="step-counter" style={{ marginBottom: '8px' }}>ETAPA {stepNumber}/{totalSteps}</div>
           <div className="theme-box">
-            <div>Construir um casa</div>
-            <div style={{ borderTop: '1px solid #ffffff', paddingTop: '4px', marginTop: '4px' }}>
-              <div className="step-counter">ETAPA {stepNumber}/{totalSteps}</div>
-            </div>
+            <div>Tutorial → Construir uma casa</div>
           </div>
         </div>
         <div className="step-title-bar">
-          AÇÃO | {stepTitle || 'Montar o terreno'}
+          Ação → {stepTitle || 'Montar o terreno'}
         </div>
         <div className="instructions-section">
           <div className="section-title">COMO FAZER NO ROBLOX STUDIOS</div>
@@ -34,7 +32,7 @@ function Card05_BeforeAction({ stepNumber, totalSteps, stepTitle, onDemonstrate,
         <div className="instructions-section">
           <div className="section-title">O QUE VOCÊ VAI VER NA TELA</div>
           <div className="instructions-box">
-            <p style={{ margin: 0, color: '#000000', fontSize: '16px', lineHeight: '1.6' }}>
+            <p style={{ margin: 0, color: '#000000', fontSize: '14.5px', lineHeight: '1.12' }}>
               Você verá a base da casa (um bloco cinza retangular grande) sendo criada no centro da tela.
             </p>
           </div>
@@ -42,8 +40,36 @@ function Card05_BeforeAction({ stepNumber, totalSteps, stepTitle, onDemonstrate,
         {onShowConcept && (
           <div className="instructions-section" style={{ marginTop: '16px' }}>
             <div className="concept-title-bar" onClick={onShowConcept} style={{ cursor: 'pointer' }}>
-              <div style={{ fontSize: '14px', marginBottom: '4px' }}>Entender conceito</div>
-              <div>O QUE É UMA PART?</div>
+              <div style={{ 
+                fontSize: '12px', 
+                marginBottom: '12px',
+                textDecoration: 'underline',
+                textDecorationThickness: '1px',
+                textUnderlineOffset: '4px',
+                color: '#f44336'
+              }}>Entender conceito</div>
+              <div style={{ 
+                fontSize: '14px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                color: '#f44336'
+              }}>
+                <span style={{ 
+                  fontSize: '14px', 
+                  fontWeight: 700,
+                  width: '20px',
+                  height: '20px',
+                  borderRadius: '50%',
+                  background: '#f44336',
+                  color: '#ffffff',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0
+                }}>ℹ</span>
+                O QUE É UMA PART?
+              </div>
             </div>
           </div>
         )}

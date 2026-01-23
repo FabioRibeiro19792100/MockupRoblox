@@ -17,6 +17,8 @@ import BadgeDisplay from './BadgeDisplay'
 import BadgeHeader from './BadgeHeader'
 import BadgeScoreboard from './BadgeScoreboard'
 import CreatorPopup from './CreatorPopup'
+import BadgePopup2 from './BadgePopup2'
+import BadgePopup3 from './BadgePopup3'
 import CreatorStamp from './CreatorStamp'
 import './TutorialPanel.css'
 
@@ -46,7 +48,11 @@ function TutorialPanel({
   onQuickComplete,
   onResetGamification,
   showCreatorPopup,
-  onCloseCreatorPopup
+  onCloseCreatorPopup,
+  showBadgePopup2,
+  onCloseBadgePopup2,
+  showBadgePopup3,
+  onCloseBadgePopup3
 }) {
   const [showBadges, setShowBadges] = useState(true)
   const [showBadgeExplanation, setShowBadgeExplanation] = useState(false)
@@ -321,6 +327,12 @@ function TutorialPanel({
         {showCreatorPopup && (
           <CreatorPopup onClose={onCloseCreatorPopup} />
         )}
+        {showBadgePopup2 && (
+          <BadgePopup2 onClose={onCloseBadgePopup2} />
+        )}
+        {showBadgePopup3 && (
+          <BadgePopup3 onClose={onCloseBadgePopup3} />
+        )}
       </div>
       {!showBadgeExplanation && (
         <div className={`badge-gallery-fixed ${badgeGalleryExpanded ? 'expanded' : 'collapsed'}`}>
@@ -369,7 +381,7 @@ function TutorialPanel({
                   style={{
                     background: 'transparent',
                     border: 'none',
-                    color: '#0066cc',
+                    color: 'rgb(113, 180, 233)',
                     fontSize: '13px',
                     textDecoration: 'underline',
                     cursor: 'pointer',

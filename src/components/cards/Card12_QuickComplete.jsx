@@ -21,7 +21,7 @@ function Card12_QuickComplete({
       <div style={{ padding: '24px' }}>
         <h2 className="card-title">{tutorialName}</h2>
         <div className="card-content">
-          <p style={{ marginBottom: '24px', fontSize: '16px', lineHeight: '1.6' }}>
+          <p style={{ marginBottom: '24px', fontSize: '16px', lineHeight: '1.12' }}>
             Este tutorial está sendo mockado. Clique no botão abaixo para marcá-lo como completo.
           </p>
           <button 

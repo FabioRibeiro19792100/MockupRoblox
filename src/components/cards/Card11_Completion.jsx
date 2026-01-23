@@ -35,17 +35,25 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu })
         <button className="header-button" onClick={onMenu}>Voltar para menu</button>
         <button className="header-button" onClick={onRestart}>Reiniciar tutorial</button>
       </div>
-      <div style={{ padding: '24px' }}>
-        <h2 className="card-title">Você chegou ao fim deste tutorial</h2>
-        <div className="card-content">
+      <div style={{ padding: '24px', paddingTop: '12px' }}>
+        <h3 style={{ 
+          fontSize: '20px', 
+          fontWeight: 700, 
+          margin: 0, 
+          color: '#000000', 
+          marginBottom: '24px', 
+          paddingTop: '12px',
+          borderBottom: '1px solid #000000',
+          paddingBottom: '8px'
+        }}>
+          Você chegou<br />ao fim deste tutorial
+        </h3>
+        <div className="card-content" style={{ marginTop: '24px' }}>
           {!showThankYou ? (
             <>
               <button className="completion-button" onClick={handleRegister} style={{ textAlign: 'left', marginTop: '60px' }}>
                 Clique aqui para registrar sua experiência
               </button>
-              <p className="completion-text" style={{ textAlign: 'left', marginBottom: '16px', marginTop: '24px' }}>
-                Ao finalizar todos os tutoriais desta fase você receberá uma mensagem para resgatar um asset especial da Mastertech
-              </p>
             </>
           ) : (
             <div style={{ padding: '24px', textAlign: 'left' }}>
@@ -54,9 +62,6 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu })
               </h3>
               <p className="completion-text" style={{ marginBottom: '16px' }}>
                 Sua experiência foi registrada. Os logs da sua jornada de aprendizado foram coletados silenciosamente durante o tutorial.
-              </p>
-              <p className="completion-text" style={{ marginBottom: '16px', marginTop: '24px' }}>
-                Ao finalizar todos os tutoriais desta fase você receberá uma mensagem para resgatar um asset especial da Mastertech
               </p>
             </div>
           )}

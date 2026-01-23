@@ -22,7 +22,7 @@ function ElementLabel({ elements, containerId, onElementClick }) {
           
           // Destacar o elemento se estiver selecionado
           if (element.highlighted) {
-            el.style.outline = '3px solid #2196F3'
+            el.style.outline = '3px solid rgb(113, 180, 233)'
             el.style.outlineOffset = '2px'
             el.style.boxShadow = '0 0 0 2px rgba(33, 150, 243, 0.3)'
             el.setAttribute('data-highlighted', 'true')

@@ -10,13 +10,19 @@ function Card05_1_Concept({ onContinue, onMenu, onRestart }) {
         <button className="header-button" onClick={onMenu}>Voltar para menu</button>
         <button className="header-button" onClick={onRestart}>Reiniciar tutorial</button>
       </div>
-      <div style={{ padding: '0 24px 24px 24px' }}>
-        <div style={{ marginBottom: '16px', paddingTop: '24px' }}>
-          <div style={{ fontSize: '14px', fontWeight: 700, marginBottom: '8px', color: '#000000' }}>
-            Conceito importante
-          </div>
-          <h2 className="card-title" style={{ fontSize: '24px' }}>O que é uma Part?</h2>
-        </div>
+      <div style={{ padding: '24px', paddingBottom: '80px' }}>
+        <h3 style={{ 
+          fontSize: '20px', 
+          fontWeight: 700, 
+          margin: 0, 
+          color: '#000000', 
+          marginBottom: '24px', 
+          paddingTop: '12px',
+          borderBottom: '1px solid #000000',
+          paddingBottom: '8px'
+        }}>
+          O que é uma Part?
+        </h3>
         <div className="card-content">
           <p className="card-text">
             Uma <strong>Part</strong> é o objeto fundamental no Roblox Studio. É um bloco 3D que pode ser usado para construir qualquer coisa no seu jogo.

@@ -13,7 +13,9 @@ function Card01_02_Selection({
   onTutorialClassSelect,
   onTutorialSelect,
   onBack,
-  onMenu
+  onMenu,
+  defaultExpanded = false,
+  stampOpacity = 1
 }) {
   const tutorialsClass1 = [
     { id: 1, name: 'Construir um casa', description: 'Aprenda a criar uma casa completa' },
@@ -32,20 +34,26 @@ function Card01_02_Selection({
   ]
 
   // Estado para controlar quais classes estão expandidas
-  // Usa useRef para persistir entre re-renderizações
-  const expandedClassesRef = useRef({
-    class1: false,  // Classe 1 fechada por padrão
-    class2: false   // Classe 2 fechada por padrão
-  })
-  const [expandedClasses, setExpandedClasses] = useState(expandedClassesRef.current)
+  // Se defaultExpanded for true, inicia com classe 1 aberta
+  const initialExpanded = {
+    class1: defaultExpanded === true,
+    class2: false
+  }
+  const [expandedClasses, setExpandedClasses] = useState(initialExpanded)
+  const expandedClassesRef = useRef(expandedClasses)
   const [lockedTutorialInfo, setLockedTutorialInfo] = useState(null)
+
+  // Atualizar o ref quando o estado mudar
+  useEffect(() => {
+    expandedClassesRef.current = expandedClasses
+  }, [expandedClasses])
 
   // Função para alternar expansão de uma classe
   const toggleClass = (classNum) => {
     const classKey = classNum === 1 ? 'class1' : 'class2'
     const newState = {
-      ...expandedClassesRef.current,
-      [classKey]: !expandedClassesRef.current[classKey]
+      ...expandedClasses,
+      [classKey]: !expandedClasses[classKey]
     }
     expandedClassesRef.current = newState
     setExpandedClasses(newState)
@@ -64,7 +72,7 @@ function Card01_02_Selection({
   }
 
   const renderTutorialList = (tutorials, completed, classNum) => {
-    return tutorials.map((tutorial) => {
+    return tutorials.map((tutorial, index) => {
       const isCompleted = completed.includes(tutorial.id)
       const isAvailable = isTutorialAvailable(tutorial.id, completed)
       const isLocked = !isAvailable && !isCompleted
@@ -77,7 +85,7 @@ function Card01_02_Selection({
             justifyContent: 'space-between',
             alignItems: 'center',
             padding: '24px',
-            borderBottom: '1px solid #e0e0e0',
+            borderBottom: index === 0 ? 'none' : '1px solid #e0e0e0',
             cursor: isLocked ? 'not-allowed' : 'pointer',
             opacity: isLocked ? 0.5 : (isCompleted ? 0.7 : 1),
             background: isLocked ? '#f5f5f5' : 'transparent',
@@ -116,20 +124,28 @@ function Card01_02_Selection({
               <span style={{ 
                 fontSize: '16px', 
                 color: isLocked ? '#999999' : '#000000', 
-                fontWeight: 600 
+                fontWeight: 600,
+                display: 'inline-block',
+                width: '100%'
               }}>
                 {tutorial.name}
               </span>
               {isCompleted ? (
                 <span style={{ 
                   fontSize: '12px', 
-                  color: '#4CAF50', 
+                  color: '#000000', 
                   fontWeight: 500,
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '4px'
+                  gap: '4px',
+                  lineHeight: '1.4',
+                  margin: 0,
+                  padding: 0
                 }}>
-                  ✓ Concluído
+                  <span style={{ 
+                    fontSize: '12px',
+                    lineHeight: '1.4'
+                  }}>✓ Concluído</span>
                 </span>
               ) : isAvailable && !isLocked ? (
                 <span style={{ 
@@ -147,7 +163,7 @@ function Card01_02_Selection({
               width: '32px',
               height: '32px',
               borderRadius: '50%',
-              background: isLocked ? '#cccccc' : (isCompleted ? '#4CAF50' : '#000000'),
+              background: isLocked ? '#cccccc' : (isCompleted ? 'rgb(253, 187, 44)' : '#000000'),
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -169,25 +185,25 @@ function Card01_02_Selection({
 
   return (
     <div className="card card-selection" style={{ position: 'relative' }}>
-      <div style={{ padding: '24px 24px', paddingTop: '80px', position: 'relative' }}>
-        {earnedBadges && Array.isArray(earnedBadges) && earnedBadges.includes(1) && (
-          <div style={{ position: 'absolute', top: '20px', right: '24px', zIndex: 10 }}>
-            <CreatorStamp isVisible={true} />
-          </div>
-        )}
-        {/* Logo e Título - mesma posição do Card 00 */}
-        <div style={{ marginBottom: '32px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <div style={{ padding: '24px 24px', paddingTop: '24px', position: 'relative' }}>
+        {/* Logo e Selo lado a lado */}
+        <div style={{ marginBottom: '32px', display: 'flex', justifyContent: 'flex-start', alignItems: 'center', gap: '24px' }}>
           <img 
             src="/logo.png" 
             alt="Logo" 
             style={{ 
-              maxWidth: '200px', 
-              maxHeight: '100px', 
+              maxWidth: '160px', 
+              maxHeight: '80px', 
               width: 'auto', 
               height: 'auto',
               objectFit: 'contain'
             }} 
           />
+          {earnedBadges && Array.isArray(earnedBadges) && earnedBadges.includes(1) && (
+            <div style={{ opacity: stampOpacity }}>
+              <CreatorStamp isVisible={true} hideText={stampOpacity < 1} />
+            </div>
+          )}
         </div>
         <h3 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '24px', color: '#000000' }}>
           Tutoriais Roblox Studios
@@ -197,8 +213,8 @@ function Card01_02_Selection({
           <div style={{ 
             margin: 0,
             marginBottom: '24px',
-            border: '1px solid #e0e0e0', 
-            borderRadius: '8px', 
+            border: '1px solid #000000', 
+            borderRadius: '0', 
             overflow: 'hidden', 
             width: '100%',
             flexShrink: 0
@@ -211,7 +227,7 @@ function Card01_02_Selection({
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                borderBottom: expandedClasses.class1 ? '1px solid #e0e0e0' : 'none',
+                borderBottom: expandedClasses.class1 ? '1px solid #000000' : 'none',
                 height: '56px',
                 minHeight: '56px',
                 maxHeight: '56px',
@@ -231,7 +247,7 @@ function Card01_02_Selection({
                 display: 'flex',
                 alignItems: 'center'
               }}>
-                Os primeiros passos para se tornar Creator
+                Transforme-se num Creator
               </h3>
               <span style={{ 
                 fontSize: '20px', 
@@ -259,8 +275,8 @@ function Card01_02_Selection({
           <div style={{ 
             margin: 0,
             marginBottom: '24px',
-            border: '1px solid #e0e0e0', 
-            borderRadius: '8px', 
+            border: '1px solid #000000', 
+            borderRadius: '0', 
             overflow: 'hidden', 
             width: '100%',
             flexShrink: 0
@@ -273,7 +289,7 @@ function Card01_02_Selection({
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                borderBottom: expandedClasses.class2 ? '1px solid #e0e0e0' : 'none',
+                borderBottom: expandedClasses.class2 ? '1px solid #000000' : 'none',
                 height: '56px',
                 minHeight: '56px',
                 maxHeight: '56px',
@@ -393,7 +409,7 @@ function Card01_02_Selection({
                 Tutorial Bloqueado
               </h3>
             </div>
-            <div style={{ fontSize: '16px', lineHeight: '1.6', color: '#333333' }}>
+            <div style={{ fontSize: '16px', lineHeight: '1.12', color: '#333333' }}>
               <p style={{ marginBottom: '16px' }}>
                 O tutorial <strong>"{lockedTutorialInfo.tutorialName}"</strong> está bloqueado.
               </p>
@@ -410,8 +426,8 @@ function Card01_02_Selection({
                 marginTop: '24px',
                 width: '100%',
                 padding: '12px 24px',
-                background: '#2196F3',
-                color: '#ffffff',
+                background: 'rgb(113, 180, 233)',
+                color: '#000000',
                 border: 'none',
                 borderRadius: '6px',
                 fontSize: '16px',
@@ -419,8 +435,8 @@ function Card01_02_Selection({
                 cursor: 'pointer',
                 transition: 'background 0.2s'
               }}
-              onMouseEnter={(e) => e.target.style.background = '#1976D2'}
-              onMouseLeave={(e) => e.target.style.background = '#2196F3'}
+              onMouseEnter={(e) => e.target.style.background = 'rgb(100, 160, 210)'}
+              onMouseLeave={(e) => e.target.style.background = 'rgb(113, 180, 233)'}
             >
               Entendi
             </button>

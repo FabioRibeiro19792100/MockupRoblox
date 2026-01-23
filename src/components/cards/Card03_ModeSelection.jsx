@@ -7,10 +7,19 @@ function Card03_ModeSelection({ onModeSelect, onMenu }) {
         <button className="header-button" onClick={onMenu}>Voltar para menu</button>
       </div>
       <div style={{ padding: '24px 24px' }}>
-        <h3 style={{ fontSize: '18px', fontWeight: 700, marginBottom: '24px', color: '#000000' }}>
+        <h3 style={{ 
+          fontSize: '20px', 
+          fontWeight: 700, 
+          margin: 0, 
+          color: '#000000', 
+          marginBottom: '24px', 
+          paddingTop: '12px',
+          borderBottom: '1px solid #000000',
+          paddingBottom: '8px'
+        }}>
           Escolha o modo:
         </h3>
-        <div className="card-content">
+        <div className="card-content" style={{ marginTop: '24px' }}>
           <button
             className="mode-button mode-button-demonstrative"
             onClick={() => onModeSelect('demonstrative')}

@@ -16,16 +16,22 @@
 .creator-popup-content {
   background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
   border-radius: 20px;
-  padding: 48px 40px;
+  padding: 32px 40px 48px 40px;
   max-width: 500px;
   width: 90%;
-  max-height: 90%;
-  overflow-y: auto;
+  min-height: 600px;
+  height: 600px;
+  max-height: 600px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
   position: relative;
   text-align: center;
   animation: slideUp 0.5s ease-out;
   margin: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .creator-popup-close {
@@ -52,11 +58,13 @@
 
 .creator-popup-animation {
   position: relative;
-  height: 120px;
-  margin-bottom: 24px;
+  height: 100px;
+  min-height: 100px;
+  margin-bottom: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .creator-popup-star {
@@ -102,15 +110,17 @@
   font-size: 32px;
   font-weight: 700;
   color: #000000;
-  margin: 0 0 8px 0;
+  margin: 0 0 4px 0;
   animation: fadeInUp 0.6s ease-out 0.3s both;
+  flex-shrink: 0;
 }
 
 .creator-popup-subtitle {
   font-size: 18px;
   color: #666666;
-  margin: 0 0 8px 0;
+  margin: 0 0 4px 0;
   animation: fadeInUp 0.6s ease-out 0.4s both;
+  flex-shrink: 0;
 }
 
 .creator-popup-creator {
@@ -120,23 +130,33 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin: 0 0 24px 0;
+  margin: 0 0 16px 0;
   letter-spacing: 4px;
   text-shadow: 2px 2px 4px rgba(255, 215, 0, 0.3);
   animation: fadeInUp 0.6s ease-out 0.5s both, creatorGlow 2s ease-in-out infinite 1s;
+  flex-shrink: 0;
 }
 
 .creator-popup-message {
-  font-size: 16px;
+  font-size: 13px;
   line-height: 1.6;
   color: #333333;
-  margin: 0 0 32px 0;
+  margin: 0;
+  padding: 0 16px;
   animation: fadeInUp 0.6s ease-out 0.6s both;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  min-height: 80px;
+  max-height: 80px;
 }
 
 .creator-popup-button {
-  background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
-  color: #ffffff;
+  background: linear-gradient(135deg, rgb(113, 180, 233) 0%, rgb(100, 160, 210) 100%);
+  color: #000000;
   border: none;
   border-radius: 8px;
   padding: 14px 32px;
@@ -144,12 +164,35 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
-  animation: fadeInUp 0.6s ease-out 0.7s both;
+  flex-shrink: 0;
+  position: absolute;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 80px);
+  max-width: 300px;
+  margin: 0;
+  box-sizing: border-box;
+  text-align: center;
+  white-space: nowrap;
+  opacity: 0;
+  animation: buttonFadeInUp 0.6s ease-out 0.7s forwards;
+}
+
+@keyframes buttonFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
 }
 
 .creator-popup-button:hover {
-  background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
-  transform: translateY(-2px);
+  background: linear-gradient(135deg, rgb(100, 160, 210) 0%, rgb(90, 140, 190) 100%);
+  transform: translateX(-50%) translateY(-2px);
   box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
 }
 

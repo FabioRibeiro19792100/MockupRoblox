@@ -189,7 +189,7 @@
 }
 
 .toggle-switch input:checked + .toggle-slider {
-  background-color: #002DCC;
+  background-color: rgb(113, 180, 233);
 }
 
 .toggle-switch input:checked + .toggle-slider:before {
@@ -197,5 +197,5 @@
 }
 
 .toggle-switch input:focus + .toggle-slider {
-  box-shadow: 0 0 1px #002DCC;
+  box-shadow: 0 0 1px rgb(113, 180, 233);
 }

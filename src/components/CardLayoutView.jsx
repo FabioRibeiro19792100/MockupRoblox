@@ -15,52 +15,18 @@ import Card13_BadgeExplanation from './cards/Card13_BadgeExplanation'
 import BadgeHeader from './BadgeHeader'
 import BadgeScoreboard from './BadgeScoreboard'
 import CreatorPopup from './CreatorPopup'
+import BadgePopup2 from './BadgePopup2'
+import BadgePopup3 from './BadgePopup3'
 import CreatorStamp from './CreatorStamp'
 import ElementLabel from './ElementLabel'
 import BadgeNotification from './BadgeNotification'
 import './CardLayoutView.css'
 
-// Sistema de layers - 10 designs completamente novos
+// Sistema de layers - Design Original
 const LAYER_STYLES = {
   layer1: {
     name: 'Design Original',
     description: 'Design original sem modificações'
-  },
-  layer2: {
-    name: 'Futurista Neon',
-    description: 'Estilo cyberpunk com efeitos neon e animações'
-  },
-  layer3: {
-    name: 'Vintage Paper',
-    description: 'Aparência de papel antigo, estilo vintage'
-  },
-  layer4: {
-    name: 'Glassmorphism',
-    description: 'Efeito de vidro fosco com blur e transparência'
-  },
-  layer5: {
-    name: 'Brutalist',
-    description: 'Design brutalista com bordas grossas e cores vibrantes'
-  },
-  layer6: {
-    name: 'Organic Flow',
-    description: 'Formas orgânicas, gradientes suaves, bordas arredondadas'
-  },
-  layer7: {
-    name: 'Terminal/CLI',
-    description: 'Aparência de terminal de linha de comando'
-  },
-  layer8: {
-    name: 'Retro 80s',
-    description: 'Estilo retrô dos anos 80 com padrões e cores vibrantes'
-  },
-  layer9: {
-    name: 'Minimalist Japanese',
-    description: 'Minimalismo japonês, muito espaço em branco, tipografia limpa'
-  },
-  layer10: {
-    name: '3D Isometric',
-    description: 'Efeito 3D isométrico com perspectiva e sombras'
   }
 }
 
@@ -80,7 +46,7 @@ function CardLayoutView({
   const [currentStep, setCurrentStep] = useState(1)
   const [tutorialMode, setTutorialMode] = useState('demonstrative')
   const [currentLayer, setCurrentLayer] = useState('layer1')
-  const [showLabels, setShowLabels] = useState(true)
+  const [showLabels, setShowLabels] = useState(false)
   const [showBadgeGallery, setShowBadgeGallery] = useState(true)
   const [badgeGalleryExpanded, setBadgeGalleryExpanded] = useState(false) // Para controle global
   const [expandedCards, setExpandedCards] = useState(new Set()) // Estado individual por card
@@ -174,34 +140,158 @@ function CardLayoutView({
     description: 'Criar a base da casa'
   }
 
+  // Estado para controlar visibilidade da galeria por card - por padrão todos estão visíveis
+  const [badgeGalleryVisible, setBadgeGalleryVisible] = useState(() => {
+    // Inicializa com todos os cards desligados (toggle off)
+    return new Set()
+  })
+
+  // Estado para rastrear cards explicitamente contraídos (quando o usuário clica no header da galeria)
+  const [collapsedGalleryCards, setCollapsedGalleryCards] = useState(new Set())
+
+  const toggleBadgeGalleryVisibility = (cardId) => {
+    const hasAnyVisible = badgeGalleryVisible.size > 0
+    
+    if (hasAnyVisible) {
+      // Se tem algum visível, desliga todos e contrai todas as galerias
+      const allCollapsed = new Set()
+      for (let i = 0; i < 21; i++) {
+        allCollapsed.add(i)
+      }
+      setBadgeGalleryVisible(new Set())
+      setCollapsedGalleryCards(allCollapsed)
+    } else {
+      // Se não tem nenhum visível, liga todos e expande todas as galerias
+      const allCards = new Set()
+      for (let i = 0; i < 21; i++) {
+        allCards.add(i)
+      }
+      // Limpa o collapsedGalleryCards e liga todos os toggles simultaneamente
+      setCollapsedGalleryCards(new Set())
+      setBadgeGalleryVisible(allCards)
+    }
+  }
+
   // Função helper para renderizar a galeria de badges
   const renderBadgeGallery = (cardContent, cardId) => {
-    if (!showBadgeGallery) {
-      return cardContent
-    }
+    // Estado global: se algum card está visível
+    const isAnyGalleryVisible = badgeGalleryVisible.size > 0
+    const isGalleryVisible = badgeGalleryVisible.has(cardId)
     
-    // Estado individual por card
-    const isCardExpanded = expandedCards.has(cardId)
+    // Quando visível, começa expandida por padrão, a menos que tenha sido explicitamente contraída
+    const isCardExpanded = isGalleryVisible && !collapsedGalleryCards.has(cardId)
     
-    // Calcula a altura da galeria baseado no estado expandido/contraído
-    const galleryHeight = isCardExpanded ? 350 : 100
+    // Se a galeria está contraída, ela não deve aparecer (altura 0)
+    // Se está expandida, mostra com altura 350px
+    const galleryHeight = isCardExpanded ? 350 : 0
     const buttonHeight = 80 // Altura dos botões de CTA
     
+    // IMPORTANTE: Esta função apenas expande/contrai a galeria, NÃO desliga o toggle
+    // O toggle (badgeGalleryVisible) é controlado separadamente e não deve ser afetado aqui
     const toggleCardGallery = () => {
-      setExpandedCards(prev => {
-        const newSet = new Set(prev)
-        if (newSet.has(cardId)) {
-          newSet.delete(cardId)
+      // Expandir/contrair a galeria em TODOS os cards ao mesmo tempo
+      setCollapsedGalleryCards(prev => {
+        const isCurrentlyCollapsed = prev.has(cardId)
+        if (isCurrentlyCollapsed) {
+          // Se estava contraída, expande TODOS (remove todos do Set)
+          return new Set()
         } else {
-          newSet.add(cardId)
+          // Se estava expandida, contrai TODOS (adiciona todos ao Set)
+          // Quando contrai, também desliga o toggle para voltar à posição inicial
+          setBadgeGalleryVisible(new Set())
+          const allCards = new Set()
+          for (let i = 0; i < 21; i++) {
+            allCards.add(i)
+          }
+          return allCards
         }
-        return newSet
       })
+    }
+    
+    // Toggle switch da galeria de badges - será inserido logo após o header via CSS
+    const badgeToggle = (
+      <div 
+        className="badge-gallery-toggle"
+        onClick={(e) => {
+          e.stopPropagation()
+          toggleBadgeGalleryVisibility(cardId)
+        }}
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '12px 24px',
+          background: 'rgb(113, 180, 233)',
+          borderBottom: '1px solid #e0e0e0',
+          cursor: 'pointer',
+          userSelect: 'none',
+          transition: 'background 0.2s',
+          flexShrink: 0
+        }}
+        onMouseEnter={(e) => e.currentTarget.style.background = 'rgb(100, 160, 210)'}
+        onMouseLeave={(e) => e.currentTarget.style.background = 'rgb(113, 180, 233)'}
+      >
+        <span style={{ fontSize: '14px', fontWeight: 600, color: '#000000' }}>
+          Conquiste seus badges de Creator
+        </span>
+        {/* Toggle Switch */}
+        <div 
+          onClick={(e) => {
+            e.stopPropagation()
+            toggleBadgeGalleryVisibility(cardId)
+          }}
+          style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '8px',
+            cursor: 'pointer'
+          }}
+        >
+          <div 
+            style={{
+              width: '44px',
+              height: '24px',
+              borderRadius: '12px',
+              background: isAnyGalleryVisible ? 'rgb(113, 180, 233)' : '#cccccc',
+              position: 'relative',
+              transition: 'background 0.3s',
+              cursor: 'pointer',
+              flexShrink: 0
+            }}
+          >
+            <div
+              style={{
+                width: '20px',
+                height: '20px',
+                borderRadius: '50%',
+                background: '#ffffff',
+                position: 'absolute',
+                top: '2px',
+                left: isAnyGalleryVisible ? '22px' : '2px',
+                transition: 'left 0.3s',
+                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)'
+              }}
+            />
+          </div>
+        </div>
+      </div>
+    )
+
+    // Wrapper que insere o toggle logo após o header
+    const contentWithToggle = (
+      <div className="card-with-badge-toggle" style={{ display: 'flex', flexDirection: 'column', height: '100%', position: 'relative' }}>
+        {cardContent}
+        {badgeToggle}
+      </div>
+    )
+    
+    if (!isGalleryVisible) {
+      return contentWithToggle
     }
     
     return (
       <div style={{ position: 'relative', height: '100%', width: '100%', overflow: 'visible' }}>
-        {/* Conteúdo do card - não é afetado pela galeria */}
+        {/* Conteúdo do card com toggle - não é afetado pela galeria */}
         <div style={{ 
           height: '100%',
           width: '100%',
@@ -209,12 +299,14 @@ function CardLayoutView({
           position: 'relative',
           paddingBottom: `${buttonHeight}px` // Espaço para os botões ficarem visíveis
         }}>
-          {cardContent}
+          {contentWithToggle}
         </div>
         {/* Galeria de badges - overlay absoluto que não move nada, posicionada acima dos botões */}
-        <div className={`badge-gallery-fixed ${isCardExpanded ? 'expanded' : 'collapsed'}`} style={{ 
+        {/* Só mostra a galeria se estiver expandida */}
+        {isCardExpanded && (
+        <div className={`badge-gallery-fixed expanded`} style={{ 
           background: 'linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%)',
-          borderTop: '2px solid #2196F3',
+          borderTop: '2px solid rgb(113, 180, 233)',
           boxShadow: '0 -2px 8px rgba(0, 0, 0, 0.15)',
           position: 'absolute',
           bottom: `${buttonHeight}px`, // Posiciona acima dos botões (80px)
@@ -222,7 +314,7 @@ function CardLayoutView({
           right: 0,
           zIndex: 100,
           maxHeight: `${galleryHeight}px`,
-          minHeight: isCardExpanded ? '350px' : '100px',
+          minHeight: '350px',
           overflow: 'hidden',
           transition: 'max-height 0.3s ease, min-height 0.3s ease'
         }}>
@@ -240,21 +332,21 @@ function CardLayoutView({
               userSelect: 'none',
               minHeight: '100px',
               position: 'relative',
-              background: 'linear-gradient(135deg, #2196F3 0%, #1976D2 100%)',
-              borderBottom: '1px solid #1565C0',
-              color: '#ffffff',
+              background: 'linear-gradient(135deg, rgb(113, 180, 233) 0%, rgb(100, 160, 210) 100%)',
+              borderBottom: '1px solid rgb(90, 140, 190)',
+              color: '#000000',
               zIndex: 101,
               pointerEvents: 'auto'
             }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-              <h2 style={{ fontSize: '20px', paddingTop: '0px', marginBottom: '0px', margin: 0, color: '#ffffff' }}>
+              <h2 style={{ fontSize: '20px', paddingTop: '0px', marginBottom: '0px', margin: 0, color: '#000000' }}>
                 Galeria de Badges
               </h2>
               <span style={{ 
                 fontSize: '24px', 
                 fontWeight: 700,
-                color: '#ffffff',
+                color: '#000000',
                 transition: 'transform 0.3s',
                 transform: isCardExpanded ? 'rotate(45deg)' : 'rotate(0deg)',
                 lineHeight: 1
@@ -278,7 +370,7 @@ function CardLayoutView({
                   style={{
                     background: 'transparent',
                     border: 'none',
-                    color: '#0066cc',
+                    color: 'rgb(113, 180, 233)',
                     fontSize: '13px',
                     textDecoration: 'underline',
                     cursor: 'pointer',
@@ -297,6 +389,7 @@ function CardLayoutView({
             </div>
           )}
         </div>
+        )}
       </div>
     )
   }
@@ -330,6 +423,7 @@ function CardLayoutView({
           onTutorialSelect={onTutorialSelect || (() => {})}
           onBack={onMenu || (() => {})}
           onMenu={onMenu || (() => {})}
+          stampOpacity={0.05}
         />,
         1
       ),
@@ -354,6 +448,45 @@ function CardLayoutView({
     },
     {
       id: 2,
+      name: 'Card 01 - Seleção (Aberto)',
+      component: renderBadgeGallery(
+        <Card01_02_Selection
+          cardNumber={1}
+          selectedTutorial={selectedTutorial}
+          onSelect={setSelectedTutorial}
+          onNext={() => {}}
+          completedTutorials={{ class1: [1, 2], class2: [] }}
+          earnedBadges={[1]}
+          currentTutorialClass={1}
+          onTutorialClassSelect={() => {}}
+          onTutorialSelect={onTutorialSelect || (() => {})}
+          onBack={onMenu || (() => {})}
+          onMenu={onMenu || (() => {})}
+          defaultExpanded={true}
+        />,
+        2
+      ),
+      elements: [
+        { type: 'title-1', selector: '.card-title', label: 'Título 1 - Principal' },
+        { type: 'accordion-header', selector: 'h3', label: 'Cabeçalho do Acordeão - Título' },
+        { type: 'accordion-icon', selector: 'span[style*="transform"]', label: 'Ícone Expandir/Colapsar' },
+        { type: 'accordion-content', selector: 'div[style*="borderBottom"]', label: 'Conteúdo do Acordeão - Lista' },
+        { type: 'button-selection', selector: '.selection-button', label: 'Botão de Seleção' },
+        { type: 'tutorial-item', selector: 'div[style*="padding: \'24px\'"]', label: 'Item de Tutorial' },
+        { type: 'tutorial-status', selector: 'span[style*="✓ Concluído"]', label: 'Status - Concluído' },
+        { type: 'tutorial-lock', selector: 'span[style*="🔒"]', label: 'Ícone - Bloqueado' },
+        { type: 'header-global', selector: '.card-header-global', label: 'Header Global' },
+        { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' },
+        { type: 'badge-gallery', selector: '.badge-gallery-fixed', label: 'Galeria de Badges - Fixa' },
+        { type: 'badge-scoreboard', selector: '.badge-scoreboard', label: 'Placar de Badges' },
+        { type: 'badge-header', selector: '.badge-header', label: 'Galeria de Badges - Expandida' },
+        { type: 'badge-item', selector: '.badge-header-item', label: 'Item de Badge' },
+        { type: 'badge-description', selector: '.badge-description', label: 'Descrição do Badge' },
+        { type: 'creator-stamp', selector: '.creator-stamp-inline', label: 'Selo de Creator' }
+      ]
+    },
+    {
+      id: 3,
       name: 'Card 01 - Seleção (Concluído)',
       component: renderBadgeGallery(
         <Card01_02_Selection
@@ -368,6 +501,7 @@ function CardLayoutView({
           onTutorialSelect={onTutorialSelect || (() => {})}
           onBack={onMenu || (() => {})}
           onMenu={onMenu || (() => {})}
+          defaultExpanded={true}
         />,
         2
       ),
@@ -390,7 +524,7 @@ function CardLayoutView({
       ]
     },
     {
-      id: 3,
+      id: 4,
       name: 'Card 03 - Modo',
       component: (
         <Card03_ModeSelection
@@ -410,7 +544,7 @@ function CardLayoutView({
       ]
     },
     {
-      id: 4,
+      id: 5,
       name: 'Card 04 - Introdução',
       component: renderBadgeGallery(
         <Card04_Introduction
@@ -424,7 +558,7 @@ function CardLayoutView({
             else if (onMenu) onMenu()
           }}
         />,
-        4
+        5
       ),
       elements: [
         { type: 'title-2', selector: 'h3', label: 'Título 2 - Nome do Tutorial' },
@@ -438,7 +572,7 @@ function CardLayoutView({
       ]
     },
     {
-      id: 5,
+      id: 6,
       name: 'Card 05 - Antes da Ação',
       component: renderBadgeGallery(
         <Card05_BeforeAction
@@ -453,7 +587,7 @@ function CardLayoutView({
           onMenu={onMenu || (() => {})}
           onRestart={onRestart || (() => {})}
         />,
-        5
+        6
       ),
       elements: [
         { type: 'title-2', selector: '.card-title', label: 'Título 2 - Subtítulo' },
@@ -494,7 +628,7 @@ function CardLayoutView({
       ]
     },
     {
-      id: 6,
+      id: 7,
       name: 'Card 06 - Após Ação',
       component: renderBadgeGallery(
         <Card06_AfterAction
@@ -506,7 +640,7 @@ function CardLayoutView({
           onMenu={onMenu || (() => {})}
           onRestart={onRestart || (() => {})}
         />,
-        6
+        7
       ),
       elements: [
         { type: 'title-2', selector: '.card-title', label: 'Título 2' },
@@ -521,7 +655,7 @@ function CardLayoutView({
       ]
     },
     {
-      id: 7,
+      id: 8,
       name: 'Card 07 - Interação',
       component: renderBadgeGallery(
         <Card07_InteractionInvite
@@ -530,7 +664,7 @@ function CardLayoutView({
           onMenu={onMenu || (() => {})}
           onRestart={onRestart || (() => {})}
         />,
-        7
+        8
       ),
       elements: [
         { type: 'title-1', selector: '.card-title', label: 'Título 1' },
@@ -542,7 +676,7 @@ function CardLayoutView({
       ]
     },
     {
-      id: 8,
+      id: 9,
       name: 'Card 08 - Tentativa',
       component: renderBadgeGallery(
         <Card08_UserAttempt
@@ -556,7 +690,7 @@ function CardLayoutView({
           onMenu={onMenu || (() => {})}
           onRestart={onRestart || (() => {})}
         />,
-        8
+        9
       ),
       elements: [
         { type: 'button-attempt', selector: '.user-attempt-button', label: 'Botão de Tentativa - Verificar' },
@@ -567,32 +701,10 @@ function CardLayoutView({
       ]
     },
     {
-      id: 9,
+      id: 10,
       name: 'Card 09 - Feedback Positivo',
       component: renderBadgeGallery(
         <Card09_PositiveFeedback
-          onTryAgain={() => {}}
-          onContinue={() => {}}
-          onMenu={onMenu || (() => {})}
-          onRestart={onRestart || (() => {})}
-        />,
-        9
-      ),
-      elements: [
-        { type: 'feedback-icon', selector: '.feedback-icon', label: 'Ícone de Feedback' },
-        { type: 'title-1', selector: '.card-title', label: 'Título 1' },
-        { type: 'button-feedback', selector: '.feedback-button-red', label: 'Botão Feedback - Fazer de Novo' },
-        { type: 'button-feedback', selector: '.feedback-button-black', label: 'Botão Feedback - Continuar' },
-        { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' },
-        { type: 'badge-gallery', selector: '.badge-gallery-fixed', label: 'Galeria de Badges - Fixa' },
-        { type: 'badge-scoreboard', selector: '.badge-scoreboard', label: 'Placar de Badges' }
-      ]
-    },
-    {
-      id: 10,
-      name: 'Card 10 - Feedback Negativo',
-      component: renderBadgeGallery(
-        <Card10_NegativeFeedback
           onTryAgain={() => {}}
           onContinue={() => {}}
           onMenu={onMenu || (() => {})}
@@ -612,6 +724,28 @@ function CardLayoutView({
     },
     {
       id: 11,
+      name: 'Card 10 - Feedback Negativo',
+      component: renderBadgeGallery(
+        <Card10_NegativeFeedback
+          onTryAgain={() => {}}
+          onContinue={() => {}}
+          onMenu={onMenu || (() => {})}
+          onRestart={onRestart || (() => {})}
+        />,
+        11
+      ),
+      elements: [
+        { type: 'feedback-icon', selector: '.feedback-icon', label: 'Ícone de Feedback' },
+        { type: 'title-1', selector: '.card-title', label: 'Título 1' },
+        { type: 'button-feedback', selector: '.feedback-button-red', label: 'Botão Feedback - Fazer de Novo' },
+        { type: 'button-feedback', selector: '.feedback-button-black', label: 'Botão Feedback - Continuar' },
+        { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' },
+        { type: 'badge-gallery', selector: '.badge-gallery-fixed', label: 'Galeria de Badges - Fixa' },
+        { type: 'badge-scoreboard', selector: '.badge-scoreboard', label: 'Placar de Badges' }
+      ]
+    },
+    {
+      id: 12,
       name: 'Card 11 - Conclusão',
       component: renderBadgeGallery(
         <Card11_Completion
@@ -620,7 +754,7 @@ function CardLayoutView({
           onComplete={onTutorialComplete || (() => {})}
           onCompleteAndMenu={onQuickComplete || (() => {})}
         />,
-        11
+        12
       ),
       elements: [
         { type: 'title-1', selector: '.card-title', label: 'Título 1' },
@@ -684,292 +818,37 @@ function CardLayoutView({
       ]
     },
     {
-      id: 18,
-      name: 'Card 01 - Seleção (Acordeões Abertos)',
-      component: renderBadgeGallery(
-        <div className="card card-selection" style={{ position: 'relative' }}>
-          <div style={{ padding: '24px 24px', paddingTop: '80px', position: 'relative' }}>
-            {earnedBadges && Array.isArray(earnedBadges) && earnedBadges.includes(1) && (
-              <div style={{ position: 'absolute', top: '20px', right: '24px', zIndex: 10 }}>
-                <CreatorStamp isVisible={true} />
-              </div>
-            )}
-            {/* Logo e Título - mesma posição do Card 00 */}
-            <div style={{ marginBottom: '32px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              <img 
-                src="/logo.png" 
-                alt="Logo" 
-                style={{ 
-                  maxWidth: '200px', 
-                  maxHeight: '100px', 
-                  width: 'auto', 
-                  height: 'auto',
-                  objectFit: 'contain'
-                }} 
-              />
-            </div>
-            <h3 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '24px', color: '#000000' }}>
-              Tutoriais Roblox Studios
-            </h3>
-            <div className="card-content" style={{ margin: 0, padding: 0, marginTop: '0px' }}>
-              {/* Classe 1 - Acordeon ABERTO */}
-              <div style={{ marginBottom: '24px', border: '1px solid #e0e0e0', borderRadius: '8px', overflow: 'hidden' }}>
-                <div
-                  style={{
-                    padding: '16px 20px',
-                    background: '#f5f5f5',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    borderBottom: '1px solid #e0e0e0'
-                  }}
-                >
-                  <h3 style={{ 
-                    fontSize: '18px', 
-                    fontWeight: 700, 
-                    margin: 0,
-                    color: '#000000'
-                  }}>
-                    Os primeiros passos para se tornar Creator
-                  </h3>
-                  <span style={{ 
-                    fontSize: '20px', 
-                    color: '#666666',
-                    transition: 'transform 0.2s',
-                    transform: 'rotate(180deg)'
-                  }}>
-                    ▼
-                  </span>
-                </div>
-                <div>
-                  {[
-                    { id: 1, name: 'Construir um casa', description: 'Aprenda a criar uma casa completa' },
-                    { id: 2, name: 'Criar um obstáculo', description: 'Domine a criação de obstáculos' },
-                    { id: 3, name: 'Animar um avatar', description: 'Aprenda a animar personagens' },
-                    { id: 4, name: 'Criar um portal', description: 'Aprenda a criar portais' },
-                    { id: 5, name: 'Adicionar efeitos', description: 'Aprenda a adicionar efeitos visuais' },
-                  ].map((tutorial) => {
-                    const isCompleted = (completedTutorials?.class1 || []).includes(tutorial.id)
-                    const isAvailable = tutorial.id === 1 || (completedTutorials?.class1 || []).includes(tutorial.id - 1)
-                    const isLocked = !isAvailable && !isCompleted
-                    
-                    return (
-                      <div
-                        key={`1-${tutorial.id}`}
-                        style={{
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                          alignItems: 'center',
-                          padding: '24px',
-                          borderBottom: '1px solid #e0e0e0',
-                          cursor: isLocked ? 'not-allowed' : 'pointer',
-                          opacity: isLocked ? 0.5 : (isCompleted ? 0.7 : 1),
-                          background: isLocked ? '#f5f5f5' : 'transparent',
-                        }}
-                      >
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1 }}>
-                          <span style={{ 
-                            fontSize: '14px', 
-                            fontWeight: 700, 
-                            color: isLocked ? '#999999' : '#000000',
-                            minWidth: '24px'
-                          }}>
-                            {tutorial.id}.
-                          </span>
-                          <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', flex: 1 }}>
-                            <span style={{ 
-                              fontSize: '16px', 
-                              color: isLocked ? '#999999' : '#000000', 
-                              fontWeight: 600 
-                            }}>
-                              {tutorial.name}
-                            </span>
-                            {isCompleted ? (
-                              <span style={{ 
-                                fontSize: '12px', 
-                                color: '#4CAF50', 
-                                fontWeight: 500,
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '4px'
-                              }}>
-                                ✓ Concluído
-                              </span>
-                            ) : isAvailable && !isLocked ? (
-                              <span style={{ 
-                                fontSize: '12px', 
-                                color: '#666666', 
-                                fontWeight: 500
-                              }}>
-                                Em andamento
-                              </span>
-                            ) : null}
-                          </div>
-                        </div>
-                        <div
-                          style={{
-                            width: '32px',
-                            height: '32px',
-                            borderRadius: '50%',
-                            background: isLocked ? '#cccccc' : (isCompleted ? '#4CAF50' : '#000000'),
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            cursor: isLocked ? 'not-allowed' : 'pointer',
-                          }}
-                        >
-                          {isLocked ? (
-                            <span style={{ color: '#ffffff', fontSize: '16px' }}>🔒</span>
-                          ) : isCompleted ? (
-                            <span style={{ color: '#ffffff', fontSize: '16px' }}>✓</span>
-                          ) : (
-                            <span style={{ color: '#ffffff', fontSize: '12px' }}>▶</span>
-                          )}
-                        </div>
-                      </div>
-                    )
-                  })}
-                </div>
-              </div>
-
-              {/* Classe 2 - Acordeon ABERTO */}
-              <div style={{ marginBottom: '24px', border: '1px solid #e0e0e0', borderRadius: '8px', overflow: 'hidden' }}>
-                <div
-                  style={{
-                    padding: '16px 20px',
-                    background: '#f5f5f5',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    borderBottom: '1px solid #e0e0e0'
-                  }}
-                >
-                  <h3 style={{ 
-                    fontSize: '18px', 
-                    fontWeight: 700, 
-                    margin: 0,
-                    color: '#000000'
-                  }}>
-                    Criações rápidas
-                  </h3>
-                  <span style={{ 
-                    fontSize: '20px', 
-                    color: '#666666',
-                    transition: 'transform 0.2s',
-                    transform: 'rotate(180deg)'
-                  }}>
-                    ▼
-                  </span>
-                </div>
-                <div>
-                  {[
-                    { id: 1, name: 'Criar um jogo simples', description: 'Aprenda a criar um jogo básico' },
-                    { id: 2, name: 'Adicionar física', description: 'Domine a física no Roblox' },
-                    { id: 3, name: 'Criar UI interativa', description: 'Aprenda a criar interfaces' },
-                    { id: 4, name: 'Publicar seu jogo', description: 'Aprenda a publicar jogos' },
-                    { id: 5, name: 'Monetizar criação', description: 'Aprenda a monetizar' },
-                  ].map((tutorial) => {
-                    const isCompleted = (completedTutorials?.class2 || []).includes(tutorial.id)
-                    const isAvailable = tutorial.id === 1 || (completedTutorials?.class2 || []).includes(tutorial.id - 1)
-                    const isLocked = !isAvailable && !isCompleted
-                    
-                    return (
-                      <div
-                        key={`2-${tutorial.id}`}
-                        style={{
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                          alignItems: 'center',
-                          padding: '24px',
-                          borderBottom: tutorial.id < 5 ? '1px solid #e0e0e0' : 'none',
-                          cursor: isLocked ? 'not-allowed' : 'pointer',
-                          opacity: isLocked ? 0.5 : (isCompleted ? 0.7 : 1),
-                          background: isLocked ? '#f5f5f5' : 'transparent',
-                        }}
-                      >
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1 }}>
-                          <span style={{ 
-                            fontSize: '14px', 
-                            fontWeight: 700, 
-                            color: isLocked ? '#999999' : '#000000',
-                            minWidth: '24px'
-                          }}>
-                            {tutorial.id}.
-                          </span>
-                          <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', flex: 1 }}>
-                            <span style={{ 
-                              fontSize: '16px', 
-                              color: isLocked ? '#999999' : '#000000', 
-                              fontWeight: 600 
-                            }}>
-                              {tutorial.name}
-                            </span>
-                            {isCompleted ? (
-                              <span style={{ 
-                                fontSize: '12px', 
-                                color: '#4CAF50', 
-                                fontWeight: 500,
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '4px'
-                              }}>
-                                ✓ Concluído
-                              </span>
-                            ) : isAvailable && !isLocked ? (
-                              <span style={{ 
-                                fontSize: '12px', 
-                                color: '#666666', 
-                                fontWeight: 500
-                              }}>
-                                Em andamento
-                              </span>
-                            ) : null}
-                          </div>
-                        </div>
-                        <div
-                          style={{
-                            width: '32px',
-                            height: '32px',
-                            borderRadius: '50%',
-                            background: isLocked ? '#cccccc' : (isCompleted ? '#4CAF50' : '#000000'),
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            cursor: isLocked ? 'not-allowed' : 'pointer',
-                          }}
-                        >
-                          {isLocked ? (
-                            <span style={{ color: '#ffffff', fontSize: '16px' }}>🔒</span>
-                          ) : isCompleted ? (
-                            <span style={{ color: '#ffffff', fontSize: '16px' }}>✓</span>
-                          ) : (
-                            <span style={{ color: '#ffffff', fontSize: '12px' }}>▶</span>
-                          )}
-                        </div>
-                      </div>
-                    )
-                  })}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>,
-        18
+      id: 19,
+      name: 'Badge Popup 2 - Criador Iniciante',
+      component: (
+        <div className="card" style={{ padding: '24px', background: '#ffffff', height: '100%', position: 'relative', overflow: 'visible', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <BadgePopup2 onClose={() => {}} />
+        </div>
       ),
       elements: [
-        { type: 'title-1', selector: '.card-title', label: 'Título 1 - Principal' },
-        { type: 'accordion-header', selector: 'h3', label: 'Cabeçalho do Acordeão - Título' },
-        { type: 'accordion-icon', selector: 'span[style*="transform"]', label: 'Ícone Expandir/Colapsar' },
-        { type: 'accordion-content', selector: 'div[style*="borderBottom"]', label: 'Conteúdo do Acordeão - Lista' },
-        { type: 'tutorial-item', selector: 'div[style*="padding: \'24px\'"]', label: 'Item de Tutorial' },
-        { type: 'tutorial-status', selector: 'span[style*="✓ Concluído"]', label: 'Status - Concluído' },
-        { type: 'tutorial-lock', selector: 'span[style*="🔒"]', label: 'Ícone - Bloqueado' },
-        { type: 'tutorial-play', selector: 'span[style*="▶"]', label: 'Ícone - Play' },
-        { type: 'creator-stamp', selector: '.creator-stamp-inline', label: 'Selo de Creator' },
-        { type: 'badge-gallery', selector: '.badge-gallery-fixed', label: 'Galeria de Badges - Fixa' },
-        { type: 'badge-scoreboard', selector: '.badge-scoreboard', label: 'Placar de Badges' }
+        { type: 'popup-overlay', selector: '.creator-popup-overlay', label: 'Overlay do Popup' },
+        { type: 'popup-content', selector: '.creator-popup-content', label: 'Conteúdo do Popup' },
+        { type: 'title-1', selector: '.creator-popup-title', label: 'Título 1 - Parabéns' },
+        { type: 'title-2', selector: '.creator-popup-creator', label: 'Título 2 - Criador Iniciante' },
+        { type: 'body', selector: '.creator-popup-message', label: 'Corpo - Mensagem' },
+        { type: 'button-primary', selector: '.creator-popup-button', label: 'Botão Primário - Continuar' }
+      ]
+    },
+    {
+      id: 20,
+      name: 'Badge Popup 3 - Criador Avançado',
+      component: (
+        <div className="card" style={{ padding: '24px', background: '#ffffff', height: '100%', position: 'relative', overflow: 'visible', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <BadgePopup3 onClose={() => {}} />
+        </div>
+      ),
+      elements: [
+        { type: 'popup-overlay', selector: '.creator-popup-overlay', label: 'Overlay do Popup' },
+        { type: 'popup-content', selector: '.creator-popup-content', label: 'Conteúdo do Popup' },
+        { type: 'title-1', selector: '.creator-popup-title', label: 'Título 1 - Parabéns' },
+        { type: 'title-2', selector: '.creator-popup-creator', label: 'Título 2 - Criador Avançado' },
+        { type: 'body', selector: '.creator-popup-message', label: 'Corpo - Mensagem' },
+        { type: 'button-primary', selector: '.creator-popup-button', label: 'Botão Primário - Continuar' }
       ]
     }
   ]
@@ -1063,12 +942,12 @@ function CardLayoutView({
     
     // Mapa de cores em português
     const colorMap = {
-      'azul': '#2196F3',
-      'blue': '#2196F3',
+      'azul': 'rgb(113, 180, 233)',
+      'blue': 'rgb(113, 180, 233)',
       'vermelho': '#f44336',
       'red': '#f44336',
-      'verde': '#4CAF50',
-      'green': '#4CAF50',
+      'verde': 'rgb(253, 187, 44)',
+      'green': 'rgb(253, 187, 44)',
       'amarelo': '#FFC107',
       'yellow': '#FFC107',
       'preto': '#000000',
@@ -1491,7 +1370,7 @@ function CardLayoutView({
         sourceEl.style.opacity = '0.7'
         sourceEl.style.cursor = 'grabbing'
         sourceEl.style.transition = 'all 0.2s'
-        sourceEl.style.outline = '3px solid #4CAF50'
+        sourceEl.style.outline = '3px solid rgb(253, 187, 44)'
         sourceEl.style.outlineOffset = '4px'
         sourceEl.style.boxShadow = '0 0 10px rgba(76, 175, 80, 0.5)'
       }
@@ -1551,9 +1430,9 @@ function CardLayoutView({
     
     // Mapa de cores
     const colorMap = {
-      'azul': '#2196F3', 'blue': '#2196F3',
+      'azul': 'rgb(113, 180, 233)', 'blue': 'rgb(113, 180, 233)',
       'vermelho': '#f44336', 'red': '#f44336',
-      'verde': '#4CAF50', 'green': '#4CAF50',
+      'verde': 'rgb(253, 187, 44)', 'green': 'rgb(253, 187, 44)',
       'amarelo': '#FFC107', 'yellow': '#FFC107',
       'preto': '#000000', 'black': '#000000',
       'branco': '#ffffff', 'white': '#ffffff',
@@ -1692,8 +1571,8 @@ function CardLayoutView({
 
   // Ordenar cards na ordem da experiência do usuário
   const sortedCards = [...cards].sort((a, b) => {
-    // Ordem específica da experiência: 0, 1, 18, 2, 3, 4, 5, 5.1, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
-    const order = [0, 1, 18, 3, 4, 5, '5.1', 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17]
+    // Ordem específica da experiência: 0, 1, 2, 3, 4, 5, 5.1, 6, 7, 8, 9, 10, 11, 12, 13, 16, 17, 19, 20
+    const order = [0, 1, 2, 3, 4, 5, '5.1', 6, 7, 8, 9, 10, 11, 12, 13, 16, 17, 19, 20]
     const indexA = order.indexOf(a.id)
     const indexB = order.indexOf(b.id)
     // Se não estiver na lista de ordem, coloca no final
@@ -1720,7 +1599,7 @@ function CardLayoutView({
             padding: '12px',
             backgroundColor: elementPosition.position ? '#e3f2fd' : '#fff3cd',
             borderRadius: '6px',
-            border: `2px solid ${elementPosition.position ? '#2196F3' : '#ffc107'}`,
+            border: `2px solid ${elementPosition.position ? 'rgb(113, 180, 233)' : '#ffc107'}`,
             fontSize: '11px',
             fontFamily: 'monospace',
             position: 'sticky',
@@ -1834,212 +1713,85 @@ function CardLayoutView({
               </p>
             )}
           </div>
-          {/* Estilos aplicados automaticamente quando layer muda */}
+          {/* Controle do Toggle de Badges */}
           <div className="control-group">
-            <label>
-              <input 
-                type="checkbox" 
-                checked={showBadgeGallery} 
-                onChange={(e) => setShowBadgeGallery(e.target.checked)}
-              />
-              Mostrar Galeria de Badges
-            </label>
-          </div>
-          {showBadgeGallery && (
-            <div className="control-group">
-              <label>
-                <input 
-                  type="checkbox" 
-                  checked={badgeGalleryExpanded} 
-                  onChange={(e) => setBadgeGalleryExpanded(e.target.checked)}
-                />
-                Galeria Expandida
-              </label>
-            </div>
-          )}
-          
-          {/* Seção de Edição de Elementos */}
-          <div className="control-group" style={{ marginTop: '20px', paddingTop: '20px', borderTop: '2px solid #e0e0e0' }}>
-            <label style={{ fontWeight: 'bold', marginBottom: '12px', display: 'block', fontSize: '14px' }}>
-              Editar Elementos:
-            </label>
-            
-            {/* Lista de Elementos */}
-            <div style={{ 
-              maxHeight: '200px', 
-              overflowY: 'auto', 
-              border: '1px solid #e0e0e0', 
-              borderRadius: '4px',
-              padding: '8px',
-              marginBottom: '12px',
-              backgroundColor: '#f9f9f9'
-            }}>
-              {allElements.map((element) => (
-                <label 
-                  key={element.type}
-                  style={{ 
-                    display: 'flex', 
-                    alignItems: 'center', 
-                    gap: '8px', 
-                    marginBottom: '6px',
-                    padding: '6px',
-                    cursor: 'pointer',
-                    backgroundColor: selectedElements.has(element.type) ? '#e3f2fd' : 'transparent',
-                    borderRadius: '4px',
-                    transition: 'background-color 0.2s',
-                    border: selectedElements.has(element.type) ? '2px solid #2196F3' : '2px solid transparent'
-                  }}
-                >
-                  <input 
-                    type="checkbox" 
-                    checked={selectedElements.has(element.type)} 
-                    onChange={(e) => {
-                      const newSelected = new Set(selectedElements)
-                      if (e.target.checked) {
-                        newSelected.add(element.type)
-                      } else {
-                        newSelected.delete(element.type)
-                      }
-                      setSelectedElements(newSelected)
-                    }}
-                  />
-                  <span style={{ fontSize: '12px', flex: 1 }}>
-                    {element.label}
-                  </span>
-                </label>
-              ))}
-            </div>
-            
-            {/* Campo de Instruções */}
-            <label style={{ fontWeight: 'bold', marginBottom: '8px', display: 'block', fontSize: '13px' }}>
-              Instruções ({selectedElements.size} elemento{selectedElements.size !== 1 ? 's' : ''} selecionado{selectedElements.size !== 1 ? 's' : ''}):
-            </label>
-            <textarea
-              value={instructionText}
-              onChange={(e) => setInstructionText(e.target.value)}
-              onKeyDown={handleInstructionKeyDown}
-              placeholder="Ex: 'Aumentar o tamanho da fonte em 20%' ou 'Mudar a cor para vermelho' ou 'Adicionar sombra'..."
-              disabled={selectedElements.size === 0 || isProcessing}
-              style={{
-                width: '100%',
-                minHeight: '80px',
-                padding: '8px',
-                fontSize: '12px',
-                border: '1px solid #e0e0e0',
-                borderRadius: '4px',
-                resize: 'vertical',
-                fontFamily: 'inherit',
-                backgroundColor: selectedElements.size === 0 ? '#f5f5f5' : '#ffffff',
-                cursor: selectedElements.size === 0 ? 'not-allowed' : 'text'
-              }}
-            />
-            {selectedElements.size === 0 && (
-              <div style={{ marginTop: '4px', fontSize: '11px', color: '#999', fontStyle: 'italic' }}>
-                Selecione pelo menos um elemento acima para editar
-              </div>
-            )}
-            {selectedElements.size > 0 && (
-              <div style={{ marginTop: '8px', display: 'flex', gap: '8px', alignItems: 'center' }}>
-                <button
-                  onClick={handleProcessInstruction}
-                  disabled={!instructionText.trim() || isProcessing}
-                  style={{
-                    flex: 1,
-                    padding: '8px 16px',
-                    backgroundColor: instructionText.trim() && !isProcessing ? '#2196F3' : '#ccc',
-                    color: '#ffffff',
-                    border: 'none',
-                    borderRadius: '4px',
-                    cursor: instructionText.trim() && !isProcessing ? 'pointer' : 'not-allowed',
-                    fontSize: '12px',
-                    fontWeight: '600',
-                    transition: 'background-color 0.2s'
-                  }}
-                >
-                  {isProcessing ? 'Processando...' : 'Aplicar Instrução (Enter)'}
-                </button>
-                <button
-                  onClick={() => {
-                    setSelectedElements(new Set())
-                    setInstructionText('')
-                  }}
-                  style={{
-                    padding: '8px 12px',
-                    backgroundColor: '#f5f5f5',
-                    color: '#333',
-                    border: '1px solid #e0e0e0',
-                    borderRadius: '4px',
-                    cursor: 'pointer',
-                    fontSize: '12px'
-                  }}
-                >
-                  Limpar
-                </button>
-              </div>
-            )}
-            {/* Botão para resetar todos os estilos salvos */}
-            <div style={{ marginTop: '12px', paddingTop: '12px', borderTop: '1px solid #e0e0e0' }}>
-              <button
-                onClick={() => {
-                  if (confirm('Tem certeza que deseja resetar todos os estilos customizados? Esta ação não pode ser desfeita.')) {
-                    clearSavedStyles()
+            <label style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+              <span>Toggle de Badges</span>
+              <div 
+                onClick={(e) => {
+                  e.stopPropagation()
+                  const isAnyVisible = badgeGalleryVisible.size > 0
+                  if (isAnyVisible) {
+                    // Desliga todos
+                    setBadgeGalleryVisible(new Set())
+                  } else {
+                    // Liga todos
+                    const allCards = new Set()
+                    for (let i = 0; i < 21; i++) {
+                      allCards.add(i)
+                    }
+                    setBadgeGalleryVisible(allCards)
                   }
                 }}
-                style={{
-                  width: '100%',
-                  padding: '8px 16px',
-                  backgroundColor: '#f44336',
-                  color: '#ffffff',
-                  border: 'none',
-                  borderRadius: '4px',
-                  cursor: 'pointer',
-                  fontSize: '12px',
-                  fontWeight: '600',
-                  transition: 'background-color 0.2s'
+                style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '8px',
+                  cursor: 'pointer'
                 }}
-                onMouseEnter={(e) => e.target.style.backgroundColor = '#d32f2f'}
-                onMouseLeave={(e) => e.target.style.backgroundColor = '#f44336'}
               >
-                🔄 Resetar Todos os Estilos Customizados
-              </button>
-              <div style={{ marginTop: '4px', fontSize: '11px', color: '#666', fontStyle: 'italic' }}>
-                Remove todas as alterações salvas e recarrega a página
+                <div 
+                  style={{
+                    width: '44px',
+                    height: '24px',
+                    borderRadius: '12px',
+                    background: badgeGalleryVisible.size > 0 ? 'rgb(113, 180, 233)' : '#cccccc',
+                    position: 'relative',
+                    transition: 'background 0.3s',
+                    cursor: 'pointer',
+                    flexShrink: 0
+                  }}
+                >
+                  <div
+                    style={{
+                      width: '20px',
+                      height: '20px',
+                      borderRadius: '50%',
+                      background: '#ffffff',
+                      position: 'absolute',
+                      top: '2px',
+                      left: badgeGalleryVisible.size > 0 ? '22px' : '2px',
+                      transition: 'left 0.3s',
+                      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)'
+                    }}
+                  />
+                </div>
               </div>
-              </div>
-            )}
-            {selectedElements.size > 0 && (
-              <div style={{ marginTop: '8px', padding: '8px', backgroundColor: '#fff3cd', borderRadius: '4px', fontSize: '11px', color: '#856404' }}>
-                <strong>💡 Dica:</strong> Descreva o que você quer fazer com o(s) elemento(s) selecionado(s). Exemplos:
-                <ul style={{ margin: '4px 0 0 20px', padding: 0 }}>
-                  <li>"Aumentar tamanho da fonte em 20%"</li>
-                  <li>"Mudar cor para #FF0000"</li>
-                  <li>"Adicionar borda de 2px"</li>
-                  <li>"Aumentar espaçamento"</li>
-                </ul>
-              </div>
-            )}
+            </label>
           </div>
         </div>
       </div>
       <div className="card-layout-container">
         {sortedCards.map((card) => (
-          <div key={card.id} className="card-layout-item">
+          <div key={card.id} className="card-layout-wrapper">
             <div className="card-layout-label">{card.name}</div>
-            <div className="card-layout-content" id={`card-content-${card.id}`}>
-              {card.component}
-              {showLabels && card.elements && (
-                <ElementLabel 
-                  elements={card.elements.map(el => ({
-                    ...el,
-                    highlighted: selectedElements.has(el.type)
-                  }))} 
-                  containerId={`card-content-${card.id}`}
-                  onElementClick={handleElementClick}
-                />
-              )}
-              {showGrid && (
-                <GridOverlay cardId={card.id} />
-              )}
+            <div className="card-layout-item">
+              <div className="card-layout-content" id={`card-content-${card.id}`}>
+                {card.component}
+                {showLabels && card.elements && (
+                  <ElementLabel 
+                    elements={card.elements.map(el => ({
+                      ...el,
+                      highlighted: selectedElements.has(el.type)
+                    }))} 
+                    containerId={`card-content-${card.id}`}
+                    onElementClick={handleElementClick}
+                  />
+                )}
+                {showGrid && (
+                  <GridOverlay cardId={card.id} />
+                )}
+              </div>
             </div>
           </div>
         ))}
@@ -2129,7 +1881,7 @@ function CardLayoutView({
                 style={{
                   flex: 1,
                   padding: '10px 16px',
-                  backgroundColor: '#4CAF50',
+                  backgroundColor: 'rgb(253, 187, 44)',
                   color: '#ffffff',
                   border: 'none',
                   borderRadius: '4px',
@@ -2138,8 +1890,8 @@ function CardLayoutView({
                   fontWeight: '600',
                   transition: 'background-color 0.2s'
                 }}
-                onMouseEnter={(e) => e.target.style.backgroundColor = '#45a049'}
-                onMouseLeave={(e) => e.target.style.backgroundColor = '#4CAF50'}
+                onMouseEnter={(e) => e.target.style.backgroundColor = 'rgb(230, 170, 40)'}
+                onMouseLeave={(e) => e.target.style.backgroundColor = 'rgb(253, 187, 44)'}
               >
                 📦 Arrastar Elemento
               </button>
@@ -2243,8 +1995,8 @@ function CardLayoutView({
                 disabled={!quickEditInstruction.trim() || isProcessing}
                 style={{
                   padding: '10px 20px',
-                  backgroundColor: quickEditInstruction.trim() && !isProcessing ? '#2196F3' : '#ccc',
-                  color: '#ffffff',
+                  backgroundColor: quickEditInstruction.trim() && !isProcessing ? 'rgb(113, 180, 233)' : '#ccc',
+                  color: quickEditInstruction.trim() && !isProcessing ? '#000000' : '#ffffff',
                   border: 'none',
                   borderRadius: '4px',
                   cursor: quickEditInstruction.trim() && !isProcessing ? 'pointer' : 'not-allowed',
@@ -2290,7 +2042,7 @@ function CardLayoutView({
         >
           <div 
             style={{
-              backgroundColor: '#4CAF50',
+              backgroundColor: 'rgb(253, 187, 44)',
               color: '#ffffff',
               padding: '16px 24px',
               borderRadius: '8px',

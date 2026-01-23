@@ -22,7 +22,7 @@ function BadgeHeader({ earnedBadges, completedTutorials }) {
       name: 'Criador Iniciante',
       symbol: '🏅',
       requirement: 'Tutoriais 1-5 da classe 1',
-      requirementDetail: 'Completar todos os tutoriais de "Os primeiros passos para se tornar Creator"',
+      requirementDetail: 'Completar todos os tutoriais de "Transforme-se num Creator"',
       earned: earnedBadges.includes(2),
       progress: class1Completed.length,
       total: 5
@@ -63,8 +63,25 @@ function BadgeHeader({ earnedBadges, completedTutorials }) {
           <div style={{ fontWeight: 600, marginBottom: '4px' }}>
             {hoveredBadgeData.earned ? (
               <>
-                <span style={{ color: '#4CAF50', marginRight: '6px' }}>✓</span>
-                {hoveredBadgeData.name} - Conquistado!
+                <span style={{ 
+                  color: '#000000', 
+                  marginRight: '6px',
+                  fontSize: '12px',
+                  lineHeight: '1.4'
+                }}>
+                  <span style={{ 
+                    fontSize: '12px',
+                    lineHeight: '1.4'
+                  }}>✓</span>
+                </span>
+                <span style={{
+                  fontSize: '12px',
+                  color: '#000000',
+                  lineHeight: '1.4',
+                  textDecoration: 'underline',
+                  textDecorationThickness: '1px',
+                  textUnderlineOffset: '4px'
+                }}>{hoveredBadgeData.name} - Conquistado!</span>
               </>
             ) : (
               hoveredBadgeData.name
