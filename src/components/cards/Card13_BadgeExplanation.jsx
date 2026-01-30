@@ -1,6 +1,133 @@
 import './Card.css'
 
-function Card13_BadgeExplanation({ onClose }) {
+function Card13_BadgeExplanation({ onClose, uxLensesVariant = false }) {
+  if (uxLensesVariant) {
+    const badges = [
+      {
+        name: 'PRIMEIRO PASSO',
+        requisito: 'Completar o tutorial 1 da classe 1',
+        descricao: 'O primeiro marco de quem começa a criar no Roblox Studio. Indica domínio dos conceitos básicos da plataforma.'
+      },
+      {
+        name: 'CRIADOR INICIANTE',
+        requisito: 'Completar todos os 5 tutoriais da classe 1',
+        descricao: 'Prova que você demonstra domínio dos fundamentos essenciais e está pronto para um desafio mais sério.'
+      },
+      {
+        name: 'CRIADOR AVANÇADO',
+        requisito: 'Completar o tutorial 1 da classe 1',
+        descricao: 'Aqui você ja domina técnicas avançadas de criação e está preparado para desenvolver projetos complexos.'
+      }
+    ]
+
+    return (
+      <div className="card card-badge-explanation" style={{ background: '#e8f4fc', display: 'flex', flexDirection: 'column' }}>
+        {/* Botão fechar */}
+        <div className="no-padding-override" style={{ padding: '16px 20px', flex: 'none' }}>
+          <button
+            onClick={onClose}
+            style={{
+              width: '100%',
+              background: '#fbbf24',
+              border: 'none',
+              borderRadius: '50px',
+              padding: '14px 24px',
+              fontSize: '16px',
+              fontWeight: 600,
+              color: '#000000',
+              cursor: 'pointer'
+            }}
+          >
+            fechar
+          </button>
+        </div>
+
+        {/* Conteúdo */}
+        <div style={{ padding: '0 20px 20px', flex: 1, overflowY: 'auto' }}>
+          <h2 style={{
+            fontSize: '20px',
+            fontWeight: 700,
+            color: '#000000',
+            margin: '0 0 20px 0'
+          }}>
+            Tipos de badges:
+          </h2>
+
+          {badges.map((badge, index) => (
+            <div key={index} style={{
+              background: '#ffffff',
+              borderRadius: '12px',
+              padding: '16px',
+              marginBottom: '16px',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.05)'
+            }}>
+              {/* Header do badge */}
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', marginBottom: '8px' }}>
+                {/* Ícone hexagonal roxo */}
+                <div style={{
+                  width: '40px',
+                  height: '40px',
+                  background: '#a78bfa',
+                  borderRadius: '8px',
+                  flexShrink: 0,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="#ffffff">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 style={{
+                    fontSize: '16px',
+                    fontWeight: 700,
+                    color: '#f59e0b',
+                    margin: '0 0 2px 0'
+                  }}>
+                    {badge.name}
+                  </h3>
+                  <span style={{
+                    fontSize: '13px',
+                    color: '#6b7280'
+                  }}>
+                    Requisito:
+                  </span>
+                </div>
+              </div>
+
+              {/* Barra de requisito */}
+              <div style={{
+                background: '#f59e0b',
+                borderRadius: '6px',
+                padding: '8px 12px',
+                marginBottom: '12px'
+              }}>
+                <span style={{
+                  fontSize: '13px',
+                  fontWeight: 600,
+                  color: '#ffffff'
+                }}>
+                  {badge.requisito}
+                </span>
+              </div>
+
+              {/* Descrição */}
+              <p style={{
+                fontSize: '14px',
+                color: '#4b5563',
+                lineHeight: 1.4,
+                margin: 0
+              }}>
+                {badge.descricao}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="card card-badge-explanation">
       <div className="card-header-global single-button-header">

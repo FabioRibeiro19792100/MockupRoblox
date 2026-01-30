@@ -719,6 +719,7 @@ function CardLayoutView({
           onContinue={() => navigateToNextCard(8.5)}
           onMenu={onMenu || (() => {})}
           onRestart={onRestart || (() => {})}
+          uxLensesVariant={currentLayer === 'layer12'}
         />,
         8
       ),
@@ -739,6 +740,7 @@ function CardLayoutView({
           onContinue={() => navigateToNextCard(8.5)}
           onMenu={onMenu || (() => {})}
           onRestart={onRestart || (() => {})}
+          uxLensesVariant={currentLayer === 'layer12'}
         />,
         8.5
       ),
@@ -831,6 +833,7 @@ function CardLayoutView({
       component: (
         <Card13_BadgeExplanation
           onClose={() => navigateToNextCard(13)}
+          uxLensesVariant={currentLayer === 'layer12'}
         />
       ),
       elements: [
@@ -844,7 +847,7 @@ function CardLayoutView({
       name: 'Creator Popup - Conquista',
       component: (
         <div className="card" style={{ padding: '24px', background: '#ffffff', height: '100%', position: 'relative', overflow: 'visible', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <CreatorPopup onClose={() => {}} />
+          <CreatorPopup onClose={() => {}} uxLensesVariant={currentLayer === 'layer12'} />
         </div>
       ),
       elements: [

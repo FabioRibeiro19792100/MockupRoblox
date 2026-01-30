@@ -1,6 +1,63 @@
 import './CreatorPopup.css'
 
-function CreatorPopup({ onClose }) {
+function CreatorPopup({ onClose, uxLensesVariant = false }) {
+  if (uxLensesVariant) {
+    const topBadges = [
+      { id: 1, label: 'Lorem ipsum', earned: true },
+      { id: 2, label: 'Lorem ipsum', earned: true },
+      { id: 3, label: 'Lorem ipsum', earned: false }
+    ]
+    const bottomBadges = [
+      { id: 4, label: 'Lorem ipsum', earned: false },
+      { id: 5, label: 'Lorem ipsum', earned: false },
+      { id: 6, label: 'Lorem ipsum', earned: false }
+    ]
+
+    return (
+      <div className="creator-popup-overlay creator-popup-gallery-overlay" onClick={onClose}>
+        <div className="creator-popup-content creator-popup-gallery" onClick={(e) => e.stopPropagation()}>
+          <button className="creator-popup-gallery-close" onClick={onClose}>×</button>
+
+          <button className="creator-popup-gallery-title" type="button">
+            GALERIA DE BADGES
+          </button>
+
+          <div className="creator-popup-gallery-divider" />
+          <div className="creator-popup-gallery-label">Conquistadas:</div>
+          <div className="creator-popup-gallery-count">
+            <span className="count-current">2</span>
+            <span className="count-total">/9</span>
+          </div>
+          <div className="creator-popup-gallery-divider" />
+
+          <div className="creator-popup-badges-grid">
+            {topBadges.map((badge) => (
+              <div key={badge.id} className="creator-popup-badge-item">
+                <div className={`creator-popup-badge-hex ${badge.earned ? 'earned' : 'locked'}`} />
+                <div className="creator-popup-badge-label">{badge.label}</div>
+              </div>
+            ))}
+          </div>
+
+          <div className="creator-popup-badge-card">
+            <div className="badge-card-title">PRIMEIRO PASSO</div>
+            <div className="badge-card-subtitle">Completar: construir uma casa.</div>
+            <div className="badge-card-progress">PROGRESSO: 0/1</div>
+          </div>
+
+          <div className="creator-popup-badges-grid">
+            {bottomBadges.map((badge) => (
+              <div key={badge.id} className="creator-popup-badge-item">
+                <div className="creator-popup-badge-hex locked" />
+                <div className="creator-popup-badge-label">{badge.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="creator-popup-overlay" onClick={onClose}>
       <div className="creator-popup-content" onClick={(e) => e.stopPropagation()}>
