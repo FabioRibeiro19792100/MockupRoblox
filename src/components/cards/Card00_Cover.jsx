@@ -3,7 +3,7 @@ import './Card.css'
 function Card00_Cover({ onStart }) {
   return (
     <div className="card card-cover">
-      <div style={{ padding: '24px 24px', paddingRight: '24px', paddingBottom: '100px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', flex: 1 }}>
+      <div style={{ padding: '24px 24px 24px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', flex: '1 1 0%' }}>
         <div className="card-content">
           {/* Logo */}
           <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
@@ -69,7 +69,6 @@ function Card00_Cover({ onStart }) {
             fontSize: '16px',
             lineHeight: 1.5,
             marginBottom: '24px',
-            fontStyle: 'italic',
             color: '#ffffff'
           }}>
             Aqui você começa como criador.<br />
@@ -95,7 +94,7 @@ function Card00_Cover({ onStart }) {
                   <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
               </div>
-              <span style={{ color: '#ffffff', fontSize: '15px', fontStyle: 'italic' }}>Não precisa saber programar</span>
+              <span style={{ color: '#ffffff', fontSize: '15px' }}>Não precisa saber programar</span>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -113,7 +112,7 @@ function Card00_Cover({ onStart }) {
                   <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
               </div>
-              <span style={{ color: '#ffffff', fontSize: '15px', fontStyle: 'italic' }}>Leva cerca de 10 minutos</span>
+              <span style={{ color: '#ffffff', fontSize: '15px' }}>Leva cerca de 10 minutos</span>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -131,7 +130,7 @@ function Card00_Cover({ onStart }) {
                   <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
               </div>
-              <span style={{ color: '#ffffff', fontSize: '15px', fontStyle: 'italic' }}>Você pode sair a qualquer momento</span>
+              <span style={{ color: '#ffffff', fontSize: '15px' }}>Você pode sair a qualquer momento</span>
             </div>
           </div>
         </div>

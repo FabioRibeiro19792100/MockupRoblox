@@ -46,9 +46,7 @@ function Card07_InteractionInvite({ onTry, onContinue, onMenu, onRestart, uxLens
           minHeight: 0,
           background: 'linear-gradient(180deg, #5a9fd4 0%, #7ab8e8 100%)',
           borderRadius: '20px',
-          margin: '0 16px 16px 16px',
-          display: 'flex',
-          flexDirection: 'column',
+          margin: '0 16px 76px 16px',
           position: 'relative',
           overflow: 'hidden'
         }}>

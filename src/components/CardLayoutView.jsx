@@ -350,8 +350,141 @@ function CardLayoutView({
         </div>
         {/* Galeria de badges - overlay absoluto que não move nada, posicionada acima dos botões */}
         {/* Só mostra a galeria se estiver expandida */}
-        {isCardExpanded && (
-        <div className={`badge-gallery-fixed expanded`} style={{ 
+        {isCardExpanded && currentLayer === 'layer12' ? (
+          // UX Lenses variant - Creator Popup Conquista style
+          <div className={`badge-gallery-fixed expanded`} style={{
+            background: '#ffffff',
+            borderRadius: '24px',
+            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
+            position: 'absolute',
+            top: '60px',
+            bottom: '10px',
+            left: '16px',
+            right: '16px',
+            zIndex: 100,
+            overflow: 'hidden',
+            display: 'flex',
+            flexDirection: 'column',
+            padding: '24px 20px'
+          }}>
+            {/* Botão X fechar */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation()
+                toggleCardGallery()
+              }}
+              style={{
+                position: 'absolute',
+                top: '16px',
+                right: '16px',
+                width: '32px',
+                height: '32px',
+                borderRadius: '50%',
+                background: '#ef4444',
+                border: 'none',
+                color: '#ffffff',
+                fontSize: '18px',
+                fontWeight: 700,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              ×
+            </button>
+
+            {/* Botão GALERIA DE BADGES */}
+            <button
+              style={{
+                background: '#fbbf24',
+                border: 'none',
+                borderRadius: '50px',
+                padding: '14px 32px',
+                fontSize: '16px',
+                fontWeight: 700,
+                color: '#1f2937',
+                cursor: 'pointer',
+                alignSelf: 'center',
+                marginTop: '24px',
+                marginBottom: '20px'
+              }}
+            >
+              GALERIA DE BADGES
+            </button>
+
+            {/* Conquistadas contador */}
+            <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+              <p style={{ fontSize: '14px', color: '#6b7280', margin: '0 0 4px 0' }}>Conquistadas:</p>
+              <p style={{ fontSize: '28px', fontWeight: 700, margin: 0, color: '#1f2937' }}>
+                <span style={{ color: '#1f2937' }}>2</span>
+                <span style={{ color: '#9ca3af' }}>/9</span>
+              </p>
+            </div>
+
+            {/* Primeira linha de badges */}
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: '24px',
+              marginBottom: '16px'
+            }}>
+              {[true, true, false].map((earned, i) => (
+                <div key={i} style={{ textAlign: 'center' }}>
+                  <div style={{
+                    width: '56px',
+                    height: '64px',
+                    background: earned ? '#7c3aed' : '#c4b5fd',
+                    clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
+                    border: '3px solid #fbbf24',
+                    marginBottom: '6px'
+                  }} />
+                  <span style={{ fontSize: '11px', color: '#6b7280' }}>Lorem ipsum</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Card PRIMEIRO PASSO */}
+            <div style={{
+              background: 'linear-gradient(135deg, #f97316 0%, #fb923c 100%)',
+              borderRadius: '12px',
+              padding: '14px 16px',
+              marginBottom: '16px'
+            }}>
+              <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#ffffff', margin: '0 0 4px 0' }}>
+                PRIMEIRO PASSO
+              </h3>
+              <p style={{ fontSize: '13px', color: '#ffffff', margin: '0 0 6px 0' }}>
+                Completar: construir uma casa.
+              </p>
+              <p style={{ fontSize: '12px', fontWeight: 600, color: '#fef3c7', margin: 0 }}>
+                PROGRESSO: 0/1
+              </p>
+            </div>
+
+            {/* Segunda linha de badges */}
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: '24px'
+            }}>
+              {[false, false, false].map((earned, i) => (
+                <div key={i} style={{ textAlign: 'center' }}>
+                  <div style={{
+                    width: '56px',
+                    height: '64px',
+                    background: '#c4b5fd',
+                    clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
+                    border: '3px solid #fbbf24',
+                    marginBottom: '6px'
+                  }} />
+                  <span style={{ fontSize: '11px', color: '#6b7280' }}>Lorem ipsum</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : isCardExpanded ? (
+        <div className={`badge-gallery-fixed expanded`} style={{
           background: 'linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%)',
           borderTop: '2px solid rgb(113, 180, 233)',
           boxShadow: '0 -2px 8px rgba(0, 0, 0, 0.15)',
@@ -365,7 +498,7 @@ function CardLayoutView({
           overflow: 'hidden',
           transition: 'max-height 0.3s ease, min-height 0.3s ease'
         }}>
-          <div 
+          <div
             className="badge-gallery-header"
             onClick={(e) => {
               e.stopPropagation()
@@ -390,8 +523,8 @@ function CardLayoutView({
               <h2 style={{ fontSize: '20px', paddingTop: '0px', marginBottom: '0px', margin: 0, color: '#000000' }}>
                 Galeria de Badges
               </h2>
-              <span style={{ 
-                fontSize: '24px', 
+              <span style={{
+                fontSize: '24px',
                 fontWeight: 700,
                 color: '#000000',
                 transition: 'transform 0.3s',
@@ -406,8 +539,8 @@ function CardLayoutView({
             </div>
           </div>
           {isCardExpanded && (
-            <div className="badge-gallery-content" style={{ 
-              padding: '12px 24px', 
+            <div className="badge-gallery-content" style={{
+              padding: '12px 24px',
               background: '#f9f9f9',
               maxHeight: `${galleryHeight - 100}px`, // Altura total menos o header (100px)
               overflowY: 'auto'
@@ -428,22 +561,22 @@ function CardLayoutView({
                 </button>
               </div>
               <div>
-                <BadgeHeader 
-                  earnedBadges={earnedBadges || [1, 2]} 
+                <BadgeHeader
+                  earnedBadges={earnedBadges || [1, 2]}
                   completedTutorials={completedTutorials || { class1: [1, 2, 3, 4, 5], class2: [1, 2] }}
                 />
               </div>
             </div>
           )}
         </div>
-        )}
+        ) : null}
       </div>
     )
   }
 
   // Função para navegar para o próximo card no layout
   const navigateToNextCard = (currentId) => {
-    const order = [0, 1, 2, 3, 1.5, 5, 6, '5.1', 7, 8.4, 8, 8.5, 9, 10, 11, 12, 13, 16, 17, 19, 20]
+    const order = [0, 1, 2, 3, 1.5, 5, 6, '5.1', 7, 8.4, 8, 8.5, 9, 10, 11, 12, 13, 16, 17]
     const currentIndex = order.indexOf(currentId)
     if (currentIndex !== -1 && currentIndex < order.length - 1) {
       const nextId = order[currentIndex + 1]
@@ -859,40 +992,6 @@ function CardLayoutView({
         { type: 'button-primary', selector: '.creator-popup-button', label: 'Botão Primário - Continuar' }
       ]
     },
-    {
-      id: 19,
-      name: 'Badge Popup 2 - Criador Iniciante',
-      component: (
-        <div className="card" style={{ padding: '24px', background: '#ffffff', height: '100%', position: 'relative', overflow: 'visible', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <BadgePopup2 onClose={() => {}} />
-        </div>
-      ),
-      elements: [
-        { type: 'popup-overlay', selector: '.creator-popup-overlay', label: 'Overlay do Popup' },
-        { type: 'popup-content', selector: '.creator-popup-content', label: 'Conteúdo do Popup' },
-        { type: 'title-1', selector: '.creator-popup-title', label: 'Título 1 - Parabéns' },
-        { type: 'title-2', selector: '.creator-popup-creator', label: 'Título 2 - Criador Iniciante' },
-        { type: 'body', selector: '.creator-popup-message', label: 'Corpo - Mensagem' },
-        { type: 'button-primary', selector: '.creator-popup-button', label: 'Botão Primário - Continuar' }
-      ]
-    },
-    {
-      id: 20,
-      name: 'Badge Popup 3 - Criador Avançado',
-      component: (
-        <div className="card" style={{ padding: '24px', background: '#ffffff', height: '100%', position: 'relative', overflow: 'visible', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <BadgePopup3 onClose={() => {}} />
-        </div>
-      ),
-      elements: [
-        { type: 'popup-overlay', selector: '.creator-popup-overlay', label: 'Overlay do Popup' },
-        { type: 'popup-content', selector: '.creator-popup-content', label: 'Conteúdo do Popup' },
-        { type: 'title-1', selector: '.creator-popup-title', label: 'Título 1 - Parabéns' },
-        { type: 'title-2', selector: '.creator-popup-creator', label: 'Título 2 - Criador Avançado' },
-        { type: 'body', selector: '.creator-popup-message', label: 'Corpo - Mensagem' },
-        { type: 'button-primary', selector: '.creator-popup-button', label: 'Botão Primário - Continuar' }
-      ]
-    }
   ]
 
   // Debug: verificar se o componente está renderizando
@@ -1627,7 +1726,16 @@ function CardLayoutView({
   }
 
   // Ordenar cards na ordem da experiência do usuário
-  const sortedCards = [...cards].sort((a, b) => {
+  const sortedCards = [...cards]
+    // Filtrar cards específicos para UX Lenses (layer12)
+    .filter(card => {
+      // Remover Card de Transição - Modo Observador (id 1.5) no UX Lenses
+      if (currentLayer === 'layer12' && card.id === 1.5) {
+        return false
+      }
+      return true
+    })
+    .sort((a, b) => {
     // Ordem específica da experiência: 0, 1, 2, 3, 1.4, 1.5, 5, 6, 5.1, 7, 7.6, 8.4, 8, 8.5, 9, 10, 11, 11.5, 12, 12.5, 13, 16, 17, 19, 20
     const order = [0, 1, 2, 3, 1.4, 1.5, 5, 6, '5.1', 7, 7.6, 8.4, 8, 8.5, 9, 10, 11, 11.5, 12, 12.5, 13, 16, 17, 19, 20]
     const indexA = order.indexOf(a.id)

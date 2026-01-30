@@ -16,7 +16,7 @@ function Card13_BadgeExplanation({ onClose, uxLensesVariant = false }) {
       {
         name: 'CRIADOR AVANÇADO',
         requisito: 'Completar o tutorial 1 da classe 1',
-        descricao: 'Aqui você ja domina técnicas avançadas de criação e está preparado para desenvolver projetos complexos.'
+        descricao: 'Aqui você já domina técnicas avançadas de criação e está preparado para desenvolver projetos complexos.'
       }
     ]
 
@@ -55,29 +55,21 @@ function Card13_BadgeExplanation({ onClose, uxLensesVariant = false }) {
 
           {badges.map((badge, index) => (
             <div key={index} style={{
-              background: '#ffffff',
-              borderRadius: '12px',
-              padding: '16px',
-              marginBottom: '16px',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.05)'
+              padding: '10px 0 18px',
+              borderBottom: index < badges.length - 1 ? '2px dotted #cbd5e1' : 'none'
             }}>
               {/* Header do badge */}
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', marginBottom: '8px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
                 {/* Ícone hexagonal roxo */}
                 <div style={{
-                  width: '40px',
-                  height: '40px',
+                  width: '44px',
+                  height: '44px',
                   background: '#a78bfa',
-                  borderRadius: '8px',
+                  borderRadius: '12px',
                   flexShrink: 0,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="#ffffff">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                  </svg>
-                </div>
+                  clipPath: 'polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)',
+                  border: '3px solid #fbbf24'
+                }} />
                 <div>
                   <h3 style={{
                     fontSize: '16px',
@@ -98,9 +90,9 @@ function Card13_BadgeExplanation({ onClose, uxLensesVariant = false }) {
 
               {/* Barra de requisito */}
               <div style={{
-                background: '#f59e0b',
-                borderRadius: '6px',
-                padding: '8px 12px',
+                background: '#60a5fa',
+                borderRadius: '0px',
+                padding: '6px 10px',
                 marginBottom: '12px'
               }}>
                 <span style={{
