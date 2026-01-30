@@ -64,6 +64,10 @@ const LAYER_STYLES = {
   layer11: {
     name: 'Variação Back11',
     description: 'Background Back11.png aplicado em cards selecionados'
+  },
+  layer12: {
+    name: 'Variação Back09 - UX lenses',
+    description: 'Background back09.jpg aplicado em cards selecionados (UX lenses)'
   }
 }
 
@@ -593,21 +597,6 @@ function CardLayoutView({
       ]
     },
     {
-      id: 1.4,
-      name: 'Card de Transição - Modo Observador',
-      component: (
-        <CardTransition_Demonstrative
-          onContinue={() => navigateToNextCard(1.4)}
-          onMenu={onMenu || (() => {})}
-        />
-      ),
-      elements: [
-        { type: 'title-1', selector: 'h3', label: 'Título - MODO OBSERVADOR' },
-        { type: 'body', selector: 'p', label: 'Corpo - Texto explicativo' },
-        { type: 'button-primary', selector: '.primary-button', label: 'Botão - ISSO NÃO FAZ PARTE DO LAYOUT' }
-      ]
-    },
-    {
       id: 1.5,
       name: 'Card 05 - Modo Observador (Demonstração)',
       component: (
@@ -616,6 +605,7 @@ function CardLayoutView({
           onMenu={onMenu || (() => {})}
           initialMode="demonstrative"
           dimmedOpacity={0.2}
+          showProgressBadge={currentLayer === 'layer12'}
         />
       ),
       elements: [
@@ -640,6 +630,7 @@ function CardLayoutView({
             if (onQuickComplete) onQuickComplete()
             else if (onMenu) onMenu()
           }}
+          uxLensesVariant={currentLayer === 'layer12'}
         />,
         5
       ),
@@ -662,6 +653,7 @@ function CardLayoutView({
           stepNumber={currentStep}
           totalSteps={3}
           stepTitle={mockStepData.title}
+          uxLensesVariant={currentLayer === 'layer12'}
           onDemonstrate={() => {
             if (onCardAction) onCardAction('demonstrate')
             navigateToNextCard(6)
@@ -705,6 +697,7 @@ function CardLayoutView({
           }}
           onMenu={onMenu || (() => {})}
           onRestart={onRestart || (() => {})}
+          uxLensesVariant={currentLayer === 'layer12'}
         />
       ),
       elements: [
@@ -714,75 +707,6 @@ function CardLayoutView({
         { type: 'button-feedback', selector: '.feedback-button.positive', label: 'Botão Feedback - Positivo 👍' },
         { type: 'button-feedback', selector: '.feedback-button.negative', label: 'Botão Feedback - Negativo 👎' },
         { type: 'button-primary', selector: '.primary-button', label: 'Botão Primário - Continuar' },
-        { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' }
-      ]
-    },
-    {
-      id: 7,
-      name: 'Card 10 - Após Ação',
-      component: renderBadgeGallery(
-        <Card06_AfterAction
-          stepNumber={currentStep}
-          totalSteps={3}
-          stepTitle={mockStepData.title}
-          onNextStep={() => {
-            setCurrentStep(Math.min(3, currentStep + 1))
-            navigateToNextCard(8.4)
-          }}
-          onBack={() => setCurrentStep(Math.max(1, currentStep - 1))}
-          onMenu={onMenu || (() => {})}
-          onRestart={onRestart || (() => {})}
-        />,
-        7
-      ),
-      elements: [
-        { type: 'title-2', selector: '.card-title', label: 'Título 2' },
-        { type: 'theme-box', selector: '.theme-box', label: 'Theme Box' },
-        { type: 'step-title-bar', selector: '.step-title-bar', label: 'Barra de Título' },
-        { type: 'button-secondary', selector: '.secondary-button', label: 'Botão Secundário - Voltar' },
-        { type: 'button-next', selector: '.next-step-button', label: 'Botão Próximo Passo' },
-        { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' },
-        { type: 'card-actions', selector: '.card-actions', label: 'Área de Ações - Footer' },
-        { type: 'badge-gallery', selector: '.badge-gallery-fixed', label: 'Galeria de Badges - Fixa' },
-        { type: 'badge-scoreboard', selector: '.badge-scoreboard', label: 'Placar de Badges' }
-      ]
-    },
-    {
-      id: 7.6,
-      name: 'Card de Transição - Modo Aprendizado',
-      component: (
-        <CardTransition_Interactive
-          onContinue={() => navigateToNextCard(7.6)}
-          onMenu={onMenu || (() => {})}
-        />
-      ),
-      elements: [
-        { type: 'title-1', selector: 'h3', label: 'Título - MODO APRENDIZADO' },
-        { type: 'body', selector: 'p', label: 'Corpo - Texto explicativo' },
-        { type: 'button-primary', selector: '.interactive-button', label: 'Botão - Continuar no Fluxo' },
-        { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' }
-      ]
-    },
-    {
-      id: 8.4,
-      name: 'Card 12 - Modo Aprendizado (Demonstração)',
-      component: (
-        <Card03_ModeSelection
-          onModeSelect={(mode) => {
-            setTutorialMode(mode)
-            if (onModeSelect) onModeSelect(mode)
-            navigateToNextCard(8.4)
-          }}
-          onMenu={onMenu || (() => {})}
-          initialMode="interactive"
-          dimmedOpacity={0.15}
-        />
-      ),
-      elements: [
-        { type: 'title-1', selector: '.card-title', label: 'Título 1' },
-        { type: 'button-mode', selector: '.mode-button', label: 'Botão de Modo' },
-        { type: 'title-2', selector: '.mode-title', label: 'Título 2 - Subtítulo' },
-        { type: 'body', selector: '.mode-description', label: 'Corpo - Descrição' },
         { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' }
       ]
     },
@@ -828,32 +752,6 @@ function CardLayoutView({
       ]
     },
     {
-      id: 9,
-      name: 'Card 13 - Tentativa',
-      component: renderBadgeGallery(
-        <Card08_UserAttempt
-          stepNumber={currentStep}
-          totalSteps={3}
-          stepTitle={mockStepData.title}
-          onCheckResult={() => {
-            if (onCardAction) onCardAction('demonstrate')
-            navigateToNextCard(9)
-          }}
-          onSkip={() => navigateToNextCard(9)}
-          onMenu={onMenu || (() => {})}
-          onRestart={onRestart || (() => {})}
-        />,
-        9
-      ),
-      elements: [
-        { type: 'button-attempt', selector: '.user-attempt-button', label: 'Botão de Tentativa - Verificar' },
-        { type: 'link-skip', selector: '.skip-link', label: 'Link Pular' },
-        { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' },
-        { type: 'badge-gallery', selector: '.badge-gallery-fixed', label: 'Galeria de Badges - Fixa' },
-        { type: 'badge-scoreboard', selector: '.badge-scoreboard', label: 'Placar de Badges' }
-      ]
-    },
-    {
       id: 10,
       name: 'Card 14 - Feedback Positivo',
       component: renderBadgeGallery(
@@ -862,6 +760,7 @@ function CardLayoutView({
           onContinue={() => navigateToNextCard(11.5)}
           onMenu={onMenu || (() => {})}
           onRestart={onRestart || (() => {})}
+          uxLensesVariant={currentLayer === 'layer12'}
         />,
         10
       ),
@@ -884,6 +783,7 @@ function CardLayoutView({
           onContinue={() => navigateToNextCard(11.5)}
           onMenu={onMenu || (() => {})}
           onRestart={onRestart || (() => {})}
+          uxLensesVariant={currentLayer === 'layer12'}
         />,
         11
       ),
@@ -895,21 +795,6 @@ function CardLayoutView({
         { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' },
         { type: 'badge-gallery', selector: '.badge-gallery-fixed', label: 'Galeria de Badges - Fixa' },
         { type: 'badge-scoreboard', selector: '.badge-scoreboard', label: 'Placar de Badges' }
-      ]
-    },
-    {
-      id: 11.5,
-      name: 'Card de Transição - Fluxos se Encontram',
-      component: (
-        <CardTransition_Reunion
-          onContinue={() => navigateToNextCard(11.5)}
-          onMenu={onMenu || (() => {})}
-        />
-      ),
-      elements: [
-        { type: 'title-1', selector: 'h3', label: 'Título - FLUXOS SE ENCONTRAM' },
-        { type: 'body', selector: 'p', label: 'Corpo - Texto explicativo' },
-        { type: 'button-primary', selector: '.primary-button', label: 'Botão - ISSO NÃO FAZ PARTE DO LAYOUT' }
       ]
     },
     {
@@ -927,6 +812,7 @@ function CardLayoutView({
             if (onQuickComplete) onQuickComplete()
             navigateToNextCard(12.5)
           }}
+          uxLensesVariant={currentLayer === 'layer12'}
         />,
         12
       ),
@@ -937,21 +823,6 @@ function CardLayoutView({
         { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' },
         { type: 'badge-gallery', selector: '.badge-gallery-fixed', label: 'Galeria de Badges - Fixa' },
         { type: 'badge-scoreboard', selector: '.badge-scoreboard', label: 'Placar de Badges' }
-      ]
-    },
-    {
-      id: 12.5,
-      name: 'Card de Transição - Badges e Conquistas',
-      component: (
-        <CardTransition_Badges
-          onContinue={() => navigateToNextCard(12.5)}
-          onMenu={onMenu || (() => {})}
-        />
-      ),
-      elements: [
-        { type: 'title-1', selector: 'h3', label: 'Título - BADGES E CONQUISTAS' },
-        { type: 'body', selector: 'p', label: 'Corpo - Texto explicativo' },
-        { type: 'button-primary', selector: '.primary-button', label: 'Botão - ISSO NÃO FAZ PARTE DO LAYOUT' }
       ]
     },
     {

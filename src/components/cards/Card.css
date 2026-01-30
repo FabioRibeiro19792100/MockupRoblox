@@ -169,7 +169,7 @@
 
 
 /* Conteúdo scrollável entre header e botões */
-.card-with-badge-toggle .card > div:not(.card-header-global):not(.card-actions) {
+.card-with-badge-toggle .card > div:not(.card-header-global):not(.card-actions):not(.no-padding-override) {
   flex: 1;
   overflow-y: auto !important;
   overflow-x: hidden !important;
@@ -353,8 +353,14 @@
 
 /* Títulos dentro dos acordeões (headers) ficam pretos */
 .card-selection .card-content > div > div:first-child h3,
-.card-selection .card-content > div > div:first-child span {
+.card-selection .card-content > div > div:first-child p,
+.card-selection .card-content > div > div:first-child span:not(.badge-tag) {
   color: #000000 !important;
+}
+
+/* Badge tags mantêm suas cores originais */
+.card-selection .badge-tag {
+  color: #ffffff !important;
 }
 
 /* Botões de acordeão mantêm fundo sólido (não transparente) */
@@ -387,10 +393,6 @@
 
 /* Quando acordeão está aberto, fundo mais opaco (mais branco) */
 .card-selection .card-content > div > div:not(:first-child) {
-  background: rgba(255, 255, 255, 0.95) !important;
-}
-
-.card-selection .card-content > div > div > div {
   background: rgba(255, 255, 255, 0.95) !important;
 }
 
@@ -883,6 +885,28 @@
   right: 0 !important;
   margin-top: 0 !important;
   z-index: 52 !important;
+}
+
+.confetti-piece {
+  animation-name: confetti-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  transform: translate3d(0, 0, 0) rotate(var(--confetti-rotate, 0deg));
+  will-change: transform, opacity;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translate3d(0, -20px, 0) rotate(var(--confetti-rotate, 0deg));
+    opacity: 0.95;
+  }
+  80% {
+    opacity: 0.95;
+  }
+  100% {
+    transform: translate3d(var(--confetti-drift, 0px), 360px, 0) rotate(calc(var(--confetti-rotate, 0deg) + 90deg));
+    opacity: 0;
+  }
 }
 
 
