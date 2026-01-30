@@ -104,8 +104,6 @@ function Card07_5_LearningMode({ onContinue, onMenu, onRestart, uxLensesVariant 
           {/* Área de conteúdo com scroll */}
           <div style={{
             flex: '1 1 auto',
-            overflowY: 'auto',
-            overflowX: 'hidden',
             padding: '0 20px 20px',
             display: 'flex',
             flexDirection: 'column',
@@ -116,7 +114,6 @@ function Card07_5_LearningMode({ onContinue, onMenu, onRestart, uxLensesVariant 
             <h1 style={{
               fontSize: '22px',
               fontWeight: 800,
-              fontStyle: 'italic',
               color: '#1e3a5f',
               margin: '16px 0 16px 0',
               lineHeight: 1.2
@@ -128,7 +125,6 @@ function Card07_5_LearningMode({ onContinue, onMenu, onRestart, uxLensesVariant 
             <p style={{
               fontSize: '14px',
               fontWeight: 700,
-              fontStyle: 'italic',
               color: '#1e3a5f',
               lineHeight: 1.5,
               margin: '0 0 16px 0',
@@ -140,10 +136,11 @@ function Card07_5_LearningMode({ onContinue, onMenu, onRestart, uxLensesVariant 
             {/* Texto secundário em laranja */}
             <p style={{
               fontSize: '13px',
-              color: '#f97316',
+              color: '#ffffff',
               lineHeight: 1.5,
               margin: '0 0 16px 0',
-              maxWidth: '280px'
+              maxWidth: '280px',
+              fontWeight: 700
             }}>
               Em seguida, você será convidado(a) a reconstruir a experiência por conta própria. Durante o percurso, poderá pedir dicas e verificar se conseguiu cumprir a missão.
             </p>
@@ -152,7 +149,7 @@ function Card07_5_LearningMode({ onContinue, onMenu, onRestart, uxLensesVariant 
             <p style={{
               fontSize: '16px',
               fontWeight: 700,
-              color: '#f97316',
+              color: '#ffffff',
               margin: '0 0 20px 0'
             }}>
               E aí, preparado?

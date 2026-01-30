@@ -61,17 +61,18 @@ function Card13_BadgeExplanation({ onClose, uxLensesVariant = false }) {
               {/* Header do badge */}
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
                 {/* Ícone hexagonal roxo */}
-                <div style={{
-                  width: '44px',
-                  height: '44px',
-                  background: '#a78bfa',
-                  borderRadius: '12px',
-                  flexShrink: 0,
-                  clipPath: 'polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)',
-                  border: '3px solid #fbbf24'
-                }} />
+                <img
+                  src="/badge-icon.png"
+                  alt="Badge"
+                  style={{
+                    width: '44px',
+                    height: '44px',
+                    objectFit: 'contain',
+                    flexShrink: 0
+                  }}
+                />
                 <div>
-                  <h3 style={{
+                  <h3 className="badge-title-accent" style={{
                     fontSize: '16px',
                     fontWeight: 700,
                     color: '#f59e0b',
@@ -109,7 +110,8 @@ function Card13_BadgeExplanation({ onClose, uxLensesVariant = false }) {
                 fontSize: '14px',
                 color: '#4b5563',
                 lineHeight: 1.4,
-                margin: 0
+                margin: 0,
+                marginLeft: '56px'
               }}>
                 {badge.descricao}
               </p>

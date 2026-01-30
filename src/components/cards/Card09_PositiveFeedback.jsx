@@ -46,41 +46,18 @@ function Card09_PositiveFeedback({ onTryAgain, onContinue, onMenu, onRestart, ux
             />
           ))}
 
-          <div style={{
-            width: '190px',
-            height: '190px',
-            margin: '10px auto 14px',
-            borderRadius: '50%',
-            background: 'radial-gradient(circle at center, #eef7ff 0%, #dff2ff 55%, #cbe9ff 100%)',
-            position: 'relative',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}>
-            <div style={{
-              position: 'absolute',
-              inset: '-10px',
-              background: 'conic-gradient(from 0deg, rgba(180, 220, 255, 0.35), rgba(255, 255, 255, 0) 40%, rgba(180, 220, 255, 0.35) 70%, rgba(255, 255, 255, 0))',
-              borderRadius: '50%',
-              filter: 'blur(1px)'
-            }} />
-            <div style={{
-              width: '120px',
-              height: '120px',
-              borderRadius: '50%',
-              background: '#4f46e5',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              boxShadow: '0 6px 14px rgba(79, 70, 229, 0.35)'
-            }}>
-              <img
-                src="/badge2-removebg-preview.png"
-                alt="Badge"
-                style={{ width: '74px', height: '74px', objectFit: 'contain' }}
-              />
-            </div>
-          </div>
+          {/* NOTE: use congrats image here; do not reintroduce the badge2 circle container */}
+          <img
+            src="/congrats-next.png"
+            alt=""
+            style={{
+              width: '329px',
+              height: '261px',
+              margin: '10px auto 14px',
+              objectFit: 'contain',
+              display: 'block'
+            }}
+          />
 
           <div style={{ fontSize: '14px', fontWeight: 700, color: '#111827', marginBottom: '10px' }}>
             <span style={{ color: '#f59e0b' }}>+ 1 acerto</span> • Badges 2/5

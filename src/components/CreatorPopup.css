@@ -53,6 +53,32 @@
   border-radius: 20px;
 }
 
+/* UX Lenses: ensure the custom popup never picks up background images */
+.creator-popup-content-ux,
+.card-layout-view.layer-layer12 .creator-popup-content-ux,
+body:has(.card-layout-view.layer-layer12) .creator-popup-content-ux {
+  background: transparent !important;
+  background-image: none !important;
+}
+
+.creator-popup-content-ux::before,
+.card-layout-view.layer-layer12 .creator-popup-content-ux::before,
+body:has(.card-layout-view.layer-layer12) .creator-popup-content-ux::before {
+  display: none !important;
+}
+
+/* UX Lenses: remove qualquer imagem de fundo do popup */
+.card-layout-view.layer-layer12 .creator-popup-content,
+body:has(.card-layout-view.layer-layer12) .creator-popup-content {
+  background-image: none !important;
+  background-color: transparent !important;
+}
+
+.card-layout-view.layer-layer12 .creator-popup-content::before,
+body:has(.card-layout-view.layer-layer12) .creator-popup-content::before {
+  display: none !important;
+}
+
 .creator-popup-content > * {
   position: relative;
   z-index: 2;

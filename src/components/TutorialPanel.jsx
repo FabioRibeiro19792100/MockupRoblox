@@ -21,7 +21,6 @@ import BadgeScoreboard from './BadgeScoreboard'
 import CreatorPopup from './CreatorPopup'
 import BadgePopup2 from './BadgePopup2'
 import BadgePopup3 from './BadgePopup3'
-import CreatorStamp from './CreatorStamp'
 import './TutorialPanel.css'
 
 function TutorialPanel({ 

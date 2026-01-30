@@ -3,7 +3,6 @@ import TutorialPanel from './components/TutorialPanel'
 import RobloxStudioMock from './components/RobloxStudioMock'
 import CardLayoutView from './components/CardLayoutView'
 import BadgeHeader from './components/BadgeHeader'
-import CreatorStamp from './components/CreatorStamp'
 import './App.css'
 
 // Definindo 3 passos mockados do tutorial com sequência lógica

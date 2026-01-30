@@ -92,7 +92,7 @@ function Card04_Introduction({ tutorialName, onStart, onMenu, onRestart, current
             fontSize: '15px',
             color: '#d1d5db',
             lineHeight: 1.5,
-            margin: '0 0 20px 0'
+            margin: '0 0 75px 0'
           }}>
             O tutorial te guia em cada etapa, mostrando como usar o Animation Editor, ajustar keyframes e testar o resultado no Studio.
           </p>

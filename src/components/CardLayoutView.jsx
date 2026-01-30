@@ -20,51 +20,12 @@ import Card13_BadgeExplanation from './cards/Card13_BadgeExplanation'
 import BadgeHeader from './BadgeHeader'
 import BadgeScoreboard from './BadgeScoreboard'
 import CreatorPopup from './CreatorPopup'
-import BadgePopup2 from './BadgePopup2'
-import BadgePopup3 from './BadgePopup3'
-import CreatorStamp from './CreatorStamp'
 import ElementLabel from './ElementLabel'
 import BadgeNotification from './BadgeNotification'
 import './CardLayoutView.css'
 
 // Sistema de layers - Design Original + Arredondado + Variações de Background
 const LAYER_STYLES = {
-  layer2: {
-    name: 'Variação Back02',
-    description: 'Background back02.jpg aplicado em cards selecionados'
-  },
-  layer3: {
-    name: 'Variação Back04',
-    description: 'Background back04.png aplicado em cards selecionados'
-  },
-  layer4: {
-    name: 'Variação Back05',
-    description: 'Background back05.png aplicado em cards selecionados'
-  },
-  layer5: {
-    name: 'Variação Back06',
-    description: 'Background back06.png aplicado em cards selecionados'
-  },
-  layer7: {
-    name: 'Variação Back07',
-    description: 'Background back07.jpg aplicado em cards selecionados'
-  },
-  layer8: {
-    name: 'Variação Back08',
-    description: 'Background back08.jpg aplicado em cards selecionados'
-  },
-  layer9: {
-    name: 'Variação Back09',
-    description: 'Background back09.jpg aplicado em cards selecionados'
-  },
-  layer10: {
-    name: 'Variação Back10',
-    description: 'Background back10.jpg aplicado em cards selecionados'
-  },
-  layer11: {
-    name: 'Variação Back11',
-    description: 'Background Back11.png aplicado em cards selecionados'
-  },
   layer12: {
     name: 'Variação Back09 - UX lenses',
     description: 'Background back09.jpg aplicado em cards selecionados (UX lenses)'
@@ -86,7 +47,7 @@ function CardLayoutView({
   const [showConcept, setShowConcept] = useState(false)
   const [currentStep, setCurrentStep] = useState(1)
   const [tutorialMode, setTutorialMode] = useState('demonstrative')
-  const [currentLayer, setCurrentLayer] = useState('layer9')
+  const [currentLayer, setCurrentLayer] = useState('layer12')
   const [showLabels, setShowLabels] = useState(false)
   const [activeCardId, setActiveCardId] = useState(null) // Card atualmente visualizado
   const [currentLayoutCard, setCurrentLayoutCard] = useState(0) // Card atual no layout mode
@@ -324,15 +285,130 @@ function CardLayoutView({
       </div>
     )
 
+    const inlineGallery = isCardExpanded && currentLayer === 'layer12' ? (
+      <div className={`badge-gallery-fixed expanded`} style={{
+        background: '#ffffff',
+        borderRadius: '24px',
+        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
+        position: 'absolute',
+        top: '12px',
+        left: '16px',
+        right: '16px',
+        bottom: '76px',
+        zIndex: 200,
+        overflowY: 'auto',
+        overflowX: 'hidden',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        padding: '24px 20px'
+      }}>
+        {/* Botão X fechar */}
+        <button
+          onClick={(e) => {
+            e.stopPropagation()
+            toggleCardGallery()
+          }}
+          style={{
+            position: 'absolute',
+            top: '16px',
+            right: '16px',
+            width: '22px',
+            height: '46px',
+            borderRadius: '50%',
+            background: '#ef4444',
+            border: 'none',
+            color: '#ffffff',
+            fontSize: '18px',
+            fontWeight: 700,
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        >
+          ×
+        </button>
+
+        <button style={{
+          background: '#fbbf24',
+          border: 'none',
+          borderRadius: '50px',
+          padding: '14px 32px',
+          fontSize: '16px',
+          fontWeight: 700,
+          color: '#1f2937',
+          cursor: 'pointer',
+          alignSelf: 'center',
+          marginTop: '24px',
+          marginBottom: '20px'
+        }}>
+          GALERIA DE BADGES
+        </button>
+
+        <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+          <p style={{ fontSize: '14px', color: '#6b7280', margin: '0 0 4px 0' }}>Conquistadas:</p>
+          <p style={{ fontSize: '28px', fontWeight: 700, margin: 0, color: '#1f2937' }}>
+            <span style={{ color: '#1f2937' }}>2</span>
+            <span style={{ color: '#9ca3af' }}>/9</span>
+          </p>
+        </div>
+
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', marginBottom: '35px' }}>
+          {[true, true, false].map((earned, i) => (
+            <div key={`top-${i}`} style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <img
+                src="/badge-icon.png"
+                alt="Badge"
+                style={{ width: '56px', height: '64px', objectFit: 'contain', marginBottom: '6px', opacity: 0.5 }}
+              />
+              <span style={{ fontSize: '11px', color: '#6b7280' }}>Lorem ipsum</span>
+            </div>
+          ))}
+        </div>
+
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '24px' }}>
+          {[false, false, false].map((earned, i) => (
+            <div key={`bottom-${i}`} style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <img
+                src="/badge-icon.png"
+                alt="Badge"
+                style={{ width: '56px', height: '64px', objectFit: 'contain', marginBottom: '6px', opacity: 0.5 }}
+              />
+              <span style={{ fontSize: '11px', color: '#6b7280' }}>Lorem ipsum</span>
+            </div>
+          ))}
+        </div>
+
+        <div style={{
+          background: 'linear-gradient(135deg, #f97316 0%, #fb923c 100%)',
+          borderRadius: '12px',
+          padding: '14px 16px',
+          marginTop: '16px'
+        }}>
+          <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#ffffff', margin: '0 0 4px 0' }}>
+            PRIMEIRO PASSO
+          </h3>
+          <p style={{ fontSize: '13px', color: '#ffffff', margin: '0 0 6px 0' }}>
+            Completar: construir uma casa.
+          </p>
+          <p style={{ fontSize: '12px', fontWeight: 600, color: '#fef3c7', margin: 0 }}>
+            PROGRESSO: 0/1
+          </p>
+        </div>
+      </div>
+    ) : null
+
     // Wrapper que insere o toggle logo após o header
     const contentWithToggle = (
       <div className="card-with-badge-toggle" style={{ display: 'flex', flexDirection: 'column', height: '100%', position: 'relative' }}>
         {cardContent}
         {badgeToggle}
+        {inlineGallery}
       </div>
     )
     
-    if (!isGalleryVisible) {
+    if (!isGalleryVisible || currentLayer === 'layer12') {
       return contentWithToggle
     }
     
@@ -348,142 +424,7 @@ function CardLayoutView({
         }}>
           {contentWithToggle}
         </div>
-        {/* Galeria de badges - overlay absoluto que não move nada, posicionada acima dos botões */}
-        {/* Só mostra a galeria se estiver expandida */}
-        {isCardExpanded && currentLayer === 'layer12' ? (
-          // UX Lenses variant - Creator Popup Conquista style
-          <div className={`badge-gallery-fixed expanded`} style={{
-            background: '#ffffff',
-            borderRadius: '24px',
-            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
-            position: 'absolute',
-            top: '60px',
-            bottom: '10px',
-            left: '16px',
-            right: '16px',
-            zIndex: 100,
-            overflow: 'hidden',
-            display: 'flex',
-            flexDirection: 'column',
-            padding: '24px 20px'
-          }}>
-            {/* Botão X fechar */}
-            <button
-              onClick={(e) => {
-                e.stopPropagation()
-                toggleCardGallery()
-              }}
-              style={{
-                position: 'absolute',
-                top: '16px',
-                right: '16px',
-                width: '32px',
-                height: '32px',
-                borderRadius: '50%',
-                background: '#ef4444',
-                border: 'none',
-                color: '#ffffff',
-                fontSize: '18px',
-                fontWeight: 700,
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
-            >
-              ×
-            </button>
-
-            {/* Botão GALERIA DE BADGES */}
-            <button
-              style={{
-                background: '#fbbf24',
-                border: 'none',
-                borderRadius: '50px',
-                padding: '14px 32px',
-                fontSize: '16px',
-                fontWeight: 700,
-                color: '#1f2937',
-                cursor: 'pointer',
-                alignSelf: 'center',
-                marginTop: '24px',
-                marginBottom: '20px'
-              }}
-            >
-              GALERIA DE BADGES
-            </button>
-
-            {/* Conquistadas contador */}
-            <div style={{ textAlign: 'center', marginBottom: '20px' }}>
-              <p style={{ fontSize: '14px', color: '#6b7280', margin: '0 0 4px 0' }}>Conquistadas:</p>
-              <p style={{ fontSize: '28px', fontWeight: 700, margin: 0, color: '#1f2937' }}>
-                <span style={{ color: '#1f2937' }}>2</span>
-                <span style={{ color: '#9ca3af' }}>/9</span>
-              </p>
-            </div>
-
-            {/* Primeira linha de badges */}
-            <div style={{
-              display: 'flex',
-              justifyContent: 'center',
-              gap: '24px',
-              marginBottom: '16px'
-            }}>
-              {[true, true, false].map((earned, i) => (
-                <div key={i} style={{ textAlign: 'center' }}>
-                  <div style={{
-                    width: '56px',
-                    height: '64px',
-                    background: earned ? '#7c3aed' : '#c4b5fd',
-                    clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
-                    border: '3px solid #fbbf24',
-                    marginBottom: '6px'
-                  }} />
-                  <span style={{ fontSize: '11px', color: '#6b7280' }}>Lorem ipsum</span>
-                </div>
-              ))}
-            </div>
-
-            {/* Card PRIMEIRO PASSO */}
-            <div style={{
-              background: 'linear-gradient(135deg, #f97316 0%, #fb923c 100%)',
-              borderRadius: '12px',
-              padding: '14px 16px',
-              marginBottom: '16px'
-            }}>
-              <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#ffffff', margin: '0 0 4px 0' }}>
-                PRIMEIRO PASSO
-              </h3>
-              <p style={{ fontSize: '13px', color: '#ffffff', margin: '0 0 6px 0' }}>
-                Completar: construir uma casa.
-              </p>
-              <p style={{ fontSize: '12px', fontWeight: 600, color: '#fef3c7', margin: 0 }}>
-                PROGRESSO: 0/1
-              </p>
-            </div>
-
-            {/* Segunda linha de badges */}
-            <div style={{
-              display: 'flex',
-              justifyContent: 'center',
-              gap: '24px'
-            }}>
-              {[false, false, false].map((earned, i) => (
-                <div key={i} style={{ textAlign: 'center' }}>
-                  <div style={{
-                    width: '56px',
-                    height: '64px',
-                    background: '#c4b5fd',
-                    clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
-                    border: '3px solid #fbbf24',
-                    marginBottom: '6px'
-                  }} />
-                  <span style={{ fontSize: '11px', color: '#6b7280' }}>Lorem ipsum</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        ) : isCardExpanded ? (
+        {isCardExpanded ? (
         <div className={`badge-gallery-fixed expanded`} style={{
           background: 'linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%)',
           borderTop: '2px solid rgb(113, 180, 233)',
@@ -643,7 +584,6 @@ function CardLayoutView({
         { type: 'badge-header', selector: '.badge-header', label: 'Galeria de Badges - Expandida' },
         { type: 'badge-item', selector: '.badge-header-item', label: 'Item de Badge' },
         { type: 'badge-description', selector: '.badge-description', label: 'Descrição do Badge' },
-        { type: 'creator-stamp', selector: '.creator-stamp-inline', label: 'Selo de Creator' }
       ]
     },
     {
@@ -685,7 +625,6 @@ function CardLayoutView({
         { type: 'badge-header', selector: '.badge-header', label: 'Galeria de Badges - Expandida' },
         { type: 'badge-item', selector: '.badge-header-item', label: 'Item de Badge' },
         { type: 'badge-description', selector: '.badge-description', label: 'Descrição do Badge' },
-        { type: 'creator-stamp', selector: '.creator-stamp-inline', label: 'Selo de Creator' }
       ]
     },
     {
@@ -726,7 +665,6 @@ function CardLayoutView({
         { type: 'badge-header', selector: '.badge-header', label: 'Galeria de Badges - Expandida' },
         { type: 'badge-item', selector: '.badge-header-item', label: 'Item de Badge' },
         { type: 'badge-description', selector: '.badge-description', label: 'Descrição do Badge' },
-        { type: 'creator-stamp', selector: '.creator-stamp-inline', label: 'Selo de Creator' }
       ]
     },
     {
@@ -1729,9 +1667,11 @@ function CardLayoutView({
   const sortedCards = [...cards]
     // Filtrar cards específicos para UX Lenses (layer12)
     .filter(card => {
-      // Remover Card de Transição - Modo Observador (id 1.5) no UX Lenses
-      if (currentLayer === 'layer12' && card.id === 1.5) {
-        return false
+      if (currentLayer === 'layer12') {
+        // Remover cards não usados no UX Lenses
+        if (card.id === 1.5 || card.id === 19 || card.id === 20) {
+          return false
+        }
       }
       return true
     })
@@ -1859,7 +1799,6 @@ function CardLayoutView({
                   return numA - numB
                 })
                 .map(([key, value]) => {
-                  const isPreferred = key === 'layer9' || key === 'layer11'
                   return (
                     <button
                       key={key}
@@ -1895,13 +1834,6 @@ function CardLayoutView({
                       }}
                     >
                       <span>{value.name}</span>
-                      {isPreferred && (
-                        <span style={{
-                          fontSize: '16px',
-                          color: '#FFC107',
-                          fontWeight: 'bold'
-                        }}>⭐</span>
-                      )}
                     </button>
                   )
                 })}

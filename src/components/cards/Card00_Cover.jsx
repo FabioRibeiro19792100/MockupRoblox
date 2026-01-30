@@ -43,7 +43,6 @@ function Card00_Cover({ onStart }) {
           {/* Subtítulo amarelo */}
           <p style={{
             fontSize: '16px',
-            fontStyle: 'italic',
             marginBottom: '8px',
             color: '#FFD700'
           }}>
@@ -53,13 +52,14 @@ function Card00_Cover({ onStart }) {
           {/* Tag Tutorial */}
           <div style={{
             display: 'inline-block',
-            backgroundColor: '#22c55e',
+            backgroundColor: '#2196F3',
             color: '#ffffff',
             padding: '6px 12px',
             borderRadius: '4px',
             fontSize: '14px',
             fontWeight: 600,
-            marginBottom: '20px'
+            marginBottom: '20px',
+            width: 'fit-content'
           }}>
             Tutorial 1 de 5
           </div>

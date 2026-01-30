@@ -6,13 +6,11 @@ function CreatorStamp({ isVisible, hideText = false, badgeImage }) {
   const imageSrc = badgeImage || '/Selo2.png'
 
   return (
-    <div className="creator-stamp-inline">
-      <img 
-        src={imageSrc} 
-        alt="Selo de Creator" 
-        className="creator-stamp-image"
-      />
-    </div>
+    <img
+      src={imageSrc}
+      alt="Selo de Creator"
+      className="creator-stamp-image"
+    />
   )
 }
 

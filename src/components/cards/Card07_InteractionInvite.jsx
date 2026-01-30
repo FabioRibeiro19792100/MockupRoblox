@@ -67,24 +67,36 @@ function Card07_InteractionInvite({ onTry, onContinue, onMenu, onRestart, uxLens
             padding: '16px 20px 8px'
           }}>
             <div style={{
-              width: '12px',
-              height: '12px',
+              width: '24px',
+              height: '24px',
               borderRadius: '50%',
-              background: '#1e3a5f',
-              border: '2px solid #1e3a5f'
-            }} />
+              background: 'transparent',
+              border: '2px solid #1e3a5f',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '12px',
+              fontWeight: 700,
+              color: '#1e3a5f'
+            }}>1</div>
             <div style={{
               width: '30px',
               height: '2px',
               background: '#1e3a5f'
             }} />
             <div style={{
-              width: '12px',
-              height: '12px',
+              width: '24px',
+              height: '24px',
               borderRadius: '50%',
-              background: 'transparent',
-              border: '2px solid #1e3a5f'
-            }} />
+              background: '#1e3a5f',
+              border: '2px solid #1e3a5f',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '12px',
+              fontWeight: 700,
+              color: '#ffffff'
+            }}>2</div>
           </div>
 
           {/* Área de conteúdo com scroll */}
@@ -108,15 +120,12 @@ function Card07_InteractionInvite({ onTry, onContinue, onMenu, onRestart, uxLens
               justifyContent: 'center'
             }}>
               <img
-                src="/character-cube.png"
+                src="/logo-expedicao-carrying-block.png"
                 alt="Creator"
                 style={{
                   width: '100%',
                   height: '100%',
                   objectFit: 'contain'
-                }}
-                onError={(e) => {
-                  e.target.outerHTML = `<div style="width: 120px; height: 120px; display: flex; align-items: center; justify-content: center; font-size: 60px;">🧑‍🎨</div>`
                 }}
               />
             </div>
@@ -125,7 +134,6 @@ function Card07_InteractionInvite({ onTry, onContinue, onMenu, onRestart, uxLens
             <h1 style={{
               fontSize: '22px',
               fontWeight: 800,
-              fontStyle: 'italic',
               color: '#ffffff',
               margin: '0 0 12px 0',
               textTransform: 'uppercase',
@@ -149,7 +157,7 @@ function Card07_InteractionInvite({ onTry, onContinue, onMenu, onRestart, uxLens
             <p style={{
               fontSize: '16px',
               fontWeight: 700,
-              color: '#f97316',
+              color: '#ffffff',
               margin: '0 0 16px 0'
             }}>
               Quer tentar?
@@ -181,13 +189,13 @@ function Card07_InteractionInvite({ onTry, onContinue, onMenu, onRestart, uxLens
               style={{
                 width: '100%',
                 maxWidth: '260px',
-                background: 'transparent',
-                border: '2px solid #3b82f6',
+                background: '#0e4ba4',
+                border: 'none',
                 borderRadius: '50px',
                 padding: '12px 24px',
                 fontSize: '14px',
                 fontWeight: 600,
-                color: '#3b82f6',
+                color: '#ffffff',
                 cursor: 'pointer'
               }}
             >

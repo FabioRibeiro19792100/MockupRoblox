@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from 'react'
-import CreatorStamp from '../CreatorStamp'
 import './Card.css'
 
 function Card01_02_Selection({ 
@@ -199,11 +198,6 @@ function Card01_02_Selection({
               objectFit: 'contain'
             }} 
           />
-          {earnedBadges && Array.isArray(earnedBadges) && earnedBadges.includes(1) && (
-            <div style={{ opacity: stampOpacity }}>
-              <CreatorStamp isVisible={true} hideText={stampOpacity < 1} badgeImage="/badge1-removebg-preview.png" />
-            </div>
-          )}
         </div>
         <h3 style={{ 
           fontSize: '20px', 
@@ -255,7 +249,6 @@ function Card01_02_Selection({
                 </h3>
                 <p style={{
                   fontSize: '14px',
-                  fontStyle: 'italic',
                   margin: '4px 0 8px 0',
                   color: '#000000'
                 }}>

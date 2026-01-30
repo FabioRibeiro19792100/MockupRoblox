@@ -10,41 +10,16 @@ function Card10_NegativeFeedback({ onTryAgain, onContinue, onMenu, onRestart, ux
         </div>
 
         <div style={{ padding: '56px 24px 28px', textAlign: 'center', position: 'relative', background: '#ffffff' }}>
-          <div style={{
-            width: '190px',
-            height: '190px',
-            margin: '10px auto 14px',
-            borderRadius: '50%',
-            background: 'radial-gradient(circle at center, #eef7ff 0%, #dff2ff 55%, #cbe9ff 100%)',
-            position: 'relative',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}>
-            <div style={{
-              position: 'absolute',
-              inset: '-10px',
-              background: 'conic-gradient(from 0deg, rgba(180, 220, 255, 0.35), rgba(255, 255, 255, 0) 40%, rgba(180, 220, 255, 0.35) 70%, rgba(255, 255, 255, 0))',
-              borderRadius: '50%',
-              filter: 'blur(1px)'
-            }} />
-            <div style={{
+          <img
+            src="/logo-expedicao-derrota.png"
+            alt="Derrota"
+            style={{
               width: '120px',
               height: '120px',
-              borderRadius: '50%',
-              background: '#4f46e5',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              boxShadow: '0 6px 14px rgba(79, 70, 229, 0.35)'
-            }}>
-              <img
-                src="/badge2-removebg-preview.png"
-                alt="Badge"
-                style={{ width: '74px', height: '74px', objectFit: 'contain' }}
-              />
-            </div>
-          </div>
+              margin: '10px auto 14px',
+              objectFit: 'contain'
+            }}
+          />
 
           <div style={{ fontSize: '14pt', fontWeight: 700, color: '#111827', marginBottom: '25px', marginTop: '28px' }}>
             Opa! Infelizmente essa etapa não saiu como esperado.

@@ -65,10 +65,10 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
+          justifyContent: 'space-around',
           textAlign: 'center',
           position: 'relative',
-          overflowY: 'auto',
-          overflowX: 'hidden'
+          overflow: 'hidden auto'
         }}>
           {/* Sparkles decorativos */}
           <div style={{ position: 'absolute', top: '20px', right: '30px', fontSize: '20px' }}>✨</div>
@@ -137,40 +137,41 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
           </p>
 
           {/* Botão Continuar */}
-          <button
-            onClick={handleKeepMap}
-            style={{
-              width: '100%',
-              maxWidth: '260px',
-              background: '#fbbf24',
-              border: 'none',
-              borderRadius: '50px',
-              padding: '12px 22px',
-              fontSize: '16px',
-              fontWeight: 700,
-              color: '#000000',
-              cursor: 'pointer',
-              marginBottom: '12px'
-            }}
-          >
-            continuar
-          </button>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <button
+              onClick={handleKeepMap}
+              style={{
+                width: '100%',
+                maxWidth: '260px',
+                background: '#fbbf24',
+                border: 'none',
+                borderRadius: '50px',
+                padding: '12px 22px',
+                fontSize: '16px',
+                fontWeight: 700,
+                color: '#000000',
+                cursor: 'pointer',
+                marginBottom: '12px'
+              }}
+            >
+              continuar
+            </button>
 
-          {/* Link limpar e sair */}
-          <button
-            onClick={handleClearAndExit}
-            style={{
-              background: 'transparent',
-              border: 'none',
-              color: '#1e3a5f',
-              fontSize: '13px',
-              fontWeight: 700,
-              textDecoration: 'underline',
-              cursor: 'pointer'
-            }}
-          >
-            limpar e sair
-          </button>
+            <button
+              onClick={handleClearAndExit}
+              style={{
+                background: 'transparent',
+                border: 'none',
+                color: '#1e3a5f',
+                fontSize: '13px',
+                fontWeight: 700,
+                textDecoration: 'underline',
+                cursor: 'pointer'
+              }}
+            >
+              limpar e sair
+            </button>
+          </div>
         </div>
       </div>
     )

@@ -237,43 +237,9 @@
 /* Layers 2-10 - Removidos temporariamente para não quebrar o layout */
 
 
-/* Estilos da galeria de badges para os cards de layout */
-.card-layout-view .card-layout-item .badge-gallery-fixed {
-  position: absolute !important;
-  bottom: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-  z-index: 5;
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
-  border-top: 2px solid rgb(113, 180, 233);
-  transition: all 0.3s ease;
-  overflow: visible;
-}
+/* Estilos da galeria de badges para os cards de layout - removidos */
 
-.card-layout-view .card-layout-item .badge-gallery-fixed.collapsed {
-  max-height: 120px;
-  overflow: hidden;
-}
-
-.card-layout-view .card-layout-item .badge-gallery-fixed.expanded {
-  max-height: 350px;
-  min-height: 350px;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-.card-layout-view .card-layout-item .badge-gallery-header {
-  background: linear-gradient(135deg, rgb(113, 180, 233) 0%, rgb(100, 160, 210) 100%);
-  border-bottom: 1px solid rgb(90, 140, 190);
-  color: #000000;
-}
-
-.card-layout-view .card-layout-item .badge-gallery-content {
-  padding: 12px 24px;
-  padding-bottom: 24px;
-  animation: slideDown 0.3s ease;
-}
+/* Estilos de header/content específicos removidos */
 
 /* Ajustes para cards de feedback (9 e 10) no layout mode */
 .card-layout-view .card-layout-item .card-feedback .card-title {
@@ -797,20 +763,18 @@ body:has(.card-layout-view.layer-layer11) .creator-popup-content::before {
   background: rgba(0, 0, 0, 0.6) !important;
 }
 
-/* Layer 12: Variação Back09 - UX lenses - back09.jpg nos popups */
+/* Layer 12: UX Lenses - no popup background image */
 .card-layout-view.layer-layer12 .creator-popup-content,
 .layer-layer12 .creator-popup-content,
 body:has(.card-layout-view.layer-layer12) .creator-popup-content {
-  background-image: url('/back09.jpg') !important;
-  background-size: cover !important;
-  background-position: center center !important;
-  background-repeat: no-repeat !important;
+  background-image: none !important;
+  background-color: transparent !important;
 }
 
 .card-layout-view.layer-layer12 .creator-popup-content::before,
 .layer-layer12 .creator-popup-content::before,
 body:has(.card-layout-view.layer-layer12) .creator-popup-content::before {
-  background: rgba(0, 0, 0, 0.6) !important;
+  display: none !important;
 }
 
 /* ============================================
@@ -1373,4 +1337,3 @@ body:has(.card-layout-view.layer-layer12) .creator-popup-content::before {
 .card-layout-view.layer-layer8 .card-layout-item .card-actions .demonstrate-button {
   border-radius: 50px !important;
 }
-

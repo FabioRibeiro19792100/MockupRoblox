@@ -95,7 +95,7 @@ function Card05_1_Concept({ onContinue, onMenu, onRestart, uxLensesVariant = fal
         </div>
 
         {/* Seção inferior - fundo branco */}
-        <div style={{ padding: '20px', paddingBottom: '80px', flex: 1, display: 'flex', flexDirection: 'column' }}>
+        <div style={{ padding: '33px 20px 80px', flex: '1 1 0%', display: 'flex', flexDirection: 'column' }}>
           {/* Feedback */}
           <div style={{ marginBottom: '20px' }}>
             <p style={{
