@@ -154,6 +154,7 @@ function Card09_PositiveFeedback({ onTryAgain, onContinue, onMenu, onRestart, ux
                 background: '#facc15',
                 color: '#000000',
                 fontWeight: 700,
+                fontSize: '14pt',
                 borderRadius: '999px',
                 padding: '12px 18px',
                 boxShadow: '0 10px 20px rgba(250, 204, 21, 0.35)'

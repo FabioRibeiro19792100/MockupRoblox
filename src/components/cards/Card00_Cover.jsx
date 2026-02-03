@@ -24,7 +24,6 @@ function Card00_Cover({ onStart }) {
           <h1 style={{
             fontSize: '28px',
             fontWeight: 700,
-            marginBottom: '8px',
             color: '#ffffff',
             lineHeight: 1.2
           }}>
@@ -66,10 +65,11 @@ function Card00_Cover({ onStart }) {
 
           {/* Texto descritivo */}
           <p className="card-text" style={{
-            fontSize: '16px',
-            lineHeight: 1.5,
+            fontSize: '14pt',
+            lineHeight: 1.3,
             marginBottom: '24px',
-            color: '#ffffff'
+            color: '#ffffff',
+            fontWeight: 'bold'
           }}>
             Aqui você começa como criador.<br />
             Você vai construir, testar<br />

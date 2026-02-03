@@ -88,14 +88,14 @@ function Card07_InteractionInvite({ onTry, onContinue, onMenu, onRestart, uxLens
               width: '24px',
               height: '24px',
               borderRadius: '50%',
-              background: 'transparent',
+              background: '#1e3a5f',
               border: '2px solid #1e3a5f',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               fontSize: '12px',
               fontWeight: 700,
-              color: '#1e3a5f'
+              color: '#ffffff'
             }}>1</div>
             <div style={{
               width: '30px',
@@ -106,14 +106,14 @@ function Card07_InteractionInvite({ onTry, onContinue, onMenu, onRestart, uxLens
               width: '24px',
               height: '24px',
               borderRadius: '50%',
-              background: '#1e3a5f',
+              background: 'transparent',
               border: '2px solid #1e3a5f',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               fontSize: '12px',
               fontWeight: 700,
-              color: '#ffffff'
+              color: '#1e3a5f'
             }}>2</div>
           </div>
 
@@ -164,7 +164,7 @@ function Card07_InteractionInvite({ onTry, onContinue, onMenu, onRestart, uxLens
               fontSize: '14px',
               color: '#ffffff',
               lineHeight: 1.5,
-              margin: '0 0 16px 0',
+              margin: '0 0 34px 0',
               maxWidth: '280px'
             }}>
               Para treinar suas habilidades você pode tentar executar esse mesmo passo com as instruções dadas.

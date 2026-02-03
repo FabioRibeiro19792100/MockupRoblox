@@ -181,19 +181,19 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
                 fontSize: '28px',
                 fontWeight: 900,
                 color: '#000000',
-                margin: '0 0 6px 0',
-                marginTop: '30px',
-                letterSpacing: '2px'
+                margin: '10px 0 0px',
+                letterSpacing: '0px',
+                textTransform: 'none'
               }}
             >
-              PARABÉNS!
+              Parabéns!
             </h1>
 
             {/* Subtítulo */}
             <p style={{
               fontSize: '14px',
               color: '#000000',
-              margin: '0 0 18px 0',
+              margin: '0 0 38px',
               fontWeight: 500
             }}>
               você concluiu o tutorial:
@@ -223,8 +223,7 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
                 fontSize: '18pt',
                 fontWeight: 700,
                 color: '#000000',
-                margin: '10px 0 10px',
-                marginTop: '20px'
+                margin: '30px 0 10px'
               }}
             >
               Construir uma casa
@@ -267,11 +266,11 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
               </div>
             </div>
             <p style={{
-              fontSize: '14px',
-              color: '#000000',
+              fontSize: '10pt',
+              color: 'rgb(128 126 126)',
               fontWeight: 700,
               lineHeight: 1.4,
-              marginBottom: '50px'
+              marginBottom: '55px'
             }}>
               Faltam X tutoriais para você<br />
               conquistar um novo badge!
@@ -286,7 +285,7 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
                   border: 'none',
                   borderRadius: '50px',
                   padding: '12px 22px',
-                  fontSize: '16px',
+                  fontSize: '14pt',
                   fontWeight: 700,
                   color: '#000000',
                   cursor: 'pointer',
@@ -305,7 +304,7 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
                 fontSize: '10pt',
                 fontWeight: 700,
                 textDecoration: 'underline',
-                marginBottom: '30px',
+                marginBottom: '72pt',
                 cursor: 'pointer'
               }}
             >

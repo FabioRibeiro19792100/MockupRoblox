@@ -215,8 +215,6 @@
 
 /* Estilos para diferentes layers - 10 layouts completamente novos */
 /* Layer 1 - Design Original (sem modificações) - SEM BACKGROUND */
-.card-layout-view.layer-layer1 .card-layout-item .card.card-cover,
-.card-layout-view.layer-layer1 .card-layout-item .card.card-selection,
 .card-layout-view.layer-layer1 .card-layout-item .card.card-mode,
 .card-layout-view.layer-layer1 .card-layout-item .card.card-interactive,
 .card-layout-view.layer-layer1 .card-layout-item .card.card-intro,
@@ -225,8 +223,6 @@
   background-color: #ffffff !important;
 }
 
-.card-layout-view.layer-layer1 .card-layout-item .card.card-cover::before,
-.card-layout-view.layer-layer1 .card-layout-item .card.card-selection::before,
 .card-layout-view.layer-layer1 .card-layout-item .card.card-mode::before,
 .card-layout-view.layer-layer1 .card-layout-item .card.card-interactive::before,
 .card-layout-view.layer-layer1 .card-layout-item .card.card-intro::before,
@@ -361,12 +357,13 @@
     margin-bottom: 0 !important;
   }
 
-  .card-layout-view .card-layout-content {
-    width: 100% !important;
-    height: auto !important;
-    min-height: 400px !important;
-    max-height: none !important;
-  }
+.card-layout-view .card-layout-content {
+  width: 100% !important;
+  height: auto !important;
+  min-height: 400px !important;
+  max-height: none !important;
+  background: #000000;
+}
 
   .card-layout-view .card-layout-content .card {
     height: auto !important;
@@ -399,7 +396,7 @@
 .card-layout-view.layer-layer2 .card-layout-item .card.card-interactive::before,
 .card-layout-view.layer-layer2 .card-layout-item .card.card-intro::before,
 .card-layout-view.layer-layer2 .card-layout-item .card.card-completion::before {
-  background: rgba(0, 0, 0, 0.6) !important;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 90%) !important;
 }
 
 /* Layer 3: Variação Back04 - back04.png em TODOS os cards com background */
@@ -421,7 +418,7 @@
 .card-layout-view.layer-layer3 .card-layout-item .card.card-interactive::before,
 .card-layout-view.layer-layer3 .card-layout-item .card.card-intro::before,
 .card-layout-view.layer-layer3 .card-layout-item .card.card-completion::before {
-  background: rgba(0, 0, 0, 0.6) !important;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 90%) !important;
 }
 
 /* Layer 4: Variação Back05 - back05.png em TODOS os cards com background */
@@ -443,7 +440,7 @@
 .card-layout-view.layer-layer4 .card-layout-item .card.card-interactive::before,
 .card-layout-view.layer-layer4 .card-layout-item .card.card-intro::before,
 .card-layout-view.layer-layer4 .card-layout-item .card.card-completion::before {
-  background: rgba(0, 0, 0, 0.6) !important;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 90%) !important;
 }
 
 /* Layer 5: Variação Back06 - back06.png em TODOS os cards com background */
@@ -465,7 +462,7 @@
 .card-layout-view.layer-layer5 .card-layout-item .card.card-interactive::before,
 .card-layout-view.layer-layer5 .card-layout-item .card.card-intro::before,
 .card-layout-view.layer-layer5 .card-layout-item .card.card-completion::before {
-  background: rgba(0, 0, 0, 0.6) !important;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 90%) !important;
 }
 
 /* Layer 7: Variação Back07 - back07.jpg em TODOS os cards com background */
@@ -487,7 +484,7 @@
 .card-layout-view.layer-layer7 .card-layout-item .card.card-interactive::before,
 .card-layout-view.layer-layer7 .card-layout-item .card.card-intro::before,
 .card-layout-view.layer-layer7 .card-layout-item .card.card-completion::before {
-  background: rgba(0, 0, 0, 0.6) !important;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 90%) !important;
 }
 
 /* Layer 8: Variação Back08 - back08.jpg em TODOS os cards com background */
@@ -509,7 +506,7 @@
 .card-layout-view.layer-layer8 .card-layout-item .card.card-interactive::before,
 .card-layout-view.layer-layer8 .card-layout-item .card.card-intro::before,
 .card-layout-view.layer-layer8 .card-layout-item .card.card-completion::before {
-  background: rgba(0, 0, 0, 0.6) !important;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 90%) !important;
 }
 
 /* Layer 9: Variação Back09 - back09.jpg em TODOS os cards com background */
@@ -531,7 +528,7 @@
 .card-layout-view.layer-layer9 .card-layout-item .card.card-interactive::before,
 .card-layout-view.layer-layer9 .card-layout-item .card.card-intro::before,
 .card-layout-view.layer-layer9 .card-layout-item .card.card-completion::before {
-  background: rgba(0, 0, 0, 0.6) !important;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 90%) !important;
 }
 
 /* Layer 10: Variação Back10 - back10.jpg em TODOS os cards com background */
@@ -553,7 +550,7 @@
 .card-layout-view.layer-layer10 .card-layout-item .card.card-interactive::before,
 .card-layout-view.layer-layer10 .card-layout-item .card.card-intro::before,
 .card-layout-view.layer-layer10 .card-layout-item .card.card-completion::before {
-  background: rgba(0, 0, 0, 0.6) !important;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 90%) !important;
 }
 
 /* Layer 11: Variação Back11 - Back11.png em TODOS os cards com background */
@@ -576,7 +573,7 @@
 .card-layout-view.layer-layer11 .card-layout-item .card.card-interactive::before,
 .card-layout-view.layer-layer11 .card-layout-item .card.card-intro::before,
 .card-layout-view.layer-layer11 .card-layout-item .card.card-completion::before {
-  background: rgba(0, 0, 0, 0.6) !important;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 90%) !important;
 }
 
 /* Layer 12: Variação Back09 - UX lenses - back09.jpg em TODOS os cards com background */
@@ -598,7 +595,7 @@
 .card-layout-view.layer-layer12 .card-layout-item .card.card-interactive::before,
 .card-layout-view.layer-layer12 .card-layout-item .card.card-intro::before,
 .card-layout-view.layer-layer12 .card-layout-item .card.card-completion::before {
-  background: rgba(0, 0, 0, 0.6) !important;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 60%) !important;
 }
 
 /* ============================================

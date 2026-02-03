@@ -138,7 +138,7 @@ function Card07_5_LearningMode({ onContinue, onMenu, onRestart, uxLensesVariant 
               fontSize: '13px',
               color: '#ffffff',
               lineHeight: 1.5,
-              margin: '0 0 16px 0',
+              margin: '0 0 42px 0',
               maxWidth: '280px',
               fontWeight: 700
             }}>
@@ -216,7 +216,7 @@ function Card07_5_LearningMode({ onContinue, onMenu, onRestart, uxLensesVariant 
           <p style={{ fontSize: '16px', lineHeight: '1.4', color: '#ffffff', marginBottom: '16px', fontWeight: 700 }}>
             Agora, após a demonstração, você terá a oportunidade de repetir os passos apresentados e compreender, em profundidade, como funciona o processo de criação no Roblox Studio.
           </p>
-          <p style={{ fontSize: '14px', lineHeight: '1.4', color: '#ffffff', marginBottom: '16px' }}>
+          <p style={{ fontSize: '13px', lineHeight: '1.5', color: '#ffffff', marginBottom: '42px', maxWidth: '280px', fontWeight: 700 }}>
             Em seguida, você será convidado(a) a reconstruir a experiência por conta própria. Durante o percurso, poderá pedir dicas e verificar se conseguiu cumprir a missão.
           </p>
           <p style={{ fontSize: '16px', lineHeight: '1.4', fontWeight: 700, color: '#ffffff', marginBottom: '32px' }}>

@@ -70,11 +70,11 @@ function Card04_Introduction({ tutorialName, onStart, onMenu, onRestart, current
         {/* Conteúdo */}
         <div style={{ padding: '20px', paddingBottom: '80px', display: 'flex', flexDirection: 'column', flex: 1, justifyContent: 'space-between' }}>
           <p style={{
-            fontSize: '15px',
+            fontSize: '14pt',
             fontWeight: 700,
             color: '#ffffff',
-            lineHeight: 1.5,
-            margin: '0 0 16px 0'
+            lineHeight: 1.3,
+            margin: '0 0 16px'
           }}>
             Aprenda a criar e animar um avatar do zero: configurar o personagem, criar poses e movimentos básicos e aplicar a animação no jogo.
           </p>
