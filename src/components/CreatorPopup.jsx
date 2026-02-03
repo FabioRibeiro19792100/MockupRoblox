@@ -21,14 +21,14 @@ function CreatorPopup({ onClose, uxLensesVariant = false }) {
             style={{
               width: '300px',
               maxWidth: '300px',
-              backgroundColor: '#dff3ff',
+              backgroundColor: '#ffffff',
               backgroundImage: 'none',
               backgroundRepeat: 'no-repeat',
               backgroundSize: 'auto',
               backgroundPosition: 'initial',
               border: 'none',
-              borderRadius: '28px',
-              padding: '24px 20px 20px',
+              borderRadius: '20px',
+              padding: '24px 20px',
               textAlign: 'center',
               position: 'relative',
               overflow: 'hidden',
@@ -72,15 +72,20 @@ function CreatorPopup({ onClose, uxLensesVariant = false }) {
               ))}
             </div>
 
-            <div style={{ fontSize: '28px', fontWeight: 900, color: '#ef4444', margin: '12px 0 8px', letterSpacing: '1px', backgroundImage: 'none' }}>
-              PARABÉNS
-            </div>
+            <section>
+              <div style={{ fontSize: '28px', fontWeight: 900, color: '#000000', margin: '0 0 6px', letterSpacing: '2px', backgroundImage: 'none' }}>
+                PARABÉNS!
+              </div>
+              <div style={{ fontSize: '13px', color: '#000000', marginBottom: '4px' }}>
+                você agora é um
+              </div>
+            </section>
 
             <div
               style={{
-                width: '280px',
+                width: '100%',
                 height: '280px',
-                margin: '0 auto 10px',
+                margin: '0 0 10px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center'
@@ -90,37 +95,35 @@ function CreatorPopup({ onClose, uxLensesVariant = false }) {
                 src="/congrats-badge.png"
                 alt="Badge"
                 style={{
-                  width: '156px',
-                  height: '134px',
-                  objectFit: 'contain'
+                  width: '250px',
+                  height: '250px',
+                  objectFit: 'contain',
+                  display: 'block',
+                  margin: '0 auto'
                 }}
               />
             </div>
 
             <div style={{ marginBottom: '10px' }}>
-              <div style={{ fontSize: '13px', color: '#1e3a5f', marginBottom: '4px' }}>você agora é um</div>
-              <div style={{ fontSize: '21pt', fontWeight: 'bold', color: '#1d4ed8' }}>
-                CREATOR ROBLOX
+              <div style={{ fontSize: '18pt', fontWeight: 'bold', color: '#000000' }}>
+                Creator Roblox
               </div>
             </div>
 
             <div style={{ marginBottom: '14px' }}>
               <div
                 style={{
-                  background: '#ffffff',
-                  border: '2px solid #f59e0b',
-                  borderRadius: '14px',
-                  padding: '10px 12px',
-                  fontSize: '13px',
-                  fontWeight: 600,
-                  color: '#111827',
-                  marginBottom: '10px'
+                  fontSize: '12pt',
+                  color: '#000000',
+                  fontWeight: 700,
+                  margin: '0 0 20px 0',
+                  lineHeight: 1.4
                 }}
               >
                 Você completou seu primeiro tutorial e ganhou o selo de Creator!
               </div>
 
-              <div style={{ fontSize: '12px', color: '#6b7280' }}>
+              <div style={{ fontSize: '12px', color: '#000000' }}>
                 isso libera novos tutoriais e desafios no plugin
               </div>
             </div>

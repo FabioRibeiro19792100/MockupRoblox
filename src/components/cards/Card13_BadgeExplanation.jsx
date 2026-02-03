@@ -94,7 +94,8 @@ function Card13_BadgeExplanation({ onClose, uxLensesVariant = false }) {
                 background: '#60a5fa',
                 borderRadius: '0px',
                 padding: '6px 10px',
-                marginBottom: '12px'
+                marginBottom: '12px',
+                color: '#ffffff'
               }}>
                 <span style={{
                   fontSize: '13px',

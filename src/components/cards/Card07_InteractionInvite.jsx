@@ -136,10 +136,9 @@ function Card07_InteractionInvite({ onTry, onContinue, onMenu, onRestart, uxLens
               fontWeight: 800,
               color: '#ffffff',
               margin: '0 0 12px 0',
-              textTransform: 'uppercase',
               lineHeight: 1.2
             }}>
-              ESSE É O SEU<br />MOMENTO CREATOR!
+              Esse é o seu<br />momento creator!
             </h1>
 
             {/* Descrição */}

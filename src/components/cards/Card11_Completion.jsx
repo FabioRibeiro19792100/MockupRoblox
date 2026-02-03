@@ -1,6 +1,9 @@
+import { useState } from 'react'
 import './Card.css'
 
 function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, uxLensesVariant = false }) {
+  const [completionValue, setCompletionValue] = useState(50)
+
   const handleKeepMap = () => {
     if (onComplete) {
       onComplete()
@@ -55,10 +58,12 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
         </div>
 
         {/* Conteúdo principal - fundo azul gradiente */}
-        <div style={{
+          <div
+        className="completion-card"
+        style={{
           flex: '1 1 auto',
           minHeight: 0,
-          background: 'linear-gradient(180deg, #5a9fd4 0%, #7ab8e8 100%)',
+          background: '#ffffff',
           borderRadius: '20px',
           margin: '0 16px 75px 16px',
           padding: '24px 20px',
@@ -74,28 +79,102 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
           <div style={{ position: 'absolute', top: '20px', right: '30px', fontSize: '20px' }}>✨</div>
           <div style={{ position: 'absolute', top: '40px', right: '60px', fontSize: '14px' }}>✨</div>
           <div style={{ position: 'absolute', top: '25px', left: '25px', fontSize: '16px' }}>✨</div>
+          <style>{`
+            .completion-range {
+              outline: none;
+              border: none;
+              box-shadow: none;
+              appearance: none;
+              -webkit-appearance: none;
+              height: 12px;
+              border-radius: 2px;
+            }
+            .completion-range::-webkit-slider-runnable-track {
+              background: transparent;
+              border: 2px solid #1e3a5f;
+              height: 12px;
+              border-radius: 2px;
+              box-shadow: none;
+            }
+            .completion-range::-webkit-slider-thumb {
+              -webkit-appearance: none;
+              width: 0;
+              height: 0;
+              border-radius: 2px;
+              background: transparent;
+              border: none;
+              box-shadow: none;
+              margin-top: 0;
+            }
+            .completion-range::-moz-range-track {
+              background: #e0f0ff;
+              border: 2px solid #1e3a5f;
+              height: 12px;
+              border-radius: 2px;
+              box-shadow: none;
+            }
+            .completion-range::-moz-range-progress {
+              background: #3b82f6;
+              height: 12px;
+              border-radius: 2px;
+            }
+            .completion-range::-moz-range-thumb {
+              width: 0;
+              height: 0;
+              border-radius: 2px;
+              background: transparent;
+              border: none;
+              box-shadow: none;
+            }
+            .completion-range::-ms-track {
+              background: transparent;
+              border: 2px solid #1e3a5f;
+              color: transparent;
+              height: 12px;
+              border-radius: 2px;
+              box-shadow: none;
+            }
+            .completion-range::-ms-fill-lower {
+              background: #3b82f6;
+              border-radius: 2px;
+            }
+            .completion-range::-ms-fill-upper {
+              background: #e0f0ff;
+              border-radius: 2px;
+            }
+            .completion-card .completion-title {
+              color: #000000 !important;
+            }
+            .completion-card h1.completion-title {
+              color: #000000 !important;
+            }
+          `}</style>
 
-          {/* Título PARABÉNS */}
-          <h1 style={{
-            fontSize: '28px',
-            fontWeight: 900,
-            color: '#fbbf24',
-            margin: '0 0 6px 0',
-            textShadow: '2px 2px 4px rgba(0,0,0,0.2)',
-            letterSpacing: '2px'
-          }}>
-            ✦PARABÉNS!
-          </h1>
+          <section>
+            {/* Título PARABÉNS */}
+            <h1
+              className="completion-title"
+              style={{
+                fontSize: '28px',
+                fontWeight: 900,
+                color: '#000000',
+                margin: '0 0 6px 0',
+                letterSpacing: '2px'
+              }}
+            >
+              PARABÉNS!
+            </h1>
 
-          {/* Subtítulo */}
-          <p style={{
-            fontSize: '14px',
-            color: '#ffffff',
-            margin: '0 0 18px 0',
-            fontWeight: 500
-          }}>
-            você concluiu o tutorial:
-          </p>
+            {/* Subtítulo */}
+            <p style={{
+              fontSize: '14px',
+              color: '#000000',
+              margin: '0 0 18px 0',
+              fontWeight: 500
+            }}>
+              você concluiu o tutorial:
+            </p>
+          </section>
 
           {/* Ícone da casa */}
           <div style={{
@@ -117,24 +196,65 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
           </div>
 
           {/* Nome do tutorial */}
-          <h2 style={{
-            fontSize: '20px',
+          <h2
+            className="completion-title"
+            style={{
+            fontSize: '18pt',
             fontWeight: 700,
-            color: '#ffffff',
+            color: '#000000',
             margin: '0 0 10px 0'
-          }}>
+          }}
+          >
             Construir uma casa
           </h2>
 
           {/* Pergunta */}
-          <p style={{
-            fontSize: '14px',
-            color: '#e0f0ff',
-            margin: '0 0 20px 0',
-            lineHeight: 1.4
-          }}>
-            O que deseja fazer com<br />a criação que você construiu?
-          </p>
+          <section>
+            <div style={{ width: '77%', margin: '10px auto 12px' }}>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={completionValue}
+                onChange={(event) => {
+                  setCompletionValue(Number(event.target.value))
+                }}
+                className="completion-range"
+                style={{
+                  width: '100%',
+                  background: `linear-gradient(
+                    to right,
+                    #3b82f6 0%,
+                    #3b82f6 ${completionValue}%,
+                    #e0f0ff ${completionValue}%,
+                    #e0f0ff 100%
+                  )`,
+                }}
+              />
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  fontSize: '12px',
+                  color: '#000000',
+                  fontWeight: 700,
+                }}
+              >
+                <span>{completionValue}%</span>
+                <span>100%</span>
+              </div>
+            </div>
+            <p style={{
+              fontSize: '14px',
+              color: '#000000',
+              fontWeight: 700,
+              margin: '0 0 20px 0',
+              lineHeight: 1.4
+            }}>
+              Faltam X tutoriais para você<br />
+              conquistar um novo badge!
+            </p>
+          </section>
 
           {/* Botão Continuar */}
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>

@@ -59,13 +59,17 @@ function Card09_PositiveFeedback({ onTryAgain, onContinue, onMenu, onRestart, ux
             }}
           />
 
-          <div style={{ fontSize: '14px', fontWeight: 700, color: '#111827', marginBottom: '10px' }}>
-            <span style={{ color: '#f59e0b' }}>+ 1 acerto</span> • Badges 2/5
+          <div
+            style={{
+              fontSize: '14pt',
+              fontWeight: 700,
+              color: '#111827',
+              marginBottom: '25px',
+              marginTop: '28px',
+            }}
+          >
+            Etapa concluída!
           </div>
-          <div style={{ fontSize: '12px', color: '#6b7280', marginBottom: '62px' }}>
-            Isso conta para seus badges de creator.
-          </div>
-
           <button
             className="primary-button"
             onClick={onContinue}
