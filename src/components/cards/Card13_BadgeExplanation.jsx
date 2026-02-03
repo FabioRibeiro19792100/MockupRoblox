@@ -21,7 +21,7 @@ function Card13_BadgeExplanation({ onClose, uxLensesVariant = false }) {
     ]
 
     return (
-      <div className="card card-badge-explanation" style={{ background: '#e8f4fc', display: 'flex', flexDirection: 'column' }}>
+      <div className="card card-badge-explanation" style={{ background: '#ffffff', display: 'flex', flexDirection: 'column' }}>
         {/* Botão fechar */}
         <div className="no-padding-override" style={{ padding: '16px 20px', flex: 'none' }}>
           <button

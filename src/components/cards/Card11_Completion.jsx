@@ -21,8 +21,31 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
   if (uxLensesVariant) {
     return (
       <div className="card card-completion" style={{ background: '#ffffff', display: 'flex', flexDirection: 'column', flex: '1 1 auto', minHeight: 0 }}>
+        <style>{`
+          .card.card-completion {
+            background-image: none !important;
+          }
+          .card.card-completion::before {
+            display: none !important;
+          }
+          .card-layout-view.layer-layer12 .card-layout-item .card.card-completion {
+            background-image: none !important;
+          }
+          .card-layout-view.layer-layer12 .card-layout-item .card.card-completion::before {
+            display: none !important;
+          }
+        `}</style>
         {/* Header com botões - fundo branco */}
-        <div className="no-padding-override" style={{ display: 'flex', gap: '12px', padding: '16px 20px', flex: 'none' }}>
+        <div
+          className="no-padding-override"
+          style={{
+            display: 'flex',
+            gap: '12px',
+            padding: '16px 20px',
+            flex: 'none',
+            borderBottom: '1px solid #e5e7eb',
+          }}
+        >
           <button
             onClick={onMenu}
             style={{
