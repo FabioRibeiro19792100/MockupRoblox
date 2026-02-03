@@ -89,6 +89,11 @@
 
 .card05-ux-actions .card05-ux-action-button {
   all: unset;
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  border: 0;
+  color: inherit;
   cursor: pointer;
   display: inline-flex;
   flex-direction: column;
@@ -105,7 +110,7 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-  margin: 10px 0;
+  margin-bottom: 2px;
 }
 
 .card05-ux-action-icon--reset {
@@ -122,6 +127,21 @@
 
 .card05-ux-action-icon--demo {
   background-image: url('/play-ico.png');
+}
+
+.card05-ux-actions .card05-ux-action-button.card05-ux-action-demo {
+  font-weight: 800;
+  background-color: #fdbb2c;
+  box-shadow: 0 0 12px rgba(253, 187, 44, 0.55);
+  border-radius: 10px;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.card05-ux-actions .card05-ux-action-button.card05-ux-action-demo .card05-ux-action-icon {
+  width: 20px;
+  height: 20px;
 }
 
 .card05-ux-steps-stack {
