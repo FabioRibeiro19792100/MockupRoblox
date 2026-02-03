@@ -223,7 +223,8 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
                 fontSize: '18pt',
                 fontWeight: 700,
                 color: '#000000',
-                margin: '10px 0 10px'
+                margin: '10px 0 10px',
+                marginTop: '20px'
               }}
             >
               Construir uma casa
@@ -270,7 +271,7 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
               color: '#000000',
               fontWeight: 700,
               lineHeight: 1.4,
-              marginBottom: '41px'
+              marginBottom: '50px'
             }}>
               Faltam X tutoriais para você<br />
               conquistar um novo badge!
@@ -304,6 +305,7 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
                 fontSize: '10pt',
                 fontWeight: 700,
                 textDecoration: 'underline',
+                marginBottom: '30px',
                 cursor: 'pointer'
               }}
             >

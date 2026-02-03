@@ -101,19 +101,6 @@
   color: #000000 !important;
 }
 
-/* Exceção: Card 13 (Badge Explanation) - TODAS as fontes devem ser pretas */
-.card-badge-explanation,
-.card-badge-explanation *,
-.card-badge-explanation p,
-.card-badge-explanation span,
-.card-badge-explanation strong,
-.card-badge-explanation h1,
-.card-badge-explanation h2,
-.card-badge-explanation h3,
-.card-badge-explanation .card-title {
-  color: #000000 !important;
-}
-
 /* Exceção: No hover do botão header no Card 13, fonte deve ser branca */
 .card-badge-explanation .header-button:hover {
   color: #ffffff !important;
