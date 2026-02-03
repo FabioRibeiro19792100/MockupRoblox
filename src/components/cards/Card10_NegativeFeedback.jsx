@@ -1,6 +1,59 @@
+import { useEffect, useRef, useState } from 'react'
 import './Card.css'
 
 function Card10_NegativeFeedback({ onTryAgain, onContinue, onMenu, onRestart, uxLensesVariant = false }) {
+  const lossFrames = ['loss-1', 'loss-2', 'loss-3', 'loss-4', 'loss-5', 'loss-6', 'loss-7']
+  const [lossFrameIndex, setLossFrameIndex] = useState(0)
+  const lossIntervalRef = useRef(null)
+  const lossCycleTimeoutRef = useRef(null)
+  const isAnimatingRef = useRef(false)
+
+  useEffect(() => {
+    const root = document.documentElement
+    const setAnimatingFlag = (value) => {
+      root.dataset.card15Animating = value ? 'true' : 'false'
+    }
+
+    const stopAnimation = () => {
+      if (lossIntervalRef.current) {
+        clearInterval(lossIntervalRef.current)
+        lossIntervalRef.current = null
+      }
+      isAnimatingRef.current = false
+      setAnimatingFlag(false)
+    }
+
+    const startAnimation = () => {
+      if (isAnimatingRef.current) return
+      isAnimatingRef.current = true
+      setAnimatingFlag(true)
+
+      lossIntervalRef.current = setInterval(() => {
+        setLossFrameIndex((current) => {
+          if (current >= lossFrames.length - 1) {
+            stopAnimation()
+            lossCycleTimeoutRef.current = setTimeout(() => {
+              setLossFrameIndex(0)
+              startAnimation()
+            }, 5000)
+            return current
+          }
+          return current + 1
+        })
+      }, 200)
+    }
+
+    startAnimation()
+
+    return () => {
+      stopAnimation()
+      if (lossCycleTimeoutRef.current) {
+        clearTimeout(lossCycleTimeoutRef.current)
+        lossCycleTimeoutRef.current = null
+      }
+    }
+  }, [])
+
   if (uxLensesVariant) {
     return (
       <div className="card card-feedback" style={{ position: 'relative', overflow: 'hidden' }}>
@@ -51,7 +104,7 @@ function Card10_NegativeFeedback({ onTryAgain, onContinue, onMenu, onRestart, ux
         <div style={{ padding: '24px 20px', textAlign: 'center', position: 'relative', background: '#ffffff', display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}>
           <section>
             <img
-              src="/logo-expedicao-derrota.png"
+              src={`/Loss/${lossFrames[lossFrameIndex]}.png`}
               alt="Derrota"
               style={{
                 width: '120px',

@@ -71,6 +71,11 @@
   animation: progressShine 2s infinite;
 }
 
+:root[data-card15-animating='true'] .card-progress-visual .progress-bar-fill::after,
+:root[data-card15-animating='true'] .card-progress-visual .timeline-step-current .timeline-step-circle {
+  animation-play-state: paused;
+}
+
 @keyframes progressShine {
   0% { left: -100%; }
   100% { left: 100%; }

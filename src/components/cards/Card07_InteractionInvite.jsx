@@ -1,6 +1,24 @@
+import { useEffect, useRef, useState } from 'react'
 import './Card.css'
 
 function Card07_InteractionInvite({ onTry, onContinue, onMenu, onRestart, uxLensesVariant = false }) {
+  const runFrames = ['run-1', 'run-2', 'run-3', 'run-4', 'run-5']
+  const [runFrameIndex, setRunFrameIndex] = useState(0)
+  const runIntervalRef = useRef(null)
+
+  useEffect(() => {
+    runIntervalRef.current = setInterval(() => {
+      setRunFrameIndex((current) => (current + 1) % runFrames.length)
+    }, 50)
+
+    return () => {
+      if (runIntervalRef.current) {
+        clearInterval(runIntervalRef.current)
+        runIntervalRef.current = null
+      }
+    }
+  }, [runFrames.length])
+
   if (uxLensesVariant) {
     return (
       <div className="card card-interactive" style={{ background: '#ffffff', display: 'flex', flexDirection: 'column', flex: '1 1 auto', minHeight: 0 }}>
@@ -120,7 +138,7 @@ function Card07_InteractionInvite({ onTry, onContinue, onMenu, onRestart, uxLens
               justifyContent: 'center'
             }}>
               <img
-                src="/logo-expedicao-carrying-block.png"
+                src={`/Run/${runFrames[runFrameIndex]}.png`}
                 alt="Creator"
                 style={{
                   width: '100%',

@@ -1,6 +1,18 @@
+import { useEffect, useState } from 'react'
 import './Card.css'
 
 function Card09_PositiveFeedback({ onTryAgain, onContinue, onMenu, onRestart, uxLensesVariant = false }) {
+  const victoryFrames = ['victory-1', 'victory-1-ib', 'victory-2', 'victory-3', 'victory-3-ib', 'victory-4']
+  const [victoryFrameIndex, setVictoryFrameIndex] = useState(0)
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setVictoryFrameIndex((current) => (current + 1) % victoryFrames.length)
+    }, 100)
+
+    return () => clearInterval(intervalId)
+  }, [])
+
   if (uxLensesVariant) {
     const confettiPieces = [
       { top: '-10%', left: '12%', rotate: '-20deg', color: '#f97316', w: 10, h: 3, drift: '12px', delay: '0s', duration: '2.6s' },
@@ -97,18 +109,28 @@ function Card09_PositiveFeedback({ onTryAgain, onContinue, onMenu, onRestart, ux
 
           {/* NOTE: use congrats image here; do not reintroduce the badge2 circle container */}
           <section>
-            <img
-              src="/congrats-next.png"
-              alt=""
+            <div
               style={{
                 width: '120px',
                 height: '120px',
                 margin: '40px auto 14px',
-                objectFit: 'contain',
-                display: 'block',
-                marginTop: '40px'
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                overflow: 'hidden'
               }}
-            />
+            >
+              <img
+                src={`/victory/${victoryFrames[victoryFrameIndex]}.png`}
+                alt=""
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain',
+                  display: 'block'
+                }}
+              />
+            </div>
 
             <div
               style={{
