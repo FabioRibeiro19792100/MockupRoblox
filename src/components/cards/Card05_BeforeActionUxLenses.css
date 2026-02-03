@@ -72,6 +72,40 @@
   overflow-y: auto;
 }
 
+.card05-ux-actions {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card05-ux-actions .card05-ux-action-button {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.card05-ux-actions .card05-ux-action-button {
+  all: unset;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  line-height: 1.2;
+  padding: 0;
+  margin: 0;
+}
+
+.card05-ux-action-icon {
+  position: absolute;
+  left: 50%;
+  top: -12px;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+}
+
 .card05-ux-steps-stack {
   display: flex;
   flex-direction: column;
@@ -159,14 +193,14 @@
 
 .card05-ux-concept-link {
   cursor: pointer;
-  color: #ef4444 !important;
+  color: #ef4444;
   font-size: 10pt;
-  font-weight: 700 !important;
+  font-weight: 700;
   text-decoration: underline;
   background: transparent;
-  border: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
+  border: 0;
+  padding: 0;
+  margin: 0;
   font: inherit;
   text-align: left;
   display: inline-flex;
@@ -176,14 +210,6 @@
   height: auto;
   box-shadow: none;
   appearance: none;
-}
-
-/* Neutraliza regras globais do CardLayoutView que adicionam padding em buttons */
-.card-layout-view:is(.layer-layer2, .layer-layer3, .layer-layer4, .layer-layer5, .layer-layer7, .layer-layer8, .layer-layer9, .layer-layer10, .layer-layer11, .layer-layer12) .card-layout-item .card05-ux-concept-link {
-  padding: 0 !important;
-  border-radius: 0 !important;
-  min-height: 0 !important;
-  height: auto !important;
 }
 
 .card05-ux-emphasis {

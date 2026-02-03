@@ -39,10 +39,6 @@ function Card05_BeforeActionUxLenses({ stepNumber, totalSteps, stepTitle, onDemo
 
   return (
     <div className="card card-step">
-      <div className="card-header-global">
-        <button className="header-button" onClick={onMenu}>Voltar para menu</button>
-        <button className="header-button" onClick={onRestart}>Reiniciar tutorial</button>
-      </div>
       <div className="card05-ux-body">
         <div className="card05-ux-header">
           <div className="card05-ux-banner">
@@ -103,14 +99,24 @@ function Card05_BeforeActionUxLenses({ stepNumber, totalSteps, stepTitle, onDemo
           </div>
         </section>
       </div>
-      <div className="card-actions">
-        <button className="secondary-button" onClick={onBack}>
+      <section className="card-actions card05-ux-actions" aria-label="Ações do tutorial">
+        <button className="card05-ux-action-button" onClick={onMenu}>
+          <span className="card05-ux-action-icon" aria-hidden="true" />
+          Menu
+        </button>
+        <button className="card05-ux-action-button" onClick={onRestart}>
+          <span className="card05-ux-action-icon" aria-hidden="true" />
+          Reiniciar
+        </button>
+        <button className="card05-ux-action-button" onClick={onBack}>
+          <span className="card05-ux-action-icon" aria-hidden="true" />
           Voltar passo
         </button>
-        <button className="primary-button demonstrate-button" onClick={onDemonstrate}>
+        <button className="card05-ux-action-button" onClick={onDemonstrate}>
+          <span className="card05-ux-action-icon" aria-hidden="true" />
           Demonstrar
         </button>
-      </div>
+      </section>
     </div>
   )
 }
