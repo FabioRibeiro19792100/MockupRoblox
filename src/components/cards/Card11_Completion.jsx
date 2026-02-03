@@ -88,7 +88,7 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
           minHeight: 0,
           background: '#ffffff',
           borderRadius: '20px',
-          margin: '0 16px 75px 16px',
+          margin: '0 16px 0px',
           padding: '24px 20px',
           display: 'flex',
           flexDirection: 'column',
@@ -173,7 +173,7 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
             }
           `}</style>
 
-          <section>
+          <section className="completion-actions-section">
             {/* Título PARABÉNS */}
             <h1
               className="completion-title"
@@ -182,6 +182,7 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
                 fontWeight: 900,
                 color: '#000000',
                 margin: '0 0 6px 0',
+                marginTop: '30px',
                 letterSpacing: '2px'
               }}
             >
@@ -197,43 +198,40 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
             }}>
               você concluiu o tutorial:
             </p>
+
+            {/* Ícone da casa */}
+            <div style={{
+              width: '104px',
+              height: '104px',
+              background: '#3b6fa0',
+              borderRadius: '24px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '0 auto 14px',
+              transform: 'rotate(-5deg)'
+            }}>
+              <svg width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+            </div>
+
+            <h2
+              className="completion-title"
+              style={{
+                fontSize: '18pt',
+                fontWeight: 700,
+                color: '#000000',
+                margin: '10px 0 10px'
+              }}
+            >
+              Construir uma casa
+            </h2>
           </section>
 
-          {/* Ícone da casa */}
-          <div style={{
-            width: '104px',
-            height: '104px',
-            background: '#3b6fa0',
-            borderRadius: '24px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginBottom: '14px',
-            boxShadow: '0 8px 20px rgba(0,0,0,0.2)',
-            transform: 'rotate(-5deg)'
-          }}>
-            <svg width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-              <polyline points="9 22 9 12 15 12 15 22"></polyline>
-            </svg>
-          </div>
-
-          {/* Nome do tutorial */}
-          <h2
-            className="completion-title"
-            style={{
-            fontSize: '18pt',
-            fontWeight: 700,
-            color: '#000000',
-            margin: '0 0 10px 0'
-          }}
-          >
-            Construir uma casa
-          </h2>
-
-          {/* Pergunta */}
-          <section>
-            <div style={{ width: '77%', margin: '10px auto 12px' }}>
+          <section className="completion-progress-section">
+            <div style={{ width: '77%', margin: '10px auto 5px' }}>
               <input
                 type="range"
                 min="0"
@@ -271,42 +269,39 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
               fontSize: '14px',
               color: '#000000',
               fontWeight: 700,
-              margin: '0 0 20px 0',
-              lineHeight: 1.4
+              lineHeight: 1.4,
+              marginBottom: '41px'
             }}>
               Faltam X tutoriais para você<br />
               conquistar um novo badge!
             </p>
-          </section>
-
-          {/* Botão Continuar */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <button
-              onClick={handleKeepMap}
-              style={{
-                width: '100%',
-                maxWidth: '260px',
-                background: '#fbbf24',
-                border: 'none',
-                borderRadius: '50px',
-                padding: '12px 22px',
-                fontSize: '16px',
-                fontWeight: 700,
-                color: '#000000',
-                cursor: 'pointer',
-                marginBottom: '12px'
-              }}
-            >
-              continuar
-            </button>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <button
+                onClick={handleKeepMap}
+                style={{
+                  width: '100%',
+                  maxWidth: '260px',
+                  background: '#fbbf24',
+                  border: 'none',
+                  borderRadius: '50px',
+                  padding: '12px 22px',
+                  fontSize: '16px',
+                  fontWeight: 700,
+                  color: '#000000',
+                  cursor: 'pointer',
+                  marginBottom: '20px'
+                }}
+              >
+                continuar
+              </button>
 
             <button
               onClick={handleClearAndExit}
               style={{
                 background: 'transparent',
                 border: 'none',
-                color: '#1e3a5f',
-                fontSize: '13px',
+                color: '#000000',
+                fontSize: '10pt',
                 fontWeight: 700,
                 textDecoration: 'underline',
                 cursor: 'pointer'
@@ -314,7 +309,8 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
             >
               limpar e sair
             </button>
-          </div>
+            </div>
+          </section>
         </div>
       </div>
     )
