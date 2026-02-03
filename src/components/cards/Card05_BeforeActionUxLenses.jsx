@@ -100,20 +100,20 @@ function Card05_BeforeActionUxLenses({ stepNumber, totalSteps, stepTitle, onDemo
         </section>
       </div>
       <section className="card-actions card05-ux-actions" aria-label="Ações do tutorial">
-        <button className="card05-ux-action-button" onClick={onMenu}>
-          <span className="card05-ux-action-icon" aria-hidden="true" />
+        <button className="card05-ux-action-button card05-ux-action-menu" onClick={onMenu}>
+          <span className="card05-ux-action-icon card05-ux-action-icon--menu" aria-hidden="true" />
           Menu
         </button>
-        <button className="card05-ux-action-button" onClick={onRestart}>
-          <span className="card05-ux-action-icon" aria-hidden="true" />
+        <button className="card05-ux-action-button card05-ux-action-reset" onClick={onRestart}>
+          <span className="card05-ux-action-icon card05-ux-action-icon--reset" aria-hidden="true" />
           Reiniciar
         </button>
-        <button className="card05-ux-action-button" onClick={onBack}>
-          <span className="card05-ux-action-icon" aria-hidden="true" />
+        <button className="card05-ux-action-button card05-ux-action-back" onClick={onBack}>
+          <span className="card05-ux-action-icon card05-ux-action-icon--back" aria-hidden="true" />
           Voltar passo
         </button>
-        <button className="card05-ux-action-button" onClick={onDemonstrate}>
-          <span className="card05-ux-action-icon" aria-hidden="true" />
+        <button className="card05-ux-action-button card05-ux-action-demo" onClick={onDemonstrate}>
+          <span className="card05-ux-action-icon card05-ux-action-icon--demo" aria-hidden="true" />
           Demonstrar
         </button>
       </section>

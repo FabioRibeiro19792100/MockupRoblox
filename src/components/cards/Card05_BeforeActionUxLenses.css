@@ -75,9 +75,10 @@
 .card05-ux-actions {
   display: flex;
   flex-wrap: nowrap;
-  gap: 16px;
+  gap: 1.5px;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
+  padding: 10px;
 }
 
 .card05-ux-actions .card05-ux-action-button {
@@ -89,21 +90,38 @@
 .card05-ux-actions .card05-ux-action-button {
   all: unset;
   cursor: pointer;
-  position: relative;
-  display: inline-block;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
   line-height: 1.2;
   padding: 0;
   margin: 0;
 }
 
 .card05-ux-action-icon {
-  position: absolute;
-  left: 50%;
-  top: -12px;
-  transform: translateX(-50%);
-  width: 12px;
-  height: 12px;
+  width: 17px;
+  height: 17px;
   pointer-events: none;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  margin: 10px 0;
+}
+
+.card05-ux-action-icon--reset {
+  background-image: url('/reset-ico.png');
+}
+
+.card05-ux-action-icon--menu {
+  background-image: url('/home-ico.png');
+}
+
+.card05-ux-action-icon--back {
+  background-image: url('/undo-ico.png');
+}
+
+.card05-ux-action-icon--demo {
+  background-image: url('/play-ico.png');
 }
 
 .card05-ux-steps-stack {
