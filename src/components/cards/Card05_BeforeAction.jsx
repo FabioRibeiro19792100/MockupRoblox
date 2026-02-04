@@ -2,7 +2,22 @@ import './Card.css'
 import './Card05_BeforeAction.css'
 import Card05_BeforeActionUxLenses from './Card05_BeforeActionUxLenses'
 
-function Card05_BeforeAction({ stepNumber, totalSteps, stepTitle, onDemonstrate, onBack, onShowConcept, onMenu, onRestart, uxLensesVariant = false }) {
+function Card05_BeforeAction({
+  stepNumber,
+  totalSteps,
+  stepTitle,
+  onDemonstrate,
+  onBack,
+  onShowConcept,
+  onMenu,
+  onRestart,
+  highlightStepCount = 0,
+  highlightVariant = 'text-green',
+  onResetEffects,
+  blinkStepIndex = null,
+  blinkVariant = 'text-green',
+  uxLensesVariant = false
+}) {
   if (uxLensesVariant) {
     return (
       <Card05_BeforeActionUxLenses
@@ -14,6 +29,11 @@ function Card05_BeforeAction({ stepNumber, totalSteps, stepTitle, onDemonstrate,
         onShowConcept={onShowConcept}
         onMenu={onMenu}
         onRestart={onRestart}
+        highlightStepCount={highlightStepCount}
+        highlightVariant={highlightVariant}
+        onResetEffects={onResetEffects}
+        blinkStepIndex={blinkStepIndex}
+        blinkVariant={blinkVariant}
       />
     )
   }

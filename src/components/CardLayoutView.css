@@ -161,6 +161,44 @@
   z-index: 1001;
 }
 
+.card-layout-view .card08-module-button {
+  width: 100%;
+  padding: 10px 14px;
+  border: 2px solid #000000;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #000000;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.card-layout-view .card08-module-button:hover {
+  background: #f5f5f5;
+}
+
+.card-layout-view .card08-module-controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.card-layout-view .card08-module-controls .card08-module-button {
+  flex: 1 1 100%;
+}
+
+.card-layout-view .card08-module-controls .card08-module-button--reset {
+  border-style: dashed;
+}
+
+.card-layout-view .card08-module-button--with-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .card-layout-view .layer-select {
   width: 100%;
   padding: 8px 12px;

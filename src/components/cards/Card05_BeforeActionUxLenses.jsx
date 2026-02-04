@@ -1,8 +1,24 @@
+import { useState } from 'react'
 import './Card.css'
 import './Card05_BeforeActionUxLenses.css'
 
-function Card05_BeforeActionUxLenses({ stepNumber, totalSteps, stepTitle, onDemonstrate, onBack, onShowConcept, onMenu, onRestart }) {
+function Card05_BeforeActionUxLenses({
+  stepNumber,
+  totalSteps,
+  stepTitle,
+  onDemonstrate,
+  onBack,
+  onShowConcept,
+  onMenu,
+  onRestart,
+  onResetEffects,
+  highlightStepCount = 0,
+  highlightVariant = 'text-green',
+  blinkStepIndex = null,
+  blinkVariant = 'text-green'
+}) {
   const completedStep = 0
+  const [showResetConfirm, setShowResetConfirm] = useState(false)
   const steps = [
     {
       id: 1,
@@ -61,10 +77,22 @@ function Card05_BeforeActionUxLenses({ stepNumber, totalSteps, stepTitle, onDemo
 
         <section className="card05-ux-steps" aria-label="Passo a passo">
           <div className="card05-ux-steps-stack">
-            {steps.map((step, index) => (
-              <div className="card05-ux-step" key={step.id}>
+            {steps.map((step, index) => {
+              const isHighlighted = highlightStepCount > index
+              const isCurrent = highlightStepCount === index
+              const isBlinking = blinkStepIndex === index
+              const isInactive = !isHighlighted && !isCurrent && !isBlinking
+              return (
+              <div
+                className={`card05-ux-step${isHighlighted ? ' card05-ux-step--highlighted' : ''}${isInactive ? ' card05-ux-step--inactive' : ''}${isBlinking ? ' card05-ux-step--blinking' : ''}`}
+                data-highlight={isHighlighted ? highlightVariant : undefined}
+                data-blink={isBlinking ? blinkVariant : undefined}
+                key={step.id}
+              >
                 <div className="card05-ux-step-marker">
-                  <div className="card05-ux-step-bubble">{step.id}</div>
+                  <div className="card05-ux-step-bubble">
+                    {isHighlighted ? '✓' : step.id}
+                  </div>
                   {index < steps.length - 1 && (
                     <div
                       className="card05-ux-step-line"
@@ -81,7 +109,7 @@ function Card05_BeforeActionUxLenses({ stepNumber, totalSteps, stepTitle, onDemo
                   ))}
                 </div>
               </div>
-            ))}
+            )})}
             <section className="card05-ux-outcome" aria-label="Resultado esperado">
               <hr className="card05-ux-divider" />
               <h4 className="card05-ux-result-label">O que você vai ver na tela:</h4>
@@ -104,7 +132,10 @@ function Card05_BeforeActionUxLenses({ stepNumber, totalSteps, stepTitle, onDemo
           <span className="card05-ux-action-icon card05-ux-action-icon--menu" aria-hidden="true" />
           Menu
         </button>
-        <button className="card05-ux-action-button card05-ux-action-reset" onClick={onRestart}>
+        <button
+          className="card05-ux-action-button card05-ux-action-reset"
+          onClick={() => setShowResetConfirm(true)}
+        >
           <span className="card05-ux-action-icon card05-ux-action-icon--reset" aria-hidden="true" />
           Reiniciar
         </button>
@@ -117,6 +148,36 @@ function Card05_BeforeActionUxLenses({ stepNumber, totalSteps, stepTitle, onDemo
           Demonstrar
         </button>
       </section>
+      {showResetConfirm && (
+        <div className="card05-ux-reset-overlay" role="dialog" aria-modal="true">
+          <div className="card05-ux-reset-modal">
+            <h3 className="card05-ux-reset-title">Reiniciar tutorial?</h3>
+            <p className="card05-ux-reset-text">
+              Você tem certeza que deseja reiniciar? Seu progresso desta etapa será perdido.
+            </p>
+            <div className="card05-ux-reset-actions">
+              <button
+                type="button"
+                className="card05-ux-reset-button card05-ux-reset-cancel"
+                onClick={() => setShowResetConfirm(false)}
+              >
+                Cancelar
+              </button>
+              <button
+                type="button"
+                className="card05-ux-reset-button card05-ux-reset-confirm"
+                onClick={() => {
+                  if (onResetEffects) onResetEffects()
+                  setShowResetConfirm(false)
+                  if (onRestart) onRestart()
+                }}
+              >
+                Reiniciar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

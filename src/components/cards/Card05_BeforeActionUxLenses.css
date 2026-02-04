@@ -147,12 +147,14 @@
 .card05-ux-steps-stack {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 0;
 }
 
 .card05-ux-step {
   display: flex;
   gap: 12px;
+  margin: 0;
+  padding: 0;
 }
 
 .card05-ux-step-marker {
@@ -178,7 +180,6 @@
 }
 
 .card05-ux-step-line {
-  margin-top: 4px;
   width: 2px;
   flex-grow: 1;
   min-height: 26px;
@@ -187,6 +188,7 @@
 
 .card05-ux-step-content {
   color: #000000;
+  margin-bottom: 20px;
 }
 
 .card05-ux-step-title {
@@ -198,6 +200,72 @@
   font-size: 13px;
   color: #4b5563;
   margin-top: 2px;
+}
+
+.card05-ux-step--inactive {
+  opacity: 0.5;
+}
+
+.card05-ux-step--blinking[data-blink="text-green"] .card05-ux-step-title,
+.card05-ux-step--blinking[data-blink="text-green"] .card05-ux-step-line-text,
+.card05-ux-step--blinking[data-blink="text-green"] .card05-ux-emphasis {
+  animation: card05-ux-blink-text 0.45s ease-in-out 3;
+}
+
+.card05-ux-step--blinking[data-blink="text-green"] .card05-ux-step-bubble {
+  animation: card05-ux-blink-bubble 0.45s ease-in-out 3;
+}
+
+.card05-ux-step--blinking[data-blink="text-green"] .card05-ux-step-line {
+  animation: card05-ux-blink-line 0.45s ease-in-out 3;
+}
+
+@keyframes card05-ux-blink-text {
+  0%,
+  100% {
+    color: inherit;
+  }
+  50% {
+    color: #16a34a;
+  }
+}
+
+@keyframes card05-ux-blink-bubble {
+  0%,
+  100% {
+    background: #000000;
+    border-color: #f97316;
+    color: #ffffff;
+  }
+  50% {
+    background: #16a34a;
+    border-color: #16a34a;
+    color: #ffffff;
+  }
+}
+
+@keyframes card05-ux-blink-line {
+  0%,
+  100% {
+    background: #d1d5db;
+  }
+  50% {
+    background: #16a34a;
+  }
+}
+.card05-ux-step--highlighted[data-highlight="text-green"] .card05-ux-step-title,
+.card05-ux-step--highlighted[data-highlight="text-green"] .card05-ux-step-line-text,
+.card05-ux-step--highlighted[data-highlight="text-green"] .card05-ux-emphasis {
+  color: #16a34a;
+}
+
+.card05-ux-step--highlighted[data-highlight="text-green"] .card05-ux-step-bubble {
+  background: #16a34a;
+  border-color: #16a34a;
+}
+
+.card05-ux-step--highlighted[data-highlight="text-green"] .card05-ux-step-line {
+  background: #16a34a !important;
 }
 
 .card05-ux-outcome {
@@ -253,4 +321,64 @@
 .card05-ux-emphasis {
   color: #ef4444;
   text-decoration: underline;
+}
+
+.card05-ux-reset-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 5;
+}
+
+.card05-ux-reset-modal {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  width: min(320px, 100%);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  text-align: left;
+}
+
+.card05-ux-reset-title {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #000000;
+}
+
+.card05-ux-reset-text {
+  margin: 0 0 16px 0;
+  font-size: 13px;
+  color: #374151;
+  line-height: 1.4;
+}
+
+.card05-ux-reset-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.card05-ux-reset-button {
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.card05-ux-reset-cancel {
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  color: #111827;
+}
+
+.card05-ux-reset-confirm {
+  background: #fbbf24;
+  border: 1px solid #000000;
+  color: #111827;
 }

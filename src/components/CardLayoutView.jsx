@@ -43,12 +43,16 @@ function CardLayoutView({
   onTutorialComplete,
   onQuickComplete
 }) {
+  const CARD08_STEP_COUNT = 4
   const [selectedTutorial, setSelectedTutorial] = useState('Construir uma casa')
   const [showConcept, setShowConcept] = useState(false)
   const [currentStep, setCurrentStep] = useState(1)
   const [tutorialMode, setTutorialMode] = useState('demonstrative')
   const [currentLayer, setCurrentLayer] = useState('layer12')
   const [showLabels, setShowLabels] = useState(false)
+  const [card08HighlightCount, setCard08HighlightCount] = useState(0)
+  const [card08BlinkingIndex, setCard08BlinkingIndex] = useState(null)
+  const [card08IsBlinking, setCard08IsBlinking] = useState(false)
   const [activeCardId, setActiveCardId] = useState(null) // Card atualmente visualizado
   const [currentLayoutCard, setCurrentLayoutCard] = useState(0) // Card atual no layout mode
   const [showBadgeGallery, setShowBadgeGallery] = useState(true)
@@ -67,6 +71,31 @@ function CardLayoutView({
   
   // Estado para coordenadas do elemento clicado
   const [elementPosition, setElementPosition] = useState(null) // { label, position, cardId }
+
+  const handleCard08ModuleAction = () => {
+    if (card08IsBlinking) return
+    if (card08HighlightCount >= CARD08_STEP_COUNT) {
+      setCard08HighlightCount(0)
+      return
+    }
+    const nextIndex = card08HighlightCount
+    setCard08BlinkingIndex(nextIndex)
+    setCard08IsBlinking(true)
+    const blinkDurationMs = 450
+    const blinkIterations = 3
+    const totalMs = blinkDurationMs * blinkIterations
+    window.setTimeout(() => {
+      setCard08HighlightCount((prev) => Math.min(prev + 1, CARD08_STEP_COUNT))
+      setCard08BlinkingIndex(null)
+      setCard08IsBlinking(false)
+    }, totalMs)
+  }
+
+  const handleCard08ResetEffects = () => {
+    setCard08HighlightCount(0)
+    setCard08BlinkingIndex(null)
+    setCard08IsBlinking(false)
+  }
   
   // Chave para localStorage
   const STORAGE_KEY = 'cardLayoutCustomStyles'
@@ -703,6 +732,11 @@ function CardLayoutView({
           totalSteps={3}
           stepTitle={mockStepData.title}
           uxLensesVariant={currentLayer === 'layer12'}
+          highlightStepCount={card08HighlightCount}
+          highlightVariant="text-green"
+          blinkStepIndex={card08BlinkingIndex}
+          blinkVariant="text-green"
+          onResetEffects={handleCard08ResetEffects}
           onDemonstrate={() => {
             if (onCardAction) onCardAction('demonstrate')
             navigateToNextCard(6)
@@ -1826,6 +1860,23 @@ function CardLayoutView({
               />
               Mostrar Labels
             </label>
+          </div>
+          <div className="control-group card08-module-controls">
+            <button
+              type="button"
+              className="card08-module-button"
+              onClick={handleCard08ModuleAction}
+            >
+              Ação do modulo Card 8
+            </button>
+            <button
+              type="button"
+              className="card08-module-button card08-module-button--reset card08-module-button--with-icon"
+              onClick={handleCard08ResetEffects}
+            >
+              <span className="card05-ux-action-icon card05-ux-action-icon--reset" aria-hidden="true" />
+              Reset efeitos
+            </button>
           </div>
         </div>
       </div>
