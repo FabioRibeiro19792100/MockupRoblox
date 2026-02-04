@@ -52,6 +52,7 @@ function Card05_BeforeActionUxLenses({
   }
   const [showResetConfirm, setShowResetConfirm] = useState(false)
   const [activeHelpStepId, setActiveHelpStepId] = useState(null)
+  const [showResultGuard, setShowResultGuard] = useState(false)
   const steps = [
     {
       id: 1,
@@ -87,6 +88,7 @@ function Card05_BeforeActionUxLenses({
     }
   ]
   const isAllStepsCompleted = highlightStepCount >= steps.length
+  const remainingSteps = Math.max(0, steps.length - highlightStepCount)
   const getHelpImagePath = (stepId) =>
     `public/Tutorial-steps/Build-A-House/Build-a-house-step${stepId}.png`
 
@@ -186,8 +188,13 @@ function Card05_BeforeActionUxLenses({
               <button
                 type="button"
                 className={`card05-ux-result-button${isAllStepsCompleted ? '' : ' card05-ux-result-button--disabled'}`}
-                disabled={!isAllStepsCompleted}
-                onClick={() => {}}
+                aria-disabled={!isAllStepsCompleted}
+                onClick={() => {
+                  if (!isAllStepsCompleted) {
+                    setShowResultGuard(true)
+                    return
+                  }
+                }}
               >
                 Clique para ver o resultado
               </button>
@@ -275,6 +282,23 @@ function Card05_BeforeActionUxLenses({
               <img src={activeHelp.image} alt="" />
             </div>
             <p className="card05-ux-help-text">{activeHelp.text}</p>
+          </div>
+        </div>
+      )}
+      {showResultGuard && (
+        <div className="card05-ux-result-overlay" role="dialog" aria-modal="true">
+          <div className="card05-ux-result-modal">
+            <button
+              type="button"
+              className="card05-ux-result-close"
+              aria-label="Fechar"
+              onClick={() => setShowResultGuard(false)}
+            >
+              ×
+            </button>
+            <p className="card05-ux-result-text">
+              Opa, vejo que você está tentando ver o resultado, no entanto, falta você concluir {remainingSteps} passo{remainingSteps === 1 ? '' : 's'} para poder prosseguir.
+            </p>
           </div>
         </div>
       )}

@@ -53,6 +53,8 @@ function CardLayoutView({
   const [card08HighlightCount, setCard08HighlightCount] = useState(0)
   const [card08BlinkingIndex, setCard08BlinkingIndex] = useState(null)
   const [card08IsBlinking, setCard08IsBlinking] = useState(false)
+  const card08StepsTotal = 4
+  const isCard08Complete = card08HighlightCount >= card08StepsTotal
   const [activeCardId, setActiveCardId] = useState(null) // Card atualmente visualizado
   const [currentLayoutCard, setCurrentLayoutCard] = useState(0) // Card atual no layout mode
   const [showBadgeGallery, setShowBadgeGallery] = useState(true)
@@ -1867,6 +1869,7 @@ function CardLayoutView({
             </label>
           </div>
           <div className="control-group card08-module-controls">
+            <div className="card08-module-title">Iterações do Card 8</div>
             <button
               type="button"
               className="card08-module-button"
@@ -1882,6 +1885,14 @@ function CardLayoutView({
               <span className="card05-ux-action-icon card05-ux-action-icon--reset" aria-hidden="true" />
               Reset efeitos
             </button>
+            {isCard08Complete && (
+              <div className="card08-dev-message">
+                <div className="card08-dev-message-title">Mensagem para o desenvolvedor</div>
+                <div className="card08-dev-message-body">
+                  Desenvolvedor, ao final dessa iteração, a lógica segue para o Card 14, feedback positivo
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

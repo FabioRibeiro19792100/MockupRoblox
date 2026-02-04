@@ -199,6 +199,46 @@
   gap: 8px;
 }
 
+.card-layout-view .card08-module-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.card-layout-view .card08-dev-message {
+  border: 1px solid #000000;
+  border-radius: 8px;
+  padding: 12px;
+  background: #fff7ed;
+  animation: card08-dev-blink 1s ease-in-out infinite;
+}
+
+.card-layout-view .card08-dev-message-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.card-layout-view .card08-dev-message-body {
+  font-size: 13px;
+  font-weight: 600;
+  color: #111827;
+}
+
+@keyframes card08-dev-blink {
+  0%,
+  100% {
+    box-shadow: 0 0 0 rgba(253, 187, 44, 0);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(253, 187, 44, 0.45);
+  }
+}
+
 .card-layout-view .layer-select {
   width: 100%;
   padding: 8px 12px;
