@@ -11,13 +11,17 @@ function Card05_BeforeAction({
   onShowConcept,
   onMenu,
   onRestart,
-  highlightStepCount = 0,
+  highlightStepCount = null,
   highlightVariant = 'text-green',
   onResetEffects,
   blinkStepIndex = null,
   blinkVariant = 'text-green',
   uxLensesVariant = false
 }) {
+  const effectiveHighlightCount =
+    highlightStepCount === null || highlightStepCount === undefined
+      ? Math.max(0, (stepNumber || 1) - 1)
+      : highlightStepCount
   if (uxLensesVariant) {
     return (
       <Card05_BeforeActionUxLenses
@@ -29,7 +33,7 @@ function Card05_BeforeAction({
         onShowConcept={onShowConcept}
         onMenu={onMenu}
         onRestart={onRestart}
-        highlightStepCount={highlightStepCount}
+        highlightStepCount={effectiveHighlightCount}
         highlightVariant={highlightVariant}
         onResetEffects={onResetEffects}
         blinkStepIndex={blinkStepIndex}

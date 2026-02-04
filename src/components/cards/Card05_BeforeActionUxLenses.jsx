@@ -18,10 +18,10 @@ function Card05_BeforeActionUxLenses({
   blinkVariant = 'text-green'
 }) {
   const completedStep = 0
-  const keepTrailingPhraseTogether = (text) => {
-    if (!text || typeof text !== 'string') return text
+  const splitTitleForTail = (text) => {
+    if (!text || typeof text !== 'string') return { head: '', tail: text }
     const trimmed = text.trim()
-    if (!trimmed.includes(' ')) return trimmed
+    if (!trimmed.includes(' ')) return { head: '', tail: trimmed }
 
     const lastQuoteIndex = trimmed.lastIndexOf('"')
     const hasQuotePair = lastQuoteIndex !== -1 && trimmed.slice(0, lastQuoteIndex).includes('"')
@@ -32,31 +32,32 @@ function Card05_BeforeActionUxLenses({
       const quoteGroup = trimmed.slice(quoteStart)
       const beforeQuoteParts = beforeQuote.split(/\s+/)
       if (beforeQuoteParts.length >= 1) {
-        const lead = beforeQuoteParts.slice(0, -1).join(' ')
-        const tail = `${beforeQuoteParts[beforeQuoteParts.length - 1]} ${quoteGroup}`.replace(' ', '\u00A0')
-        return lead ? `${lead} ${tail}` : tail
+        const head = beforeQuoteParts.slice(0, -1).join(' ')
+        const tail = `${beforeQuoteParts[beforeQuoteParts.length - 1]} ${quoteGroup}`
+        return { head, tail }
       }
-      return trimmed.replace(' ', '\u00A0')
+      return { head: '', tail: trimmed }
     }
 
     const parts = trimmed.split(/\s+/)
     const lastWord = parts[parts.length - 1]
     const keepCount = lastWord.length <= 4 ? 3 : 2
     if (parts.length <= keepCount) {
-      return parts.join('\u00A0')
+      return { head: '', tail: parts.join(' ') }
     }
-    const head = parts.slice(0, -keepCount).join(' ')
-    const tail = parts.slice(-keepCount).join('\u00A0')
-    return `${head} ${tail}`
+    return {
+      head: parts.slice(0, -keepCount).join(' '),
+      tail: parts.slice(-keepCount).join(' ')
+    }
   }
   const [showResetConfirm, setShowResetConfirm] = useState(false)
+  const [activeHelpStepId, setActiveHelpStepId] = useState(null)
   const steps = [
     {
       id: 1,
       title: 'Crie uma "Part"',
       lines: [
-        <>Na barra superior, clique em <strong>Modelo</strong></>,
-        <>Clique em <strong>Part</strong></>
+        <>Na barra superior, clique em <strong>Modelo (model)</strong> e, em seguida,<br />clique em <strong>Part</strong></>
       ]
     },
     {
@@ -83,6 +84,28 @@ function Card05_BeforeActionUxLenses({
       ]
     }
   ]
+  const getHelpImagePath = (stepId) =>
+    `public/Tutorial-steps/Build-A-House/Build-a-house-step${stepId}.png`
+
+  const helpContentByStep = {
+    1: {
+      image: getHelpImagePath(1),
+      text: 'Nesta etapa você cria a primeira Part pelo menu Modelo.'
+    },
+    2: {
+      image: getHelpImagePath(2),
+      text: 'Aqui você renomeia a Part recém-criada no painel Explorador.'
+    },
+    3: {
+      image: getHelpImagePath(3),
+      text: 'Ajuste as dimensões da Part usando as alças de escala.'
+    },
+    4: {
+      image: getHelpImagePath(4),
+      text: 'Centralize a base para manter a casa alinhada com o chão.'
+    }
+  }
+  const activeHelp = activeHelpStepId ? helpContentByStep[activeHelpStepId] : null
 
   return (
     <div className="card card-step">
@@ -112,6 +135,7 @@ function Card05_BeforeActionUxLenses({
               const isCurrent = highlightStepCount === index
               const isBlinking = blinkStepIndex === index
               const isInactive = !isHighlighted && !isCurrent && !isBlinking
+              const { head, tail } = splitTitleForTail(step.title)
               return (
               <div
                 className={`card05-ux-step${isHighlighted ? ' card05-ux-step--highlighted' : ''}${isCurrent ? ' card05-ux-step--current' : ''}${isInactive ? ' card05-ux-step--inactive' : ''}${isBlinking ? ' card05-ux-step--blinking' : ''}`}
@@ -131,7 +155,22 @@ function Card05_BeforeActionUxLenses({
                   )}
                 </div>
                 <div className="card05-ux-step-content">
-                  <div className="card05-ux-step-title">{keepTrailingPhraseTogether(step.title)}</div>
+                  <div className="card05-ux-step-title">
+                    {head ? `${head} ` : ''}
+                    <span className="card05-ux-step-title-tail">
+                      {tail}
+                      {isCurrent && (
+                        <button
+                          type="button"
+                          className="card05-ux-step-help"
+                          aria-label="Ajuda"
+                          onClick={() => setActiveHelpStepId(step.id)}
+                        >
+                          ?
+                        </button>
+                      )}
+                    </span>
+                  </div>
                   {step.lines.map((line, lineIndex) => (
                     <div className="card05-ux-step-line-text" key={`${step.id}-${lineIndex}`}>
                       {line}
@@ -205,6 +244,24 @@ function Card05_BeforeActionUxLenses({
                 Reiniciar
               </button>
             </div>
+          </div>
+        </div>
+      )}
+      {activeHelp && (
+        <div className="card05-ux-help-overlay" role="dialog" aria-modal="true">
+          <div className="card05-ux-help-modal">
+            <button
+              type="button"
+              className="card05-ux-help-close"
+              aria-label="Fechar"
+              onClick={() => setActiveHelpStepId(null)}
+            >
+              ×
+            </button>
+            <div className="card05-ux-help-image">
+              <img src={activeHelp.image} alt="" />
+            </div>
+            <p className="card05-ux-help-text">{activeHelp.text}</p>
           </div>
         </div>
       )}

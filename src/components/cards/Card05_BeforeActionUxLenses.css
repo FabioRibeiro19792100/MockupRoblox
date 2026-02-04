@@ -72,6 +72,7 @@
 
 .card05-ux-steps {
   position: relative;
+  padding-top: 10px;
   padding-right: 28px;
   padding-left: 6px;
   margin-bottom: 80px;
@@ -204,6 +205,107 @@
 .card05-ux-step-title {
   font-size: 14pt;
   font-weight: 700;
+}
+
+.card05-ux-step-title-tail {
+  white-space: nowrap;
+}
+
+.card05-ux-step-help {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid #94a3b8;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 700;
+  margin-left: 8px;
+  margin-bottom: 3px;
+  vertical-align: middle;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+  background: transparent;
+  padding: 0;
+}
+
+.card05-ux-step-help:hover {
+  background: #bae6fd;
+  border-color: #38bdf8;
+  color: #0369a1;
+}
+
+.card05-ux-help-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 6;
+}
+
+.card05-ux-help-modal {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  width: min(320px, 100%);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  text-align: left;
+  position: relative;
+}
+
+.card05-ux-help-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: #000000;
+  border: 0;
+  width: 40px;
+  height: 40px;
+  font-size: 26pt;
+  cursor: pointer;
+  color: #ffffff;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card05-ux-help-image {
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f3f4f6;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  margin-bottom: 12px;
+}
+
+.card05-ux-help-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.card05-ux-help-text {
+  margin: 0;
+  font-size: 10pt;
+  color: #111827;
+  line-height: 1.4;
+  text-align: center;
 }
 
 .card05-ux-step-line-text {

@@ -741,7 +741,12 @@ function CardLayoutView({
             if (onCardAction) onCardAction('demonstrate')
             navigateToNextCard(6)
           }}
-          onBack={() => setCurrentStep(Math.max(1, currentStep - 1))}
+          onBack={() => {
+            setCurrentStep(Math.max(1, currentStep - 1))
+            setCard08HighlightCount((prev) => Math.max(0, prev - 1))
+            setCard08BlinkingIndex(null)
+            setCard08IsBlinking(false)
+          }}
           onShowConcept={() => {
             setShowConcept(true)
             navigateToNextCard(6)
@@ -1867,7 +1872,7 @@ function CardLayoutView({
               className="card08-module-button"
               onClick={handleCard08ModuleAction}
             >
-              Ação do modulo Card 8
+              Evento de conclusão de um passo
             </button>
             <button
               type="button"
