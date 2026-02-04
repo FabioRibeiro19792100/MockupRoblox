@@ -18,6 +18,37 @@ function Card05_BeforeActionUxLenses({
   blinkVariant = 'text-green'
 }) {
   const completedStep = 0
+  const keepTrailingPhraseTogether = (text) => {
+    if (!text || typeof text !== 'string') return text
+    const trimmed = text.trim()
+    if (!trimmed.includes(' ')) return trimmed
+
+    const lastQuoteIndex = trimmed.lastIndexOf('"')
+    const hasQuotePair = lastQuoteIndex !== -1 && trimmed.slice(0, lastQuoteIndex).includes('"')
+
+    if (hasQuotePair) {
+      const quoteStart = trimmed.lastIndexOf('"', lastQuoteIndex - 1)
+      const beforeQuote = trimmed.slice(0, quoteStart).trim()
+      const quoteGroup = trimmed.slice(quoteStart)
+      const beforeQuoteParts = beforeQuote.split(/\s+/)
+      if (beforeQuoteParts.length >= 1) {
+        const lead = beforeQuoteParts.slice(0, -1).join(' ')
+        const tail = `${beforeQuoteParts[beforeQuoteParts.length - 1]} ${quoteGroup}`.replace(' ', '\u00A0')
+        return lead ? `${lead} ${tail}` : tail
+      }
+      return trimmed.replace(' ', '\u00A0')
+    }
+
+    const parts = trimmed.split(/\s+/)
+    const lastWord = parts[parts.length - 1]
+    const keepCount = lastWord.length <= 4 ? 3 : 2
+    if (parts.length <= keepCount) {
+      return parts.join('\u00A0')
+    }
+    const head = parts.slice(0, -keepCount).join(' ')
+    const tail = parts.slice(-keepCount).join('\u00A0')
+    return `${head} ${tail}`
+  }
   const [showResetConfirm, setShowResetConfirm] = useState(false)
   const steps = [
     {
@@ -83,7 +114,7 @@ function Card05_BeforeActionUxLenses({
               const isInactive = !isHighlighted && !isCurrent && !isBlinking
               return (
               <div
-                className={`card05-ux-step${isHighlighted ? ' card05-ux-step--highlighted' : ''}${isInactive ? ' card05-ux-step--inactive' : ''}${isBlinking ? ' card05-ux-step--blinking' : ''}`}
+                className={`card05-ux-step${isHighlighted ? ' card05-ux-step--highlighted' : ''}${isCurrent ? ' card05-ux-step--current' : ''}${isInactive ? ' card05-ux-step--inactive' : ''}${isBlinking ? ' card05-ux-step--blinking' : ''}`}
                 data-highlight={isHighlighted ? highlightVariant : undefined}
                 data-blink={isBlinking ? blinkVariant : undefined}
                 key={step.id}
@@ -100,7 +131,7 @@ function Card05_BeforeActionUxLenses({
                   )}
                 </div>
                 <div className="card05-ux-step-content">
-                  <div className="card05-ux-step-title">{step.title}</div>
+                  <div className="card05-ux-step-title">{keepTrailingPhraseTogether(step.title)}</div>
                   {step.lines.map((line, lineIndex) => (
                     <div className="card05-ux-step-line-text" key={`${step.id}-${lineIndex}`}>
                       {line}

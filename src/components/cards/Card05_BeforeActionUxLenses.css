@@ -73,9 +73,11 @@
 .card05-ux-steps {
   position: relative;
   padding-right: 28px;
+  padding-left: 6px;
   margin-bottom: 80px;
   /* max-height: 190px; */
   overflow-y: auto;
+  overflow-x: visible;
 }
 
 .card05-ux-actions {
@@ -154,6 +156,7 @@
   display: flex;
   flex-direction: column;
   gap: 0;
+  overflow: visible;
 }
 
 .card05-ux-step {
@@ -168,6 +171,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: visible;
 }
 
 .card05-ux-step-bubble {
@@ -206,10 +210,24 @@
   font-size: 13px;
   color: #4b5563;
   margin-top: 2px;
+  font-weight: 700;
 }
 
 .card05-ux-step--inactive {
   opacity: 0.5;
+}
+
+.card05-ux-step--inactive .card05-ux-step-title {
+  color: #4b5563;
+}
+
+.card05-ux-step--inactive .card05-ux-step-line-text {
+  font-weight: 400;
+}
+
+.card05-ux-step--current .card05-ux-step-bubble {
+  transform: scale(1.25);
+  transform-origin: center;
 }
 
 .card05-ux-step--blinking[data-blink="text-green"] .card05-ux-step-title,
@@ -220,10 +238,6 @@
 
 .card05-ux-step--blinking[data-blink="text-green"] .card05-ux-step-bubble {
   animation: card05-ux-blink-bubble 0.45s ease-in-out 3;
-}
-
-.card05-ux-step--blinking[data-blink="text-green"] .card05-ux-step-line {
-  animation: card05-ux-blink-line 0.45s ease-in-out 3;
 }
 
 @keyframes card05-ux-blink-text {
@@ -250,15 +264,6 @@
   }
 }
 
-@keyframes card05-ux-blink-line {
-  0%,
-  100% {
-    background: #d1d5db;
-  }
-  50% {
-    background: #16a34a;
-  }
-}
 .card05-ux-step--highlighted[data-highlight="text-green"] .card05-ux-step-title,
 .card05-ux-step--highlighted[data-highlight="text-green"] .card05-ux-step-line-text,
 .card05-ux-step--highlighted[data-highlight="text-green"] .card05-ux-emphasis {
@@ -273,6 +278,7 @@
 .card05-ux-step--highlighted[data-highlight="text-green"] .card05-ux-step-line {
   background: #16a34a !important;
 }
+
 
 .card05-ux-outcome {
   margin: 0;
