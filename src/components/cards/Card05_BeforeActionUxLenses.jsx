@@ -15,7 +15,12 @@ function Card05_BeforeActionUxLenses({
   highlightStepCount = 0,
   highlightVariant = 'text-green',
   blinkStepIndex = null,
-  blinkVariant = 'text-green'
+  blinkVariant = 'text-green',
+  stageNumber = 1,
+  totalStages = 3,
+  stageBlinking = false,
+  stageLoading = false,
+  onAdvanceStage
 }) {
   const completedStep = 0
   const splitTitleForTail = (text) => {
@@ -120,22 +125,30 @@ function Card05_BeforeActionUxLenses({
             <div className="card05-ux-kicker">TUTORIAL</div>
             <div className="card05-ux-title">Construir uma casa</div>
           </div>
-          <div className="card05-ux-step-badge">ETAPA {stepNumber}/{totalSteps}</div>
+          <div className={`card05-ux-step-badge${stageBlinking ? ' card05-ux-step-badge--blinking' : ''}`}>
+            ETAPA {stageNumber}/{totalStages}
+          </div>
         </div>
       </div>
       <div className="card05-ux-body">
-        <div className="card05-ux-action">
-          <div className="card05-ux-action-label">Ação:</div>
-          <div className="card05-ux-action-title">
-            {stepTitle || 'Montar terreno.'}
+        {stageLoading ? (
+          <div className="card05-ux-loading-wrapper">
+            <div className="card05-ux-loading">Carregando nova etapa</div>
           </div>
-        </div>
+        ) : (
+          <>
+            <div className="card05-ux-action">
+              <div className="card05-ux-action-label">Ação:</div>
+              <div className="card05-ux-action-title">
+                {stepTitle || 'Montar terreno.'}
+              </div>
+            </div>
 
-        <div className="card05-ux-section-title">Como fazer no Roblox Studios?</div>
+            <div className="card05-ux-section-title">Como fazer no Roblox Studios?</div>
 
-        <section className="card05-ux-steps" aria-label="Passo a passo">
-          <div className="card05-ux-steps-stack">
-            {steps.map((step, index) => {
+            <section className="card05-ux-steps" aria-label="Passo a passo">
+            <div className="card05-ux-steps-stack">
+              {steps.map((step, index) => {
               const isHighlighted = highlightStepCount > index
               const isCurrent = highlightStepCount === index
               const isBlinking = blinkStepIndex === index
@@ -194,6 +207,7 @@ function Card05_BeforeActionUxLenses({
                     setShowResultGuard(true)
                     return
                   }
+                  if (onAdvanceStage) onAdvanceStage()
                 }}
               >
                 Clique para ver o resultado
@@ -213,8 +227,10 @@ function Card05_BeforeActionUxLenses({
                 </div>
               )}
             </section>
-          </div>
-        </section>
+            </div>
+          </section>
+          </>
+        )}
       </div>
       <section className="card-actions card05-ux-actions" aria-label="Ações do tutorial">
         <button className="card05-ux-action-button card05-ux-action-menu" onClick={onMenu}>

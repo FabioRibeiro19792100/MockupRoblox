@@ -54,7 +54,11 @@ function CardLayoutView({
   const [card08BlinkingIndex, setCard08BlinkingIndex] = useState(null)
   const [card08IsBlinking, setCard08IsBlinking] = useState(false)
   const card08StepsTotal = 4
+  const card08StagesTotal = 3
   const isCard08Complete = card08HighlightCount >= card08StepsTotal
+  const [card08Stage, setCard08Stage] = useState(1)
+  const [card08StageLoading, setCard08StageLoading] = useState(false)
+  const [card08StageBlinking, setCard08StageBlinking] = useState(false)
   const [activeCardId, setActiveCardId] = useState(null) // Card atualmente visualizado
   const [currentLayoutCard, setCurrentLayoutCard] = useState(0) // Card atual no layout mode
   const [showBadgeGallery, setShowBadgeGallery] = useState(true)
@@ -97,6 +101,19 @@ function CardLayoutView({
     setCard08HighlightCount(0)
     setCard08BlinkingIndex(null)
     setCard08IsBlinking(false)
+  }
+
+  const handleCard08AdvanceStage = () => {
+    if (card08StageLoading) return
+    const nextStage = card08Stage >= card08StagesTotal ? 1 : card08Stage + 1
+    setCard08StageLoading(true)
+    setCard08StageBlinking(true)
+    const transitionMs = 1200
+    window.setTimeout(() => {
+      setCard08Stage(nextStage)
+      setCard08StageBlinking(false)
+      setCard08StageLoading(false)
+    }, transitionMs)
   }
   
   // Chave para localStorage
@@ -738,6 +755,11 @@ function CardLayoutView({
           highlightVariant="text-green"
           blinkStepIndex={card08BlinkingIndex}
           blinkVariant="text-green"
+          stageNumber={card08Stage}
+          totalStages={card08StagesTotal}
+          stageBlinking={card08StageBlinking}
+          stageLoading={card08StageLoading}
+          onAdvanceStage={handleCard08AdvanceStage}
           onResetEffects={handleCard08ResetEffects}
           onDemonstrate={() => {
             if (onCardAction) onCardAction('demonstrate')
@@ -1876,6 +1898,13 @@ function CardLayoutView({
               onClick={handleCard08ModuleAction}
             >
               Evento de conclusão de um passo
+            </button>
+            <button
+              type="button"
+              className="card08-module-button"
+              onClick={handleCard08AdvanceStage}
+            >
+              Evento 2 - Nova Etapa
             </button>
             <button
               type="button"

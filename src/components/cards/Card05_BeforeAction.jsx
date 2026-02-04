@@ -16,6 +16,11 @@ function Card05_BeforeAction({
   onResetEffects,
   blinkStepIndex = null,
   blinkVariant = 'text-green',
+  stageNumber = 1,
+  totalStages = 3,
+  stageBlinking = false,
+  stageLoading = false,
+  onAdvanceStage,
   uxLensesVariant = false
 }) {
   const effectiveHighlightCount =
@@ -38,6 +43,11 @@ function Card05_BeforeAction({
         onResetEffects={onResetEffects}
         blinkStepIndex={blinkStepIndex}
         blinkVariant={blinkVariant}
+        stageNumber={stageNumber}
+        totalStages={totalStages}
+        stageBlinking={stageBlinking}
+        stageLoading={stageLoading}
+        onAdvanceStage={onAdvanceStage}
       />
     )
   }
