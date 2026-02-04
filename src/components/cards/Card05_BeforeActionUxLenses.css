@@ -1,20 +1,26 @@
-.card05-ux-body {
-  padding: 0 24px 24px 24px;
+.card05-ux-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  padding: 0;
+  background: transparent;
+  height: auto;
+  flex: 0 0 auto !important;
 }
 
-.card05-ux-header {
-  margin-top: 12px;
-  margin-bottom: 10px;
+.card05-ux-body {
+  padding: 12px 24px 24px 24px;
 }
 
 .card05-ux-banner {
   background: #f4d36f;
-  border-radius: 12px;
-  padding: 14px 16px;
+  padding: 14px 23px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
+  margin: 0;
+  width: 100%;
 }
 
 .card05-ux-kicker {
@@ -192,7 +198,7 @@
 }
 
 .card05-ux-step-title {
-  font-size: 14px;
+  font-size: 14pt;
   font-weight: 700;
 }
 

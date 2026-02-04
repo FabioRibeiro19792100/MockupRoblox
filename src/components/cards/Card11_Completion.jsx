@@ -232,7 +232,7 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
           </section>
 
           <section className="completion-progress-section">
-            <div style={{ width: '77%', margin: '8px auto 4px' }}>
+            <div style={{ width: '100%', margin: '8px auto 4px' }}>
               <input
                 type="range"
                 min="0"

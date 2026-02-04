@@ -55,17 +55,16 @@ function Card05_BeforeActionUxLenses({
 
   return (
     <div className="card card-step">
-      <div className="card05-ux-body">
-        <div className="card05-ux-header">
-          <div className="card05-ux-banner">
-            <div>
-              <div className="card05-ux-kicker">TUTORIAL</div>
-              <div className="card05-ux-title">Construir uma casa</div>
-            </div>
-            <div className="card05-ux-step-badge">ETAPA {stepNumber}/{totalSteps}</div>
+      <div className="card05-ux-topbar">
+        <div className="card05-ux-banner">
+          <div>
+            <div className="card05-ux-kicker">TUTORIAL</div>
+            <div className="card05-ux-title">Construir uma casa</div>
           </div>
+          <div className="card05-ux-step-badge">ETAPA {stepNumber}/{totalSteps}</div>
         </div>
-
+      </div>
+      <div className="card05-ux-body">
         <div className="card05-ux-action">
           <div className="card05-ux-action-label">Ação:</div>
           <div className="card05-ux-action-title">
