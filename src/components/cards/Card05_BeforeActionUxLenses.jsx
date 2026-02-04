@@ -70,17 +70,19 @@ function Card05_BeforeActionUxLenses({
     },
     {
       id: 3,
-      title: 'Ajuste o tamanho da "Part"',
+      title: 'Ajuste o tamanho e posição da Part',
       lines: [
-        <>Use as alças para dimensionar a base conforme necessário</>
+        <>No painel <strong>"Propriedades"</strong>:</>,
+        <>Encontre a variável <strong>"Size"</strong> e substitua os valores atuais por 2.6,9.8,4.4</>,
+        <>Encontre a variável <strong>"Position"</strong> e substitua os valores atuais por 5.96,4.9,-9.54</>
       ]
     },
     {
       id: 4,
-      title: 'Centralize a base da casa',
+      title: 'Mude o Material',
       lines: [
-        <>Arraste a "Part_1" até o centro da cena</>,
-        <>Garanta que a base fique alinhada com o chão</>
+        <>Mova o cursor até o top bar, clique em <strong>Modelo (model)</strong>, clique em <strong>"Material"</strong>.</>,
+        <>No campo de busca, digite <strong>"Wood"</strong> e selecione.</>
       ]
     }
   ]
@@ -94,15 +96,15 @@ function Card05_BeforeActionUxLenses({
     },
     2: {
       image: getHelpImagePath(2),
-      text: 'Aqui você renomeia a Part recém-criada no painel Explorador.'
+      text: 'Caso você não veja o painel explorer na tela, ele pode ser encontrado em Window > Explorer.'
     },
     3: {
       image: getHelpImagePath(3),
-      text: 'Ajuste as dimensões da Part usando as alças de escala.'
+      text: 'Clique nos numero ao lado, na coluna da direita, para alterar os valores da variável.'
     },
     4: {
       image: getHelpImagePath(4),
-      text: 'Centralize a base para manter a casa alinhada com o chão.'
+      text: 'Isso irá aplicar um "Shader" no seu Part.'
     }
   }
   const activeHelp = activeHelpStepId ? helpContentByStep[activeHelpStepId] : null
