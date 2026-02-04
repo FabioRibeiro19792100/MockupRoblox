@@ -86,6 +86,7 @@ function Card05_BeforeActionUxLenses({
       ]
     }
   ]
+  const isAllStepsCompleted = highlightStepCount >= steps.length
   const getHelpImagePath = (stepId) =>
     `public/Tutorial-steps/Build-A-House/Build-a-house-step${stepId}.png`
 
@@ -181,6 +182,16 @@ function Card05_BeforeActionUxLenses({
                 </div>
               </div>
             )})}
+            <div className="card05-ux-result-action">
+              <button
+                type="button"
+                className={`card05-ux-result-button${isAllStepsCompleted ? '' : ' card05-ux-result-button--disabled'}`}
+                disabled={!isAllStepsCompleted}
+                onClick={() => {}}
+              >
+                Clique para ver o resultado
+              </button>
+            </div>
             <section className="card05-ux-outcome" aria-label="Resultado esperado">
               <hr className="card05-ux-divider" />
               <h4 className="card05-ux-result-label">O que você vai ver na tela:</h4>

@@ -211,6 +211,39 @@
   white-space: nowrap;
 }
 
+.card05-ux-result-action {
+  margin: 6px 0 10px;
+}
+
+.card05-ux-result-button {
+  width: 100%;
+  border: 1px solid #94a3b8;
+  background: transparent;
+  color: #111827;
+  font-size: 12pt;
+  font-weight: 700;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.card05-ux-result-button:not(.card05-ux-result-button--disabled) {
+  background: rgb(253, 187, 44);
+  border-color: #000000;
+  color: #000000;
+}
+
+.card05-ux-result-button:not(.card05-ux-result-button--disabled):hover {
+  background: rgb(230, 170, 40);
+}
+
+.card05-ux-result-button--disabled {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+}
+
 .card05-ux-step-help {
   display: inline-flex;
   align-items: center;
