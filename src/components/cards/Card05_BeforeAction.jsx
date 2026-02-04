@@ -1,4 +1,5 @@
 import './Card.css'
+import './Card05_BeforeAction.css'
 import Card05_BeforeActionUxLenses from './Card05_BeforeActionUxLenses'
 
 function Card05_BeforeAction({ stepNumber, totalSteps, stepTitle, onDemonstrate, onBack, onShowConcept, onMenu, onRestart, uxLensesVariant = false }) {
@@ -23,9 +24,9 @@ function Card05_BeforeAction({ stepNumber, totalSteps, stepTitle, onDemonstrate,
         <button className="header-button" onClick={onMenu}>Voltar para menu</button>
         <button className="header-button" onClick={onRestart}>Reiniciar tutorial</button>
       </div>
-      <div style={{ padding: '0 24px 24px 24px' }}>
-        <div className="card-step-header" style={{ marginBottom: '12px', marginTop: '24px' }}>
-          <div className="step-counter" style={{ marginBottom: '8px', marginTop: '-16px' }}>ETAPA {stepNumber}/{totalSteps}</div>
+      <div className="card05-before-action-content">
+        <div className="card-step-header card05-before-action-header">
+          <div className="step-counter card05-before-action-step-counter">ETAPA {stepNumber}/{totalSteps}</div>
           <div className="theme-action-box">
             <div className="theme-box">
               <div>Tutorial → Construir uma casa</div>
@@ -50,42 +51,17 @@ function Card05_BeforeAction({ stepNumber, totalSteps, stepTitle, onDemonstrate,
         <div className="instructions-section">
           <div className="section-title">O QUE VOCÊ VAI VER NA TELA</div>
           <div className="instructions-box">
-            <p style={{ margin: 0, color: '#000000', fontSize: '14.5px', lineHeight: '1.12' }}>
+            <p className="card05-before-action-note">
               Você verá a base da casa (um bloco cinza retangular grande) sendo criada no centro da tela.
             </p>
           </div>
         </div>
         {onShowConcept && (
-          <div className="instructions-section" style={{ marginTop: '16px' }}>
-            <div className="concept-title-bar" onClick={onShowConcept} style={{ cursor: 'pointer' }}>
-              <div style={{ 
-                fontSize: '12px', 
-                marginBottom: '12px',
-                textDecoration: 'underline',
-                textDecorationThickness: '1px',
-                textUnderlineOffset: '4px',
-                color: '#f44336'
-              }}>Entender conceito</div>
-              <div style={{ 
-                fontSize: '14px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                color: '#f44336'
-              }}>
-                <span style={{ 
-                  fontSize: '14px', 
-                  fontWeight: 700,
-                  width: '20px',
-                  height: '20px',
-                  borderRadius: '50%',
-                  background: '#f44336',
-                  color: '#ffffff',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexShrink: 0
-                }}>ℹ</span>
+          <div className="instructions-section card05-before-action-concept">
+            <div className="concept-title-bar card05-before-action-concept-bar" onClick={onShowConcept}>
+              <div className="card05-before-action-concept-label">Entender conceito</div>
+              <div className="card05-before-action-concept-title">
+                <span className="card05-before-action-concept-icon">ℹ</span>
                 O QUE É UMA PART?
               </div>
             </div>

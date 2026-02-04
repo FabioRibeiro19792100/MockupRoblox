@@ -81,23 +81,24 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
         </div>
 
         {/* Conteúdo principal - fundo azul gradiente */}
-          <div
-        className="completion-card"
-        style={{
-          flex: '1 1 auto',
-          minHeight: 0,
-          background: '#ffffff',
-          borderRadius: '20px',
-          margin: '0 16px 0px',
-          padding: '24px 20px',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'space-around',
-          textAlign: 'center',
-          position: 'relative',
-          overflow: 'hidden auto'
-        }}>
+        <div
+          className="completion-card"
+          style={{
+            flex: '1 1 auto',
+            minHeight: 0,
+            background: '#ffffff',
+            borderRadius: '20px',
+            margin: '0 16px 16px',
+            padding: '20px 16px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            textAlign: 'center',
+            position: 'relative',
+            overflow: 'hidden'
+          }}
+        >
           {/* Sparkles decorativos */}
           <div style={{ position: 'absolute', top: '20px', right: '30px', fontSize: '20px' }}>✨</div>
           <div style={{ position: 'absolute', top: '40px', right: '60px', fontSize: '14px' }}>✨</div>
@@ -193,7 +194,7 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
             <p style={{
               fontSize: '14px',
               color: '#000000',
-              margin: '0 0 38px',
+              margin: '0 0 22px',
               fontWeight: 500
             }}>
               você concluiu o tutorial:
@@ -208,7 +209,7 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              margin: '0 auto 14px',
+              margin: '0 auto 12px',
               transform: 'rotate(-5deg)'
             }}>
               <svg width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -223,7 +224,7 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
                 fontSize: '18pt',
                 fontWeight: 700,
                 color: '#000000',
-                margin: '30px 0 10px'
+                margin: '18px 0 6px'
               }}
             >
               Construir uma casa
@@ -231,7 +232,7 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
           </section>
 
           <section className="completion-progress-section">
-            <div style={{ width: '77%', margin: '10px auto 5px' }}>
+            <div style={{ width: '77%', margin: '8px auto 4px' }}>
               <input
                 type="range"
                 min="0"
@@ -270,7 +271,7 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
               color: 'rgb(128 126 126)',
               fontWeight: 700,
               lineHeight: 1.4,
-              marginBottom: '55px'
+              marginBottom: '24px'
             }}>
               Faltam X tutoriais para você<br />
               conquistar um novo badge!
@@ -289,7 +290,7 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
                   fontWeight: 700,
                   color: '#000000',
                   cursor: 'pointer',
-                  marginBottom: '20px'
+                  marginBottom: '12px'
                 }}
               >
                 continuar
@@ -304,7 +305,7 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
                 fontSize: '10pt',
                 fontWeight: 700,
                 textDecoration: 'underline',
-                marginBottom: '72pt',
+                marginBottom: 0,
                 cursor: 'pointer'
               }}
             >

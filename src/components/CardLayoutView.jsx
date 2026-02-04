@@ -629,42 +629,20 @@ function CardLayoutView({
     },
     {
       id: 3,
-      name: 'Card 04 - Seleção (Concluído)',
-      component: renderBadgeGallery(
-        <Card01_02_Selection
-          cardNumber={1}
-          selectedTutorial={selectedTutorial}
-          onSelect={setSelectedTutorial}
-          onNext={() => navigateToNextCard(1.4)}
-          completedTutorials={{ class1: [1, 2, 3, 4, 5], class2: [1, 2, 3, 4, 5] }}
-          earnedBadges={[1, 2, 3]}
-          currentTutorialClass={1}
-          onTutorialClassSelect={() => {}}
-          onTutorialSelect={(tutorialId, tutorialClass) => {
-            if (onTutorialSelect) onTutorialSelect(tutorialId, tutorialClass)
-            navigateToNextCard(1.4)
-          }}
-          onBack={onMenu || (() => {})}
+      name: 'Card 03 - Seleção de Modo',
+      component: (
+        <Card03_ModeSelection
+          onModeSelect={null}
           onMenu={onMenu || (() => {})}
-          defaultExpanded={true}
-        />,
-        3
+          showProgressBadge={currentLayer === 'layer12'}
+        />
       ),
       elements: [
-        { type: 'title-1', selector: '.card-title', label: 'Título 1 - Principal' },
-        { type: 'accordion-header', selector: 'h3', label: 'Cabeçalho do Acordeão - Título' },
-        { type: 'accordion-icon', selector: 'span[style*="transform"]', label: 'Ícone Expandir/Colapsar' },
-        { type: 'accordion-content', selector: 'div[style*="borderBottom"]', label: 'Conteúdo do Acordeão - Lista' },
-        { type: 'button-selection', selector: '.selection-button', label: 'Botão de Seleção' },
-        { type: 'tutorial-item', selector: 'div[style*="padding: \'24px\'"]', label: 'Item de Tutorial' },
-        { type: 'tutorial-status', selector: 'span[style*="✓ Concluído"]', label: 'Status - Concluído' },
-        { type: 'header-global', selector: '.card-header-global', label: 'Header Global' },
+        { type: 'title-1', selector: '.card-title', label: 'Título 1' },
+        { type: 'button-mode', selector: '.mode-button', label: 'Botão de Modo' },
+        { type: 'title-2', selector: '.mode-title', label: 'Título 2 - Subtítulo' },
+        { type: 'body', selector: '.mode-description', label: 'Corpo - Descrição' },
         { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' },
-        { type: 'badge-gallery', selector: '.badge-gallery-fixed', label: 'Galeria de Badges - Fixa' },
-        { type: 'badge-scoreboard', selector: '.badge-scoreboard', label: 'Placar de Badges' },
-        { type: 'badge-header', selector: '.badge-header', label: 'Galeria de Badges - Expandida' },
-        { type: 'badge-item', selector: '.badge-header-item', label: 'Item de Badge' },
-        { type: 'badge-description', selector: '.badge-description', label: 'Descrição do Badge' },
       ]
     },
     {
