@@ -120,6 +120,8 @@
 
 .white-card-canvas-05-ideal__dot.is-active {
   background: #2563eb;
+  width: 15px;
+  height: 15px;
 }
 
 .white-card-canvas-05-ideal__hero-message {

@@ -65,6 +65,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-bottom: 100px;
 }
 
 .white-card-canvas-02__image-asset {

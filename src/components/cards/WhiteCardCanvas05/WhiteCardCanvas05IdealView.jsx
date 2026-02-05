@@ -32,7 +32,7 @@ function WhiteCardCanvas05IdealView({ slides, index, displayText, animationSeed,
                 <span className="white-card-canvas-05-ideal__meta-text">20/30 min</span>
               </div>
               <div className="white-card-canvas-05-ideal__meta-item white-card-canvas-05-ideal__meta-item--right">
-                <span className="white-card-canvas-05-ideal__meta-text">Nível: Fácil</span>
+                <span className="white-card-canvas-05-ideal__meta-text">NÍVEL: INICIANTE</span>
               </div>
             </div>
             {activeSlide ? (

@@ -1,0 +1,183 @@
+.white-card-canvas-07 {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background: #ffffff;
+  color: #111111;
+  font-family: "Space Grotesk", "Segoe UI", Arial, sans-serif;
+  border-radius: 8px;
+  box-sizing: border-box;
+  overflow: hidden;
+  border: 1px solid #d7d7d7;
+}
+
+.white-card-canvas-07__topbar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 14px 18px;
+  background: #f3f4f6;
+  border-bottom: 1px solid #cbd5f5;
+}
+
+.white-card-canvas-07__topbar-button {
+  border: 1px solid #000000;
+  background: #ffffff;
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.white-card-canvas-07__content {
+  flex: 1;
+  position: relative;
+  padding: 24px 20px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.white-card-canvas-07__confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.white-card-canvas-07__confetti-piece {
+  position: absolute;
+  border-radius: 2px;
+  opacity: 0.9;
+  animation: whiteCard07Confetti 2.6s infinite ease-in-out;
+}
+
+.white-card-canvas-07__confetti-piece.piece-1 { top: -10%; left: 12%; width: 10px; height: 3px; background: #f97316; --confetti-rotate: -20deg; --confetti-drift: 12px; animation-delay: 0s; animation-duration: 2.6s; }
+.white-card-canvas-07__confetti-piece.piece-2 { top: -6%; left: 68%; width: 8px; height: 3px; background: #3b82f6; --confetti-rotate: 18deg; --confetti-drift: -14px; animation-delay: 0.2s; animation-duration: 2.4s; }
+.white-card-canvas-07__confetti-piece.piece-3 { top: -12%; left: 28%; width: 9px; height: 3px; background: #22c55e; --confetti-rotate: 32deg; --confetti-drift: 10px; animation-delay: 0.35s; animation-duration: 2.8s; }
+.white-card-canvas-07__confetti-piece.piece-4 { top: -8%; left: 80%; width: 10px; height: 3px; background: #ef4444; --confetti-rotate: -12deg; --confetti-drift: -10px; animation-delay: 0.1s; animation-duration: 2.5s; }
+.white-card-canvas-07__confetti-piece.piece-5 { top: -14%; left: 8%; width: 8px; height: 3px; background: #a855f7; --confetti-rotate: 20deg; --confetti-drift: 14px; animation-delay: 0.25s; animation-duration: 2.7s; }
+.white-card-canvas-07__confetti-piece.piece-6 { top: -9%; left: 88%; width: 10px; height: 3px; background: #f59e0b; --confetti-rotate: 35deg; --confetti-drift: -8px; animation-delay: 0.4s; animation-duration: 2.9s; }
+.white-card-canvas-07__confetti-piece.piece-7 { top: -11%; left: 6%; width: 9px; height: 3px; background: #3b82f6; --confetti-rotate: -25deg; --confetti-drift: 16px; animation-delay: 0.55s; animation-duration: 2.6s; }
+.white-card-canvas-07__confetti-piece.piece-8 { top: -7%; left: 76%; width: 8px; height: 3px; background: #22c55e; --confetti-rotate: 10deg; --confetti-drift: -12px; animation-delay: 0.3s; animation-duration: 2.4s; }
+.white-card-canvas-07__confetti-piece.piece-9 { top: -13%; left: 20%; width: 10px; height: 3px; background: #ef4444; --confetti-rotate: 28deg; --confetti-drift: 10px; animation-delay: 0.15s; animation-duration: 2.8s; }
+.white-card-canvas-07__confetti-piece.piece-10 { top: -5%; left: 84%; width: 8px; height: 3px; background: #a855f7; --confetti-rotate: -18deg; --confetti-drift: -16px; animation-delay: 0.6s; animation-duration: 2.7s; }
+.white-card-canvas-07__confetti-piece.piece-11 { top: -12%; left: 32%; width: 9px; height: 3px; background: #f59e0b; --confetti-rotate: -8deg; --confetti-drift: 12px; animation-delay: 0.45s; animation-duration: 2.6s; }
+.white-card-canvas-07__confetti-piece.piece-12 { top: -10%; left: 72%; width: 9px; height: 3px; background: #3b82f6; --confetti-rotate: 22deg; --confetti-drift: -10px; animation-delay: 0.5s; animation-duration: 2.5s; }
+
+@keyframes whiteCard07Confetti {
+  0% { transform: translate(0, 0) rotate(var(--confetti-rotate, 0deg)); }
+  100% { transform: translate(var(--confetti-drift, 0px), 120px) rotate(var(--confetti-rotate, 0deg)); }
+}
+
+.white-card-canvas-07__hero {
+  width: 140px;
+  height: 140px;
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.white-card-canvas-07__hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  margin-top: 120px;
+}
+
+.white-card-canvas-07__title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.white-card-canvas-07__title-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.white-card-canvas-07__subtitle {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.white-card-canvas-07__next {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 50px;
+}
+
+.white-card-canvas-07__primary {
+  width: 100%;
+  max-width: 260px;
+  background: #facc15;
+  color: #000000;
+  font-weight: 700;
+  font-size: 14pt;
+  border-radius: 999px;
+  padding: 12px 18px;
+  border: none;
+  box-shadow: 0 10px 20px rgba(250, 204, 21, 0.35);
+  cursor: pointer;
+}
+
+.white-card-canvas-07__next-text {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.white-card-canvas-07__link {
+  background: transparent;
+  border: none;
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.white-card-canvas-07__badge-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: #000000;
+  border-top: 1px solid #e0e0e0;
+}
+
+.white-card-canvas-07__badge-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.white-card-canvas-07__badge-switch {
+  width: 44px;
+  height: 24px;
+  border-radius: 12px;
+  background: #666666;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.white-card-canvas-07__badge-knob {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ffffff;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}

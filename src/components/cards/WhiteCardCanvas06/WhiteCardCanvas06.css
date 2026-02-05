@@ -1,0 +1,358 @@
+.white-card-canvas-06 {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background: #ffffff;
+  color: #111111;
+  font-family: "Space Grotesk", "Segoe UI", Arial, sans-serif;
+  border-radius: 8px;
+  box-sizing: border-box;
+  overflow: hidden;
+  border: 1px solid #d7d7d7;
+}
+
+.white-card-canvas-06__topbar {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  padding: 0;
+  background: transparent;
+  flex: 0 0 auto;
+}
+
+.white-card-canvas-06__banner {
+  background: #f4d36f;
+  padding: 14px 23px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+}
+
+.white-card-canvas-06__kicker {
+  font-size: 12px;
+  font-weight: 700;
+  color: #000000;
+  letter-spacing: 0.4px;
+}
+
+.white-card-canvas-06__title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #000000;
+}
+
+.white-card-canvas-06__step-badge {
+  background: #000000;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 10px;
+  border-radius: 6px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.white-card-canvas-06__body {
+  padding: 12px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.white-card-canvas-06__action {
+  margin: 8px 0 12px;
+}
+
+.white-card-canvas-06__action-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #f97316;
+}
+
+.white-card-canvas-06__action-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #000000;
+}
+
+.white-card-canvas-06__section-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 8px;
+}
+
+.white-card-canvas-06__steps {
+  position: relative;
+  padding-top: 10px;
+  padding-right: 28px;
+  padding-left: 6px;
+  margin-bottom: 80px;
+  overflow-y: auto;
+  overflow-x: visible;
+}
+
+.white-card-canvas-06__steps-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow: visible;
+}
+
+.white-card-canvas-06__step {
+  display: flex;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+}
+
+.white-card-canvas-06__step-marker {
+  width: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: visible;
+}
+
+.white-card-canvas-06__step-bubble {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #000000;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #f97316;
+  flex-shrink: 0;
+}
+
+.white-card-canvas-06__step-line {
+  width: 2px;
+  flex-grow: 1;
+  min-height: 26px;
+  border-radius: 2px;
+  background: #d1d5db;
+}
+
+.white-card-canvas-06__step-content {
+  color: #000000;
+  margin-bottom: 20px;
+}
+
+.white-card-canvas-06__step-title {
+  font-size: 14pt;
+  font-weight: 700;
+}
+
+.white-card-canvas-06__step-title-tail {
+  white-space: nowrap;
+}
+
+.white-card-canvas-06__step-help {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid #94a3b8;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 700;
+  margin-left: 8px;
+  margin-bottom: 3px;
+  vertical-align: middle;
+  cursor: pointer;
+  background: transparent;
+  padding: 0;
+}
+
+.white-card-canvas-06__step-text {
+  font-size: 13px;
+  color: #4b5563;
+  margin-top: 2px;
+  font-weight: 700;
+}
+
+.white-card-canvas-06__emphasis {
+  font-weight: 700;
+}
+
+.white-card-canvas-06__result-action {
+  margin: 6px 0 10px;
+}
+
+.white-card-canvas-06__result-button {
+  width: 100%;
+  border: 1px solid #94a3b8;
+  background: transparent;
+  color: #111827;
+  font-size: 12pt;
+  font-weight: 700;
+  padding: 10px 12px;
+  border-radius: 10px;
+}
+
+.white-card-canvas-06__result-button[aria-disabled="true"] {
+  opacity: 0.4;
+}
+
+.white-card-canvas-06__divider {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+}
+
+.white-card-canvas-06__result-label {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.white-card-canvas-06__result-text {
+  margin: 0;
+  font-size: 11pt;
+  color: #111827;
+  line-height: 1.4;
+}
+
+.white-card-canvas-06__concept-link {
+  border: none;
+  background: transparent;
+  color: #111111;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+}
+
+.white-card-canvas-06__step--inactive {
+  opacity: 0.5;
+}
+
+.white-card-canvas-06__step--inactive .white-card-canvas-06__step-title {
+  color: #4b5563;
+}
+
+.white-card-canvas-06__step--inactive .white-card-canvas-06__step-text {
+  font-weight: 400;
+}
+
+.white-card-canvas-06__step--current .white-card-canvas-06__step-bubble {
+  transform: scale(1.25);
+  transform-origin: center;
+}
+
+.white-card-canvas-06__actions {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: #ffffff;
+  border-top: 1px solid #e5e7eb;
+  position: sticky;
+  bottom: 56px;
+  z-index: 3;
+}
+
+.white-card-canvas-06__action-button {
+  all: unset;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  color: #111111;
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.15;
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.white-card-canvas-06__action-icon {
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  margin-bottom: 4px;
+}
+
+.white-card-canvas-06__action-icon--reset {
+  background-image: url('/reset-ico.png');
+}
+
+.white-card-canvas-06__action-icon--menu {
+  background-image: url('/home-ico.png');
+}
+
+.white-card-canvas-06__action-icon--back {
+  background-image: url('/undo-ico.png');
+}
+
+.white-card-canvas-06__action-icon--demo {
+  background-image: url('/play-ico.png');
+}
+
+.white-card-canvas-06__action-demo {
+  font-weight: 800;
+  background-color: #fdbb2c;
+  box-shadow: 0 6px 12px rgba(253, 187, 44, 0.45);
+  border-radius: 16px;
+  padding: 8px 12px 6px;
+}
+
+.white-card-canvas-06__action-demo .white-card-canvas-06__action-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.white-card-canvas-06__badge-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: #000000;
+  border-top: 1px solid #e0e0e0;
+  cursor: pointer;
+  position: sticky;
+  bottom: 0;
+  z-index: 4;
+}
+
+.white-card-canvas-06__badge-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.white-card-canvas-06__badge-switch {
+  width: 44px;
+  height: 24px;
+  border-radius: 12px;
+  background: #666666;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.white-card-canvas-06__badge-knob {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ffffff;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}

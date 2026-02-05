@@ -22,6 +22,8 @@ import WhiteCardCanvas02 from './cards/WhiteCardCanvas02/WhiteCardCanvas02'
 import WhiteCardCanvas03 from './cards/WhiteCardCanvas03/WhiteCardCanvas03'
 import WhiteCardCanvas04 from './cards/WhiteCardCanvas04/WhiteCardCanvas04'
 import WhiteCardCanvas05 from './cards/WhiteCardCanvas05/WhiteCardCanvas05'
+import WhiteCardCanvas06 from './cards/WhiteCardCanvas06/WhiteCardCanvas06'
+import WhiteCardCanvas07 from './cards/WhiteCardCanvas07/WhiteCardCanvas07'
 import BadgeHeader from './BadgeHeader'
 import BadgeScoreboard from './BadgeScoreboard'
 import CreatorPopup from './CreatorPopup'
@@ -1023,6 +1025,22 @@ function CardLayoutView({
       name: 'Card Branco 05 - Placeholder',
       component: (
         <WhiteCardCanvas05 variant={card05Variant} />
+      ),
+      elements: []
+    },
+    {
+      id: 106,
+      name: 'Card Branco 06 - Placeholder',
+      component: (
+        <WhiteCardCanvas06 />
+      ),
+      elements: []
+    },
+    {
+      id: 107,
+      name: 'Card Branco 07 - Feedback Positivo',
+      component: (
+        <WhiteCardCanvas07 />
       ),
       elements: []
     }

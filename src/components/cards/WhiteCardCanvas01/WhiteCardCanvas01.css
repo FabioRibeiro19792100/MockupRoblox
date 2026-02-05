@@ -120,6 +120,8 @@
 
 .white-card-canvas-01__dot.is-active {
   background: #2563eb;
+  width: 15px;
+  height: 15px;
 }
 
 .white-card-canvas-01__hero-message {
@@ -139,6 +141,7 @@
   justify-content: center;
   width: 100%;
   margin: 0;
+  margin-top: 50px;
 }
 
 .white-card-canvas-01__hero-circle {
