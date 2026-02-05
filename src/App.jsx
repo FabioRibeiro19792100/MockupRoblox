@@ -473,28 +473,6 @@ function App() {
           Modo Layout
         </button>
       )}
-      {layoutMode && (
-        <button 
-          onClick={() => setLayoutMode(!layoutMode)}
-          style={{
-            position: 'fixed',
-            top: '20px',
-            right: '20px',
-            zIndex: 1000,
-            padding: '10px 20px',
-            background: 'rgb(253, 187, 44)',
-            color: '#ffffff',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: 'pointer',
-            fontWeight: 600,
-            fontSize: '14px',
-            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)'
-          }}
-        >
-          Modo Normal
-        </button>
-      )}
     </div>
   )
 }

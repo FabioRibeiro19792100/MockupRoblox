@@ -1,4 +1,4 @@
-.white-card-canvas-01 {
+.white-card-canvas-05-ideal {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -12,13 +12,13 @@
   border: 1px solid #d7d7d7;
 }
 
-.white-card-canvas-01__header {
+.white-card-canvas-05-ideal__header {
   padding: 28px 28px 18px 28px;
   border-bottom: 1px solid #eeeeee;
   background: #ffffff;
 }
 
-.white-card-canvas-01__eyebrow {
+.white-card-canvas-05-ideal__eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -29,21 +29,21 @@
   color: #6b7280;
 }
 
-.white-card-canvas-01__title {
+.white-card-canvas-05-ideal__title {
   margin: 12px 0 8px 0;
   font-size: 24px;
   font-weight: 700;
   color: #111111;
 }
 
-.white-card-canvas-01__subtitle {
+.white-card-canvas-05-ideal__subtitle {
   margin: 0;
   font-size: 14px;
   line-height: 1.4;
   color: #6b7280;
 }
 
-.white-card-canvas-01__body {
+.white-card-canvas-05-ideal__body {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -54,7 +54,7 @@
   background: linear-gradient(180deg, #ffffff 0%, #f7f7f7 100%);
 }
 
-.white-card-canvas-01__placeholder {
+.white-card-canvas-05-ideal__placeholder {
   width: 100%;
   flex: 1;
   min-height: 520px;
@@ -70,11 +70,11 @@
   background: #ffffff;
 }
 
-.white-card-canvas-01--onboarding .white-card-canvas-01__header {
+.white-card-canvas-05-ideal--onboarding .white-card-canvas-05-ideal__header {
   display: none;
 }
 
-.white-card-canvas-01__body--onboarding {
+.white-card-canvas-05-ideal__body--onboarding {
   padding: 16px;
   height: 100%;
   display: flex;
@@ -82,7 +82,7 @@
   justify-content: center;
 }
 
-.white-card-canvas-01__phone {
+.white-card-canvas-05-ideal__phone {
   width: 100%;
   height: 100%;
   min-height: 0;
@@ -98,7 +98,7 @@
   max-height: 680px;
 }
 
-.white-card-canvas-01__dots {
+.white-card-canvas-05-ideal__dots {
   display: flex;
   gap: 0;
   align-items: center;
@@ -108,7 +108,7 @@
   padding: 0 8px;
 }
 
-.white-card-canvas-01__dot {
+.white-card-canvas-05-ideal__dot {
   width: 10px;
   height: 10px;
   border-radius: 999px;
@@ -118,11 +118,11 @@
   padding: 0;
 }
 
-.white-card-canvas-01__dot.is-active {
+.white-card-canvas-05-ideal__dot.is-active {
   background: #2563eb;
 }
 
-.white-card-canvas-01__hero-message {
+.white-card-canvas-05-ideal__hero-message {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -132,7 +132,50 @@
   width: 100%;
 }
 
-.white-card-canvas-01__hero {
+.white-card-canvas-05-ideal__hero-meta {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+  color: #f3f4f6;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.white-card-canvas-05-ideal__meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.white-card-canvas-05-ideal__meta-item--right {
+  justify-content: flex-end;
+}
+
+.white-card-canvas-05-ideal__meta-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.white-card-canvas-05-ideal__meta-icon svg {
+  width: 12px;
+  height: 12px;
+  fill: #f3f4f6;
+}
+
+.white-card-canvas-05-ideal__meta-text {
+  color: #f3f4f6;
+}
+
+.white-card-canvas-05-ideal__hero {
   flex: 0 0 auto;
   display: flex;
   align-items: center;
@@ -141,7 +184,7 @@
   margin: 0;
 }
 
-.white-card-canvas-01__hero-circle {
+.white-card-canvas-05-ideal__hero-circle {
   width: 170px;
   height: 170px;
   border-radius: 999px;
@@ -154,13 +197,13 @@
   opacity: 0;
 }
 
-.white-card-canvas-01__hero-image {
+.white-card-canvas-05-ideal__hero-image {
   width: 96px;
   height: 96px;
   object-fit: contain;
 }
 
-.white-card-canvas-01__message {
+.white-card-canvas-05-ideal__message {
   width: 100%;
   padding: 0 4px;
   margin-bottom: 12px;
@@ -168,7 +211,7 @@
   margin-right: 0;
 }
 
-.white-card-canvas-01__message-text {
+.white-card-canvas-05-ideal__message-text {
   margin: 0 auto;
   max-width: 320px;
   padding: 18px 20px;
@@ -190,20 +233,20 @@
   white-space: pre-wrap;
 }
 
-.white-card-canvas-01__message-line {
+.white-card-canvas-05-ideal__message-line {
   display: block;
 }
 
-.white-card-canvas-01__message-line--bullet {
+.white-card-canvas-05-ideal__message-line--bullet {
   align-self: flex-start;
   text-align: left;
 }
 
-.white-card-canvas-01__hero-circle.is-pop {
+.white-card-canvas-05-ideal__hero-circle.is-pop {
   animation: onboarding-pop 420ms ease-out forwards;
 }
 
-.white-card-canvas-01__message-text {
+.white-card-canvas-05-ideal__message-text {
   animation: onboarding-grow 380ms ease-out forwards;
   animation-delay: 320ms;
 }
@@ -234,14 +277,14 @@
   }
 }
 
-.white-card-canvas-01__actions {
+.white-card-canvas-05-ideal__actions {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
   width: 100%;
 }
 
-.white-card-canvas-01__action {
+.white-card-canvas-05-ideal__action {
   border: none;
   border-radius: 999px;
   padding: 10px 0;
@@ -252,18 +295,18 @@
   cursor: pointer;
 }
 
-.white-card-canvas-01__action--primary {
+.white-card-canvas-05-ideal__action--primary {
   background: #f6c23e;
   color: #1a1a1a;
 }
 
-.white-card-canvas-01__action--ghost {
+.white-card-canvas-05-ideal__action--ghost {
   background: #f6c23e;
   color: #1a1a1a;
   opacity: 0.95;
 }
 
-.white-card-canvas-01__action:disabled {
+.white-card-canvas-05-ideal__action:disabled {
   opacity: 0.4;
   cursor: not-allowed;
   filter: grayscale(0.4);

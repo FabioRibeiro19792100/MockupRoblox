@@ -1,8 +1,9 @@
 import React from 'react'
 import './WhiteCardCanvas01.css'
 
-function OnboardingView({ slides, index, displayText, animationSeed, onPrev, onNext, onGoTo, onSkip }) {
+function OnboardingView({ slides, index, displayText, animationSeed, onPrev, onNext, onGoTo, onSkip, skipLabel = 'Pular' }) {
   const activeSlide = slides[index]
+  const isFinalSlide = index === slides.length - 1
 
   return (
     <section className="white-card-canvas-01 white-card-canvas-01--onboarding" aria-label="Onboarding">
@@ -38,7 +39,20 @@ function OnboardingView({ slides, index, displayText, animationSeed, onPrev, onN
             ) : null}
             <blockquote className="white-card-canvas-01__message">
               <p key={`message-${animationSeed}`} className="white-card-canvas-01__message-text">
-                {activeSlide ? displayText : ''}
+                {activeSlide
+                  ? displayText.split('\n').map((line, lineIndex) => (
+                      <span
+                        key={lineIndex}
+                        className={
+                          line.trim().startsWith('•')
+                            ? 'white-card-canvas-01__message-line white-card-canvas-01__message-line--bullet'
+                            : 'white-card-canvas-01__message-line'
+                        }
+                      >
+                        {line}
+                      </span>
+                    ))
+                  : ''}
               </p>
             </blockquote>
           </main>
@@ -64,8 +78,9 @@ function OnboardingView({ slides, index, displayText, animationSeed, onPrev, onN
               className="white-card-canvas-01__action white-card-canvas-01__action--ghost"
               onClick={onSkip}
               aria-label="Pular onboarding"
+              disabled={skipLabel === 'Iniciar' && !isFinalSlide}
             >
-              Pular
+              {skipLabel}
             </button>
           </div>
         </div>

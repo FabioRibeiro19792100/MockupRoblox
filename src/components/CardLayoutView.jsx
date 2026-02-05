@@ -21,6 +21,7 @@ import WhiteCardCanvas01 from './cards/WhiteCardCanvas01/WhiteCardCanvas01'
 import WhiteCardCanvas02 from './cards/WhiteCardCanvas02/WhiteCardCanvas02'
 import WhiteCardCanvas03 from './cards/WhiteCardCanvas03/WhiteCardCanvas03'
 import WhiteCardCanvas04 from './cards/WhiteCardCanvas04/WhiteCardCanvas04'
+import WhiteCardCanvas05 from './cards/WhiteCardCanvas05/WhiteCardCanvas05'
 import BadgeHeader from './BadgeHeader'
 import BadgeScoreboard from './BadgeScoreboard'
 import CreatorPopup from './CreatorPopup'
@@ -74,6 +75,7 @@ function CardLayoutView({
   const [expandedCards, setExpandedCards] = useState(new Set()) // Estado individual por card
   const [onboardingAutoPlay, setOnboardingAutoPlay] = useState(false)
   const [onboardingAnimationSeed, setOnboardingAnimationSeed] = useState(0)
+  const [card05Variant, setCard05Variant] = useState('mvp')
   
   // Estados para edição de elementos
   const [selectedElements, setSelectedElements] = useState(new Set())
@@ -1013,6 +1015,14 @@ function CardLayoutView({
       name: 'Card Branco 04 - Placeholder',
       component: (
         <WhiteCardCanvas04 />
+      ),
+      elements: []
+    },
+    {
+      id: 105,
+      name: 'Card Branco 05 - Placeholder',
+      component: (
+        <WhiteCardCanvas05 variant={card05Variant} />
       ),
       elements: []
     }
@@ -2000,6 +2010,21 @@ function CardLayoutView({
               <li className="card08-module-list-item card08-module-list-item--next">
                 2 - implementar help text (que descreve a função do elemento em questão).
               </li>
+              <li className="card08-module-list-item">
+                3 - No primeiro paragaf, o font size aqui é 14pt, font-weigth é bold
+              </li>
+              <li className="card08-module-list-item">
+                4 - Nos demais paragrafos, o font-size é 11pt
+              </li>
+              <li className="card08-module-list-item">
+                5 - remova esse bg branco atrás do botão.
+              </li>
+              <li className="card08-module-list-item">
+                6 - Aqui o bg é preto, falta o marcador de tempo (duração do tutorial) e pode se livrar dessa linha abaixo do texto
+              </li>
+              <li className="card08-module-list-item">
+                7 - Bg preto, botão branco e texto bold cor preta.
+              </li>
             </ul>
           </div>
         </div>
@@ -2037,7 +2062,46 @@ function CardLayoutView({
                 }
               }}
             >
-              {card.name}
+              <div className="card-layout-label-content">
+                <span>{card.name}</span>
+                {card.id === 105 && (
+                  <div className="card-layout-variant-toggle" onClick={(event) => event.stopPropagation()}>
+                    <label className="card-layout-variant-option">
+                      <input
+                        type="radio"
+                        name="card05-variant"
+                        value="mvp"
+                        checked={card05Variant === 'mvp'}
+                        onChange={() => setCard05Variant('mvp')}
+                      />
+                      <span className="card-layout-variant-radio" aria-hidden="true" />
+                      <span className="card-layout-variant-label">MVP</span>
+                    </label>
+                    <label className="card-layout-variant-option">
+                      <input
+                        type="radio"
+                        name="card05-variant"
+                        value="hybrid"
+                        checked={card05Variant === 'hybrid'}
+                        onChange={() => setCard05Variant('hybrid')}
+                      />
+                      <span className="card-layout-variant-radio" aria-hidden="true" />
+                      <span className="card-layout-variant-label">Híbrido</span>
+                    </label>
+                    <label className="card-layout-variant-option">
+                      <input
+                        type="radio"
+                        name="card05-variant"
+                        value="ideal"
+                        checked={card05Variant === 'ideal'}
+                        onChange={() => setCard05Variant('ideal')}
+                      />
+                      <span className="card-layout-variant-radio" aria-hidden="true" />
+                      <span className="card-layout-variant-label">Ideal</span>
+                    </label>
+                  </div>
+                )}
+              </div>
             </div>
             <div className="card-layout-item">
               <div 

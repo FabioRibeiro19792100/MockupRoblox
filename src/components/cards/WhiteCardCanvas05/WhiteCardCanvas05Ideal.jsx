@@ -1,9 +1,9 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
-import slides from './onboardingSlides.json'
-import OnboardingView from './OnboardingView'
-import { useOnboardingAnimation } from './useOnboardingAnimation'
+import React, { useEffect, useMemo, useRef, useState } from "react"
+import slides from "./onboardingSlides.json"
+import WhiteCardCanvas05IdealView from "./WhiteCardCanvas05IdealView"
+import { useOnboardingAnimation } from "./useOnboardingAnimation"
 
-function WhiteCardCanvas01({ autoPlay = false, animationSeed = 0, skipLabel }) {
+function WhiteCardCanvas05Ideal({ autoPlay = false, animationSeed = 0, skipLabel = "Iniciar" }) {
   const { index, next, prev, goTo } = useOnboardingAnimation({
     total: slides.length,
     interval: 4500,
@@ -11,19 +11,19 @@ function WhiteCardCanvas01({ autoPlay = false, animationSeed = 0, skipLabel }) {
   })
 
   const activeSlide = useMemo(() => slides[index], [index])
-  const [displayText, setDisplayText] = useState('')
+  const [displayText, setDisplayText] = useState("")
   const lastSeedRef = useRef(animationSeed)
 
   useEffect(() => {
     if (!activeSlide) {
-      setDisplayText('')
+      setDisplayText("")
       return
     }
 
-    const shouldDelayTyping = animationSeed !== lastSeedRef.current
+    const shouldDelayTyping = animationSeed != lastSeedRef.current
     lastSeedRef.current = animationSeed
 
-    setDisplayText('')
+    setDisplayText("")
     const growDelayMs = shouldDelayTyping ? 350 : 0
     const typingDelayMs = shouldDelayTyping ? 550 : 0
     const typingSpeedMs = 28
@@ -49,7 +49,7 @@ function WhiteCardCanvas01({ autoPlay = false, animationSeed = 0, skipLabel }) {
   }, [activeSlide, animationSeed])
 
   return (
-    <OnboardingView
+    <WhiteCardCanvas05IdealView
       slides={slides}
       index={index}
       displayText={displayText}
@@ -63,4 +63,4 @@ function WhiteCardCanvas01({ autoPlay = false, animationSeed = 0, skipLabel }) {
   )
 }
 
-export default WhiteCardCanvas01
+export default WhiteCardCanvas05Ideal

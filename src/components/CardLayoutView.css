@@ -36,7 +36,74 @@
   font-size: 11px;
   font-weight: 400;
   opacity: 0.6;
+  pointer-events: auto;
+}
+
+.card-layout-view .card-layout-label-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.card-layout-view .card-layout-variant-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.card-layout-view .card-layout-variant-option {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 6px;
+}
+
+.card-layout-view .card-layout-variant-option input {
+  position: absolute;
+  opacity: 0;
   pointer-events: none;
+}
+
+.card-layout-view .card-layout-variant-radio {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid #9ca3af;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.card-layout-view .card-layout-variant-radio::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: transparent;
+  transition: background 0.2s ease;
+}
+
+.card-layout-view .card-layout-variant-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #9ca3af;
+}
+
+.card-layout-view .card-layout-variant-option input:checked + .card-layout-variant-radio {
+  border-color: #2196f3;
+}
+
+.card-layout-view .card-layout-variant-option input:checked + .card-layout-variant-radio::after {
+  background: #2196f3;
+}
+
+.card-layout-view .card-layout-variant-option input:checked + .card-layout-variant-radio + .card-layout-variant-label {
+  color: #111111;
 }
 
 .card-layout-view .card-layout-item {
