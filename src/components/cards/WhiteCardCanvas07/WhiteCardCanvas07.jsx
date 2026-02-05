@@ -67,7 +67,7 @@ function WhiteCardCanvas07({ variant = 'ideal' }) {
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
               </div>
-              <span>Não precisa saber programar</span>
+              <span>Criar blocos no mundo 3D</span>
             </div>
             <div className="white-card-canvas-07__learned-item">
               <div className="white-card-canvas-07__learned-icon">
@@ -75,7 +75,7 @@ function WhiteCardCanvas07({ variant = 'ideal' }) {
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
               </div>
-              <span>Leva cerca de 10 minutos</span>
+              <span>Controlar tamanho e posição</span>
             </div>
             <div className="white-card-canvas-07__learned-item">
               <div className="white-card-canvas-07__learned-icon">
@@ -83,7 +83,7 @@ function WhiteCardCanvas07({ variant = 'ideal' }) {
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
               </div>
-              <span>Você pode sair a qualquer momento</span>
+              <span>Aplicar aparência ao objeto</span>
             </div>
           </div>
           <p className="white-card-canvas-07__subtitle">progresso salvo!</p>
