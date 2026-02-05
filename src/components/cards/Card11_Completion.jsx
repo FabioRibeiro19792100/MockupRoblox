@@ -194,7 +194,7 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
             <p style={{
               fontSize: '14px',
               color: '#000000',
-              margin: '0 0 22px',
+              margin: '0 0 56px',
               fontWeight: 500
             }}>
               você concluiu o tutorial:
@@ -271,7 +271,7 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
               color: 'rgb(128 126 126)',
               fontWeight: 700,
               lineHeight: 1.4,
-              marginBottom: '24px'
+              marginBottom: '40px'
             }}>
               Faltam X tutoriais para você<br />
               conquistar um novo badge!
@@ -290,7 +290,7 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
                   fontWeight: 700,
                   color: '#000000',
                   cursor: 'pointer',
-                  marginBottom: '12px'
+                  marginBottom: '81px'
                 }}
               >
                 continuar
