@@ -231,7 +231,7 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
             </h2>
           </section>
 
-          <section className="completion-progress-section">
+          <section className="completion-progress-section" style={{ width: '90%' }}>
             <div style={{ width: '100%', margin: '8px auto 4px' }}>
               <input
                 type="range"

@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import './Card.css'
 import './Card05_BeforeActionUxLenses.css'
+import buildHouseStepsData from '../../data/tutorials/Build-a-House/steps.json'
+import buildHouseHelpData from '../../data/tutorials/Build-a-House/help.json'
 
 function Card05_BeforeActionUxLenses({
   stepNumber,
@@ -58,63 +60,13 @@ function Card05_BeforeActionUxLenses({
   const [showResetConfirm, setShowResetConfirm] = useState(false)
   const [activeHelpStepId, setActiveHelpStepId] = useState(null)
   const [showResultGuard, setShowResultGuard] = useState(false)
-  const steps = [
-    {
-      id: 1,
-      title: 'Crie uma "Part"',
-      lines: [
-        <>Na barra superior, clique em <strong>Modelo (model)</strong> e, em seguida,<br />clique em <strong>Part</strong></>
-      ]
-    },
-    {
-      id: 2,
-      title: 'Selecione e renomeie a nova "Part"',
-      lines: [
-        <>No painel Explorador (direita, embaixo), encontre o objeto recém-criado <span className="card05-ux-emphasis">"Part"</span></>,
-        <>Renomeie para <span className="card05-ux-emphasis">Part_1</span> (botão direito &gt; Renomear &gt; Part_1 &gt; Enter)</>
-      ]
-    },
-    {
-      id: 3,
-      title: 'Ajuste o tamanho e posição da Part',
-      lines: [
-        <>No painel <strong>"Propriedades"</strong>:</>,
-        <>Encontre a variável <strong>"Size"</strong> e substitua os valores atuais por 2.6,9.8,4.4</>,
-        <>Encontre a variável <strong>"Position"</strong> e substitua os valores atuais por 5.96,4.9,-9.54</>
-      ]
-    },
-    {
-      id: 4,
-      title: 'Mude o Material',
-      lines: [
-        <>Mova o cursor até o top bar, clique em <strong>Modelo (model)</strong>, clique em <strong>"Material"</strong>.</>,
-        <>No campo de busca, digite <strong>"Wood"</strong> e selecione.</>
-      ]
-    }
-  ]
+  const steps = buildHouseStepsData.steps
   const isAllStepsCompleted = highlightStepCount >= steps.length
   const remainingSteps = Math.max(0, steps.length - highlightStepCount)
-  const getHelpImagePath = (stepId) =>
-    `public/Tutorial-steps/Build-A-House/Build-a-house-step${stepId}.png`
-
-  const helpContentByStep = {
-    1: {
-      image: getHelpImagePath(1),
-      text: 'Nesta etapa você cria a primeira Part pelo menu Modelo.'
-    },
-    2: {
-      image: getHelpImagePath(2),
-      text: 'Caso você não veja o painel explorer na tela, ele pode ser encontrado em Window > Explorer.'
-    },
-    3: {
-      image: getHelpImagePath(3),
-      text: 'Clique nos numero ao lado, na coluna da direita, para alterar os valores da variável.'
-    },
-    4: {
-      image: getHelpImagePath(4),
-      text: 'Isso irá aplicar um "Shader" no seu Part.'
-    }
-  }
+  const helpContentByStep = buildHouseHelpData.help.reduce((acc, item) => {
+    acc[item.id] = item
+    return acc
+  }, {})
   const activeHelp = activeHelpStepId ? helpContentByStep[activeHelpStepId] : null
 
   return (
@@ -190,9 +142,11 @@ function Card05_BeforeActionUxLenses({
                     </span>
                   </div>
                   {step.lines.map((line, lineIndex) => (
-                    <div className="card05-ux-step-line-text" key={`${step.id}-${lineIndex}`}>
-                      {line}
-                    </div>
+                    <div
+                      className="card05-ux-step-line-text"
+                      key={`${step.id}-${lineIndex}`}
+                      dangerouslySetInnerHTML={{ __html: line }}
+                    />
                   ))}
                 </div>
               </div>

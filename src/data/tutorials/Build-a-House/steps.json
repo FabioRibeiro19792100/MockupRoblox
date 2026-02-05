@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "id": 1,
+      "title": "Crie uma \"Part\"",
+      "lines": [
+        "Na barra superior, clique em <strong>Modelo (model)</strong> e, em seguida,<br>clique em <strong>Part</strong>"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Selecione e renomeie a nova \"Part\"",
+      "lines": [
+        "No painel Explorador (direita, embaixo), encontre o objeto recém-criado <span class=\"card05-ux-emphasis\">\"Part\"</span>",
+        "Renomeie para <span class=\"card05-ux-emphasis\">Part_1</span> (botão direito &gt; Renomear &gt; Part_1 &gt; Enter)"
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Ajuste o tamanho e posição da Part",
+      "lines": [
+        "No painel <strong>\"Propriedades\"</strong>:",
+        "Encontre a variável <strong>\"Size\"</strong> e substitua os valores atuais por 2.6,9.8,4.4",
+        "Encontre a variável <strong>\"Position\"</strong> e substitua os valores atuais por 5.96,4.9,-9.54"
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Mude o Material",
+      "lines": [
+        "Mova o cursor até o top bar, clique em <strong>Modelo (model)</strong>, clique em <strong>\"Material\"</strong>.",
+        "No campo de busca, digite <strong>\"Wood\"</strong> e selecione."
+      ]
+    }
+  ]
+}
