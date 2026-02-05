@@ -20,6 +20,7 @@ import Card13_BadgeExplanation from './cards/Card13_BadgeExplanation'
 import WhiteCardCanvas01 from './cards/WhiteCardCanvas01/WhiteCardCanvas01'
 import WhiteCardCanvas02 from './cards/WhiteCardCanvas02/WhiteCardCanvas02'
 import WhiteCardCanvas03 from './cards/WhiteCardCanvas03/WhiteCardCanvas03'
+import WhiteCardCanvas04 from './cards/WhiteCardCanvas04/WhiteCardCanvas04'
 import BadgeHeader from './BadgeHeader'
 import BadgeScoreboard from './BadgeScoreboard'
 import CreatorPopup from './CreatorPopup'
@@ -995,10 +996,7 @@ function CardLayoutView({
       id: 102,
       name: 'Card Branco 02 - Exploração',
       component: (
-        <WhiteCardCanvas02
-          title="Tela 02"
-          subtitle="Espaço reservado para novas telas"
-        />
+        <WhiteCardCanvas02 />
       ),
       elements: []
     },
@@ -1006,10 +1004,15 @@ function CardLayoutView({
       id: 103,
       name: 'Card Branco 03 - Fluxo',
       component: (
-        <WhiteCardCanvas03
-          title="Tela 03"
-          subtitle="Monte o fluxo sem herdar estilos"
-        />
+        <WhiteCardCanvas03 />
+      ),
+      elements: []
+    },
+    {
+      id: 104,
+      name: 'Card Branco 04 - Placeholder',
+      component: (
+        <WhiteCardCanvas04 />
       ),
       elements: []
     }
@@ -1979,6 +1982,25 @@ function CardLayoutView({
             >
               {onboardingAutoPlay ? 'Desativar animações' : 'Ativar animações'}
             </button>
+            <div className="card08-module-title">Seleção de tutorial</div>
+            <div className="card08-module-legend">
+              <div className="card08-module-legend-item">
+                <span className="card08-module-legend-dot card08-module-legend-dot--blue" />
+                <span>Implementação para a entrega atual</span>
+              </div>
+              <div className="card08-module-legend-item">
+                <span className="card08-module-legend-dot card08-module-legend-dot--yellow" />
+                <span>Implementação para a próxima entrega</span>
+              </div>
+            </div>
+            <ul className="card08-module-list">
+              <li className="card08-module-list-item">
+                1 - corrigir hover, cor precisa preencher toda altura do elemento
+              </li>
+              <li className="card08-module-list-item card08-module-list-item--next">
+                2 - implementar help text (que descreve a função do elemento em questão).
+              </li>
+            </ul>
           </div>
         </div>
       </div>

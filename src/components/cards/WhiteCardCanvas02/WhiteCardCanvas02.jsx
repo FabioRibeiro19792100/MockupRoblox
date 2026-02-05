@@ -1,22 +1,26 @@
 import React from 'react'
 import './WhiteCardCanvas02.css'
 
-function WhiteCardCanvas02({ title, subtitle }) {
+function WhiteCardCanvas02() {
   return (
-    <div className="white-card-canvas-02">
-      <div className="white-card-canvas-02__header">
-        <span className="white-card-canvas-02__eyebrow">Tela em branco</span>
-        <h2 className="white-card-canvas-02__title">{title}</h2>
-        {subtitle ? (
-          <p className="white-card-canvas-02__subtitle">{subtitle}</p>
-        ) : null}
+    <section className="white-card-canvas-02" aria-label="Tela 02">
+      <div className="white-card-canvas-02__body white-card-canvas-02__body--hero">
+        <figure className="white-card-canvas-02__image">
+          <img
+            src="/logo.png"
+            alt="Imagem principal"
+            className="white-card-canvas-02__image-asset"
+          />
+        </figure>
+        <p className="white-card-canvas-02__slogan">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non
+          justo sed ipsum dignissim viverra.
+        </p>
+        <button type="button" className="white-card-canvas-02__cta">
+          Comecar
+        </button>
       </div>
-      <div className="white-card-canvas-02__body">
-        <div className="white-card-canvas-02__placeholder">
-          <span>Area livre para layout</span>
-        </div>
-      </div>
-    </div>
+    </section>
   )
 }
 

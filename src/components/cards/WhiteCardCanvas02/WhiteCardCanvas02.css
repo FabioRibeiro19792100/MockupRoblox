@@ -49,23 +49,51 @@
   flex-direction: column;
   align-items: stretch;
   justify-content: flex-start;
-  gap: 0;
+  gap: 22px;
   padding: 24px;
   background: linear-gradient(180deg, #ffffff 0%, #f7f7f7 100%);
 }
 
-.white-card-canvas-02__placeholder {
-  width: 100%;
-  flex: 1;
-  min-height: 520px;
-  border: 2px dashed #cfcfcf;
-  border-radius: 16px;
-  display: flex;
+.white-card-canvas-02__body--hero {
   align-items: center;
   justify-content: center;
-  color: #6b7280;
-  font-size: 13px;
+  text-align: center;
+}
+
+.white-card-canvas-02__image {
+  margin: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.white-card-canvas-02__image-asset {
+  width: min(220px, 70%);
+  height: auto;
+  object-fit: contain;
+}
+
+.white-card-canvas-02__slogan {
+  margin: 0;
+  max-width: 320px;
+  color: #374151;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.white-card-canvas-02__cta {
+  border: none;
+  border-radius: 999px;
+  padding: 12px 30px;
+  background: #f6c23e;
+  color: #1a1a1a;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  background: #ffffff;
+  cursor: pointer;
+}
+
+.white-card-canvas-02__cta:hover {
+  filter: brightness(0.96);
 }

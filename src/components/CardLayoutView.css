@@ -205,6 +205,60 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 6px;
+  margin-top: 20px;
+}
+
+.card-layout-view .card08-module-list {
+  list-style: none;
+  margin: 0 0 12px 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card-layout-view .card08-module-list-item {
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
+  background: #2563eb;
+  border-radius: 6px;
+  padding: 8px 10px;
+}
+
+.card-layout-view .card08-module-list-item--next {
+  background: #ff5722;
+}
+
+.card-layout-view .card08-module-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0 0 10px 0;
+}
+
+.card-layout-view .card08-module-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #111111;
+}
+
+.card-layout-view .card08-module-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.card-layout-view .card08-module-legend-dot--blue {
+  background: #2563eb;
+}
+
+.card-layout-view .card08-module-legend-dot--yellow {
+  background: #ff5722;
 }
 
 .card-layout-view .card08-dev-message {
