@@ -17,6 +17,9 @@ import Card09_PositiveFeedback from './cards/Card09_PositiveFeedback'
 import Card10_NegativeFeedback from './cards/Card10_NegativeFeedback'
 import Card11_Completion from './cards/Card11_Completion'
 import Card13_BadgeExplanation from './cards/Card13_BadgeExplanation'
+import WhiteCardCanvas01 from './cards/WhiteCardCanvas01/WhiteCardCanvas01'
+import WhiteCardCanvas02 from './cards/WhiteCardCanvas02/WhiteCardCanvas02'
+import WhiteCardCanvas03 from './cards/WhiteCardCanvas03/WhiteCardCanvas03'
 import BadgeHeader from './BadgeHeader'
 import BadgeScoreboard from './BadgeScoreboard'
 import CreatorPopup from './CreatorPopup'
@@ -29,6 +32,10 @@ const LAYER_STYLES = {
   layer12: {
     name: 'Variação Back09 - UX lenses',
     description: 'Background back09.jpg aplicado em cards selecionados (UX lenses)'
+  },
+  layer13: {
+    name: 'Sessão Cards Brancos',
+    description: 'Sessão limpa para novas telas, sem herdar do Back09'
   }
 }
 
@@ -64,6 +71,8 @@ function CardLayoutView({
   const [showBadgeGallery, setShowBadgeGallery] = useState(true)
   const [badgeGalleryExpanded, setBadgeGalleryExpanded] = useState(false) // Para controle global
   const [expandedCards, setExpandedCards] = useState(new Set()) // Estado individual por card
+  const [onboardingAutoPlay, setOnboardingAutoPlay] = useState(false)
+  const [onboardingAnimationSeed, setOnboardingAnimationSeed] = useState(0)
   
   // Estados para edição de elementos
   const [selectedElements, setSelectedElements] = useState(new Set())
@@ -973,6 +982,39 @@ function CardLayoutView({
     },
   ]
 
+  const whiteCards = [
+    {
+      id: 101,
+      name: 'Card Branco 01 - Base',
+      component: (
+        <WhiteCardCanvas01 autoPlay={onboardingAutoPlay} animationSeed={onboardingAnimationSeed} />
+      ),
+      elements: []
+    },
+    {
+      id: 102,
+      name: 'Card Branco 02 - Exploração',
+      component: (
+        <WhiteCardCanvas02
+          title="Tela 02"
+          subtitle="Espaço reservado para novas telas"
+        />
+      ),
+      elements: []
+    },
+    {
+      id: 103,
+      name: 'Card Branco 03 - Fluxo',
+      component: (
+        <WhiteCardCanvas03
+          title="Tela 03"
+          subtitle="Monte o fluxo sem herdar estilos"
+        />
+      ),
+      elements: []
+    }
+  ]
+
   // Debug: verificar se o componente está renderizando
   console.log('CardLayoutView renderizando', { completedTutorials, earnedBadges, cardsCount: cards.length })
   
@@ -1024,13 +1066,13 @@ function CardLayoutView({
   // Aplicar classe do layer no body para que popups também sejam afetados
   useEffect(() => {
     // Remove todas as classes de layer do body
-    document.body.classList.remove('layer-layer1', 'layer-layer2', 'layer-layer3', 'layer-layer4', 'layer-layer5', 'layer-layer7', 'layer-layer8', 'layer-layer9', 'layer-layer10', 'layer-layer11')
+    document.body.classList.remove('layer-layer1', 'layer-layer2', 'layer-layer3', 'layer-layer4', 'layer-layer5', 'layer-layer7', 'layer-layer8', 'layer-layer9', 'layer-layer10', 'layer-layer11', 'layer-layer12', 'layer-layer13')
     // Adiciona a classe do layer atual
     document.body.classList.add(`layer-${currentLayer}`)
     
     return () => {
       // Limpa ao desmontar
-      document.body.classList.remove('layer-layer1', 'layer-layer2', 'layer-layer3', 'layer-layer4', 'layer-layer5', 'layer-layer7', 'layer-layer8', 'layer-layer9', 'layer-layer10', 'layer-layer11')
+      document.body.classList.remove('layer-layer1', 'layer-layer2', 'layer-layer3', 'layer-layer4', 'layer-layer5', 'layer-layer7', 'layer-layer8', 'layer-layer9', 'layer-layer10', 'layer-layer11', 'layer-layer12', 'layer-layer13')
     }
   }, [currentLayer])
 
@@ -1705,28 +1747,30 @@ function CardLayoutView({
   }
 
   // Ordenar cards na ordem da experiência do usuário
-  const sortedCards = [...cards]
-    // Filtrar cards específicos para UX Lenses (layer12)
-    .filter(card => {
-      if (currentLayer === 'layer12') {
-        // Remover cards não usados no UX Lenses
-        if (card.id === 1.5 || card.id === 19 || card.id === 20) {
-          return false
+  const sortedCards = currentLayer === 'layer13'
+    ? whiteCards
+    : [...cards]
+      // Filtrar cards específicos para UX Lenses (layer12)
+      .filter(card => {
+        if (currentLayer === 'layer12') {
+          // Remover cards não usados no UX Lenses
+          if (card.id === 1.5 || card.id === 19 || card.id === 20) {
+            return false
+          }
         }
-      }
-      return true
+        return true
+      })
+      .sort((a, b) => {
+      // Ordem específica da experiência: 0, 1, 2, 3, 1.4, 1.5, 5, 6, 5.1, 7, 7.6, 8.4, 8, 8.5, 9, 10, 11, 11.5, 12, 12.5, 13, 16, 17, 19, 20
+      const order = [0, 1, 2, 3, 1.4, 1.5, 5, 6, '5.1', 7, 7.6, 8.4, 8, 8.5, 9, 10, 11, 11.5, 12, 12.5, 13, 16, 17, 19, 20]
+      const indexA = order.indexOf(a.id)
+      const indexB = order.indexOf(b.id)
+      // Se não estiver na lista de ordem, coloca no final
+      if (indexA === -1 && indexB === -1) return 0
+      if (indexA === -1) return 1
+      if (indexB === -1) return -1
+      return indexA - indexB
     })
-    .sort((a, b) => {
-    // Ordem específica da experiência: 0, 1, 2, 3, 1.4, 1.5, 5, 6, 5.1, 7, 7.6, 8.4, 8, 8.5, 9, 10, 11, 11.5, 12, 12.5, 13, 16, 17, 19, 20
-    const order = [0, 1, 2, 3, 1.4, 1.5, 5, 6, '5.1', 7, 7.6, 8.4, 8, 8.5, 9, 10, 11, 11.5, 12, 12.5, 13, 16, 17, 19, 20]
-    const indexA = order.indexOf(a.id)
-    const indexB = order.indexOf(b.id)
-    // Se não estiver na lista de ordem, coloca no final
-    if (indexA === -1 && indexB === -1) return 0
-    if (indexA === -1) return 1
-    if (indexB === -1) return -1
-    return indexA - indexB
-  })
   
   console.log('Cards ordenados:', sortedCards.map(c => ({ id: c.id, name: c.name })))
 
@@ -1922,6 +1966,19 @@ function CardLayoutView({
                 </div>
               </div>
             )}
+          </div>
+          <div className="control-group card08-module-controls">
+            <div className="card08-module-title">Iterações do Onboarding</div>
+            <button
+              type="button"
+              className="card08-module-button"
+              onClick={() => {
+                setOnboardingAutoPlay((prev) => !prev)
+                setOnboardingAnimationSeed((prev) => prev + 1)
+              }}
+            >
+              {onboardingAutoPlay ? 'Desativar animações' : 'Ativar animações'}
+            </button>
           </div>
         </div>
       </div>

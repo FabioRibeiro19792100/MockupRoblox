@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "image": "/logo-expedicao-carrying-block.png",
+    "alt": "Icone de boas vindas",
+    "text": "Ai esta voce! bem vindo a uma excitante jornada de aprendizado."
+  },
+  {
+    "id": 2,
+    "image": "/logo.png",
+    "alt": "Icone de exploracao",
+    "text": "Explore recursos, desbloqueie badges e avance no seu ritmo."
+  },
+  {
+    "id": 3,
+    "image": "/badge-icon.png",
+    "alt": "Icone de progresso",
+    "text": "Complete desafios para ganhar recompensas e evoluir." 
+  }
+]
