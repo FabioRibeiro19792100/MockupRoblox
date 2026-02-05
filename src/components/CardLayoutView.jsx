@@ -78,6 +78,7 @@ function CardLayoutView({
   const [onboardingAutoPlay, setOnboardingAutoPlay] = useState(false)
   const [onboardingAnimationSeed, setOnboardingAnimationSeed] = useState(0)
   const [card05Variant, setCard05Variant] = useState('mvp')
+  const [card07Variant, setCard07Variant] = useState('ideal')
   
   // Estados para edição de elementos
   const [selectedElements, setSelectedElements] = useState(new Set())
@@ -1040,7 +1041,7 @@ function CardLayoutView({
       id: 107,
       name: 'Card Branco 07 - Feedback Positivo',
       component: (
-        <WhiteCardCanvas07 />
+        <WhiteCardCanvas07 variant={card07Variant} />
       ),
       elements: []
     }
@@ -2099,20 +2100,35 @@ function CardLayoutView({
                       <input
                         type="radio"
                         name="card05-variant"
-                        value="hybrid"
-                        checked={card05Variant === 'hybrid'}
-                        onChange={() => setCard05Variant('hybrid')}
+                        value="ideal"
+                        checked={card05Variant === 'ideal'}
+                        onChange={() => setCard05Variant('ideal')}
                       />
                       <span className="card-layout-variant-radio" aria-hidden="true" />
-                      <span className="card-layout-variant-label">Híbrido</span>
+                      <span className="card-layout-variant-label">Ideal</span>
+                    </label>
+                  </div>
+                )}
+                {card.id === 107 && (
+                  <div className="card-layout-variant-toggle" onClick={(event) => event.stopPropagation()}>
+                    <label className="card-layout-variant-option">
+                      <input
+                        type="radio"
+                        name="card07-variant"
+                        value="mvp"
+                        checked={card07Variant === 'mvp'}
+                        onChange={() => setCard07Variant('mvp')}
+                      />
+                      <span className="card-layout-variant-radio" aria-hidden="true" />
+                      <span className="card-layout-variant-label">MVP</span>
                     </label>
                     <label className="card-layout-variant-option">
                       <input
                         type="radio"
-                        name="card05-variant"
+                        name="card07-variant"
                         value="ideal"
-                        checked={card05Variant === 'ideal'}
-                        onChange={() => setCard05Variant('ideal')}
+                        checked={card07Variant === 'ideal'}
+                        onChange={() => setCard07Variant('ideal')}
                       />
                       <span className="card-layout-variant-radio" aria-hidden="true" />
                       <span className="card-layout-variant-label">Ideal</span>

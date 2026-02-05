@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import './WhiteCardCanvas07.css'
 
-function WhiteCardCanvas07() {
+function WhiteCardCanvas07({ variant = 'ideal' }) {
   const victoryFrames = ['victory-1', 'victory-1-ib', 'victory-2', 'victory-3', 'victory-3-ib', 'victory-4']
   const [victoryFrameIndex, setVictoryFrameIndex] = useState(0)
 
@@ -12,6 +12,20 @@ function WhiteCardCanvas07() {
 
     return () => clearInterval(intervalId)
   }, [])
+
+  if (variant === 'mvp') {
+    return (
+      <section className="white-card-canvas-07" aria-label="Feedback positivo MVP">
+        <div className="white-card-canvas-07__body--mvp">
+          <img
+            src="/Q&A/Winscreen.png"
+            alt="Winscreen"
+            className="white-card-canvas-07__mvp-image"
+          />
+        </div>
+      </section>
+    )
+  }
 
   return (
     <section className="white-card-canvas-07" aria-label="Feedback positivo">
@@ -46,6 +60,32 @@ function WhiteCardCanvas07() {
 
         <div className="white-card-canvas-07__title-group">
           <h2 className="white-card-canvas-07__title">Etapa concluída!</h2>
+          <div className="white-card-canvas-07__learned">
+            <div className="white-card-canvas-07__learned-item">
+              <div className="white-card-canvas-07__learned-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </div>
+              <span>Não precisa saber programar</span>
+            </div>
+            <div className="white-card-canvas-07__learned-item">
+              <div className="white-card-canvas-07__learned-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </div>
+              <span>Leva cerca de 10 minutos</span>
+            </div>
+            <div className="white-card-canvas-07__learned-item">
+              <div className="white-card-canvas-07__learned-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </div>
+              <span>Você pode sair a qualquer momento</span>
+            </div>
+          </div>
           <p className="white-card-canvas-07__subtitle">progresso salvo!</p>
         </div>
 
