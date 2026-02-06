@@ -87,7 +87,7 @@
   height: 100%;
   min-height: 0;
   border-radius: 0;
-  background: linear-gradient(to top, #224d7a 0%, #000000 100%);
+  background: linear-gradient(to top, #5babff 0%, #19003e 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -153,7 +153,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
   transform: scale(0.85);
   opacity: 0;
 }
@@ -196,6 +195,8 @@
   flex-direction: column;
   gap: 6px;
   white-space: pre-wrap;
+  animation: onboarding-grow 380ms ease-out 320ms forwards,
+    float-message 3.2s ease-in-out 1.1s infinite;
 }
 
 .white-card-canvas-01__message-line {
@@ -209,11 +210,6 @@
 
 .white-card-canvas-01__hero-circle.is-pop {
   animation: onboarding-pop 420ms ease-out forwards;
-}
-
-.white-card-canvas-01__message-text {
-  animation: onboarding-grow 380ms ease-out forwards;
-  animation-delay: 320ms;
 }
 
 @keyframes onboarding-pop {
@@ -242,9 +238,28 @@
   }
 }
 
+@keyframes float-message {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) scale(1);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
 .white-card-canvas-01__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.white-card-canvas-01__actions-row {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
   width: 100%;
 }

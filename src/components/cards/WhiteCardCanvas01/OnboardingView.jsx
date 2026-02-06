@@ -58,34 +58,36 @@ function OnboardingView({ slides, index, displayText, animationSeed, onPrev, onN
                 : ''}
             </p>
           </blockquote>
+          <div className="white-card-canvas-01__actions" role="group" aria-label="Acoes do onboarding">
+            <div className="white-card-canvas-01__actions-row">
+              <button
+                type="button"
+                className="white-card-canvas-01__action white-card-canvas-01__action--ghost"
+                onClick={onPrev}
+                aria-label="Voltar para o slide anterior"
+              >
+                Voltar
+              </button>
+              <button
+                type="button"
+                className="white-card-canvas-01__action white-card-canvas-01__action--primary"
+                onClick={onNext}
+                aria-label="Avancar para o proximo slide"
+              >
+                Avancar
+              </button>
+            </div>
+            <button
+              type="button"
+              className="white-card-canvas-01__action white-card-canvas-01__action--ghost"
+              onClick={onSkip}
+              aria-label="Pular onboarding"
+              disabled={skipLabel === 'Iniciar' && !isFinalSlide}
+            >
+              {skipLabel}
+            </button>
+          </div>
         </main>
-        <div className="white-card-canvas-01__actions" role="group" aria-label="Acoes do onboarding">
-          <button
-            type="button"
-            className="white-card-canvas-01__action white-card-canvas-01__action--ghost"
-            onClick={onPrev}
-            aria-label="Voltar para o slide anterior"
-          >
-            Voltar
-          </button>
-          <button
-            type="button"
-            className="white-card-canvas-01__action white-card-canvas-01__action--primary"
-            onClick={onNext}
-            aria-label="Avancar para o proximo slide"
-          >
-            Avancar
-          </button>
-          <button
-            type="button"
-            className="white-card-canvas-01__action white-card-canvas-01__action--ghost"
-            onClick={onSkip}
-            aria-label="Pular onboarding"
-            disabled={skipLabel === 'Iniciar' && !isFinalSlide}
-          >
-            {skipLabel}
-          </button>
-        </div>
       </div>
     </section>
   )
