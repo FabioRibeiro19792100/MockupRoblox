@@ -280,6 +280,7 @@
   height: 42px;
   text-align: center;
   position: relative;
+  transition: transform 160ms ease;
 }
 
 .white-card-canvas-01__action--with-icon-left {
@@ -295,8 +296,8 @@
 }
 
 .white-card-canvas-01__action-icon {
-  width: 14px;
-  height: 14px;
+  width: 17px;
+  height: 17px;
   display: inline-block;
   flex-shrink: 0;
 }
@@ -369,7 +370,17 @@
 }
 
 .white-card-canvas-01__action:disabled {
-  opacity: 0.4;
+  opacity: 0.5;
   cursor: not-allowed;
   filter: grayscale(0.4);
+}
+
+.white-card-canvas-01__action--ghost:hover,
+.white-card-canvas-01__action--primary:hover {
+  transform: translateY(-2px);
+}
+
+.white-card-canvas-01__action--ghost:disabled:hover,
+.white-card-canvas-01__action--primary:disabled:hover {
+  transform: none;
 }

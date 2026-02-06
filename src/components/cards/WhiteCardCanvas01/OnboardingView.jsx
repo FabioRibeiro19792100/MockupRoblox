@@ -65,6 +65,7 @@ function OnboardingView({ slides, index, displayText, animationSeed, onPrev, onN
                 className="white-card-canvas-01__action white-card-canvas-01__action--ghost white-card-canvas-01__action--with-icon-left"
                 onClick={onPrev}
                 aria-label="Voltar para o slide anterior"
+                disabled={index === 0}
               >
                 <img
                   src="/UI/arrow-left.png"
