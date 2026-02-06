@@ -1,7 +1,23 @@
 import React from 'react'
 import './WhiteCardCanvas03.css'
 
-function WhiteCardCanvas03() {
+function WhiteCardCanvas03({ variant = 'mvp' }) {
+  const isIdeal = variant === 'ideal'
+  if (!isIdeal) {
+    return (
+      <section className="white-card-canvas-03 white-card-canvas-03--mvp" aria-label="Pagina home">
+        <div className="white-card-canvas-03__body">
+          <figure className="white-card-canvas-03__figure">
+            <img
+              src="/Q&A/pagina-home.png"
+              alt="Pagina Home"
+              className="white-card-canvas-03__image"
+            />
+          </figure>
+        </div>
+      </section>
+    )
+  }
   return (
     <section className="white-card-canvas-03" aria-label="Card de capa">
       <div className="white-card-canvas-03__body">

@@ -1,19 +1,19 @@
 [
   {
     "id": 1,
-    "image": "/avatar-01.png",
+    "image": "/victory-2/onboarding/onboarding-1.png",
     "alt": "Icone de boas vindas",
-    "text": "Pense em todos os jogos roblox que você ja experimentou. As casas, os esconderijos, as bases secretas... alguém criou cada um deles. Tijolo por tijolo. Parede por parede."
+    "text": "Aí está você! Bem vindo a uma nova aventura de criação no Roblox!"
   },
   {
     "id": 2,
     "image": "/logo.png",
     "alt": "Icone de exploracao",
-    "text": "Hoje, essa pessoa é você! Nesse tutorial, você irá começar do zero e terminar com uma casa completa!"
+    "text": "Não temos tempo a perder, então vamos nessa! Apresento a você o segredo da criação dos mundos Roblox, onde a mágica acontece, aperta o cinto!"
   },
   {
     "id": 3,
-    "image": "/badge-icon.png",
+    "image": "/Q&A/Ide-image.png",
     "alt": "Icone de progresso",
     "text": "O que você irá criar:\n• Pilares que suportam a entrada\n• Uma porta de madeira com alças douradas\n• Quatro paredes sólidas\n• Um telhado"
   },

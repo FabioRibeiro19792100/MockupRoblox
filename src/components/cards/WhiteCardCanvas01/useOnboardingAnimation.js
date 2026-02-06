@@ -1,8 +1,7 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 
-export function useOnboardingAnimation({ total, interval = 4000, autoPlay = false } = {}) {
+export function useOnboardingAnimation({ total } = {}) {
   const [index, setIndex] = useState(0)
-  const timerRef = useRef(null)
 
   const next = () => {
     setIndex((current) => (current + 1) % total)
@@ -17,12 +16,6 @@ export function useOnboardingAnimation({ total, interval = 4000, autoPlay = fals
     const bounded = Math.max(0, Math.min(total - 1, nextIndex))
     setIndex(bounded)
   }
-
-  useEffect(() => {
-    if (!autoPlay || total <= 1) return
-    timerRef.current = window.setInterval(next, interval)
-    return () => window.clearInterval(timerRef.current)
-  }, [autoPlay, interval, total])
 
   return {
     index,

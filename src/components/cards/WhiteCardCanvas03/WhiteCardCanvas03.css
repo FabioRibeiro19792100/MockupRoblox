@@ -23,6 +23,22 @@
   background: radial-gradient(circle at top, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7));
 }
 
+.white-card-canvas-03__figure {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.white-card-canvas-03__image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
 .white-card-canvas-03__logo {
   display: flex;
   justify-content: flex-start;

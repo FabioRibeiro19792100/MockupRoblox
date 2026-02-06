@@ -77,6 +77,9 @@ function CardLayoutView({
   const [expandedCards, setExpandedCards] = useState(new Set()) // Estado individual por card
   const [onboardingAutoPlay, setOnboardingAutoPlay] = useState(false)
   const [onboardingAnimationSeed, setOnboardingAnimationSeed] = useState(0)
+  const [card01SoundEnabled, setCard01SoundEnabled] = useState(false)
+  const [card03Variant, setCard03Variant] = useState('mvp')
+  const [card04Variant, setCard04Variant] = useState('mvp')
   const [card05Variant, setCard05Variant] = useState('mvp')
   const [card07Variant, setCard07Variant] = useState('ideal')
   
@@ -1009,7 +1012,7 @@ function CardLayoutView({
       id: 103,
       name: 'Card Branco 03 - Fluxo',
       component: (
-        <WhiteCardCanvas03 />
+        <WhiteCardCanvas03 variant={card03Variant} />
       ),
       elements: []
     },
@@ -1017,7 +1020,7 @@ function CardLayoutView({
       id: 104,
       name: 'Card Branco 04 - Placeholder',
       component: (
-        <WhiteCardCanvas04 />
+        <WhiteCardCanvas04 variant={card04Variant} />
       ),
       elements: []
     },
@@ -1130,6 +1133,30 @@ function CardLayoutView({
     })
     return Array.from(elementMap.values())
   }, [cards])
+
+  const card01AudioRef = useRef(null)
+
+  useEffect(() => {
+    if (!card01AudioRef.current) {
+      card01AudioRef.current = new Audio('/sound-fx/soundtrack-1.mp3')
+      card01AudioRef.current.loop = true
+      card01AudioRef.current.volume = 0.6
+    }
+
+    const audio = card01AudioRef.current
+    if (card01SoundEnabled) {
+      audio.play().catch(() => {})
+    } else {
+      audio.pause()
+      audio.currentTime = 0
+    }
+
+    return () => {
+      if (!audio) return
+      audio.pause()
+      audio.currentTime = 0
+    }
+  }, [card01SoundEnabled])
 
   // Função para processar instruções e aplicar mudanças
   const handleProcessInstruction = async () => {
@@ -2001,16 +2028,6 @@ function CardLayoutView({
           </div>
           <div className="control-group card08-module-controls">
             <div className="card08-module-title">Iterações do Onboarding</div>
-            <button
-              type="button"
-              className="card08-module-button"
-              onClick={() => {
-                setOnboardingAutoPlay((prev) => !prev)
-                setOnboardingAnimationSeed((prev) => prev + 1)
-              }}
-            >
-              {onboardingAutoPlay ? 'Desativar animações' : 'Ativar animações'}
-            </button>
             <div className="card08-module-title">Seleção de tutorial</div>
             <div className="card08-module-legend">
               <div className="card08-module-legend-item">
@@ -2025,6 +2042,9 @@ function CardLayoutView({
             <ul className="card08-module-list">
               <li className="card08-module-list-item">
                 1 - corrigir hover, cor precisa preencher toda altura do elemento
+              </li>
+              <li className="card08-module-list-item">
+                1.2 - precisamos colocar um botão "voltar para home"
               </li>
               <li className="card08-module-list-item card08-module-list-item--next">
                 2 - implementar help text (que descreve a função do elemento em questão).
@@ -2081,8 +2101,32 @@ function CardLayoutView({
                 }
               }}
             >
+              {card.id === 101 && (
+                <button
+                  type="button"
+                  className="card08-module-button"
+                  onClick={(event) => {
+                    event.stopPropagation()
+                    setOnboardingAutoPlay((prev) => !prev)
+                    setOnboardingAnimationSeed((prev) => prev + 1)
+                  }}
+                >
+                  {onboardingAutoPlay ? 'Desativar animações' : 'Ativar animações'}
+                </button>
+              )}
               <div className="card-layout-label-content">
                 <span>{card.name}</span>
+                {card.id === 101 && (
+                  <label className="card-layout-sound-toggle" onClick={(event) => event.stopPropagation()}>
+                    <input
+                      type="checkbox"
+                      checked={card01SoundEnabled}
+                      onChange={(event) => setCard01SoundEnabled(event.target.checked)}
+                    />
+                    <span className="card-layout-sound-switch" aria-hidden="true" />
+                    <span className="card-layout-sound-label">Som</span>
+                  </label>
+                )}
                 {card.id === 105 && (
                   <div className="card-layout-variant-toggle" onClick={(event) => event.stopPropagation()}>
                     <label className="card-layout-variant-option">
@@ -2103,6 +2147,58 @@ function CardLayoutView({
                         value="ideal"
                         checked={card05Variant === 'ideal'}
                         onChange={() => setCard05Variant('ideal')}
+                      />
+                      <span className="card-layout-variant-radio" aria-hidden="true" />
+                      <span className="card-layout-variant-label">Ideal</span>
+                    </label>
+                  </div>
+                )}
+                {card.id === 103 && (
+                  <div className="card-layout-variant-toggle" onClick={(event) => event.stopPropagation()}>
+                    <label className="card-layout-variant-option">
+                      <input
+                        type="radio"
+                        name="card03-variant"
+                        value="mvp"
+                        checked={card03Variant === 'mvp'}
+                        onChange={() => setCard03Variant('mvp')}
+                      />
+                      <span className="card-layout-variant-radio" aria-hidden="true" />
+                      <span className="card-layout-variant-label">MVP</span>
+                    </label>
+                    <label className="card-layout-variant-option">
+                      <input
+                        type="radio"
+                        name="card03-variant"
+                        value="ideal"
+                        checked={card03Variant === 'ideal'}
+                        onChange={() => setCard03Variant('ideal')}
+                      />
+                      <span className="card-layout-variant-radio" aria-hidden="true" />
+                      <span className="card-layout-variant-label">Ideal</span>
+                    </label>
+                  </div>
+                )}
+                {card.id === 104 && (
+                  <div className="card-layout-variant-toggle" onClick={(event) => event.stopPropagation()}>
+                    <label className="card-layout-variant-option">
+                      <input
+                        type="radio"
+                        name="card04-variant"
+                        value="mvp"
+                        checked={card04Variant === 'mvp'}
+                        onChange={() => setCard04Variant('mvp')}
+                      />
+                      <span className="card-layout-variant-radio" aria-hidden="true" />
+                      <span className="card-layout-variant-label">MVP</span>
+                    </label>
+                    <label className="card-layout-variant-option">
+                      <input
+                        type="radio"
+                        name="card04-variant"
+                        value="ideal"
+                        checked={card04Variant === 'ideal'}
+                        onChange={() => setCard04Variant('ideal')}
                       />
                       <span className="card-layout-variant-radio" aria-hidden="true" />
                       <span className="card-layout-variant-label">Ideal</span>

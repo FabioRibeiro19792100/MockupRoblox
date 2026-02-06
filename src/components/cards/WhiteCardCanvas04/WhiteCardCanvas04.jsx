@@ -1,9 +1,10 @@
 import React from 'react'
 import './WhiteCardCanvas04.css'
 
-function WhiteCardCanvas04() {
+function WhiteCardCanvas04({ variant = 'mvp' }) {
+  const isIdeal = variant === 'ideal'
   return (
-    <section className="white-card-canvas-04" aria-label="Tutorial Select Screen">
+    <section className="white-card-canvas-04" aria-label={`Tutorial Select Screen ${isIdeal ? 'Ideal' : 'MVP'}`}>
       <div className="white-card-canvas-04__body">
         <figure className="white-card-canvas-04__figure">
           <img
@@ -11,7 +12,8 @@ function WhiteCardCanvas04() {
             alt="Tutorial Select Screen"
             className="white-card-canvas-04__image"
           />
-          <span className="white-card-canvas-04__marker white-card-canvas-04__marker--1">1</span>
+          <span className="white-card-canvas-04__marker white-card-canvas-04__marker--0">1</span>
+          <span className="white-card-canvas-04__marker white-card-canvas-04__marker--1">1.2</span>
           <span className="white-card-canvas-04__marker white-card-canvas-04__marker--2">2</span>
           <div className="white-card-canvas-04__callout">
             <p className="white-card-canvas-04__callout-text">
