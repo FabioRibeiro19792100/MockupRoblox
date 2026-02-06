@@ -1,9 +1,20 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import './WhiteCardCanvas01.css'
 
 function OnboardingView({ slides, index, displayText, animationSeed, onPrev, onNext, onGoTo, onSkip, skipLabel = 'Pular' }) {
+  const beepRef = useRef(null)
   const activeSlide = slides[index]
   const isFinalSlide = index === slides.length - 1
+
+  const playBeep = () => {
+    if (!beepRef.current) {
+      beepRef.current = new Audio('/sound-fx/beep.wav')
+      beepRef.current.volume = 0.6
+    }
+    const audio = beepRef.current
+    audio.currentTime = 0
+    audio.play().catch(() => {})
+  }
 
   return (
     <section className="white-card-canvas-01 white-card-canvas-01--onboarding" aria-label="Onboarding">
@@ -20,7 +31,10 @@ function OnboardingView({ slides, index, displayText, animationSeed, onPrev, onN
               className={slideIndex === index ? 'white-card-canvas-01__dot is-active' : 'white-card-canvas-01__dot'}
               aria-label={`Ir para slide ${slideIndex + 1}`}
               aria-current={slideIndex === index ? 'true' : undefined}
-              onClick={() => onGoTo(slideIndex)}
+              onClick={() => {
+                playBeep()
+                onGoTo(slideIndex)
+              }}
             />
           ))}
         </nav>
@@ -63,7 +77,10 @@ function OnboardingView({ slides, index, displayText, animationSeed, onPrev, onN
               <button
                 type="button"
                 className="white-card-canvas-01__action white-card-canvas-01__action--ghost white-card-canvas-01__action--with-icon-left"
-                onClick={onPrev}
+                onClick={() => {
+                  playBeep()
+                  onPrev()
+                }}
                 aria-label="Voltar para o slide anterior"
                 disabled={index === 0}
               >
@@ -78,7 +95,10 @@ function OnboardingView({ slides, index, displayText, animationSeed, onPrev, onN
               <button
                 type="button"
                 className="white-card-canvas-01__action white-card-canvas-01__action--primary white-card-canvas-01__action--with-icon-right"
-                onClick={onNext}
+                onClick={() => {
+                  playBeep()
+                  onNext()
+                }}
                 aria-label="Avancar para o proximo slide"
               >
                 Avancar
@@ -93,7 +113,10 @@ function OnboardingView({ slides, index, displayText, animationSeed, onPrev, onN
             <button
               type="button"
               className="white-card-canvas-01__action white-card-canvas-01__action--link"
-              onClick={onSkip}
+              onClick={() => {
+                playBeep()
+                onSkip()
+              }}
               aria-label="Pular onboarding"
               disabled={skipLabel === 'Iniciar' && !isFinalSlide}
             >
