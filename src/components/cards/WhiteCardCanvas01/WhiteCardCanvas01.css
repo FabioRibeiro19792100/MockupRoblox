@@ -271,19 +271,101 @@
   text-transform: uppercase;
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 42px;
+  text-align: center;
+  position: relative;
 }
 
+.white-card-canvas-01__action--with-icon-left {
+  justify-content: center;
+  padding-left: 40px;
+  padding-right: 16px;
+}
+
+.white-card-canvas-01__action--with-icon-right {
+  justify-content: center;
+  padding-right: 40px;
+  padding-left: 16px;
+}
+
+.white-card-canvas-01__action-icon {
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.white-card-canvas-01__action--with-icon-left .white-card-canvas-01__action-icon {
+  position: absolute;
+  left: 12px;
+}
+
+.white-card-canvas-01__action--with-icon-right .white-card-canvas-01__action-icon {
+  position: absolute;
+  right: 12px;
+}
+
+.white-card-canvas-01__action--with-icon-left .white-card-canvas-01__action-icon {
+  animation: arrow-left-float 2.4s ease-in-out infinite;
+}
+
+.white-card-canvas-01__action--with-icon-right .white-card-canvas-01__action-icon {
+  animation: arrow-right-float 2.4s ease-in-out infinite;
+}
+
+@keyframes arrow-left-float {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-4px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes arrow-right-float {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
 .white-card-canvas-01__action--primary {
   background: #f6c23e;
-  color: #1a1a1a;
+  color: #3f51b5;
+  font-weight: bold;
+  font-size: 12pt;
 }
 
 .white-card-canvas-01__action--ghost {
   background: #f6c23e;
-  color: #1a1a1a;
+  color: #3f51b5;
   opacity: 0.95;
+  font-weight: bold;
+  font-size: 12pt;
+}
+
+.white-card-canvas-01__action--link {
+  background: transparent;
+  border: none;
+  color: #fefefe;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
 }
 
 .white-card-canvas-01__action:disabled {

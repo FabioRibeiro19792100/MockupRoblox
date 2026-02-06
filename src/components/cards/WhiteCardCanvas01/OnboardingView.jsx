@@ -62,24 +62,36 @@ function OnboardingView({ slides, index, displayText, animationSeed, onPrev, onN
             <div className="white-card-canvas-01__actions-row">
               <button
                 type="button"
-                className="white-card-canvas-01__action white-card-canvas-01__action--ghost"
+                className="white-card-canvas-01__action white-card-canvas-01__action--ghost white-card-canvas-01__action--with-icon-left"
                 onClick={onPrev}
                 aria-label="Voltar para o slide anterior"
               >
+                <img
+                  src="/UI/arrow-left.png"
+                  alt=""
+                  aria-hidden="true"
+                  className="white-card-canvas-01__action-icon"
+                />
                 Voltar
               </button>
               <button
                 type="button"
-                className="white-card-canvas-01__action white-card-canvas-01__action--primary"
+                className="white-card-canvas-01__action white-card-canvas-01__action--primary white-card-canvas-01__action--with-icon-right"
                 onClick={onNext}
                 aria-label="Avancar para o proximo slide"
               >
                 Avancar
+                <img
+                  src="/UI/arrow-right.png"
+                  alt=""
+                  aria-hidden="true"
+                  className="white-card-canvas-01__action-icon"
+                />
               </button>
             </div>
             <button
               type="button"
-              className="white-card-canvas-01__action white-card-canvas-01__action--ghost"
+              className="white-card-canvas-01__action white-card-canvas-01__action--link"
               onClick={onSkip}
               aria-label="Pular onboarding"
               disabled={skipLabel === 'Iniciar' && !isFinalSlide}
