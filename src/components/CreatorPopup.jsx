@@ -77,7 +77,7 @@ function CreatorPopup({ onClose, uxLensesVariant = false }) {
                 PARABÉNS!
               </div>
               <div style={{ fontSize: '13px', color: '#000000', marginBottom: '4px' }}>
-                você agora é um
+                Você completou o seu primeiro tutorial, ganhou o selo Creator e agora é um
               </div>
             </section>
 
@@ -111,20 +111,8 @@ function CreatorPopup({ onClose, uxLensesVariant = false }) {
             </div>
 
             <div style={{ marginBottom: '14px' }}>
-              <div
-                style={{
-                  fontSize: '12pt',
-                  color: '#000000',
-                  fontWeight: 700,
-                  margin: '0 0 20px 0',
-                  lineHeight: 1.4
-                }}
-              >
-                Você completou seu primeiro tutorial e ganhou o selo de Creator!
-              </div>
-
-              <div style={{ fontSize: '12px', color: '#000000' }}>
-                isso libera novos tutoriais e desafios no plugin
+              <div style={{ fontSize: '12px', color: '#000000', fontWeight: 700, lineHeight: 1.4 }}>
+                Acesse novos tutoriais e complete outros desafios no plugin!
               </div>
             </div>
 
@@ -143,7 +131,7 @@ function CreatorPopup({ onClose, uxLensesVariant = false }) {
                 cursor: 'pointer'
               }}
             >
-              continuar
+              CONTINUAR
             </button>
           </div>
         </div>
@@ -170,17 +158,14 @@ function CreatorPopup({ onClose, uxLensesVariant = false }) {
             />
           </div>
         </div>
-        <h2 className="creator-popup-title">Parabéns!</h2>
-        <p className="creator-popup-subtitle">Você agora é um</p>
+        <h2 className="creator-popup-title">PARABÉNS!</h2>
+        <p className="creator-popup-subtitle">Você completou o seu primeiro tutorial, ganhou o selo Creator e agora é um</p>
         <h1 className="creator-popup-creator">CREATOR ROBLOX</h1>
         <p className="creator-popup-message">
-          Você completou seu primeiro tutorial e ganhou o selo de Creator!
-        </p>
-        <p className="creator-popup-message">
-          Continue aprendendo para desbloquear mais conquistas.
+          Acesse novos tutoriais e complete outros desafios no plugin!
         </p>
         <button className="creator-popup-button" onClick={onClose}>
-          Continuar
+          CONTINUAR
         </button>
       </div>
     </div>

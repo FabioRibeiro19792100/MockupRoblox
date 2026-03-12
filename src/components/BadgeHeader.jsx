@@ -12,14 +12,14 @@ function BadgeHeader({ earnedBadges, completedTutorials }) {
       name: 'Primeiro Passo',
       image: '/badge1-removebg-preview.png',
       requirement: 'Tutorial 1 da classe 1',
-      requirementDetail: 'Completar: Construir um casa',
+      requirementDetail: 'Completar: Construir uma casa',
       earned: earnedBadges.includes(1),
       progress: class1Completed.includes(1) ? 1 : 0,
       total: 1
     },
     {
       id: 2,
-      name: 'Criador Iniciante',
+      name: 'Creator Iniciante',
       image: '/badge2-removebg-preview.png',
       requirement: 'Tutoriais 1-5 da classe 1',
       requirementDetail: 'Completar todos os tutoriais de "Transforme-se num Creator"',
@@ -29,7 +29,7 @@ function BadgeHeader({ earnedBadges, completedTutorials }) {
     },
     {
       id: 3,
-      name: 'Criador Avançado',
+      name: 'Creator Avançado',
       image: '/badge3-removebg-preview.png',
       requirement: 'Tutoriais 1-5 da classe 2',
       requirementDetail: 'Completar todos os tutoriais de "Criações rápidas"',

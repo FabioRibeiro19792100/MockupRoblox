@@ -29,8 +29,8 @@ function App() {
   const [earnedBadges, setEarnedBadges] = useState([]) // IDs dos badges ganhos (1-3)
   const [showBadgeNotification, setShowBadgeNotification] = useState(null) // Badge ID para mostrar notificação
   const [showCreatorPopup, setShowCreatorPopup] = useState(false) // Mostrar popup de Creator (badge 1)
-  const [showBadgePopup2, setShowBadgePopup2] = useState(false) // Mostrar popup de Badge 2 (Criador Iniciante)
-  const [showBadgePopup3, setShowBadgePopup3] = useState(false) // Mostrar popup de Badge 3 (Criador Avançado)
+  const [showBadgePopup2, setShowBadgePopup2] = useState(false) // Mostrar popup de Badge 2 (Creator Iniciante)
+  const [showBadgePopup3, setShowBadgePopup3] = useState(false) // Mostrar popup de Badge 3 (Creator Avançado)
   const [currentTutorialClass, setCurrentTutorialClass] = useState(null) // 1 ou 2
   const [currentTutorialId, setCurrentTutorialId] = useState(null) // ID do tutorial atual (1-5 dentro de cada classe)
   const [layoutMode, setLayoutMode] = useState(true) // Modo layout para visualizar todos os cards

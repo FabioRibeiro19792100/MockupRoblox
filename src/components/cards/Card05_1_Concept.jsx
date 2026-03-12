@@ -23,7 +23,7 @@ function Card05_1_Concept({ onContinue, onMenu, onRestart, uxLensesVariant = fal
               cursor: 'pointer'
             }}
           >
-            Voltar para menu
+            Voltar para o menu
           </button>
           <button
             onClick={onRestart}
@@ -62,7 +62,7 @@ function Card05_1_Concept({ onContinue, onMenu, onRestart, uxLensesVariant = fal
               lineHeight: 1.5,
               margin: '0 0 16px 0'
             }}>
-              Uma <span style={{ textDecoration: 'underline' }}>Part</span> é o objeto fundamental no Roblox Studio. É um bloco 3D que pode ser usado para construir qualquer coisa no seu jogo.
+              Uma <span style={{ textDecoration: 'underline' }}>Part</span> é uma peça 3D fundamental no Roblox Studio, que possibilita a construção de qualquer objeto nos seus jogos.
             </p>
 
             <p style={{
@@ -71,7 +71,16 @@ function Card05_1_Concept({ onContinue, onMenu, onRestart, uxLensesVariant = fal
               lineHeight: 1.5,
               margin: '0 0 20px 0'
             }}>
-              <span style={{ textDecoration: 'underline' }}>Parts</span> podem ter diferentes formas (bloco, esfera, cilindro) e propriedades como cor, Tamanho e posição.
+              E é por isso que uma <span style={{ textDecoration: 'underline' }}>Part</span> pode assumir variadas formas — esférica, cilíndrica e retangular — e propriedades, tais como cor, tamanho e posição.
+            </p>
+
+            <p style={{
+              fontSize: '15px',
+              color: '#374151',
+              lineHeight: 1.5,
+              margin: '0 0 20px 0'
+            }}>
+              Ou seja, absolutamente tudo que você vê ou configura é criado a partir de uma Part
             </p>
 
             {/* Subtítulo */}
@@ -90,7 +99,7 @@ function Card05_1_Concept({ onContinue, onMenu, onRestart, uxLensesVariant = fal
               lineHeight: 1.5,
               margin: 0
             }}>
-              <span style={{ textDecoration: 'underline' }}>Part</span> é o átomo do sistema. Tudo que você vê, toca ou anima no jogo parte dela.
+              <span style={{ textDecoration: 'underline' }}>Part</span> é a base do sistema. Tudo que você vê, toca ou anima no jogo começa por ela.
             </p>
         </div>
 
@@ -152,7 +161,7 @@ function Card05_1_Concept({ onContinue, onMenu, onRestart, uxLensesVariant = fal
               fontStyle: 'italic',
               margin: 0
             }}>
-              Isso melhora os próximos tutoriais.
+              A sua resposta melhora os próximos tutoriais!
             </p>
           </div>
 
@@ -166,7 +175,6 @@ function Card05_1_Concept({ onContinue, onMenu, onRestart, uxLensesVariant = fal
               }}>
                 No próximo passo, você vai:
               </span>
-              <span style={{ color: '#f97316', fontSize: '18px' }}>→</span>
             </div>
             <p style={{
               fontSize: '14px',
@@ -204,7 +212,7 @@ function Card05_1_Concept({ onContinue, onMenu, onRestart, uxLensesVariant = fal
   return (
     <div className="card card-concept">
       <div className="card-header-global">
-        <button className="header-button" onClick={onMenu}>Voltar para menu</button>
+        <button className="header-button" onClick={onMenu}>Voltar para o menu</button>
         <button className="header-button" onClick={onRestart}>Reiniciar tutorial</button>
       </div>
       <div style={{ padding: '24px', paddingBottom: '80px' }}>

@@ -38,7 +38,7 @@ function Card14_ProgressVisual({
   return (
     <div className="card card-progress-visual">
       <div className="card-header-global">
-        <button className="header-button" onClick={onMenu}>Voltar para menu</button>
+        <button className="header-button" onClick={onMenu}>Voltar para o menu</button>
         <button className="header-button" onClick={onRestart}>Reiniciar tutorial</button>
       </div>
       

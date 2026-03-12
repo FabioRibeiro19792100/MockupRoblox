@@ -30,7 +30,7 @@ function WhiteCardCanvas07({ variant = 'ideal' }) {
   return (
     <section className="white-card-canvas-07" aria-label="Feedback positivo">
       <div className="white-card-canvas-07__topbar">
-        <button type="button" className="white-card-canvas-07__topbar-button">Voltar para menu</button>
+        <button type="button" className="white-card-canvas-07__topbar-button">Voltar para o menu</button>
         <button type="button" className="white-card-canvas-07__topbar-button">Reiniciar tutorial</button>
       </div>
 
@@ -59,7 +59,7 @@ function WhiteCardCanvas07({ variant = 'ideal' }) {
         </div>
 
         <div className="white-card-canvas-07__title-group">
-          <h2 className="white-card-canvas-07__title">Etapa concluída!</h2>
+          <h2 className="white-card-canvas-07__title">Etapa concluída com sucesso!</h2>
           <div className="white-card-canvas-07__learned">
             <div className="white-card-canvas-07__learned-item">
               <div className="white-card-canvas-07__learned-icon">
@@ -90,7 +90,7 @@ function WhiteCardCanvas07({ variant = 'ideal' }) {
         </div>
 
         <div className="white-card-canvas-07__next">
-          <button type="button" className="white-card-canvas-07__primary">continuar</button>
+          <button type="button" className="white-card-canvas-07__primary">CONTINUAR</button>
           <div className="white-card-canvas-07__next-text">
             próximo: <strong>vamos colocar isso no mundo!</strong>
           </div>
@@ -99,7 +99,7 @@ function WhiteCardCanvas07({ variant = 'ideal' }) {
       </div>
 
       <div className="white-card-canvas-07__badge-toggle">
-        <span className="white-card-canvas-07__badge-text">Conquiste seus badges de Creator</span>
+        <span className="white-card-canvas-07__badge-text">CONQUISTE SEUS BADGES DE CREATOR</span>
         <div className="white-card-canvas-07__badge-switch">
           <div className="white-card-canvas-07__badge-knob" />
         </div>

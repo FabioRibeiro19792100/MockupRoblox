@@ -81,7 +81,7 @@ function Card10_NegativeFeedback({ onTryAgain, onContinue, onMenu, onRestart, ux
               cursor: 'pointer'
             }}
           >
-            Voltar para menu
+            Voltar para o menu
           </button>
           <button
             onClick={onRestart}
@@ -119,7 +119,7 @@ function Card10_NegativeFeedback({ onTryAgain, onContinue, onMenu, onRestart, ux
           </section>
           <section className="negative-action-section">
             <div style={{ fontSize: '12pt', color: '#6b7280', margin: '0 0 5px' }}>
-              mas você pode
+              MAS VOCÊ PODE:
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <button
@@ -138,13 +138,13 @@ function Card10_NegativeFeedback({ onTryAgain, onContinue, onMenu, onRestart, ux
                   boxShadow: '0 10px 20px rgba(250, 204, 21, 0.35)'
                 }}
               >
-                tentar novamente
+                TENTAR NOVAMENTE
               </button>
               <button
                 onClick={onContinue}
                 className="negative-follow-link"
               >
-                seguir em frente
+                SEGUIR EM FRENTE
               </button>
             </div>
           </section>
@@ -156,12 +156,12 @@ function Card10_NegativeFeedback({ onTryAgain, onContinue, onMenu, onRestart, ux
   return (
     <div className="card card-feedback">
       <div className="card-header-global">
-        <button className="header-button" onClick={onMenu}>Voltar para menu</button>
+        <button className="header-button" onClick={onMenu}>Voltar para o menu</button>
         <button className="header-button" onClick={onRestart}>Reiniciar tutorial</button>
       </div>
       <div className="card-feedback-content">
         <div className="feedback-icon error" style={{ fontSize: '80px' }}>✗</div>
-        <h2 className="card-title">Ops! Algo não saiu como esperado</h2>
+        <h2 className="card-title">Ops! Infelizmente essa etapa não foi concluída como esperado...</h2>
         <div className="feedback-actions">
           <button className="feedback-button-red" onClick={onTryAgain}>
             Fazer de novo

@@ -20,7 +20,7 @@ function Card07_5_LearningMode({ onContinue, onMenu, onRestart, uxLensesVariant 
               cursor: 'pointer'
             }}
           >
-            Voltar para menu
+            Voltar para o menu
           </button>
           <button
             onClick={onRestart}
@@ -118,7 +118,7 @@ function Card07_5_LearningMode({ onContinue, onMenu, onRestart, uxLensesVariant 
               margin: '16px 0 16px 0',
               lineHeight: 1.2
             }}>
-              Como usar<br />o modo aprendizado?
+              Ative o<br />modo aprendizado!
             </h1>
 
             {/* Descrição principal */}
@@ -130,7 +130,7 @@ function Card07_5_LearningMode({ onContinue, onMenu, onRestart, uxLensesVariant 
               margin: '0 0 16px 0',
               maxWidth: '280px'
             }}>
-              Agora, após a demonstração, você terá a oportunidade de repetir os passos apresentados e compreender, em profundidade, como funciona o processo de criação no Roblox Studio.
+              Agora que você já viu a demonstração, é hora de repetir os passos apresentados para compreender em profundidade como funciona o processo de criação no Roblox Studio.
             </p>
 
             {/* Texto secundário em laranja */}
@@ -142,7 +142,7 @@ function Card07_5_LearningMode({ onContinue, onMenu, onRestart, uxLensesVariant 
               maxWidth: '280px',
               fontWeight: 700
             }}>
-              Em seguida, você será convidado(a) a reconstruir a experiência por conta própria. Durante o percurso, poderá pedir dicas e verificar se conseguiu cumprir a missão.
+              Em seguida, você será convidado a reconstruir a experiência por conta própria. Durante o percurso, poderá pedir dicas e verificar se está no caminho certo para cumprir a missão.
             </p>
 
             {/* E aí, preparado? */}
@@ -171,7 +171,7 @@ function Card07_5_LearningMode({ onContinue, onMenu, onRestart, uxLensesVariant 
                 cursor: 'pointer'
               }}
             >
-              continuar
+              CONTINUAR
             </button>
           </div>
         </div>
@@ -182,7 +182,7 @@ function Card07_5_LearningMode({ onContinue, onMenu, onRestart, uxLensesVariant 
   return (
     <div className="card card-interactive">
       <div className="card-header-global">
-        <button className="header-button" onClick={onMenu}>Voltar para menu</button>
+        <button className="header-button" onClick={onMenu}>Voltar para o menu</button>
         <button className="header-button" onClick={onRestart}>Reiniciar tutorial</button>
       </div>
       <div style={{ padding: '24px 24px', paddingTop: '24px' }}>
@@ -210,20 +210,20 @@ function Card07_5_LearningMode({ onContinue, onMenu, onRestart, uxLensesVariant 
           textDecorationThickness: '1px',
           textUnderlineOffset: '12px'
         }}>
-          Como usar o Modo Aprendizado
+          Ative o Modo Aprendizado!
         </h3>
         <div className="card-interactive-content" style={{ marginTop: '16px' }}>
           <p style={{ fontSize: '16px', lineHeight: '1.4', color: '#ffffff', marginBottom: '16px', fontWeight: 700 }}>
-            Agora, após a demonstração, você terá a oportunidade de repetir os passos apresentados e compreender, em profundidade, como funciona o processo de criação no Roblox Studio.
+            Agora que você já viu a demonstração, é hora de repetir os passos apresentados para compreender em profundidade como funciona o processo de criação no Roblox Studio.
           </p>
           <p style={{ fontSize: '13px', lineHeight: '1.5', color: '#ffffff', marginBottom: '42px', maxWidth: '280px', fontWeight: 700 }}>
-            Em seguida, você será convidado(a) a reconstruir a experiência por conta própria. Durante o percurso, poderá pedir dicas e verificar se conseguiu cumprir a missão.
+            Em seguida, você será convidado a reconstruir a experiência por conta própria. Durante o percurso, poderá pedir dicas e verificar se está no caminho certo para cumprir a missão.
           </p>
           <p style={{ fontSize: '16px', lineHeight: '1.4', fontWeight: 700, color: '#ffffff', marginBottom: '32px' }}>
-            E aí? Preparado(a)?
+            E aí? Preparado?
           </p>
           <button className="interactive-button try" onClick={onContinue}>
-            Continuar
+            CONTINUAR
           </button>
         </div>
       </div>

@@ -15,7 +15,7 @@ function Card12_QuickComplete({
     <div className="card">
       <div className="card-header-global single-button-header">
         <button className="header-button" onClick={onMenu}>
-          Voltar para menu
+          Voltar para o menu
         </button>
       </div>
       <div style={{ padding: '24px' }}>

@@ -166,7 +166,7 @@ function Card13_BadgeExplanation({ onClose, uxLensesVariant = false }) {
               ⭐ Primeiro Passo
             </h3>
             <p style={{ fontSize: '14px', lineHeight: '1.12', color: '#000000', marginBottom: '8px' }}>
-              <strong>Requisito:</strong> Completar o tutorial 1 da classe 1 (Construir um casa)
+              <strong>Requisito:</strong> Completar o tutorial 1 da classe 1 (Construir uma casa)
             </p>
             <p style={{ fontSize: '14px', lineHeight: '1.12', color: '#000000' }}>
               Este é o seu primeiro passo na jornada de criação no Roblox Studio. Ao completar este tutorial, você desbloqueia o primeiro badge e aprende os fundamentos básicos.
@@ -175,7 +175,7 @@ function Card13_BadgeExplanation({ onClose, uxLensesVariant = false }) {
 
           <div style={{ marginBottom: '24px' }}>
             <h3 style={{ fontSize: '18px', fontWeight: 700, marginBottom: '12px', color: '#000000' }}>
-              🏅 Criador Iniciante
+              🏅 CREATOR INICIANTE
             </h3>
             <p style={{ fontSize: '14px', lineHeight: '1.12', color: '#000000', marginBottom: '8px' }}>
               <strong>Requisito:</strong> Completar todos os 5 tutoriais da classe 1 (Transforme-se num Creator)
@@ -187,7 +187,7 @@ function Card13_BadgeExplanation({ onClose, uxLensesVariant = false }) {
 
           <div style={{ marginBottom: '24px' }}>
             <h3 style={{ fontSize: '18px', fontWeight: 700, marginBottom: '12px', color: '#000000' }}>
-              👑 Criador Avançado
+              👑 CREATOR AVANÇADO
             </h3>
             <p style={{ fontSize: '14px', lineHeight: '1.12', color: '#000000', marginBottom: '8px' }}>
               <strong>Requisito:</strong> Completar todos os 5 tutoriais da classe 2 (Criações rápidas)

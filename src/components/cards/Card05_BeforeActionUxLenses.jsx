@@ -92,11 +92,11 @@ function Card05_BeforeActionUxLenses({
             <div className="card05-ux-action">
               <div className="card05-ux-action-label">Ação:</div>
               <div className="card05-ux-action-title">
-                {stepTitle || 'Montar terreno.'}
+                {stepTitle || 'Montar o terreno'}
               </div>
             </div>
 
-            <div className="card05-ux-section-title">Como fazer no Roblox Studios?</div>
+            <div className="card05-ux-section-title">Como fazer no Roblox Studio</div>
 
             <section className="card05-ux-steps" aria-label="Passo a passo">
             <div className="card05-ux-steps-stack">
@@ -164,14 +164,14 @@ function Card05_BeforeActionUxLenses({
                   if (onAdvanceStage) onAdvanceStage()
                 }}
               >
-                Clique para ver o resultado
+                Clique para ver o resultado!
               </button>
             </div>
             <section className="card05-ux-outcome" aria-label="Resultado esperado">
               <hr className="card05-ux-divider" />
               <h4 className="card05-ux-result-label">O que você vai ver na tela:</h4>
               <p className="card05-ux-result-text">
-                Você verá a base da casa (um bloco cinza retangular grande) sendo criada no centro da tela.
+                A base da casa, representada por um bloco retangular cinza e grande.
               </p>
               {onShowConcept && (
                 <div className="card05-ux-concept">
@@ -200,7 +200,7 @@ function Card05_BeforeActionUxLenses({
         </button>
         <button className="card05-ux-action-button card05-ux-action-back" onClick={onBack}>
           <span className="card05-ux-action-icon card05-ux-action-icon--back" aria-hidden="true" />
-          Voltar passo
+          Voltar um passo
         </button>
         <button className="card05-ux-action-button card05-ux-action-demo" onClick={onDemonstrate}>
           <span className="card05-ux-action-icon card05-ux-action-icon--demo" aria-hidden="true" />
@@ -210,9 +210,9 @@ function Card05_BeforeActionUxLenses({
       {showResetConfirm && (
         <div className="card05-ux-reset-overlay" role="dialog" aria-modal="true">
           <div className="card05-ux-reset-modal">
-            <h3 className="card05-ux-reset-title">Reiniciar tutorial?</h3>
+            <h3 className="card05-ux-reset-title">Reiniciar</h3>
             <p className="card05-ux-reset-text">
-              Você tem certeza que deseja reiniciar? Seu progresso desta etapa será perdido.
+              Se você reiniciar, seu progresso nesta etapa será perdido. Tudo bem?
             </p>
             <div className="card05-ux-reset-actions">
               <button
@@ -267,7 +267,7 @@ function Card05_BeforeActionUxLenses({
               ×
             </button>
             <p className="card05-ux-result-text">
-              Opa, vejo que você está tentando ver o resultado, no entanto, falta você concluir {remainingSteps} passo{remainingSteps === 1 ? '' : 's'} para poder prosseguir.
+              Ops! Você está tentando ver o resultado, mas é preciso concluir todos os {steps.length} passos para prosseguir. Vamos lá?!
             </p>
           </div>
         </div>

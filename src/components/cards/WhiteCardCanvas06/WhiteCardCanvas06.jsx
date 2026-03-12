@@ -1,102 +1,87 @@
-import React from 'react'
+import React, { useState, useMemo } from 'react'
 import './WhiteCardCanvas06.css'
+import tutorials from '../../../data/tutorials.json'
 
-function WhiteCardCanvas06() {
+
+function WhiteCardCanvas06({ modoSelecionado: modoProp, nivelSelecionado: nivelProp }) {
+  const [modoSelecionado, setModoSelecionado] = useState(modoProp || 'criador')
+  const [nivelSelecionado, setNivelSelecionado] = useState(nivelProp || 'facil')
+
+
+  const listaFiltrada = useMemo(() => {
+    return tutorials.filter((tutorial) => {
+      if (tutorial.modo !== modoSelecionado) return false
+      if (modoSelecionado === 'criador') {
+        return tutorial.nivel === nivelSelecionado
+      }
+      return true
+    })
+  }, [tutorials, modoSelecionado, nivelSelecionado])
+
+
+  const tutorial = listaFiltrada[0];
+
+  if (!tutorial) {
+    return (
+      <section className="white-card-canvas-06" aria-label="Antes da ação">
+        <div className="white-card-canvas-06__body">
+          <div className="white-card-canvas-06__section-title">
+            Nenhum tutorial disponível para o modo {modoSelecionado}
+            {modoSelecionado === 'criador' ? ` (${nivelSelecionado})` : ''}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+
   return (
     <section className="white-card-canvas-06" aria-label="Antes da ação">
       <div className="white-card-canvas-06__topbar">
         <div className="white-card-canvas-06__banner">
           <div>
             <div className="white-card-canvas-06__kicker">TUTORIAL</div>
-            <div className="white-card-canvas-06__title">Construir uma casa</div>
+            <div className="white-card-canvas-06__title">{tutorial.titulo}</div>
           </div>
-          <div className="white-card-canvas-06__step-badge">ETAPA 1/3</div>
+          <div className="white-card-canvas-06__step-badge">ETAPA {tutorial.etapa}</div>
         </div>
       </div>
 
       <div className="white-card-canvas-06__body">
         <div className="white-card-canvas-06__action">
           <div className="white-card-canvas-06__action-label">Ação:</div>
-          <div className="white-card-canvas-06__action-title">Montar o terreno</div>
+          <div className="white-card-canvas-06__action-title">{tutorial.acao}</div>
         </div>
 
-        <div className="white-card-canvas-06__section-title">Como fazer no Roblox Studios?</div>
+        <div className="white-card-canvas-06__section-title">Como fazer no Roblox Studio</div>
         <section className="white-card-canvas-06__steps" aria-label="Passo a passo">
           <div className="white-card-canvas-06__steps-stack">
-            <div className="white-card-canvas-06__step white-card-canvas-06__step--current">
-              <div className="white-card-canvas-06__step-marker">
-                <div className="white-card-canvas-06__step-bubble">1</div>
-                <div className="white-card-canvas-06__step-line" />
-              </div>
-              <div className="white-card-canvas-06__step-content">
-                <div className="white-card-canvas-06__step-title">
-                  Crie <span className="white-card-canvas-06__step-title-tail">
-                    uma &quot;Part&quot;
-                    <button type="button" className="white-card-canvas-06__step-help" aria-label="Ajuda">?</button>
-                  </span>
+            {tutorial.passos.map((passo, index) => (
+              <div
+                key={passo.numero}
+                className={
+                  index === 0
+                    ? 'white-card-canvas-06__step white-card-canvas-06__step--current'
+                    : 'white-card-canvas-06__step white-card-canvas-06__step--inactive'
+                }
+              >
+                <div className="white-card-canvas-06__step-marker">
+                  <div className="white-card-canvas-06__step-bubble">{passo.numero}</div>
+                  {index !== tutorial.passos.length - 1 ? (
+                    <div className="white-card-canvas-06__step-line" />
+                  ) : null}
                 </div>
-                <div className="white-card-canvas-06__step-text">
-                  Na barra superior, clique em <strong>Modelo (model)</strong> e, em seguida,<br />
-                  clique em <strong>Part</strong>
-                </div>
-              </div>
-            </div>
 
-            <div className="white-card-canvas-06__step white-card-canvas-06__step--inactive">
-              <div className="white-card-canvas-06__step-marker">
-                <div className="white-card-canvas-06__step-bubble">2</div>
-                <div className="white-card-canvas-06__step-line" />
-              </div>
-              <div className="white-card-canvas-06__step-content">
-                <div className="white-card-canvas-06__step-title">
-                  Selecione e renomeie a <span className="white-card-canvas-06__step-title-tail">
-                    nova &quot;Part&quot;
-                  </span>
-                </div>
-                <div className="white-card-canvas-06__step-text">
-                  No painel Explorador (direita, embaixo), encontre o objeto recém-criado <span className="white-card-canvas-06__emphasis">&quot;Part&quot;</span>
-                </div>
-                <div className="white-card-canvas-06__step-text">
-                  Renomeie para <span className="white-card-canvas-06__emphasis">Part_1</span> (botão direito &gt; Renomear &gt; Part_1 &gt; Enter)
+                <div className="white-card-canvas-06__step-content">
+                  <div className="white-card-canvas-06__step-title">{passo.titulo}</div>
+                  {passo.textos.map((texto, textoIndex) => (
+                    <div key={textoIndex} className="white-card-canvas-06__step-text">
+                      {texto}
+                    </div>
+                  ))}
                 </div>
               </div>
-            </div>
-
-            <div className="white-card-canvas-06__step white-card-canvas-06__step--inactive">
-              <div className="white-card-canvas-06__step-marker">
-                <div className="white-card-canvas-06__step-bubble">3</div>
-                <div className="white-card-canvas-06__step-line" />
-              </div>
-              <div className="white-card-canvas-06__step-content">
-                <div className="white-card-canvas-06__step-title">
-                  Ajuste o tamanho e <span className="white-card-canvas-06__step-title-tail">posição da Part</span>
-                </div>
-                <div className="white-card-canvas-06__step-text">No painel <strong>&quot;Propriedades&quot;</strong>:</div>
-                <div className="white-card-canvas-06__step-text">
-                  Encontre a variável <strong>&quot;Size&quot;</strong> e substitua os valores atuais por 2.6,9.8,4.4
-                </div>
-                <div className="white-card-canvas-06__step-text">
-                  Encontre a variável <strong>&quot;Position&quot;</strong> e substitua os valores atuais por 5.96,4.9,-9.54
-                </div>
-              </div>
-            </div>
-
-            <div className="white-card-canvas-06__step white-card-canvas-06__step--inactive">
-              <div className="white-card-canvas-06__step-marker">
-                <div className="white-card-canvas-06__step-bubble">4</div>
-              </div>
-              <div className="white-card-canvas-06__step-content">
-                <div className="white-card-canvas-06__step-title">
-                  Mude <span className="white-card-canvas-06__step-title-tail">o Material</span>
-                </div>
-                <div className="white-card-canvas-06__step-text">
-                  Mova o cursor até o top bar, clique em <strong>Modelo (model)</strong>, clique em <strong>&quot;Material&quot;</strong>.
-                </div>
-                <div className="white-card-canvas-06__step-text">
-                  No campo de busca, digite <strong>&quot;Wood&quot;</strong> e selecione.
-                </div>
-              </div>
-            </div>
+            ))}
 
             <div className="white-card-canvas-06__result-action">
               <button type="button" className="white-card-canvas-06__result-button" aria-disabled="true">
@@ -108,10 +93,10 @@ function WhiteCardCanvas06() {
               <hr className="white-card-canvas-06__divider" />
               <h4 className="white-card-canvas-06__result-label">O que você vai ver na tela:</h4>
               <p className="white-card-canvas-06__result-text">
-                Você verá a base da casa (um bloco cinza retangular grande) sendo criada no centro da tela.
+                {tutorial.resultado}
               </p>
               <div className="white-card-canvas-06__concept">
-                <button type="button" className="white-card-canvas-06__concept-link">O QUE É UMA PART?</button>
+                <button type="button" className="white-card-canvas-06__concept-link">{tutorial.conceito}</button>
               </div>
             </section>
           </div>
@@ -129,7 +114,7 @@ function WhiteCardCanvas06() {
         </button>
         <button className="white-card-canvas-06__action-button white-card-canvas-06__action-back">
           <span className="white-card-canvas-06__action-icon white-card-canvas-06__action-icon--back" aria-hidden="true" />
-          Voltar passo
+          Voltar um passo
         </button>
         <button className="white-card-canvas-06__action-button white-card-canvas-06__action-demo">
           <span className="white-card-canvas-06__action-icon white-card-canvas-06__action-icon--demo" aria-hidden="true" />
@@ -138,7 +123,7 @@ function WhiteCardCanvas06() {
       </section>
 
       <div className="white-card-canvas-06__badge-toggle">
-        <span className="white-card-canvas-06__badge-text">Conquiste seus badges de Creator</span>
+        <span className="white-card-canvas-06__badge-text">CONQUISTE SEUS BADGES DE CREATOR</span>
         <div className="white-card-canvas-06__badge-switch">
           <div className="white-card-canvas-06__badge-knob" />
         </div>

@@ -26,22 +26,22 @@ function WhiteCardCanvas03({ variant = 'mvp' }) {
         </header>
 
         <div className="white-card-canvas-03__content">
-          <h1 className="white-card-canvas-03__title">Do zero ao primeiro jogo</h1>
+          <h1 className="white-card-canvas-03__title">Do zero a criacao do seu primeiro jogo</h1>
           <h1 className="white-card-canvas-03__title white-card-canvas-03__title--spaced">
-            No Roblox Studio
+            no Roblox Studio!
           </h1>
 
           <p className="white-card-canvas-03__subtitle">
-            Tutoriais interativos dentro da ferramenta
+            Aprenda aqui mesmo, com os tutoriais interativos dentro da ferramenta da Expedicao Roblox!
           </p>
 
           <span className="white-card-canvas-03__tag">Tutorial 1 de 5</span>
 
           <p className="white-card-canvas-03__description">
-            Aqui voce comeca como criador.<br />
-            Voce vai construir, testar<br />
-            e publicar um jogo,<br />
-            Passo a passo.
+            Aqui comeca a sua jornada como Creator.<br />
+            Vamos te ensinar, passo a passo,<br />
+            a construir, testar e publicar um jogo<br />
+            dentro da ferramenta.
           </p>
 
           <ul className="white-card-canvas-03__list">
@@ -51,7 +51,7 @@ function WhiteCardCanvas03({ variant = 'mvp' }) {
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
               </span>
-              <span>Nao precisa saber programar</span>
+              <span>NAO PRECISA SABER PROGRAMAR</span>
             </li>
             <li className="white-card-canvas-03__list-item">
               <span className="white-card-canvas-03__check">
@@ -59,7 +59,7 @@ function WhiteCardCanvas03({ variant = 'mvp' }) {
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
               </span>
-              <span>Leva cerca de 10 minutos</span>
+              <span>LEVA CERCA DE 10 MINUTOS</span>
             </li>
             <li className="white-card-canvas-03__list-item">
               <span className="white-card-canvas-03__check">
@@ -67,14 +67,14 @@ function WhiteCardCanvas03({ variant = 'mvp' }) {
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
               </span>
-              <span>Voce pode sair a qualquer momento</span>
+              <span>E POSSIVEL SAIR A QUALQUER MOMENTO</span>
             </li>
           </ul>
         </div>
 
         <div className="white-card-canvas-03__actions">
           <button type="button" className="white-card-canvas-03__cta">
-            Iniciar tutorial
+            INICIAR TUTORIAL
           </button>
         </div>
       </div>

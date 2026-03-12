@@ -3,8 +3,8 @@ import './BadgeDisplay.css'
 function BadgeDisplay({ earnedBadges }) {
   const badgeNames = {
     1: 'Primeiro Passo',
-    2: 'Criador Iniciante',
-    3: 'Criador Avançado'
+    2: 'Creator Iniciante',
+    3: 'Creator Avançado'
   }
 
   const badgeImages = {

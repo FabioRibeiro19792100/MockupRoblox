@@ -1,10 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Card01_02_Selection from '../Card01_02_Selection'
 import './WhiteCardCanvas04.css'
 
 function WhiteCardCanvas04({ variant = 'mvp' }) {
   const isIdeal = variant === 'ideal'
+  const [selectedTutorial, setSelectedTutorial] = useState(null)
+  if (isIdeal) {
+    return (
+      <section className="white-card-canvas-04" aria-label="Tutorial Select Screen Ideal">
+        <Card01_02_Selection
+          cardNumber={1}
+          selectedTutorial={selectedTutorial}
+          onSelect={setSelectedTutorial}
+          onNext={() => {}}
+          completedTutorials={{ class1: [1, 2], class2: [] }}
+          earnedBadges={[1]}
+          currentTutorialClass={1}
+          onTutorialClassSelect={() => {}}
+          onTutorialSelect={() => {}}
+          onBack={() => {}}
+          onMenu={() => {}}
+          defaultExpanded={true}
+        />
+      </section>
+    )
+  }
   return (
-    <section className="white-card-canvas-04" aria-label={`Tutorial Select Screen ${isIdeal ? 'Ideal' : 'MVP'}`}>
+    <section className="white-card-canvas-04" aria-label="Tutorial Select Screen MVP">
       <div className="white-card-canvas-04__body">
         <figure className="white-card-canvas-04__figure">
           <img

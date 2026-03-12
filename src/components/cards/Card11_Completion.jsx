@@ -60,7 +60,7 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
               cursor: 'pointer'
             }}
           >
-            Voltar para menu
+            Voltar para o menu
           </button>
           <button
             onClick={onRestart}
@@ -187,7 +187,7 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
                 textTransform: 'none'
               }}
             >
-              Parabéns!
+              PARABÉNS!
             </h1>
 
             {/* Subtítulo */}
@@ -197,7 +197,7 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
               margin: '0 0 56px',
               fontWeight: 500
             }}>
-              você concluiu o tutorial:
+              VOCÊ CONCLUIU O TUTORIAL DE COMO CONSTRUIR UMA CASA!
             </p>
 
             {/* Ícone da casa */}
@@ -273,7 +273,7 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
               lineHeight: 1.4,
               marginBottom: '40px'
             }}>
-              Faltam X tutoriais para você<br />
+              Agora faltam X tutoriais para você<br />
               conquistar um novo badge!
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -293,7 +293,7 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
                   marginBottom: '81px'
                 }}
               >
-                continuar
+                CONTINUAR
               </button>
 
             <button
@@ -309,7 +309,7 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
                 cursor: 'pointer'
               }}
             >
-              limpar e sair
+              LIMPAR E SAIR
             </button>
             </div>
           </section>
@@ -321,7 +321,7 @@ function Card11_Completion({ onMenu, onRestart, onComplete, onCompleteAndMenu, u
   return (
     <div className="card card-completion" style={{ position: 'relative' }}>
       <div className="card-header-global">
-        <button className="header-button" onClick={onMenu}>Voltar para menu</button>
+        <button className="header-button" onClick={onMenu}>Voltar para o menu</button>
         <button 
           className="header-button next-tutorial-button" 
           onClick={onRestart}

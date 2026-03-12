@@ -55,7 +55,7 @@ function Card05_BeforeAction({
   return (
     <div className="card card-step">
       <div className="card-header-global">
-        <button className="header-button" onClick={onMenu}>Voltar para menu</button>
+        <button className="header-button" onClick={onMenu}>Voltar para o menu</button>
         <button className="header-button" onClick={onRestart}>Reiniciar tutorial</button>
       </div>
       <div className="card05-before-action-content">
@@ -74,11 +74,10 @@ function Card05_BeforeAction({
           <div className="section-title">COMO FAZER NO ROBLOX STUDIO</div>
           <div className="instructions-box">
             <ol className="instructions-list">
-              <li>Clique no menu "Insert"</li>
-              <li>Selecione "Part"</li>
-              <li>Um bloco será criado na cena</li>
-              <li>Posicione o bloco no centro da viewport</li>
-              <li>Ajuste o tamanho conforme necessário</li>
+              <li>Crie uma Part</li>
+              <li>Selecione e renomeie a nova Part</li>
+              <li>Ajuste o tamanho e a posição da Part_1</li>
+              <li>Mude o material</li>
             </ol>
           </div>
         </div>
@@ -86,7 +85,7 @@ function Card05_BeforeAction({
           <div className="section-title">O QUE VOCÊ VAI VER NA TELA</div>
           <div className="instructions-box">
             <p className="card05-before-action-note">
-              Você verá a base da casa (um bloco cinza retangular grande) sendo criada no centro da tela.
+              A base da casa, representada por um bloco retangular cinza e grande.
             </p>
           </div>
         </div>
@@ -104,7 +103,7 @@ function Card05_BeforeAction({
       </div>
       <div className="card-actions">
         <button className="secondary-button" onClick={onBack}>
-          Voltar passo
+          Voltar um passo
         </button>
         <button className="primary-button demonstrate-button" onClick={onDemonstrate}>
           Demonstrar

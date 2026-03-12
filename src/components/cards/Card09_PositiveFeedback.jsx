@@ -55,7 +55,7 @@ function Card09_PositiveFeedback({ onTryAgain, onContinue, onMenu, onRestart, ux
               cursor: 'pointer'
             }}
           >
-            Voltar para menu
+            Voltar para o menu
           </button>
           <button
             onClick={onRestart}
@@ -140,7 +140,7 @@ function Card09_PositiveFeedback({ onTryAgain, onContinue, onMenu, onRestart, ux
                 margin: '0 0 10px',
               }}
             >
-              Etapa concluída!
+              ETAPA CONCLUÍDA COM SUCESSO!
             </div>
           </section>
           <section className="positive-next-section">
@@ -160,10 +160,10 @@ function Card09_PositiveFeedback({ onTryAgain, onContinue, onMenu, onRestart, ux
                 boxShadow: '0 10px 20px rgba(250, 204, 21, 0.35)'
               }}
             >
-              continuar
+              CONTINUAR
             </button>
             <div style={{ fontSize: '12px', color: '#6b7280', marginBottom: '10px' }}>
-              próximo: <strong>vamos colocar isso no mundo!</strong>
+              PRÓXIMO: <strong>VAMOS COLOCAR ISSO NO MUNDO!</strong>
             </div>
             <button
               onClick={onTryAgain}
@@ -177,7 +177,7 @@ function Card09_PositiveFeedback({ onTryAgain, onContinue, onMenu, onRestart, ux
                 cursor: 'pointer'
               }}
             >
-              fazer de novo
+              REFAZER
             </button>
           </section>
         </div>
@@ -188,7 +188,7 @@ function Card09_PositiveFeedback({ onTryAgain, onContinue, onMenu, onRestart, ux
   return (
     <div className="card card-feedback">
       <div className="card-header-global">
-        <button className="header-button" onClick={onMenu}>Voltar para menu</button>
+        <button className="header-button" onClick={onMenu}>Voltar para o menu</button>
         <button className="header-button" onClick={onRestart}>Reiniciar tutorial</button>
       </div>
       <div className="card-feedback-content">

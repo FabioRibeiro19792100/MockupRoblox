@@ -4,7 +4,7 @@ function Card03_ModeSelection({ onModeSelect, onMenu, initialMode, dimmedOpacity
   return (
     <div className="card card-mode">
       <div className="card-header-global single-button-header">
-        <button className="header-button" onClick={onMenu}>Voltar para menu</button>
+        <button className="header-button" onClick={onMenu}>Voltar para o menu</button>
       </div>
       <div style={{ padding: '24px', paddingBottom: '80px' }}>
         <h3 style={{ 
@@ -51,7 +51,7 @@ function Card03_ModeSelection({ onModeSelect, onMenu, initialMode, dimmedOpacity
                 color: '#000000',
                 margin: 0
               }}>
-                OBSERVADOR
+                MODO OBSERVADOR
               </div>
               <span style={{
                 backgroundColor: 'rgb(0 0 0 / 33%)',
@@ -75,7 +75,7 @@ function Card03_ModeSelection({ onModeSelect, onMenu, initialMode, dimmedOpacity
                 fontWeight: 700,
                 color: '#000000'
               }}>
-                observar e aprender
+                Observe e aprenda!
               </span>
             </div>
 
@@ -89,7 +89,7 @@ function Card03_ModeSelection({ onModeSelect, onMenu, initialMode, dimmedOpacity
                 lineHeight: 1.3,
                 textAlign: 'left'
               }}>
-                Você vai apenas entender como se dá o processo de construção no Studio
+                Aqui você aprende como se dá o processo de construção no Roblox Studio assistindo a uma simulação.
               </p>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
@@ -98,7 +98,7 @@ function Card03_ModeSelection({ onModeSelect, onMenu, initialMode, dimmedOpacity
                     <polyline points="20 6 9 17 4 12"></polyline>
                   </svg>
                   <span style={{ color: 'rgb(53 60 93)', fontSize: '9pt', fontWeight: 'bold', lineHeight: 1.4, textAlign: 'left' }}>
-                    Sem necessidade de executar ações.
+                    Não é preciso executar ações.
                   </span>
                 </div>
 
@@ -107,7 +107,7 @@ function Card03_ModeSelection({ onModeSelect, onMenu, initialMode, dimmedOpacity
                     <polyline points="20 6 9 17 4 12"></polyline>
                   </svg>
                   <span style={{ color: 'rgb(53 60 93)', fontSize: '9pt', fontWeight: 'bold', lineHeight: 1.4, textAlign: 'left' }}>
-                    Você pode trocar de modo depois.
+                    É possível trocar para o MODO APRENDIZADO depois.
                   </span>
                 </div>
               </div>
@@ -169,7 +169,7 @@ function Card03_ModeSelection({ onModeSelect, onMenu, initialMode, dimmedOpacity
                   color: '#000000',
                   margin: 0
                 }}>
-                  APRENDIZADO
+                  MODO APRENDIZADO
                 </div>
                 {showProgressBadge ? (
                   <span style={{
@@ -201,7 +201,7 @@ function Card03_ModeSelection({ onModeSelect, onMenu, initialMode, dimmedOpacity
                 gap: '8px',
                 fontWeight: 700
               }}>
-                clicar <span style={{ color: 'rgb(25 67 123)' }}>❯</span> construir <span style={{ color: 'rgb(25 67 123)' }}>❯</span> testar
+                Clique, construa e teste!
               </span>
             </div>
 
@@ -215,7 +215,7 @@ function Card03_ModeSelection({ onModeSelect, onMenu, initialMode, dimmedOpacity
                 lineHeight: 1.3,
                 textAlign: 'left'
               }}>
-                Você terá a chance de aprender e fazer junto ao longo do tutorial
+                Acompanhe o tutorial e aprenda fazendo.
               </p>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '5px', marginBottom: '3px' }}>
@@ -224,7 +224,7 @@ function Card03_ModeSelection({ onModeSelect, onMenu, initialMode, dimmedOpacity
                     <polyline points="20 6 9 17 4 12"></polyline>
                   </svg>
                   <span style={{ color: 'rgb(103 79 0)', fontSize: '9pt', lineHeight: 1.4, textAlign: 'left', fontWeight: 'bold' }}>
-                    Passo a passo, com ajuda.
+                    Execute ações com suporte.
                   </span>
                 </div>
 
@@ -233,7 +233,7 @@ function Card03_ModeSelection({ onModeSelect, onMenu, initialMode, dimmedOpacity
                     <polyline points="20 6 9 17 4 12"></polyline>
                   </svg>
                   <span style={{ color: 'rgb(103 79 0)', fontSize: '9pt', lineHeight: 1.4, textAlign: 'left', fontWeight: 'bold' }}>
-                    Você pode errar e repetir.
+                    É possível refazer comandos.
                   </span>
                 </div>
 
@@ -242,7 +242,7 @@ function Card03_ModeSelection({ onModeSelect, onMenu, initialMode, dimmedOpacity
                     <polyline points="20 6 9 17 4 12"></polyline>
                   </svg>
                   <span style={{ color: 'rgb(103 79 0)', fontSize: '9pt', lineHeight: 1.4, textAlign: 'left', fontWeight: 'bold' }}>
-                    Nada aqui é avaliado.
+                    Não há certo ou errado aqui.
                   </span>
                 </div>
               </div>

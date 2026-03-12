@@ -252,7 +252,7 @@ function Card01_02_Selection({
                   margin: '4px 0 8px 0',
                   color: '#000000'
                 }}>
-                  Aprenda do zero, passo a passo.
+                  Crie do zero, passo a passo.
                 </p>
                 <span className="badge-tag" style={{
                   display: 'inline-block',
@@ -324,11 +324,11 @@ function Card01_02_Selection({
                 </h3>
                 <p style={{
                   fontSize: '14px',
-                  fontStyle: 'italic',
+                  fontStyle: 'normal',
                   margin: '4px 0 8px 0',
                   color: '#000000'
                 }}>
-                  Quero algo pronto agora.
+                  Explore uma estrutura pronta.
                 </p>
                 <span className="badge-tag" style={{
                   display: 'inline-block',

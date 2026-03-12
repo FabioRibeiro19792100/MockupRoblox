@@ -9,7 +9,7 @@ function BadgePopup3({ onClose }) {
           <div className="creator-popup-star">
             <img 
               src="/badge3-removebg-preview.png" 
-              alt="Badge Criador Avançado"
+              alt="Badge Creator Avançado"
               style={{
                 background: 'transparent',
                 border: 'none',

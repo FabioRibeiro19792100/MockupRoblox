@@ -38,7 +38,7 @@ function Card07_InteractionInvite({ onTry, onContinue, onMenu, onRestart, uxLens
               cursor: 'pointer'
             }}
           >
-            Voltar para menu
+            Voltar para o menu
           </button>
           <button
             onClick={onRestart}
@@ -156,7 +156,7 @@ function Card07_InteractionInvite({ onTry, onContinue, onMenu, onRestart, uxLens
               margin: '0 0 12px 0',
               lineHeight: 1.2
             }}>
-              Esse é o seu<br />momento creator!
+              Esse é o seu<br />momento Creator!
             </h1>
 
             {/* Descrição */}
@@ -167,7 +167,7 @@ function Card07_InteractionInvite({ onTry, onContinue, onMenu, onRestart, uxLens
               margin: '0 0 34px 0',
               maxWidth: '280px'
             }}>
-              Para treinar suas habilidades você pode tentar executar esse mesmo passo com as instruções dadas.
+              Para treinar suas habilidades, você pode executar esse mesmo passo com as instruções dadas.
             </p>
 
             {/* Quer tentar? */}
@@ -197,7 +197,7 @@ function Card07_InteractionInvite({ onTry, onContinue, onMenu, onRestart, uxLens
                 marginBottom: '12px'
               }}
             >
-              continuar
+              CONTINUAR
             </button>
 
             {/* Botão pular */}
@@ -216,7 +216,7 @@ function Card07_InteractionInvite({ onTry, onContinue, onMenu, onRestart, uxLens
                 cursor: 'pointer'
               }}
             >
-              pular essa interação
+              PULAR ESSA INTERAÇÃO
             </button>
           </div>
         </div>
@@ -227,7 +227,7 @@ function Card07_InteractionInvite({ onTry, onContinue, onMenu, onRestart, uxLens
   return (
     <div className="card card-interactive">
       <div className="card-header-global">
-        <button className="header-button" onClick={onMenu}>Voltar para menu</button>
+        <button className="header-button" onClick={onMenu}>Voltar para o menu</button>
         <button className="header-button" onClick={onRestart}>Reiniciar tutorial</button>
       </div>
       <div style={{ padding: '24px 24px', paddingTop: '24px' }}>
@@ -255,20 +255,20 @@ function Card07_InteractionInvite({ onTry, onContinue, onMenu, onRestart, uxLens
           textDecorationThickness: '1px',
           textUnderlineOffset: '12px'
         }}>
-          Este é o seu momento de Creator
+          Esse é o seu momento de Creator!
         </h3>
         <div className="card-interactive-content" style={{ marginTop: '16px' }}>
         <p style={{ fontSize: '18px', lineHeight: '1.12', color: '#ffffff', marginBottom: '16px' }}>
-          Para treinar suas habilidades você pode tentar executar esse mesmo passo com as instruções dadas.
+          Para treinar suas habilidades, você pode executar esse mesmo passo com as instruções dadas.
         </p>
         <p style={{ fontSize: '18px', lineHeight: '1.12', fontWeight: 700, color: '#ffffff', marginBottom: '24px' }}>
           Quer tentar?
         </p>
         <button className="interactive-button try" onClick={onTry}>
-          Sim, quero tentar.
+          SIM, QUERO TENTAR
         </button>
         <button className="interactive-button continue" onClick={onContinue}>
-          Pular essa interação
+          PULAR ESSA INTERAÇÃO
         </button>
         </div>
       </div>

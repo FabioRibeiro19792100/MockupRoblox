@@ -27,7 +27,7 @@ function Card00_Cover({ onStart }) {
             color: '#ffffff',
             lineHeight: 1.2
           }}>
-            Do zero ao primeiro jogo
+            Do zero à criação do seu primeiro jogo
           </h1>
           <h1 style={{
             fontSize: '28px',
@@ -36,7 +36,7 @@ function Card00_Cover({ onStart }) {
             color: '#ffffff',
             lineHeight: 1.2
           }}>
-            No Roblox Studio
+            no Roblox Studio!
           </h1>
 
           {/* Subtítulo amarelo */}
@@ -45,7 +45,7 @@ function Card00_Cover({ onStart }) {
             marginBottom: '8px',
             color: '#FFD700'
           }}>
-            Tutoriais interativos dentro da ferramenta
+            Aprenda aqui mesmo, com os tutoriais interativos dentro da ferramenta da Expedição Roblox!
           </p>
 
           {/* Tag Tutorial */}
@@ -71,10 +71,10 @@ function Card00_Cover({ onStart }) {
             color: '#ffffff',
             fontWeight: 'bold'
           }}>
-            Aqui você começa como criador.<br />
-            Você vai construir, testar<br />
-            e publicar um jogo,<br />
-            Passo a passo.
+            Aqui começa a sua jornada como Creator.<br />
+            Vamos te ensinar, passo a passo,<br />
+            a construir, testar e publicar um jogo<br />
+            dentro da ferramenta.
           </p>
 
           {/* Lista de benefícios */}
@@ -94,7 +94,7 @@ function Card00_Cover({ onStart }) {
                   <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
               </div>
-              <span style={{ color: '#ffffff', fontSize: '15px' }}>Não precisa saber programar</span>
+              <span style={{ color: '#ffffff', fontSize: '15px' }}>NÃO PRECISA SABER PROGRAMAR</span>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -112,7 +112,7 @@ function Card00_Cover({ onStart }) {
                   <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
               </div>
-              <span style={{ color: '#ffffff', fontSize: '15px' }}>Leva cerca de 10 minutos</span>
+              <span style={{ color: '#ffffff', fontSize: '15px' }}>LEVA CERCA DE 10 MINUTOS</span>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -130,7 +130,7 @@ function Card00_Cover({ onStart }) {
                   <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
               </div>
-              <span style={{ color: '#ffffff', fontSize: '15px' }}>Você pode sair a qualquer momento</span>
+              <span style={{ color: '#ffffff', fontSize: '15px' }}>É POSSÍVEL SAIR A QUALQUER MOMENTO</span>
             </div>
           </div>
         </div>
@@ -153,7 +153,7 @@ function Card00_Cover({ onStart }) {
             maxWidth: '400px'
           }}
         >
-          Iniciar tutorial
+          INICIAR TUTORIAL
         </button>
       </div>
     </div>
