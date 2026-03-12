@@ -43,7 +43,7 @@ const CARD_INSTRUCTIONS = {
     purpose: 'Permite escolher entre modo demonstrativo ou interativo. Esta escolha define o fluxo do tutorial.',
     howItWorks: 'Mostra dois botões: "Modo demonstrativo" (azul, texto branco) e "Modo Interativo" (verde, texto preto). Ao clicar, chama onModeSelect(mode) que atualiza tutorialMode no App.jsx, depois chama onNext() automaticamente que muda currentCard de 3 para 4.',
     buttonBehaviors: {
-      'Voltar para menu': 'Chama onMenu() → handleMenu() → setCurrentCard(1), setTutorialMode(null), setCurrentStep(1), setStudioState("empty"). Volta para seleção de trilhas e reseta tudo.',
+      'Voltar para o menu': 'Chama onMenu() → handleMenu() → setCurrentCard(1), setTutorialMode(null), setCurrentStep(1), setStudioState("empty"). Volta para seleção de trilhas e reseta tudo.',
       'Modo demonstrativo': 'Chama onModeSelect("demonstrative") → setTutorialMode("demonstrative"), depois onNext() → setCurrentCard(4). No modo demonstrativo, os cards 7-10 (interação) são pulados.',
       'Modo Interativo': 'Chama onModeSelect("interactive") → setTutorialMode("interactive"), depois onNext() → setCurrentCard(4). No modo interativo, os cards 7-10 aparecem para permitir prática.'
     },
@@ -54,7 +54,7 @@ const CARD_INSTRUCTIONS = {
     purpose: 'Mostra o nome do tutorial selecionado e uma descrição do que será aprendido.',
     howItWorks: 'Exibe o tutorialName (que vem de selectedTutorial do TutorialPanel) e texto descritivo. Ao clicar em "Iniciar", chama onStart() que executa handleNext(), mudando currentCard de 4 para 5 e iniciando currentStep em 1.',
     buttonBehaviors: {
-      'Voltar para menu': 'Chama onMenu() → handleMenu() → setCurrentCard(1), reseta tutorialMode, currentStep e studioState. Volta para seleção de trilhas.',
+      'Voltar para o menu': 'Chama onMenu() → handleMenu() → setCurrentCard(1), reseta tutorialMode, currentStep e studioState. Volta para seleção de trilhas.',
       'Iniciar': 'Chama onStart() → handleNext() → setCurrentCard(5). Inicia o tutorial na primeira etapa (currentStep = 1).'
     },
     dataCollected: 'Nenhum dado adicional. O tutorialName já estava armazenado do Card 02.'
@@ -64,10 +64,10 @@ const CARD_INSTRUCTIONS = {
     purpose: 'Card que exibe as instruções completas de uma etapa ANTES de ela ser demonstrada. Mostra o que o usuário precisa fazer e o que verá como resultado. É o card de preparação e ensino.',
     howItWorks: 'Exibe: (1) Box azul com "Construir um casa" e "ETAPA X/3" em duas linhas separadas por linha branca, (2) Barra branca com borda preta "AÇÃO | [título da etapa]" (ex: "AÇÃO | Montar o terreno"), (3) Seção "COMO FAZER NO ROBLOX STUDIO" com lista numerada de passos (ex: "Clique no menu Insert", "Selecione Part", etc.), (4) Seção "O QUE VOCÊ VAI VER NA TELA" com descrição do resultado esperado, (5) Link opcional "Entender conceito | O QUE É UMA PART?" (só aparece se onShowConcept existir). Recebe stepNumber, totalSteps (3) e stepTitle do App.jsx baseado em currentStep. Ao clicar em "Demonstrar", executa a ação no mock do Studio (adiciona step-box) e depois avança automaticamente para Card 06.',
     buttonBehaviors: {
-      'Voltar para menu': 'Chama onMenu() → handleMenu() → setCurrentCard(1), setTutorialMode(null), setCurrentStep(1), setStudioState("empty"). Volta para seleção de trilhas e reseta tudo.',
+      'Voltar para o menu': 'Chama onMenu() → handleMenu() → setCurrentCard(1), setTutorialMode(null), setCurrentStep(1), setStudioState("empty"). Volta para seleção de trilhas e reseta tudo.',
       'Reiniciar tutorial': 'Chama onRestart() → handleRestart() → setCurrentCard(4), setCurrentStep(1), setStudioState("empty"). Volta para introdução (Card 04) mantendo tutorial selecionado e modo escolhido.',
       'Entender conceito | O QUE É UMA PART?': 'Chama onShowConcept() → setShowConcept(true) no TutorialPanel. Mostra Card 05.1 (conceito) como overlay sobre o Card 05. Não bloqueia progresso, é opcional. O usuário pode clicar em "Continuar" no Card 05.1 para voltar ao Card 05.',
-      'Voltar passo': 'Chama onBack() → handleBack(). Se currentStep > 1: remove último step-box do Studio (setStudioState("remove-last-step-blocks")), setCurrentStep(currentStep - 1), setCurrentCard(5) (volta para Card 05 da etapa anterior). Se currentStep = 1: setCurrentCard(4) (volta para introdução).',
+      'Voltar um passo': 'Chama onBack() → handleBack(). Se currentStep > 1: remove último step-box do Studio (setStudioState("remove-last-step-blocks")), setCurrentStep(currentStep - 1), setCurrentCard(5) (volta para Card 05 da etapa anterior). Se currentStep = 1: setCurrentCard(4) (volta para introdução).',
       'Demonstrar': 'Chama onDemonstrate() → onCardAction("demonstrate") → setStudioState(step.action) (adiciona step-box no Studio mock com título da etapa), aguarda 1000ms para animação, depois onNext() → setCurrentCard(6) (vai para Card 06 - após ação).'
     },
     dataCollected: 'Nenhum dado é coletado neste card. Apenas atualiza currentStep e studioState para mostrar a ação no mock do Studio. É um card de instrução, não de interação ou coleta.'
@@ -77,7 +77,7 @@ const CARD_INSTRUCTIONS = {
     purpose: 'Explica o conceito de Part no Roblox Studio. Card opcional acessível via link "Entender conceito | O QUE É UMA PART?" no Card 05.',
     howItWorks: 'Mostra texto explicativo sobre Parts: "Uma Part é o objeto fundamental no Roblox Studio. É um bloco 3D que pode ser usado para construir qualquer coisa no seu jogo. Parts podem ter diferentes formas (bloco, esfera, cilindro) e propriedades como cor, tamanho e posição." Permite feedback com 👍 ou 👎 para indicar se a explicação foi útil. Ao clicar em "Continuar", volta para Card 05 mantendo o contexto da etapa.',
     buttonBehaviors: {
-      'Voltar para menu': 'Chama onMenu() → handleMenu() → volta para Card 1, reseta tudo.',
+      'Voltar para o menu': 'Chama onMenu() → handleMenu() → volta para Card 1, reseta tudo.',
       'Reiniciar tutorial': 'Chama onRestart() → handleRestart() → volta para Card 4, mantendo tutorial e modo.',
       '👍 / 👎': 'setFeedback("positive" ou "negative") muda opacidade do botão não selecionado. Coleta silenciosamente (via logs) se o usuário considerou a explicação útil (👍) ou não útil (👎), qual conceito foi consultado, e em qual etapa do tutorial foi acessado.',
       'Continuar': 'Chama onContinue() → setShowConcept(false). Volta para Card 05, mantendo o contexto da etapa (currentStep, studioState).'
@@ -89,9 +89,9 @@ const CARD_INSTRUCTIONS = {
     purpose: 'Mesma estrutura do Card 05, mas após a demonstração. O step-box já está visível no Studio.',
     howItWorks: 'Mostra as mesmas instruções, mas agora o resultado já foi demonstrado no Studio. Permite avançar para próxima etapa ou voltar.',
     buttonBehaviors: {
-      'Voltar para menu': 'Chama onMenu() → handleMenu() → volta para Card 1.',
+      'Voltar para o menu': 'Chama onMenu() → handleMenu() → volta para Card 1.',
       'Reiniciar tutorial': 'Chama onRestart() → handleRestart() → volta para Card 4.',
-      'Voltar passo': 'Chama onBack() → handleBack(). Se currentStep > 1: remove step-box, setCurrentStep(currentStep - 1), setCurrentCard(5). Se currentStep = 1: setCurrentCard(4).',
+      'Voltar um passo': 'Chama onBack() → handleBack(). Se currentStep > 1: remove step-box, setCurrentStep(currentStep - 1), setCurrentCard(5). Se currentStep = 1: setCurrentCard(4).',
       'Próximo passo': 'Chama onNextStep() → handleNext(). Se modo demonstrativo e currentStep < 3: setCurrentStep(currentStep + 1), setCurrentCard(5). Se currentStep = 3: setCurrentCard(11). Se modo interativo: setCurrentCard(7).'
     },
     dataCollected: 'Nenhum dado é coletado. Apenas atualiza currentStep e navegação.'
@@ -101,7 +101,7 @@ const CARD_INSTRUCTIONS = {
     purpose: 'Convida o usuário a tentar fazer a ação por conta própria. Só aparece no modo interativo.',
     howItWorks: 'Aparece apenas se tutorialMode === "interactive". Oferece duas opções: tentar fazer ou continuar sem tentar.',
     buttonBehaviors: {
-      'Voltar para menu': 'Chama onMenu() → handleMenu() → volta para Card 1.',
+      'Voltar para o menu': 'Chama onMenu() → handleMenu() → volta para Card 1.',
       'Reiniciar tutorial': 'Chama onRestart() → handleRestart() → volta para Card 4.',
       'Sim, quero tentar.': 'Chama onTry() → onNext() → setCurrentCard(8). Vai para card de tentativa do usuário.',
       'Pular essa interação': 'Chama onContinue() → onSkipToNextStep() → fixa ação no Studio (setStudioState), se currentStep < 3: avança passo e vai para Card 5, senão vai para Card 11. Pula cards 8-10 (tentativa e feedback).'
@@ -113,7 +113,7 @@ const CARD_INSTRUCTIONS = {
     purpose: 'Permite que o usuário tente fazer a ação. Mostra as mesmas instruções do Card 05. Só aparece no modo interativo.',
     howItWorks: 'Exibe as mesmas instruções da etapa. O usuário deve fazer a ação no Roblox Studio real (não no mock). Quando termina, clica para verificar resultado. O sistema verifica o estado do Studio para confirmar se a ação foi executada corretamente.',
     buttonBehaviors: {
-      'Voltar para menu': 'Chama onMenu() → handleMenu() → volta para Card 1.',
+      'Voltar para o menu': 'Chama onMenu() → handleMenu() → volta para Card 1.',
       'Reiniciar tutorial': 'Chama onRestart() → handleRestart() → volta para Card 4.',
       'Já fez? Clique aqui para ver o seu resultado': 'Chama onCheckResult() → onCardAction("demonstrate") → setStudioState(step.action) (fixa ação no Studio), aguarda 500ms, depois onNext() → setCurrentCard(9). O sistema verifica o estado do Roblox Studio: se a ação foi feita corretamente (objetos criados, posicionados, etc.), vai para feedback positivo. Se não, vai para feedback negativo. No mock, sempre assume acerto.',
       'Ou clique aqui para pular esse passo': 'Chama onSkip() → onNext(). Se currentStep < 3: avança passo e vai para Card 5, senão vai para Card 11. Marca que esta etapa foi pulada.'
@@ -125,7 +125,7 @@ const CARD_INSTRUCTIONS = {
     purpose: 'Confirma que o usuário executou a ação corretamente. Só aparece no modo interativo após tentativa com verificação positiva.',
     howItWorks: 'Mostra ícone de sucesso (✓) e mensagem positiva. Permite fazer de novo ou continuar. O sistema registra que esta etapa foi completada com sucesso.',
     buttonBehaviors: {
-      'Voltar para menu': 'Chama onMenu() → handleMenu() → volta para Card 1.',
+      'Voltar para o menu': 'Chama onMenu() → handleMenu() → volta para Card 1.',
       'Reiniciar tutorial': 'Chama onRestart() → handleRestart() → volta para Card 4.',
       'Fazer de novo': 'Chama onTryAgain() → onBack() → volta para Card 8 (tentativa). Permite repetir mesmo tendo acertado.',
       'Continuar': 'Chama onContinue() → onNext(). Se currentStep < 3: setCurrentStep(currentStep + 1), setStudioState(nextStep.action), setCurrentCard(6). Se currentStep = 3: setCurrentCard(11). Marca etapa como completada com sucesso.'
@@ -137,7 +137,7 @@ const CARD_INSTRUCTIONS = {
     purpose: 'Informa que houve erro na tentativa. Aparece quando a verificação do Studio indica que a ação não foi executada corretamente.',
     howItWorks: 'O sistema verifica o estado do Roblox Studio e identifica o que está incorreto (objetos faltando, posições erradas, propriedades incorretas, etc.). Mostra feedback negativo e permite tentar novamente ou continuar mesmo assim.',
     buttonBehaviors: {
-      'Voltar para menu': 'Chama onMenu() → handleMenu() → volta para Card 1.',
+      'Voltar para o menu': 'Chama onMenu() → handleMenu() → volta para Card 1.',
       'Reiniciar tutorial': 'Chama onRestart() → handleRestart() → volta para Card 4.',
       'Fazer de novo': 'Chama onTryAgain() → onBack() → volta para Card 8. Permite tentar novamente com as mesmas instruções.',
       'Continuar': 'Chama onContinue() → onNext() → avança para próximo card. O usuário escolhe continuar mesmo com erro, o sistema registra o erro mas permite progresso.'
@@ -149,7 +149,7 @@ const CARD_INSTRUCTIONS = {
     purpose: 'Tela final do tutorial. Mostra mensagem de conclusão e opção para registrar experiência. Os dados já foram coletados silenciosamente (logs) durante o tutorial.',
     howItWorks: 'Exibe mensagem de conclusão. Permite voltar ao menu ou reiniciar. O botão de registrar experiência mostra mensagem de agradecimento. Não há coleta ativa de dados - os logs (alias do Roblox, ações, tentativas, erros, tempo) já foram coletados silenciosamente durante toda a jornada do tutorial.',
     buttonBehaviors: {
-      'Voltar para menu': 'Chama onMenu() → handleMenu() → setCurrentCard(1), reseta tudo. Volta para seleção de trilhas.',
+      'Voltar para o menu': 'Chama onMenu() → handleMenu() → setCurrentCard(1), reseta tudo. Volta para seleção de trilhas.',
       'Reiniciar tutorial': 'Chama onRestart() → handleRestart() → setCurrentCard(4), setCurrentStep(1), setStudioState("empty"). Volta para introdução.',
       'Clique aqui para registrar sua experiência': 'Chama handleRegister() → setShowThankYou(true). Mostra mensagem "Obrigado!" informando que os logs foram coletados silenciosamente. Não há formulário ou coleta ativa - apenas confirmação visual.'
     },

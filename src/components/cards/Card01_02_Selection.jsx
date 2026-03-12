@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from 'react'
-import CreatorStamp from '../CreatorStamp'
 import './Card.css'
 
 function Card01_02_Selection({ 
@@ -88,7 +87,7 @@ function Card01_02_Selection({
             borderBottom: '1px solid #666666',
             cursor: isLocked ? 'not-allowed' : 'pointer',
             opacity: isLocked ? 0.5 : (isCompleted ? 0.7 : 1),
-            background: isLocked ? '#f5f5f5' : 'transparent',
+            background: 'transparent',
           }}
           onClick={() => {
             if (isLocked) {
@@ -199,11 +198,6 @@ function Card01_02_Selection({
               objectFit: 'contain'
             }} 
           />
-          {earnedBadges && Array.isArray(earnedBadges) && earnedBadges.includes(1) && (
-            <div style={{ opacity: stampOpacity }}>
-              <CreatorStamp isVisible={true} hideText={stampOpacity < 1} badgeImage="/badge1-removebg-preview.png" />
-            </div>
-          )}
         </div>
         <h3 style={{ 
           fontSize: '20px', 
@@ -234,40 +228,53 @@ function Card01_02_Selection({
                 cursor: 'pointer',
                 display: 'flex',
                 justifyContent: 'space-between',
-                alignItems: 'center',
+                alignItems: 'flex-start',
                 borderBottom: expandedClasses.class1 ? '1px solid #000000' : 'none',
-                height: '56px',
-                minHeight: '56px',
-                maxHeight: '56px',
+                minHeight: '80px',
                 boxSizing: 'border-box',
                 margin: 0
               }}
               onClick={() => toggleClass(1)}
             >
-              <h3 style={{ 
-                fontSize: '18px', 
-                fontWeight: 700, 
-                margin: 0,
-                padding: 0,
-                color: '#000000',
-                flex: 1,
-                lineHeight: '24px',
-                display: 'flex',
-                alignItems: 'center'
-              }}>
-                Transforme-se num Creator
-              </h3>
-              <span style={{ 
-                fontSize: '20px', 
-                color: '#666666',
+              <div style={{ flex: 1 }}>
+                <h3 style={{
+                  fontSize: '18px',
+                  fontWeight: 700,
+                  margin: 0,
+                  padding: 0,
+                  color: '#000000',
+                  lineHeight: '24px'
+                }}>
+                  Transforme-se num Creator
+                </h3>
+                <p style={{
+                  fontSize: '14px',
+                  margin: '4px 0 8px 0',
+                  color: '#000000'
+                }}>
+                  Crie do zero, passo a passo.
+                </p>
+                <span className="badge-tag" style={{
+                  display: 'inline-block',
+                  backgroundColor: '#000000',
+                  color: '#ffffff',
+                  padding: '4px 10px',
+                  borderRadius: '4px',
+                  fontSize: '11px',
+                  fontWeight: 700,
+                  letterSpacing: '0.5px'
+                }}>
+                  BADGES DE CRIAÇÃO
+                </span>
+              </div>
+              <span style={{
+                fontSize: '20px',
+                color: '#333333',
                 transition: 'transform 0.2s',
                 transform: expandedClasses.class1 ? 'rotate(180deg)' : 'rotate(0deg)',
                 marginLeft: '12px',
                 flexShrink: 0,
-                display: 'flex',
-                alignItems: 'center',
-                height: '24px',
-                lineHeight: '24px'
+                marginTop: '4px'
               }}>
                 ▼
               </span>
@@ -296,40 +303,54 @@ function Card01_02_Selection({
                 cursor: 'pointer',
                 display: 'flex',
                 justifyContent: 'space-between',
-                alignItems: 'center',
+                alignItems: 'flex-start',
                 borderBottom: expandedClasses.class2 ? '1px solid #000000' : 'none',
-                height: '56px',
-                minHeight: '56px',
-                maxHeight: '56px',
+                minHeight: '80px',
                 boxSizing: 'border-box',
                 margin: 0
               }}
               onClick={() => toggleClass(2)}
             >
-              <h3 style={{ 
-                fontSize: '18px', 
-                fontWeight: 700, 
-                margin: 0,
-                padding: 0,
-                color: '#000000',
-                flex: 1,
-                lineHeight: '24px',
-                display: 'flex',
-                alignItems: 'center'
-              }}>
-                Criações rápidas
-              </h3>
-              <span style={{ 
-                fontSize: '20px', 
-                color: '#666666',
+              <div style={{ flex: 1 }}>
+                <h3 style={{
+                  fontSize: '18px',
+                  fontWeight: 700,
+                  margin: 0,
+                  padding: 0,
+                  color: '#000000',
+                  lineHeight: '24px'
+                }}>
+                  Criações rápidas
+                </h3>
+                <p style={{
+                  fontSize: '14px',
+                  fontStyle: 'normal',
+                  margin: '4px 0 8px 0',
+                  color: '#000000'
+                }}>
+                  Explore uma estrutura pronta.
+                </p>
+                <span className="badge-tag" style={{
+                  display: 'inline-block',
+                  backgroundColor: '#000000',
+                  color: '#ffffff',
+                  padding: '4px 10px',
+                  borderRadius: '4px',
+                  fontSize: '11px',
+                  fontWeight: 700,
+                  letterSpacing: '0.5px'
+                }}>
+                  BADGES DE EXPLORAÇÃO
+                </span>
+              </div>
+              <span style={{
+                fontSize: '20px',
+                color: '#333333',
                 transition: 'transform 0.2s',
                 transform: expandedClasses.class2 ? 'rotate(180deg)' : 'rotate(0deg)',
                 marginLeft: '12px',
                 flexShrink: 0,
-                display: 'flex',
-                alignItems: 'center',
-                height: '24px',
-                lineHeight: '24px'
+                marginTop: '4px'
               }}>
                 ▼
               </span>

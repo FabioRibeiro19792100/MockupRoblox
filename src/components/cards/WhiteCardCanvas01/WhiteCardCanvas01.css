@@ -1,0 +1,386 @@
+.white-card-canvas-01 {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background: #ffffff;
+  color: #111111;
+  font-family: "Space Grotesk", "Segoe UI", Arial, sans-serif;
+  border-radius: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  border: 1px solid #d7d7d7;
+}
+
+.white-card-canvas-01__header {
+  padding: 28px 28px 18px 28px;
+  border-bottom: 1px solid #eeeeee;
+  background: #ffffff;
+}
+
+.white-card-canvas-01__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+  color: #6b7280;
+}
+
+.white-card-canvas-01__title {
+  margin: 12px 0 8px 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: #111111;
+}
+
+.white-card-canvas-01__subtitle {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #6b7280;
+}
+
+.white-card-canvas-01__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 0;
+  padding: 24px;
+  background: linear-gradient(180deg, #ffffff 0%, #f7f7f7 100%);
+}
+
+.white-card-canvas-01__placeholder {
+  width: 100%;
+  flex: 1;
+  min-height: 520px;
+  border: 2px dashed #cfcfcf;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  background: #ffffff;
+}
+
+.white-card-canvas-01--onboarding .white-card-canvas-01__header {
+  display: none;
+}
+
+.white-card-canvas-01__body--onboarding {
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+.white-card-canvas-01__phone {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  border-radius: 0;
+  background: url("/UI/onboarding-bg.png") center / cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  box-sizing: border-box;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.white-card-canvas-01__dots {
+  display: flex;
+  gap: 0;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 4px;
+  padding: 0 8px;
+}
+
+.white-card-canvas-01__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  padding: 0;
+}
+
+.white-card-canvas-01__dot.is-active {
+  background: #ff9800;
+  width: 25px;
+  height: 25px;
+  border: 3px solid #ffffff;
+}
+
+.white-card-canvas-01__hero-message {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.white-card-canvas-01__hero {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0;
+  margin-top: 50px;
+}
+
+.white-card-canvas-01__hero-circle {
+  width: 330px;
+  height: 220px;
+  border-radius: 999px;
+  /* background: #2f2f2f; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(0.85);
+  opacity: 0;
+}
+
+.white-card-canvas-01__hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.white-card-canvas-01__message {
+  width: 100%;
+  padding: 0 4px;
+  margin-bottom: 12px;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.white-card-canvas-01__message-text {
+  margin: 0 auto;
+  max-width: 320px;
+  padding: 22px 20px;
+  padding-top: 50px;
+  background: url("/UI/talk-balloon.png") center / 100% 100% no-repeat;
+  color: #256aa1;
+  border-radius: 18px;
+  font-size: 11pt;
+  font-weight: bold;
+  line-height: 1.4;
+  text-align: center;
+  margin-top: 0;
+  min-height: 200px;
+  transform: scale(0.85);
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 6px;
+  white-space: pre-wrap;
+  animation: onboarding-grow 380ms ease-out 320ms forwards,
+    float-message 3.2s ease-in-out 1.1s infinite;
+}
+
+.white-card-canvas-01__message-line {
+  display: block;
+}
+
+.white-card-canvas-01__message-line--bullet {
+  align-self: flex-start;
+  text-align: left;
+}
+
+.white-card-canvas-01__hero-circle.is-pop {
+  animation: onboarding-pop 420ms ease-out forwards;
+}
+
+@keyframes onboarding-pop {
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes onboarding-grow {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes float-message {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) scale(1);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+.white-card-canvas-01__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.white-card-canvas-01__actions-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  width: 100%;
+}
+
+.white-card-canvas-01__action {
+  border: none;
+  border-radius: 999px;
+  padding: 10px 0;
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 42px;
+  text-align: center;
+  position: relative;
+  transition: transform 160ms ease;
+}
+
+.white-card-canvas-01__action--with-icon-left {
+  justify-content: center;
+  padding-left: 40px;
+  padding-right: 16px;
+}
+
+.white-card-canvas-01__action--with-icon-right {
+  justify-content: center;
+  padding-right: 40px;
+  padding-left: 16px;
+}
+
+.white-card-canvas-01__action-icon {
+  width: 17px;
+  height: 17px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.white-card-canvas-01__action--with-icon-left .white-card-canvas-01__action-icon {
+  position: absolute;
+  left: 12px;
+}
+
+.white-card-canvas-01__action--with-icon-right .white-card-canvas-01__action-icon {
+  position: absolute;
+  right: 12px;
+}
+
+.white-card-canvas-01__action--with-icon-left .white-card-canvas-01__action-icon {
+  animation: arrow-left-float 2.4s ease-in-out infinite;
+}
+
+.white-card-canvas-01__action--with-icon-right .white-card-canvas-01__action-icon {
+  animation: arrow-right-float 2.4s ease-in-out infinite;
+}
+
+@keyframes arrow-left-float {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-4px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes arrow-right-float {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+.white-card-canvas-01__action--primary {
+  background: #f6c23e;
+  color: #3f51b5;
+  font-weight: bold;
+  font-size: 12pt;
+}
+
+.white-card-canvas-01__action--ghost {
+  background: #f6c23e;
+  color: #3f51b5;
+  opacity: 0.95;
+  font-weight: bold;
+  font-size: 12pt;
+}
+
+.white-card-canvas-01__action--link {
+  background: transparent;
+  border: none;
+  color: #fefefe;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+}
+
+.white-card-canvas-01__action:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(0.4);
+}
+
+.white-card-canvas-01__action--ghost:hover,
+.white-card-canvas-01__action--primary:hover {
+  transform: translateY(-2px);
+}
+
+.white-card-canvas-01__action--ghost:disabled:hover,
+.white-card-canvas-01__action--primary:disabled:hover {
+  transform: none;
+}

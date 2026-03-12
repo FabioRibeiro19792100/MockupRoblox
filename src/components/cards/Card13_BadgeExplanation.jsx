@@ -1,6 +1,128 @@
 import './Card.css'
 
-function Card13_BadgeExplanation({ onClose }) {
+function Card13_BadgeExplanation({ onClose, uxLensesVariant = false }) {
+  if (uxLensesVariant) {
+    const badges = [
+      {
+        name: 'PRIMEIRO PASSO',
+        requisito: 'Completar o tutorial 1 da classe 1',
+        descricao: 'O primeiro marco de quem começa a criar no Roblox Studio. Indica domínio dos conceitos básicos da plataforma.'
+      },
+      {
+        name: 'CRIADOR INICIANTE',
+        requisito: 'Completar todos os 5 tutoriais da classe 1',
+        descricao: 'Prova que você demonstra domínio dos fundamentos essenciais e está pronto para um desafio mais sério.'
+      },
+      {
+        name: 'CRIADOR AVANÇADO',
+        requisito: 'Completar o tutorial 1 da classe 1',
+        descricao: 'Aqui você já domina técnicas avançadas de criação e está preparado para desenvolver projetos complexos.'
+      }
+    ]
+
+    return (
+      <div className="card card-badge-explanation" style={{ background: '#ffffff', display: 'flex', flexDirection: 'column' }}>
+        {/* Botão fechar */}
+        <div className="no-padding-override" style={{ padding: '16px 20px', flex: 'none' }}>
+          <button
+            onClick={onClose}
+            style={{
+              width: '100%',
+              background: '#fbbf24',
+              border: 'none',
+              borderRadius: '50px',
+              padding: '14px 24px',
+              fontSize: '16px',
+              fontWeight: 600,
+              color: '#000000',
+              cursor: 'pointer'
+            }}
+          >
+            fechar
+          </button>
+        </div>
+
+        {/* Conteúdo */}
+        <div style={{ padding: '0 20px 20px', flex: 1, overflowY: 'auto' }}>
+          <h2 style={{
+            fontSize: '20px',
+            fontWeight: 700,
+            color: '#000000',
+            margin: '0 0 20px 0'
+          }}>
+            Tipos de badges:
+          </h2>
+
+          {badges.map((badge, index) => (
+            <div key={index} style={{
+              padding: '10px 0 18px',
+              borderBottom: index < badges.length - 1 ? '2px dotted #cbd5e1' : 'none'
+            }}>
+              {/* Header do badge */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
+                {/* Ícone hexagonal roxo */}
+                <img
+                  src="/badge-icon.png"
+                  alt="Badge"
+                  style={{
+                    width: '44px',
+                    height: '44px',
+                    objectFit: 'contain',
+                    flexShrink: 0
+                  }}
+                />
+                <div>
+                  <h3 className="badge-title-accent" style={{
+                    fontSize: '16px',
+                    fontWeight: 700,
+                    color: '#f59e0b',
+                    margin: '0 0 2px 0'
+                  }}>
+                    {badge.name}
+                  </h3>
+                  <span style={{
+                    fontSize: '13px',
+                    color: '#6b7280'
+                  }}>
+                    Requisito:
+                  </span>
+                </div>
+              </div>
+
+              {/* Barra de requisito */}
+              <div style={{
+                background: '#60a5fa',
+                borderRadius: '0px',
+                padding: '6px 10px',
+                marginBottom: '12px',
+                color: '#ffffff'
+              }}>
+                <span style={{
+                  fontSize: '13px',
+                  fontWeight: 600,
+                  color: '#ffffff'
+                }}>
+                  {badge.requisito}
+                </span>
+              </div>
+
+              {/* Descrição */}
+              <p style={{
+                fontSize: '14px',
+                color: '#4b5563',
+                lineHeight: 1.4,
+                margin: 0,
+                marginLeft: '56px'
+              }}>
+                {badge.descricao}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="card card-badge-explanation">
       <div className="card-header-global single-button-header">
@@ -44,7 +166,7 @@ function Card13_BadgeExplanation({ onClose }) {
               ⭐ Primeiro Passo
             </h3>
             <p style={{ fontSize: '14px', lineHeight: '1.12', color: '#000000', marginBottom: '8px' }}>
-              <strong>Requisito:</strong> Completar o tutorial 1 da classe 1 (Construir um casa)
+              <strong>Requisito:</strong> Completar o tutorial 1 da classe 1 (Construir uma casa)
             </p>
             <p style={{ fontSize: '14px', lineHeight: '1.12', color: '#000000' }}>
               Este é o seu primeiro passo na jornada de criação no Roblox Studio. Ao completar este tutorial, você desbloqueia o primeiro badge e aprende os fundamentos básicos.
@@ -53,7 +175,7 @@ function Card13_BadgeExplanation({ onClose }) {
 
           <div style={{ marginBottom: '24px' }}>
             <h3 style={{ fontSize: '18px', fontWeight: 700, marginBottom: '12px', color: '#000000' }}>
-              🏅 Criador Iniciante
+              🏅 CREATOR INICIANTE
             </h3>
             <p style={{ fontSize: '14px', lineHeight: '1.12', color: '#000000', marginBottom: '8px' }}>
               <strong>Requisito:</strong> Completar todos os 5 tutoriais da classe 1 (Transforme-se num Creator)
@@ -65,7 +187,7 @@ function Card13_BadgeExplanation({ onClose }) {
 
           <div style={{ marginBottom: '24px' }}>
             <h3 style={{ fontSize: '18px', fontWeight: 700, marginBottom: '12px', color: '#000000' }}>
-              👑 Criador Avançado
+              👑 CREATOR AVANÇADO
             </h3>
             <p style={{ fontSize: '14px', lineHeight: '1.12', color: '#000000', marginBottom: '8px' }}>
               <strong>Requisito:</strong> Completar todos os 5 tutoriais da classe 2 (Criações rápidas)

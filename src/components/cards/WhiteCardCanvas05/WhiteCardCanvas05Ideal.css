@@ -1,0 +1,315 @@
+.white-card-canvas-05-ideal {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background: #ffffff;
+  color: #111111;
+  font-family: "Space Grotesk", "Segoe UI", Arial, sans-serif;
+  border-radius: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  border: 1px solid #d7d7d7;
+}
+
+.white-card-canvas-05-ideal__header {
+  padding: 28px 28px 18px 28px;
+  border-bottom: 1px solid #eeeeee;
+  background: #ffffff;
+}
+
+.white-card-canvas-05-ideal__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+  color: #6b7280;
+}
+
+.white-card-canvas-05-ideal__title {
+  margin: 12px 0 8px 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: #111111;
+}
+
+.white-card-canvas-05-ideal__subtitle {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #6b7280;
+}
+
+.white-card-canvas-05-ideal__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 0;
+  padding: 24px;
+  background: linear-gradient(180deg, #ffffff 0%, #f7f7f7 100%);
+}
+
+.white-card-canvas-05-ideal__placeholder {
+  width: 100%;
+  flex: 1;
+  min-height: 520px;
+  border: 2px dashed #cfcfcf;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  background: #ffffff;
+}
+
+.white-card-canvas-05-ideal--onboarding .white-card-canvas-05-ideal__header {
+  display: none;
+}
+
+.white-card-canvas-05-ideal__body--onboarding {
+  padding: 0;
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+.white-card-canvas-05-ideal__phone {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  border-radius: 0;
+  background: #bdbdbd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 18px 20px 18px;
+  box-sizing: border-box;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.white-card-canvas-05-ideal__dots {
+  display: flex;
+  gap: 0;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 4px;
+  padding: 0 8px;
+}
+
+.white-card-canvas-05-ideal__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  padding: 0;
+}
+
+.white-card-canvas-05-ideal__dot.is-active {
+  background: #2563eb;
+  width: 15px;
+  height: 15px;
+}
+
+.white-card-canvas-05-ideal__hero-message {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  gap: 6px;
+  width: 100%;
+}
+
+.white-card-canvas-05-ideal__hero-meta {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+  color: #f3f4f6;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.white-card-canvas-05-ideal__meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.white-card-canvas-05-ideal__meta-item--right {
+  justify-content: flex-end;
+}
+
+.white-card-canvas-05-ideal__meta-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.white-card-canvas-05-ideal__meta-icon svg {
+  width: 12px;
+  height: 12px;
+  fill: #f3f4f6;
+}
+
+.white-card-canvas-05-ideal__meta-text {
+  color: #f3f4f6;
+}
+
+.white-card-canvas-05-ideal__hero {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0;
+}
+
+.white-card-canvas-05-ideal__hero-circle {
+  width: 170px;
+  height: 170px;
+  border-radius: 999px;
+  background: #2f2f2f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+  transform: scale(0.85);
+  opacity: 0;
+}
+
+.white-card-canvas-05-ideal__hero-image {
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+}
+
+.white-card-canvas-05-ideal__message {
+  width: 100%;
+  padding: 0 4px;
+  margin-bottom: 12px;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.white-card-canvas-05-ideal__message-text {
+  margin: 0 auto;
+  max-width: 320px;
+  padding: 18px 20px;
+  background: #5a5a5a;
+  color: #ffffff;
+  border-radius: 18px;
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: center;
+  margin-top: 0;
+  min-height: 200px;
+  transform: scale(0.85);
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 6px;
+  white-space: pre-wrap;
+}
+
+.white-card-canvas-05-ideal__message-line {
+  display: block;
+}
+
+.white-card-canvas-05-ideal__message-line--bullet {
+  align-self: flex-start;
+  text-align: left;
+}
+
+.white-card-canvas-05-ideal__hero-circle.is-pop {
+  animation: onboarding-pop 420ms ease-out forwards;
+}
+
+.white-card-canvas-05-ideal__message-text {
+  animation: onboarding-grow 380ms ease-out forwards;
+  animation-delay: 320ms;
+}
+
+@keyframes onboarding-pop {
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes onboarding-grow {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.white-card-canvas-05-ideal__actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  width: 100%;
+}
+
+.white-card-canvas-05-ideal__action {
+  border: none;
+  border-radius: 999px;
+  padding: 10px 0;
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+
+.white-card-canvas-05-ideal__action--primary {
+  background: #f6c23e;
+  color: #1a1a1a;
+}
+
+.white-card-canvas-05-ideal__action--ghost {
+  background: #f6c23e;
+  color: #1a1a1a;
+  opacity: 0.95;
+}
+
+.white-card-canvas-05-ideal__action:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  filter: grayscale(0.4);
+}

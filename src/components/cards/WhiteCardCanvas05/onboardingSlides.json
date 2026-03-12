@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "image": "/logo-expedicao-carrying-block.png",
+    "alt": "Icone de boas vindas",
+    "text": "Pense em todos os jogos roblox que você ja experimentou. As casas, os esconderijos, as bases secretas... alguém criou cada um deles. Tijolo por tijolo. Parede por parede."
+  },
+  {
+    "id": 2,
+    "image": "/logo.png",
+    "alt": "Icone de exploracao",
+    "text": "Hoje, essa pessoa é você! Nesse tutorial, você irá começar do zero e terminar com uma casa completa!"
+  },
+  {
+    "id": 3,
+    "image": "/badge-icon.png",
+    "alt": "Icone de progresso",
+    "text": "O que você irá criar:\n• Pilares que suportam a entrada\n• Uma porta de madeira com alças douradas\n• Quatro paredes sólidas\n• Um telhado"
+  },
+  {
+    "id": 4,
+    "image": "/logo-expedicao-carrying-block.png",
+    "alt": "Icone de aprendizado",
+    "text": "Você aprenderá a:\n• Criar e posicionar objetos (Parts) com precisão\n• Aplicar materiais e cores\n• Rotacionar objetos para que se encaixem perfeitamente"
+  },
+  {
+    "id": 5,
+    "image": "/logo.png",
+    "alt": "Icone de Creator",
+    "text": "São habilidades fundamentais que qualquer Creator Roblox precisa dominar!"
+  },
+  {
+    "id": 6,
+    "image": "/badge-icon.png",
+    "alt": "Icone de inicio",
+    "text": "Pronto pra criar?"
+  }
+]

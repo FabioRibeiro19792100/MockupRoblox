@@ -1,0 +1,59 @@
+.card05-before-action-content {
+  padding: 0 24px 24px;
+}
+
+.card05-before-action-header {
+  margin-bottom: 12px;
+  margin-top: 24px;
+}
+
+.card05-before-action-step-counter {
+  margin-bottom: 8px;
+  margin-top: -16px;
+}
+
+.card05-before-action-note {
+  margin: 0;
+  color: #000000;
+  font-size: 14.5px;
+  line-height: 1.12;
+}
+
+.card05-before-action-concept {
+  margin-top: 16px;
+}
+
+.card05-before-action-concept-bar {
+  cursor: pointer;
+}
+
+.card05-before-action-concept-label {
+  font-size: 12px;
+  margin-bottom: 12px;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  color: #f44336;
+}
+
+.card05-before-action-concept-title {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #f44336;
+}
+
+.card05-before-action-concept-icon {
+  font-size: 14px;
+  font-weight: 700;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #f44336;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}

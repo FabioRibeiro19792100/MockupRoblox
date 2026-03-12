@@ -1,0 +1,132 @@
+.white-card-canvas-02 {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background: #ffffff;
+  color: #111111;
+  font-family: "Space Grotesk", "Segoe UI", Arial, sans-serif;
+  border-radius: 8px;
+  box-sizing: border-box;
+  overflow: hidden;
+  border: 1px solid #d7d7d7;
+}
+
+.white-card-canvas-02__header {
+  padding: 28px 28px 18px 28px;
+  border-bottom: 1px solid #eeeeee;
+  background: #ffffff;
+}
+
+.white-card-canvas-02__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+  color: #6b7280;
+}
+
+.white-card-canvas-02__title {
+  margin: 12px 0 8px 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: #111111;
+}
+
+.white-card-canvas-02__subtitle {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #6b7280;
+}
+
+.white-card-canvas-02__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 22px;
+  padding: 24px;
+  background: linear-gradient(180deg, #ffffff 0%, #f7f7f7 100%);
+}
+
+.white-card-canvas-02__body--hero {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.white-card-canvas-02__image {
+  margin: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 100px;
+}
+
+.white-card-canvas-02__image-asset {
+  width: min(220px, 70%);
+  height: auto;
+  object-fit: contain;
+}
+
+.white-card-canvas-02__slogan {
+  margin: 0;
+  max-width: 320px;
+  color: #374151;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.white-card-canvas-02__cta {
+  border: none;
+  border-radius: 999px;
+  padding: 12px 30px;
+  background: #f6c23e;
+  color: #1a1a1a;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.white-card-canvas-02__cta:hover {
+  filter: brightness(0.96);
+}
+
+.white-card-canvas-02--animated .white-card-canvas-02__image-asset {
+  animation: card02-float 3.2s ease-in-out infinite;
+}
+
+.white-card-canvas-02--animated .white-card-canvas-02__cta {
+  animation: card02-pulse 2.6s ease-in-out infinite;
+}
+
+@keyframes card02-float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes card02-pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

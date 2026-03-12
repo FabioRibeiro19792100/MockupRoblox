@@ -13,7 +13,7 @@
 .card-layout-view .card-layout-container {
   display: flex;
   gap: 24px;
-  padding: 48px 24px 24px 24px;
+  padding: 26px 24px 24px 24px;
   height: 100%;
   align-items: flex-start;
 }
@@ -36,7 +36,126 @@
   font-size: 11px;
   font-weight: 400;
   opacity: 0.6;
+  pointer-events: auto;
+}
+
+.card-layout-view .card-layout-label-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 5px;
+}
+
+.card-layout-view .card-layout-variant-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.card-layout-view .card-layout-variant-option {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 6px;
+}
+
+.card-layout-view .card-layout-variant-option input {
+  position: absolute;
+  opacity: 0;
   pointer-events: none;
+}
+
+.card-layout-view .card-layout-variant-radio {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid #9ca3af;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.card-layout-view .card-layout-variant-radio::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: transparent;
+  transition: background 0.2s ease;
+}
+
+.card-layout-view .card-layout-variant-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #9ca3af;
+}
+
+.card-layout-view .card-layout-variant-option input:checked + .card-layout-variant-radio {
+  border-color: #2196f3;
+}
+
+.card-layout-view .card-layout-variant-option input:checked + .card-layout-variant-radio::after {
+  background: #2196f3;
+}
+
+.card-layout-view .card-layout-variant-option input:checked + .card-layout-variant-radio + .card-layout-variant-label {
+  color: #111111;
+}
+
+.card-layout-view .card-layout-sound-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.card-layout-view .card-layout-sound-toggle input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.card-layout-view .card-layout-sound-switch {
+  width: 28px;
+  height: 16px;
+  border-radius: 999px;
+  background: #d1d5db;
+  position: relative;
+  transition: background 0.2s ease;
+}
+
+.card-layout-view .card-layout-sound-switch::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ffffff;
+  transition: transform 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.card-layout-view .card-layout-sound-toggle input:checked + .card-layout-sound-switch {
+  background: #22c55e;
+}
+
+.card-layout-view .card-layout-sound-toggle input:checked + .card-layout-sound-switch::after {
+  transform: translateX(12px);
+}
+
+.card-layout-view .card-layout-sound-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #111111;
 }
 
 .card-layout-view .card-layout-item {
@@ -161,6 +280,138 @@
   z-index: 1001;
 }
 
+.card-layout-view .card08-module-button {
+  width: 100%;
+  padding: 10px 14px;
+  border: 2px solid #000000;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #000000;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.card-layout-view .card08-module-button:hover {
+  background: #f5f5f5;
+}
+
+.card-layout-view .card08-module-controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.card-layout-view .card08-module-controls .card08-module-button {
+  flex: 1 1 100%;
+}
+
+.card-layout-view .card08-module-controls .card08-module-button--reset {
+  border-style: dashed;
+}
+
+.card-layout-view .card08-module-button--with-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-layout-view .card08-module-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  margin-top: 20px;
+}
+
+.card-layout-view .card08-module-list {
+  list-style: none;
+  margin: 0 0 12px 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card-layout-view .card08-module-list-item {
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
+  background: #2563eb;
+  border-radius: 6px;
+  padding: 8px 10px;
+}
+
+.card-layout-view .card08-module-list-item--next {
+  background: #ff5722;
+}
+
+.card-layout-view .card08-module-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0 0 10px 0;
+}
+
+.card-layout-view .card08-module-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #111111;
+}
+
+.card-layout-view .card08-module-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.card-layout-view .card08-module-legend-dot--blue {
+  background: #2563eb;
+}
+
+.card-layout-view .card08-module-legend-dot--yellow {
+  background: #ff5722;
+}
+
+.card-layout-view .card08-dev-message {
+  border: 1px solid #000000;
+  border-radius: 8px;
+  padding: 12px;
+  background: #fff7ed;
+  animation: card08-dev-blink 1s ease-in-out infinite;
+}
+
+.card-layout-view .card08-dev-message-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.card-layout-view .card08-dev-message-body {
+  font-size: 13px;
+  font-weight: 600;
+  color: #111827;
+}
+
+@keyframes card08-dev-blink {
+  0%,
+  100% {
+    box-shadow: 0 0 0 rgba(253, 187, 44, 0);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(253, 187, 44, 0.45);
+  }
+}
+
 .card-layout-view .layer-select {
   width: 100%;
   padding: 8px 12px;
@@ -215,8 +466,6 @@
 
 /* Estilos para diferentes layers - 10 layouts completamente novos */
 /* Layer 1 - Design Original (sem modificações) - SEM BACKGROUND */
-.card-layout-view.layer-layer1 .card-layout-item .card.card-cover,
-.card-layout-view.layer-layer1 .card-layout-item .card.card-selection,
 .card-layout-view.layer-layer1 .card-layout-item .card.card-mode,
 .card-layout-view.layer-layer1 .card-layout-item .card.card-interactive,
 .card-layout-view.layer-layer1 .card-layout-item .card.card-intro,
@@ -225,8 +474,6 @@
   background-color: #ffffff !important;
 }
 
-.card-layout-view.layer-layer1 .card-layout-item .card.card-cover::before,
-.card-layout-view.layer-layer1 .card-layout-item .card.card-selection::before,
 .card-layout-view.layer-layer1 .card-layout-item .card.card-mode::before,
 .card-layout-view.layer-layer1 .card-layout-item .card.card-interactive::before,
 .card-layout-view.layer-layer1 .card-layout-item .card.card-intro::before,
@@ -237,43 +484,9 @@
 /* Layers 2-10 - Removidos temporariamente para não quebrar o layout */
 
 
-/* Estilos da galeria de badges para os cards de layout */
-.card-layout-view .card-layout-item .badge-gallery-fixed {
-  position: absolute !important;
-  bottom: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-  z-index: 5;
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
-  border-top: 2px solid rgb(113, 180, 233);
-  transition: all 0.3s ease;
-  overflow: visible;
-}
+/* Estilos da galeria de badges para os cards de layout - removidos */
 
-.card-layout-view .card-layout-item .badge-gallery-fixed.collapsed {
-  max-height: 120px;
-  overflow: hidden;
-}
-
-.card-layout-view .card-layout-item .badge-gallery-fixed.expanded {
-  max-height: 350px;
-  min-height: 350px;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-.card-layout-view .card-layout-item .badge-gallery-header {
-  background: linear-gradient(135deg, rgb(113, 180, 233) 0%, rgb(100, 160, 210) 100%);
-  border-bottom: 1px solid rgb(90, 140, 190);
-  color: #000000;
-}
-
-.card-layout-view .card-layout-item .badge-gallery-content {
-  padding: 12px 24px;
-  padding-bottom: 24px;
-  animation: slideDown 0.3s ease;
-}
+/* Estilos de header/content específicos removidos */
 
 /* Ajustes para cards de feedback (9 e 10) no layout mode */
 .card-layout-view .card-layout-item .card-feedback .card-title {
@@ -395,12 +608,13 @@
     margin-bottom: 0 !important;
   }
 
-  .card-layout-view .card-layout-content {
-    width: 100% !important;
-    height: auto !important;
-    min-height: 400px !important;
-    max-height: none !important;
-  }
+.card-layout-view .card-layout-content {
+  width: 100% !important;
+  height: auto !important;
+  min-height: 400px !important;
+  max-height: none !important;
+  background: #000000;
+}
 
   .card-layout-view .card-layout-content .card {
     height: auto !important;
@@ -433,7 +647,7 @@
 .card-layout-view.layer-layer2 .card-layout-item .card.card-interactive::before,
 .card-layout-view.layer-layer2 .card-layout-item .card.card-intro::before,
 .card-layout-view.layer-layer2 .card-layout-item .card.card-completion::before {
-  background: rgba(0, 0, 0, 0.6) !important;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 90%) !important;
 }
 
 /* Layer 3: Variação Back04 - back04.png em TODOS os cards com background */
@@ -455,7 +669,7 @@
 .card-layout-view.layer-layer3 .card-layout-item .card.card-interactive::before,
 .card-layout-view.layer-layer3 .card-layout-item .card.card-intro::before,
 .card-layout-view.layer-layer3 .card-layout-item .card.card-completion::before {
-  background: rgba(0, 0, 0, 0.6) !important;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 90%) !important;
 }
 
 /* Layer 4: Variação Back05 - back05.png em TODOS os cards com background */
@@ -477,7 +691,7 @@
 .card-layout-view.layer-layer4 .card-layout-item .card.card-interactive::before,
 .card-layout-view.layer-layer4 .card-layout-item .card.card-intro::before,
 .card-layout-view.layer-layer4 .card-layout-item .card.card-completion::before {
-  background: rgba(0, 0, 0, 0.6) !important;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 90%) !important;
 }
 
 /* Layer 5: Variação Back06 - back06.png em TODOS os cards com background */
@@ -499,7 +713,7 @@
 .card-layout-view.layer-layer5 .card-layout-item .card.card-interactive::before,
 .card-layout-view.layer-layer5 .card-layout-item .card.card-intro::before,
 .card-layout-view.layer-layer5 .card-layout-item .card.card-completion::before {
-  background: rgba(0, 0, 0, 0.6) !important;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 90%) !important;
 }
 
 /* Layer 7: Variação Back07 - back07.jpg em TODOS os cards com background */
@@ -521,7 +735,7 @@
 .card-layout-view.layer-layer7 .card-layout-item .card.card-interactive::before,
 .card-layout-view.layer-layer7 .card-layout-item .card.card-intro::before,
 .card-layout-view.layer-layer7 .card-layout-item .card.card-completion::before {
-  background: rgba(0, 0, 0, 0.6) !important;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 90%) !important;
 }
 
 /* Layer 8: Variação Back08 - back08.jpg em TODOS os cards com background */
@@ -543,7 +757,7 @@
 .card-layout-view.layer-layer8 .card-layout-item .card.card-interactive::before,
 .card-layout-view.layer-layer8 .card-layout-item .card.card-intro::before,
 .card-layout-view.layer-layer8 .card-layout-item .card.card-completion::before {
-  background: rgba(0, 0, 0, 0.6) !important;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 90%) !important;
 }
 
 /* Layer 9: Variação Back09 - back09.jpg em TODOS os cards com background */
@@ -565,7 +779,7 @@
 .card-layout-view.layer-layer9 .card-layout-item .card.card-interactive::before,
 .card-layout-view.layer-layer9 .card-layout-item .card.card-intro::before,
 .card-layout-view.layer-layer9 .card-layout-item .card.card-completion::before {
-  background: rgba(0, 0, 0, 0.6) !important;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 90%) !important;
 }
 
 /* Layer 10: Variação Back10 - back10.jpg em TODOS os cards com background */
@@ -587,7 +801,7 @@
 .card-layout-view.layer-layer10 .card-layout-item .card.card-interactive::before,
 .card-layout-view.layer-layer10 .card-layout-item .card.card-intro::before,
 .card-layout-view.layer-layer10 .card-layout-item .card.card-completion::before {
-  background: rgba(0, 0, 0, 0.6) !important;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 90%) !important;
 }
 
 /* Layer 11: Variação Back11 - Back11.png em TODOS os cards com background */
@@ -610,7 +824,29 @@
 .card-layout-view.layer-layer11 .card-layout-item .card.card-interactive::before,
 .card-layout-view.layer-layer11 .card-layout-item .card.card-intro::before,
 .card-layout-view.layer-layer11 .card-layout-item .card.card-completion::before {
-  background: rgba(0, 0, 0, 0.6) !important;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 90%) !important;
+}
+
+/* Layer 12: Variação Back09 - UX lenses - back09.jpg em TODOS os cards com background */
+.card-layout-view.layer-layer12 .card-layout-item .card.card-cover,
+.card-layout-view.layer-layer12 .card-layout-item .card.card-selection,
+.card-layout-view.layer-layer12 .card-layout-item .card.card-mode,
+.card-layout-view.layer-layer12 .card-layout-item .card.card-interactive,
+.card-layout-view.layer-layer12 .card-layout-item .card.card-intro,
+.card-layout-view.layer-layer12 .card-layout-item .card.card-completion {
+  background-image: url('/back09.jpg') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+.card-layout-view.layer-layer12 .card-layout-item .card.card-cover::before,
+.card-layout-view.layer-layer12 .card-layout-item .card.card-selection::before,
+.card-layout-view.layer-layer12 .card-layout-item .card.card-mode::before,
+.card-layout-view.layer-layer12 .card-layout-item .card.card-interactive::before,
+.card-layout-view.layer-layer12 .card-layout-item .card.card-intro::before,
+.card-layout-view.layer-layer12 .card-layout-item .card.card-completion::before {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 60%) !important;
 }
 
 /* ============================================
@@ -775,11 +1011,25 @@ body:has(.card-layout-view.layer-layer11) .creator-popup-content::before {
   background: rgba(0, 0, 0, 0.6) !important;
 }
 
+/* Layer 12: UX Lenses - no popup background image */
+.card-layout-view.layer-layer12 .creator-popup-content,
+.layer-layer12 .creator-popup-content,
+body:has(.card-layout-view.layer-layer12) .creator-popup-content {
+  background-image: none !important;
+  background-color: transparent !important;
+}
+
+.card-layout-view.layer-layer12 .creator-popup-content::before,
+.layer-layer12 .creator-popup-content::before,
+body:has(.card-layout-view.layer-layer12) .creator-popup-content::before {
+  display: none !important;
+}
+
 /* ============================================
-   ESTILOS ARREDONDADOS PARA LAYERS 2, 3, 4, 5, 7, 8, 9, 10, 11
+   ESTILOS ARREDONDADOS PARA LAYERS 2, 3, 4, 5, 7, 8, 9, 10, 11, 12
    ============================================ */
 
-/* Layers 2, 3, 4, 5, 7, 8, 9, 10, 11 - Aplicar estilos arredondados */
+/* Layers 2, 3, 4, 5, 7, 8, 9, 10, 11, 12 - Aplicar estilos arredondados */
 .card-layout-view.layer-layer2 .card-layout-item,
 .card-layout-view.layer-layer3 .card-layout-item,
 .card-layout-view.layer-layer4 .card-layout-item,
@@ -788,7 +1038,8 @@ body:has(.card-layout-view.layer-layer11) .creator-popup-content::before {
 .card-layout-view.layer-layer8 .card-layout-item,
 .card-layout-view.layer-layer9 .card-layout-item,
 .card-layout-view.layer-layer10 .card-layout-item,
-.card-layout-view.layer-layer11 .card-layout-item {
+.card-layout-view.layer-layer11 .card-layout-item,
+.card-layout-view.layer-layer12 .card-layout-item {
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
@@ -801,7 +1052,8 @@ body:has(.card-layout-view.layer-layer11) .creator-popup-content::before {
 .card-layout-view.layer-layer8 .card-layout-item .card,
 .card-layout-view.layer-layer9 .card-layout-item .card,
 .card-layout-view.layer-layer10 .card-layout-item .card,
-.card-layout-view.layer-layer11 .card-layout-item .card {
+.card-layout-view.layer-layer11 .card-layout-item .card,
+.card-layout-view.layer-layer12 .card-layout-item .card {
   border-radius: 12px;
 }
 
@@ -819,8 +1071,8 @@ body:has(.card-layout-view.layer-layer11) .creator-popup-content::before {
 .card-layout-view.layer-layer2 .card-layout-item .concept-continue-button,
 .card-layout-view.layer-layer2 .card-layout-item .intro-start-button,
 .card-layout-view.layer-layer2 .card-layout-item .mode-button,
-.card-layout-view.layer-layer2 .card-layout-item button,
-.card-layout-view.layer-layer2 .card-layout-item .card-actions button,
+.card-layout-view.layer-layer2 .card-layout-item button:not(.card05-ux-action-button):not(.card05-ux-concept-link),
+.card-layout-view.layer-layer2 .card-layout-item .card-actions button:not(.card05-ux-action-button),
 .card-layout-view.layer-layer3 .card-layout-item .header-button,
 .card-layout-view.layer-layer3 .card-layout-item .primary-button,
 .card-layout-view.layer-layer3 .card-layout-item .selection-button,
@@ -834,8 +1086,8 @@ body:has(.card-layout-view.layer-layer11) .creator-popup-content::before {
 .card-layout-view.layer-layer3 .card-layout-item .concept-continue-button,
 .card-layout-view.layer-layer3 .card-layout-item .intro-start-button,
 .card-layout-view.layer-layer3 .card-layout-item .mode-button,
-.card-layout-view.layer-layer3 .card-layout-item button,
-.card-layout-view.layer-layer3 .card-layout-item .card-actions button,
+.card-layout-view.layer-layer3 .card-layout-item button:not(.card05-ux-action-button):not(.card05-ux-concept-link),
+.card-layout-view.layer-layer3 .card-layout-item .card-actions button:not(.card05-ux-action-button),
 .card-layout-view.layer-layer4 .card-layout-item .header-button,
 .card-layout-view.layer-layer4 .card-layout-item .primary-button,
 .card-layout-view.layer-layer4 .card-layout-item .selection-button,
@@ -849,8 +1101,8 @@ body:has(.card-layout-view.layer-layer11) .creator-popup-content::before {
 .card-layout-view.layer-layer4 .card-layout-item .concept-continue-button,
 .card-layout-view.layer-layer4 .card-layout-item .intro-start-button,
 .card-layout-view.layer-layer4 .card-layout-item .mode-button,
-.card-layout-view.layer-layer4 .card-layout-item button,
-.card-layout-view.layer-layer4 .card-layout-item .card-actions button,
+.card-layout-view.layer-layer4 .card-layout-item button:not(.card05-ux-action-button):not(.card05-ux-concept-link),
+.card-layout-view.layer-layer4 .card-layout-item .card-actions button:not(.card05-ux-action-button),
 .card-layout-view.layer-layer5 .card-layout-item .header-button,
 .card-layout-view.layer-layer5 .card-layout-item .primary-button,
 .card-layout-view.layer-layer5 .card-layout-item .selection-button,
@@ -864,8 +1116,8 @@ body:has(.card-layout-view.layer-layer11) .creator-popup-content::before {
 .card-layout-view.layer-layer5 .card-layout-item .concept-continue-button,
 .card-layout-view.layer-layer5 .card-layout-item .intro-start-button,
 .card-layout-view.layer-layer5 .card-layout-item .mode-button,
-.card-layout-view.layer-layer5 .card-layout-item button,
-.card-layout-view.layer-layer5 .card-layout-item .card-actions button,
+.card-layout-view.layer-layer5 .card-layout-item button:not(.card05-ux-action-button):not(.card05-ux-concept-link),
+.card-layout-view.layer-layer5 .card-layout-item .card-actions button:not(.card05-ux-action-button),
 .card-layout-view.layer-layer7 .card-layout-item .header-button,
 .card-layout-view.layer-layer7 .card-layout-item .primary-button,
 .card-layout-view.layer-layer7 .card-layout-item .selection-button,
@@ -879,8 +1131,8 @@ body:has(.card-layout-view.layer-layer11) .creator-popup-content::before {
 .card-layout-view.layer-layer7 .card-layout-item .concept-continue-button,
 .card-layout-view.layer-layer7 .card-layout-item .intro-start-button,
 .card-layout-view.layer-layer7 .card-layout-item .mode-button,
-.card-layout-view.layer-layer7 .card-layout-item button,
-.card-layout-view.layer-layer7 .card-layout-item .card-actions button,
+.card-layout-view.layer-layer7 .card-layout-item button:not(.card05-ux-action-button):not(.card05-ux-concept-link),
+.card-layout-view.layer-layer7 .card-layout-item .card-actions button:not(.card05-ux-action-button),
 .card-layout-view.layer-layer8 .card-layout-item .header-button,
 .card-layout-view.layer-layer8 .card-layout-item .primary-button,
 .card-layout-view.layer-layer8 .card-layout-item .selection-button,
@@ -894,8 +1146,8 @@ body:has(.card-layout-view.layer-layer11) .creator-popup-content::before {
 .card-layout-view.layer-layer8 .card-layout-item .concept-continue-button,
 .card-layout-view.layer-layer8 .card-layout-item .intro-start-button,
 .card-layout-view.layer-layer8 .card-layout-item .mode-button,
-.card-layout-view.layer-layer8 .card-layout-item button,
-.card-layout-view.layer-layer8 .card-layout-item .card-actions button,
+.card-layout-view.layer-layer8 .card-layout-item button:not(.card05-ux-action-button):not(.card05-ux-concept-link),
+.card-layout-view.layer-layer8 .card-layout-item .card-actions button:not(.card05-ux-action-button),
 .card-layout-view.layer-layer9 .card-layout-item .header-button,
 .card-layout-view.layer-layer9 .card-layout-item .primary-button,
 .card-layout-view.layer-layer9 .card-layout-item .selection-button,
@@ -909,8 +1161,8 @@ body:has(.card-layout-view.layer-layer11) .creator-popup-content::before {
 .card-layout-view.layer-layer9 .card-layout-item .concept-continue-button,
 .card-layout-view.layer-layer9 .card-layout-item .intro-start-button,
 .card-layout-view.layer-layer9 .card-layout-item .mode-button,
-.card-layout-view.layer-layer9 .card-layout-item button,
-.card-layout-view.layer-layer9 .card-layout-item .card-actions button,
+.card-layout-view.layer-layer9 .card-layout-item button:not(.card05-ux-action-button):not(.card05-ux-concept-link),
+.card-layout-view.layer-layer9 .card-layout-item .card-actions button:not(.card05-ux-action-button),
 .card-layout-view.layer-layer10 .card-layout-item .header-button,
 .card-layout-view.layer-layer10 .card-layout-item .primary-button,
 .card-layout-view.layer-layer10 .card-layout-item .selection-button,
@@ -924,8 +1176,8 @@ body:has(.card-layout-view.layer-layer11) .creator-popup-content::before {
 .card-layout-view.layer-layer10 .card-layout-item .concept-continue-button,
 .card-layout-view.layer-layer10 .card-layout-item .intro-start-button,
 .card-layout-view.layer-layer10 .card-layout-item .mode-button,
-.card-layout-view.layer-layer10 .card-layout-item button,
-.card-layout-view.layer-layer10 .card-layout-item .card-actions button,
+.card-layout-view.layer-layer10 .card-layout-item button:not(.card05-ux-action-button):not(.card05-ux-concept-link),
+.card-layout-view.layer-layer10 .card-layout-item .card-actions button:not(.card05-ux-action-button),
 .card-layout-view.layer-layer11 .card-layout-item .header-button,
 .card-layout-view.layer-layer11 .card-layout-item .primary-button,
 .card-layout-view.layer-layer11 .card-layout-item .selection-button,
@@ -939,10 +1191,24 @@ body:has(.card-layout-view.layer-layer11) .creator-popup-content::before {
 .card-layout-view.layer-layer11 .card-layout-item .concept-continue-button,
 .card-layout-view.layer-layer11 .card-layout-item .intro-start-button,
 .card-layout-view.layer-layer11 .card-layout-item .mode-button,
-.card-layout-view.layer-layer11 .card-layout-item button,
-.card-layout-view.layer-layer11 .card-layout-item .card-actions button {
+.card-layout-view.layer-layer11 .card-layout-item button:not(.card05-ux-action-button):not(.card05-ux-concept-link),
+.card-layout-view.layer-layer11 .card-layout-item .card-actions button:not(.card05-ux-action-button),
+.card-layout-view.layer-layer12 .card-layout-item .header-button,
+.card-layout-view.layer-layer12 .card-layout-item .primary-button,
+.card-layout-view.layer-layer12 .card-layout-item .selection-button,
+.card-layout-view.layer-layer12 .card-layout-item .secondary-button,
+.card-layout-view.layer-layer12 .card-layout-item .next-step-button,
+.card-layout-view.layer-layer12 .card-layout-item .demonstrate-button,
+.card-layout-view.layer-layer12 .card-layout-item .feedback-button,
+.card-layout-view.layer-layer12 .card-layout-item .interactive-button,
+.card-layout-view.layer-layer12 .card-layout-item .completion-button,
+.card-layout-view.layer-layer12 .card-layout-item .user-attempt-button,
+.card-layout-view.layer-layer12 .card-layout-item .concept-continue-button,
+.card-layout-view.layer-layer12 .card-layout-item .intro-start-button,
+.card-layout-view.layer-layer12 .card-layout-item .mode-button,
+.card-layout-view.layer-layer12 .card-layout-item button:not(.card05-ux-action-button):not(.card05-ux-concept-link),
+.card-layout-view.layer-layer12 .card-layout-item .card-actions button:not(.card05-ux-action-button) {
   border-radius: 50px !important;
-  padding: 12px 24px !important;
   transition: all 0.3s ease !important;
 }
 
@@ -954,7 +1220,8 @@ body:has(.card-layout-view.layer-layer11) .creator-popup-content::before {
 .card-layout-view.layer-layer8 .card-layout-item .header-button,
 .card-layout-view.layer-layer9 .card-layout-item .header-button,
 .card-layout-view.layer-layer10 .card-layout-item .header-button,
-.card-layout-view.layer-layer11 .card-layout-item .header-button {
+.card-layout-view.layer-layer11 .card-layout-item .header-button,
+.card-layout-view.layer-layer12 .card-layout-item .header-button {
   border-radius: 50px !important;
   height: auto !important;
   min-height: 44px !important;
@@ -978,7 +1245,9 @@ body:has(.card-layout-view.layer-layer11) .creator-popup-content::before {
 .card-layout-view.layer-layer10 .card-layout-item .primary-button,
 .card-layout-view.layer-layer10 .card-layout-item .selection-button,
 .card-layout-view.layer-layer11 .card-layout-item .primary-button,
-.card-layout-view.layer-layer11 .card-layout-item .selection-button {
+.card-layout-view.layer-layer11 .card-layout-item .selection-button,
+.card-layout-view.layer-layer12 .card-layout-item .primary-button,
+.card-layout-view.layer-layer12 .card-layout-item .selection-button {
   border-radius: 50px !important;
   padding: 14px 28px !important;
   font-weight: 600 !important;
@@ -992,7 +1261,8 @@ body:has(.card-layout-view.layer-layer11) .creator-popup-content::before {
 .card-layout-view.layer-layer8 .card-layout-item .secondary-button,
 .card-layout-view.layer-layer9 .card-layout-item .secondary-button,
 .card-layout-view.layer-layer10 .card-layout-item .secondary-button,
-.card-layout-view.layer-layer11 .card-layout-item .secondary-button {
+.card-layout-view.layer-layer11 .card-layout-item .secondary-button,
+.card-layout-view.layer-layer12 .card-layout-item .secondary-button {
   border-radius: 50px !important;
   padding: 12px 24px !important;
 }
@@ -1005,7 +1275,8 @@ body:has(.card-layout-view.layer-layer11) .creator-popup-content::before {
 .card-layout-view.layer-layer8 .card-layout-item .mode-button,
 .card-layout-view.layer-layer9 .card-layout-item .mode-button,
 .card-layout-view.layer-layer10 .card-layout-item .mode-button,
-.card-layout-view.layer-layer11 .card-layout-item .mode-button {
+.card-layout-view.layer-layer11 .card-layout-item .mode-button,
+.card-layout-view.layer-layer12 .card-layout-item .mode-button {
   border-radius: 16px !important;
   padding: 16px 24px !important;
 }
@@ -1024,7 +1295,7 @@ body:has(.card-layout-view.layer-layer11) .creator-popup-content::before {
 .card-layout-view.layer-layer2 .card-layout-item .concept-continue-button:hover,
 .card-layout-view.layer-layer2 .card-layout-item .intro-start-button:hover,
 .card-layout-view.layer-layer2 .card-layout-item .mode-button:hover,
-.card-layout-view.layer-layer2 .card-layout-item button:hover,
+.card-layout-view.layer-layer2 .card-layout-item button:not(.card05-ux-action-button):not(.card05-ux-concept-link):not(.card05-ux-action-button):hover,
 .card-layout-view.layer-layer3 .card-layout-item .header-button:hover,
 .card-layout-view.layer-layer3 .card-layout-item .primary-button:hover,
 .card-layout-view.layer-layer3 .card-layout-item .selection-button:hover,
@@ -1038,7 +1309,7 @@ body:has(.card-layout-view.layer-layer11) .creator-popup-content::before {
 .card-layout-view.layer-layer3 .card-layout-item .concept-continue-button:hover,
 .card-layout-view.layer-layer3 .card-layout-item .intro-start-button:hover,
 .card-layout-view.layer-layer3 .card-layout-item .mode-button:hover,
-.card-layout-view.layer-layer3 .card-layout-item button:hover,
+.card-layout-view.layer-layer3 .card-layout-item button:not(.card05-ux-action-button):not(.card05-ux-concept-link):not(.card05-ux-action-button):hover,
 .card-layout-view.layer-layer4 .card-layout-item .header-button:hover,
 .card-layout-view.layer-layer4 .card-layout-item .primary-button:hover,
 .card-layout-view.layer-layer4 .card-layout-item .selection-button:hover,
@@ -1052,7 +1323,7 @@ body:has(.card-layout-view.layer-layer11) .creator-popup-content::before {
 .card-layout-view.layer-layer4 .card-layout-item .concept-continue-button:hover,
 .card-layout-view.layer-layer4 .card-layout-item .intro-start-button:hover,
 .card-layout-view.layer-layer4 .card-layout-item .mode-button:hover,
-.card-layout-view.layer-layer4 .card-layout-item button:hover,
+.card-layout-view.layer-layer4 .card-layout-item button:not(.card05-ux-action-button):not(.card05-ux-concept-link):not(.card05-ux-action-button):hover,
 .card-layout-view.layer-layer5 .card-layout-item .header-button:hover,
 .card-layout-view.layer-layer5 .card-layout-item .primary-button:hover,
 .card-layout-view.layer-layer5 .card-layout-item .selection-button:hover,
@@ -1066,7 +1337,7 @@ body:has(.card-layout-view.layer-layer11) .creator-popup-content::before {
 .card-layout-view.layer-layer5 .card-layout-item .concept-continue-button:hover,
 .card-layout-view.layer-layer5 .card-layout-item .intro-start-button:hover,
 .card-layout-view.layer-layer5 .card-layout-item .mode-button:hover,
-.card-layout-view.layer-layer5 .card-layout-item button:hover,
+.card-layout-view.layer-layer5 .card-layout-item button:not(.card05-ux-action-button):not(.card05-ux-concept-link):not(.card05-ux-action-button):hover,
 .card-layout-view.layer-layer7 .card-layout-item .header-button:hover,
 .card-layout-view.layer-layer7 .card-layout-item .primary-button:hover,
 .card-layout-view.layer-layer7 .card-layout-item .selection-button:hover,
@@ -1080,7 +1351,7 @@ body:has(.card-layout-view.layer-layer11) .creator-popup-content::before {
 .card-layout-view.layer-layer7 .card-layout-item .concept-continue-button:hover,
 .card-layout-view.layer-layer7 .card-layout-item .intro-start-button:hover,
 .card-layout-view.layer-layer7 .card-layout-item .mode-button:hover,
-.card-layout-view.layer-layer7 .card-layout-item button:hover,
+.card-layout-view.layer-layer7 .card-layout-item button:not(.card05-ux-action-button):not(.card05-ux-concept-link):not(.card05-ux-action-button):hover,
 .card-layout-view.layer-layer8 .card-layout-item .header-button:hover,
 .card-layout-view.layer-layer8 .card-layout-item .primary-button:hover,
 .card-layout-view.layer-layer8 .card-layout-item .selection-button:hover,
@@ -1094,7 +1365,7 @@ body:has(.card-layout-view.layer-layer11) .creator-popup-content::before {
 .card-layout-view.layer-layer8 .card-layout-item .concept-continue-button:hover,
 .card-layout-view.layer-layer8 .card-layout-item .intro-start-button:hover,
 .card-layout-view.layer-layer8 .card-layout-item .mode-button:hover,
-.card-layout-view.layer-layer8 .card-layout-item button:hover,
+.card-layout-view.layer-layer8 .card-layout-item button:not(.card05-ux-action-button):not(.card05-ux-concept-link):not(.card05-ux-action-button):hover,
 .card-layout-view.layer-layer9 .card-layout-item .header-button:hover,
 .card-layout-view.layer-layer9 .card-layout-item .primary-button:hover,
 .card-layout-view.layer-layer9 .card-layout-item .selection-button:hover,
@@ -1108,7 +1379,7 @@ body:has(.card-layout-view.layer-layer11) .creator-popup-content::before {
 .card-layout-view.layer-layer9 .card-layout-item .concept-continue-button:hover,
 .card-layout-view.layer-layer9 .card-layout-item .intro-start-button:hover,
 .card-layout-view.layer-layer9 .card-layout-item .mode-button:hover,
-.card-layout-view.layer-layer9 .card-layout-item button:hover,
+.card-layout-view.layer-layer9 .card-layout-item button:not(.card05-ux-action-button):not(.card05-ux-concept-link):not(.card05-ux-action-button):hover,
 .card-layout-view.layer-layer10 .card-layout-item .header-button:hover,
 .card-layout-view.layer-layer10 .card-layout-item .primary-button:hover,
 .card-layout-view.layer-layer10 .card-layout-item .selection-button:hover,
@@ -1122,7 +1393,7 @@ body:has(.card-layout-view.layer-layer11) .creator-popup-content::before {
 .card-layout-view.layer-layer10 .card-layout-item .concept-continue-button:hover,
 .card-layout-view.layer-layer10 .card-layout-item .intro-start-button:hover,
 .card-layout-view.layer-layer10 .card-layout-item .mode-button:hover,
-.card-layout-view.layer-layer10 .card-layout-item button:hover,
+.card-layout-view.layer-layer10 .card-layout-item button:not(.card05-ux-action-button):not(.card05-ux-concept-link):not(.card05-ux-action-button):hover,
 .card-layout-view.layer-layer11 .card-layout-item .header-button:hover,
 .card-layout-view.layer-layer11 .card-layout-item .primary-button:hover,
 .card-layout-view.layer-layer11 .card-layout-item .selection-button:hover,
@@ -1136,7 +1407,21 @@ body:has(.card-layout-view.layer-layer11) .creator-popup-content::before {
 .card-layout-view.layer-layer11 .card-layout-item .concept-continue-button:hover,
 .card-layout-view.layer-layer11 .card-layout-item .intro-start-button:hover,
 .card-layout-view.layer-layer11 .card-layout-item .mode-button:hover,
-.card-layout-view.layer-layer11 .card-layout-item button:hover {
+.card-layout-view.layer-layer11 .card-layout-item button:not(.card05-ux-action-button):not(.card05-ux-concept-link):not(.card05-ux-action-button):hover,
+.card-layout-view.layer-layer12 .card-layout-item .header-button:hover,
+.card-layout-view.layer-layer12 .card-layout-item .primary-button:hover,
+.card-layout-view.layer-layer12 .card-layout-item .selection-button:hover,
+.card-layout-view.layer-layer12 .card-layout-item .secondary-button:hover,
+.card-layout-view.layer-layer12 .card-layout-item .next-step-button:hover,
+.card-layout-view.layer-layer12 .card-layout-item .demonstrate-button:hover,
+.card-layout-view.layer-layer12 .card-layout-item .feedback-button:hover,
+.card-layout-view.layer-layer12 .card-layout-item .interactive-button:hover,
+.card-layout-view.layer-layer12 .card-layout-item .completion-button:hover,
+.card-layout-view.layer-layer12 .card-layout-item .user-attempt-button:hover,
+.card-layout-view.layer-layer12 .card-layout-item .concept-continue-button:hover,
+.card-layout-view.layer-layer12 .card-layout-item .intro-start-button:hover,
+.card-layout-view.layer-layer12 .card-layout-item .mode-button:hover,
+.card-layout-view.layer-layer12 .card-layout-item button:not(.card05-ux-action-button):not(.card05-ux-concept-link):not(.card05-ux-action-button):hover {
   transform: translateY(-2px) !important;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
 }
@@ -1177,7 +1462,11 @@ body:has(.card-layout-view.layer-layer11) .creator-popup-content::before {
 .card-layout-view.layer-layer11 .card-layout-item input[type="text"],
 .card-layout-view.layer-layer11 .card-layout-item input[type="email"],
 .card-layout-view.layer-layer11 .card-layout-item textarea,
-.card-layout-view.layer-layer11 .card-layout-item select {
+.card-layout-view.layer-layer11 .card-layout-item select,
+.card-layout-view.layer-layer12 .card-layout-item input[type="text"],
+.card-layout-view.layer-layer12 .card-layout-item input[type="email"],
+.card-layout-view.layer-layer12 .card-layout-item textarea,
+.card-layout-view.layer-layer12 .card-layout-item select {
   border-radius: 50px !important;
   padding: 12px 20px !important;
 }
@@ -1201,7 +1490,8 @@ body:has(.card-layout-view.layer-layer11) .creator-popup-content::before {
 .card-layout-view.layer-layer8 .card-layout-item .theme-action-box,
 .card-layout-view.layer-layer9 .card-layout-item .theme-action-box,
 .card-layout-view.layer-layer10 .card-layout-item .theme-action-box,
-.card-layout-view.layer-layer11 .card-layout-item .theme-action-box {
+.card-layout-view.layer-layer11 .card-layout-item .theme-action-box,
+.card-layout-view.layer-layer12 .card-layout-item .theme-action-box {
   border-radius: 16px !important;
 }
 
@@ -1222,7 +1512,9 @@ body:has(.card-layout-view.layer-layer11) .creator-popup-content::before {
 .card-layout-view.layer-layer10 .card-layout-item .theme-action-box .theme-box,
 .card-layout-view.layer-layer10 .card-layout-item .theme-action-box .step-title-bar,
 .card-layout-view.layer-layer11 .card-layout-item .theme-action-box .theme-box,
-.card-layout-view.layer-layer11 .card-layout-item .theme-action-box .step-title-bar {
+.card-layout-view.layer-layer11 .card-layout-item .theme-action-box .step-title-bar,
+.card-layout-view.layer-layer12 .card-layout-item .theme-action-box .theme-box,
+.card-layout-view.layer-layer12 .card-layout-item .theme-action-box .step-title-bar {
   border-radius: 0 !important;
 }
 
@@ -1234,7 +1526,8 @@ body:has(.card-layout-view.layer-layer11) .creator-popup-content::before {
 .card-layout-view.layer-layer8 .card-layout-item .theme-action-box .step-title-bar,
 .card-layout-view.layer-layer9 .card-layout-item .theme-action-box .step-title-bar,
 .card-layout-view.layer-layer10 .card-layout-item .theme-action-box .step-title-bar,
-.card-layout-view.layer-layer11 .card-layout-item .theme-action-box .step-title-bar {
+.card-layout-view.layer-layer11 .card-layout-item .theme-action-box .step-title-bar,
+.card-layout-view.layer-layer12 .card-layout-item .theme-action-box .step-title-bar {
   padding: 12px 20px !important;
 }
 
@@ -1255,7 +1548,9 @@ body:has(.card-layout-view.layer-layer11) .creator-popup-content::before {
 .card-layout-view.layer-layer10 .card-layout-item .theme-box,
 .card-layout-view.layer-layer10 .card-layout-item .instructions-box,
 .card-layout-view.layer-layer11 .card-layout-item .theme-box,
-.card-layout-view.layer-layer11 .card-layout-item .instructions-box {
+.card-layout-view.layer-layer11 .card-layout-item .instructions-box,
+.card-layout-view.layer-layer12 .card-layout-item .theme-box,
+.card-layout-view.layer-layer12 .card-layout-item .instructions-box {
   border-radius: 16px !important;
 }
 
@@ -1289,4 +1584,3 @@ body:has(.card-layout-view.layer-layer11) .creator-popup-content::before {
 .card-layout-view.layer-layer8 .card-layout-item .card-actions .demonstrate-button {
   border-radius: 50px !important;
 }
-

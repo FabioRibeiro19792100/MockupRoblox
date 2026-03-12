@@ -4,7 +4,7 @@ function Card08_UserAttempt({ stepNumber, totalSteps, stepTitle, onCheckResult, 
   return (
     <div className="card card-step">
       <div className="card-header-global">
-        <button className="header-button" onClick={onMenu}>Voltar para menu</button>
+        <button className="header-button" onClick={onMenu}>Voltar para o menu</button>
         <button className="header-button" onClick={onRestart}>Reiniciar tutorial</button>
       </div>
       <div style={{ padding: '0 24px 24px 24px' }}>
@@ -23,11 +23,10 @@ function Card08_UserAttempt({ stepNumber, totalSteps, stepTitle, onCheckResult, 
           <div className="section-title">COMO FAZER NO ROBLOX STUDIO</div>
           <div className="instructions-box">
             <ol className="instructions-list">
-              <li>Clique no menu "Insert"</li>
-              <li>Selecione "Part"</li>
-              <li>Um bloco será criado na cena</li>
-              <li>Posicione o bloco no centro da viewport</li>
-              <li>Ajuste o tamanho conforme necessário</li>
+              <li>Crie uma Part</li>
+              <li>Selecione e renomeie a nova Part</li>
+              <li>Ajuste o tamanho e a posição da Part_1</li>
+              <li>Mude o material</li>
             </ol>
           </div>
         </div>
@@ -35,13 +34,13 @@ function Card08_UserAttempt({ stepNumber, totalSteps, stepTitle, onCheckResult, 
           <div className="section-title">O QUE VOCÊ VAI VER NA TELA</div>
           <div className="instructions-box">
             <p style={{ margin: 0, color: '#000000', fontSize: '14.5px', lineHeight: '1.12' }}>
-              Você verá a base da casa (um bloco cinza retangular grande) sendo criada no centro da tela.
+              A base da casa, representada por um bloco retangular cinza e grande.
             </p>
           </div>
         </div>
         <div style={{ marginTop: '8px', textAlign: 'left' }}>
           <button className="user-attempt-button" onClick={onCheckResult} style={{ textAlign: 'left' }}>
-            Já fez? Clique para ver o resultado
+            Clique para ver o resultado!
           </button>
           <span className="skip-link" onClick={onSkip} style={{ 
             display: 'block', 
@@ -53,7 +52,7 @@ function Card08_UserAttempt({ stepNumber, totalSteps, stepTitle, onCheckResult, 
             textDecorationThickness: '1px',
             textUnderlineOffset: '8px'
           }}>
-            Ou clique aqui para pular esse passo
+            OU CLIQUE AQUI PARA PULAR ESSE PASSO
           </span>
         </div>
       </div>

@@ -45,12 +45,6 @@
   overflow: hidden;
 }
 
-.badge-gallery-fixed.expanded {
-  max-height: 350px;
-  min-height: 350px;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
 
 .badge-gallery-header {
   background: linear-gradient(135deg, rgb(113, 180, 233) 0%, rgb(100, 160, 210) 100%);
@@ -111,8 +105,4 @@
     margin-top: 0;
   }
 
-  .badge-gallery-fixed.expanded {
-    max-height: 300px;
-    min-height: 300px;
-  }
 }

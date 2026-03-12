@@ -101,22 +101,13 @@
   color: #000000 !important;
 }
 
-/* Exceção: Card 13 (Badge Explanation) - TODAS as fontes devem ser pretas */
-.card-badge-explanation,
-.card-badge-explanation *,
-.card-badge-explanation p,
-.card-badge-explanation span,
-.card-badge-explanation strong,
-.card-badge-explanation h1,
-.card-badge-explanation h2,
-.card-badge-explanation h3,
-.card-badge-explanation .card-title {
-  color: #000000 !important;
-}
-
 /* Exceção: No hover do botão header no Card 13, fonte deve ser branca */
 .card-badge-explanation .header-button:hover {
   color: #ffffff !important;
+}
+
+.card-badge-explanation .badge-title-accent {
+  color: #f59e0b !important;
 }
 
 /* Toggle da galeria de badges - posicionado logo após o header */
@@ -163,18 +154,19 @@
   margin-top: 0;
   background: #000000;
   border-top: 1px solid #e0e0e0;
-  height: 60px;
+  height: 60px !important;
+  min-height: 60px !important;
+  max-height: 60px !important;
   color: #ffffff;
 }
 
 
 /* Conteúdo scrollável entre header e botões */
-.card-with-badge-toggle .card > div:not(.card-header-global):not(.card-actions) {
+.card-with-badge-toggle .card > div:not(.card-header-global):not(.card-actions):not(.no-padding-override) {
   flex: 1;
   overflow-y: auto !important;
   overflow-x: hidden !important;
   min-height: 0;
-  padding-bottom: 140px !important; /* Espaço para botões (80px) + toggle (60px) */
 }
 
 .card-content {
@@ -283,7 +275,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 90%);
   z-index: 1;
   pointer-events: none;
 }
@@ -317,7 +309,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 90%);
   z-index: 1;
   pointer-events: none;
 }
@@ -353,8 +345,14 @@
 
 /* Títulos dentro dos acordeões (headers) ficam pretos */
 .card-selection .card-content > div > div:first-child h3,
-.card-selection .card-content > div > div:first-child span {
+.card-selection .card-content > div > div:first-child p,
+.card-selection .card-content > div > div:first-child span:not(.badge-tag) {
   color: #000000 !important;
+}
+
+/* Badge tags mantêm suas cores originais */
+.card-selection .badge-tag {
+  color: #ffffff !important;
 }
 
 /* Botões de acordeão mantêm fundo sólido (não transparente) */
@@ -387,10 +385,6 @@
 
 /* Quando acordeão está aberto, fundo mais opaco (mais branco) */
 .card-selection .card-content > div > div:not(:first-child) {
-  background: rgba(255, 255, 255, 0.95) !important;
-}
-
-.card-selection .card-content > div > div > div {
   background: rgba(255, 255, 255, 0.95) !important;
 }
 
@@ -662,7 +656,6 @@
   overflow-x: hidden !important;
   min-height: 0;
   max-height: none;
-  padding-bottom: 80px !important; /* Espaço para os botões */
 }
 
 /* Container único que envolve theme-box + step-title-bar */
@@ -883,6 +876,28 @@
   right: 0 !important;
   margin-top: 0 !important;
   z-index: 52 !important;
+}
+
+.confetti-piece {
+  animation-name: confetti-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  transform: translate3d(0, 0, 0) rotate(var(--confetti-rotate, 0deg));
+  will-change: transform, opacity;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translate3d(0, -20px, 0) rotate(var(--confetti-rotate, 0deg));
+    opacity: 0.95;
+  }
+  80% {
+    opacity: 0.95;
+  }
+  100% {
+    transform: translate3d(var(--confetti-drift, 0px), 360px, 0) rotate(calc(var(--confetti-rotate, 0deg) + 90deg));
+    opacity: 0;
+  }
 }
 
 
@@ -1244,6 +1259,29 @@
   z-index: 10;
 }
 
+.negative-action-section {
+  margin-bottom: 20px;
+}
+
+.positive-next-section {
+  margin-top: 20px;
+}
+
+.negative-follow-link {
+  background: transparent;
+  border: none;
+  color: #2196F3;
+  font-size: 10pt;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.completion-actions-section {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
 .feedback-button-red {
   flex: 1;
   padding: 12px 24px;
@@ -1289,6 +1327,8 @@
   position: relative;
   padding: 0;
   color: #ffffff;
+  overflow: hidden;
+  overflow-y: hidden;
 }
 
 .card-completion::before {

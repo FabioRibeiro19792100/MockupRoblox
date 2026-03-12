@@ -3,7 +3,6 @@ import TutorialPanel from './components/TutorialPanel'
 import RobloxStudioMock from './components/RobloxStudioMock'
 import CardLayoutView from './components/CardLayoutView'
 import BadgeHeader from './components/BadgeHeader'
-import CreatorStamp from './components/CreatorStamp'
 import './App.css'
 
 // Definindo 3 passos mockados do tutorial com sequência lógica
@@ -30,8 +29,8 @@ function App() {
   const [earnedBadges, setEarnedBadges] = useState([]) // IDs dos badges ganhos (1-3)
   const [showBadgeNotification, setShowBadgeNotification] = useState(null) // Badge ID para mostrar notificação
   const [showCreatorPopup, setShowCreatorPopup] = useState(false) // Mostrar popup de Creator (badge 1)
-  const [showBadgePopup2, setShowBadgePopup2] = useState(false) // Mostrar popup de Badge 2 (Criador Iniciante)
-  const [showBadgePopup3, setShowBadgePopup3] = useState(false) // Mostrar popup de Badge 3 (Criador Avançado)
+  const [showBadgePopup2, setShowBadgePopup2] = useState(false) // Mostrar popup de Badge 2 (Creator Iniciante)
+  const [showBadgePopup3, setShowBadgePopup3] = useState(false) // Mostrar popup de Badge 3 (Creator Avançado)
   const [currentTutorialClass, setCurrentTutorialClass] = useState(null) // 1 ou 2
   const [currentTutorialId, setCurrentTutorialId] = useState(null) // ID do tutorial atual (1-5 dentro de cada classe)
   const [layoutMode, setLayoutMode] = useState(true) // Modo layout para visualizar todos os cards
@@ -472,28 +471,6 @@ function App() {
           }}
         >
           Modo Layout
-        </button>
-      )}
-      {layoutMode && (
-        <button 
-          onClick={() => setLayoutMode(!layoutMode)}
-          style={{
-            position: 'fixed',
-            top: '20px',
-            right: '20px',
-            zIndex: 1000,
-            padding: '10px 20px',
-            background: 'rgb(253, 187, 44)',
-            color: '#ffffff',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: 'pointer',
-            fontWeight: 600,
-            fontSize: '14px',
-            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)'
-          }}
-        >
-          Modo Normal
         </button>
       )}
     </div>

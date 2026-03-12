@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "image": "/victory-2/onboarding/onboarding-1.png",
+    "alt": "Icone de boas vindas",
+    "text": "Aí está você! Bem vindo a uma nova aventura de criação no Roblox!"
+  },
+  {
+    "id": 2,
+    "image": "/victory-2/onboarding/onboarding-2.png",
+    "alt": "Icone de exploracao",
+    "text": "Não temos tempo a perder, então vamos nessa! Apresento a você o segredo da criação dos mundos Roblox, onde a mágica acontece, aperta o cinto!"
+  },
+  {
+    "id": 3,
+    "image": "/Q&A/Ide-image.png",
+    "alt": "Icone de progresso",
+    "text": "O que você irá criar:\n• Pilares que suportam a entrada\n• Uma porta de madeira com alças douradas\n• Quatro paredes sólidas\n• Um telhado"
+  },
+  {
+    "id": 4,
+    "image": "/logo-expedicao-carrying-block.png",
+    "alt": "Icone de aprendizado",
+    "text": "Você aprenderá a:\n• Criar e posicionar objetos (Parts) com precisão\n• Aplicar materiais e cores\n• Rotacionar objetos para que se encaixem perfeitamente"
+  },
+  {
+    "id": 5,
+    "image": "/logo.png",
+    "alt": "Icone de Creator",
+    "text": "São habilidades fundamentais que qualquer Creator Roblox precisa dominar!"
+  },
+  {
+    "id": 6,
+    "image": "/badge-icon.png",
+    "alt": "Icone de inicio",
+    "text": "Pronto pra criar?"
+  }
+]

@@ -17,53 +17,30 @@ import Card09_PositiveFeedback from './cards/Card09_PositiveFeedback'
 import Card10_NegativeFeedback from './cards/Card10_NegativeFeedback'
 import Card11_Completion from './cards/Card11_Completion'
 import Card13_BadgeExplanation from './cards/Card13_BadgeExplanation'
+import WhiteCardCanvas01 from './cards/WhiteCardCanvas01/WhiteCardCanvas01'
+import WhiteCardCanvas02 from './cards/WhiteCardCanvas02/WhiteCardCanvas02'
+import WhiteCardCanvas03 from './cards/WhiteCardCanvas03/WhiteCardCanvas03'
+import WhiteCardCanvas04 from './cards/WhiteCardCanvas04/WhiteCardCanvas04'
+import WhiteCardCanvas05 from './cards/WhiteCardCanvas05/WhiteCardCanvas05'
+import WhiteCardCanvas06 from './cards/WhiteCardCanvas06/WhiteCardCanvas06'
+import WhiteCardCanvas07 from './cards/WhiteCardCanvas07/WhiteCardCanvas07'
+import WhiteCardCanvas08 from './cards/WhiteCardCanvas08/WhiteCardCanvas08'
 import BadgeHeader from './BadgeHeader'
 import BadgeScoreboard from './BadgeScoreboard'
 import CreatorPopup from './CreatorPopup'
-import BadgePopup2 from './BadgePopup2'
-import BadgePopup3 from './BadgePopup3'
-import CreatorStamp from './CreatorStamp'
 import ElementLabel from './ElementLabel'
 import BadgeNotification from './BadgeNotification'
 import './CardLayoutView.css'
 
 // Sistema de layers - Design Original + Arredondado + Variações de Background
 const LAYER_STYLES = {
-  layer2: {
-    name: 'Variação Back02',
-    description: 'Background back02.jpg aplicado em cards selecionados'
+  layer12: {
+    name: 'Variação Back09 - UX lenses',
+    description: 'Background back09.jpg aplicado em cards selecionados (UX lenses)'
   },
-  layer3: {
-    name: 'Variação Back04',
-    description: 'Background back04.png aplicado em cards selecionados'
-  },
-  layer4: {
-    name: 'Variação Back05',
-    description: 'Background back05.png aplicado em cards selecionados'
-  },
-  layer5: {
-    name: 'Variação Back06',
-    description: 'Background back06.png aplicado em cards selecionados'
-  },
-  layer7: {
-    name: 'Variação Back07',
-    description: 'Background back07.jpg aplicado em cards selecionados'
-  },
-  layer8: {
-    name: 'Variação Back08',
-    description: 'Background back08.jpg aplicado em cards selecionados'
-  },
-  layer9: {
-    name: 'Variação Back09',
-    description: 'Background back09.jpg aplicado em cards selecionados'
-  },
-  layer10: {
-    name: 'Variação Back10',
-    description: 'Background back10.jpg aplicado em cards selecionados'
-  },
-  layer11: {
-    name: 'Variação Back11',
-    description: 'Background Back11.png aplicado em cards selecionados'
+  layer13: {
+    name: 'Sessão Cards Brancos',
+    description: 'Sessão limpa para novas telas, sem herdar do Back09'
   }
 }
 
@@ -78,17 +55,40 @@ function CardLayoutView({
   onTutorialComplete,
   onQuickComplete
 }) {
+  const CARD08_STEP_COUNT = 4
   const [selectedTutorial, setSelectedTutorial] = useState('Construir uma casa')
   const [showConcept, setShowConcept] = useState(false)
   const [currentStep, setCurrentStep] = useState(1)
   const [tutorialMode, setTutorialMode] = useState('demonstrative')
-  const [currentLayer, setCurrentLayer] = useState('layer9')
+  const [currentLayer, setCurrentLayer] = useState('layer12')
   const [showLabels, setShowLabels] = useState(false)
+  const [card08HighlightCount, setCard08HighlightCount] = useState(0)
+  const [card08BlinkingIndex, setCard08BlinkingIndex] = useState(null)
+  const [card08IsBlinking, setCard08IsBlinking] = useState(false)
+  const card08StepsTotal = 4
+  const card08StagesTotal = 3
+  const isCard08Complete = card08HighlightCount >= card08StepsTotal
+  const [card08Stage, setCard08Stage] = useState(1)
+  const [card08StageLoading, setCard08StageLoading] = useState(false)
+  const [card08StageBlinking, setCard08StageBlinking] = useState(false)
   const [activeCardId, setActiveCardId] = useState(null) // Card atualmente visualizado
   const [currentLayoutCard, setCurrentLayoutCard] = useState(0) // Card atual no layout mode
   const [showBadgeGallery, setShowBadgeGallery] = useState(true)
   const [badgeGalleryExpanded, setBadgeGalleryExpanded] = useState(false) // Para controle global
   const [expandedCards, setExpandedCards] = useState(new Set()) // Estado individual por card
+  const [onboardingAutoPlay, setOnboardingAutoPlay] = useState(false)
+  const [onboardingAnimationSeed, setOnboardingAnimationSeed] = useState(0)
+  const [card01SoundEnabled, setCard01SoundEnabled] = useState(false)
+  const [card02AutoPlay, setCard02AutoPlay] = useState(false)
+  const [card02AnimationSeed, setCard02AnimationSeed] = useState(0)
+  const [card02SoundEnabled, setCard02SoundEnabled] = useState(false)
+  const [card03Variant, setCard03Variant] = useState('mvp')
+  const [card04Variant, setCard04Variant] = useState('mvp')
+  const [card05Variant, setCard05Variant] = useState('mvp')
+  const [card07Variant, setCard07Variant] = useState('ideal')
+  const [card08Variant, setCard08Variant] = useState('mvp')
+  const [modoSelecionado, setModoSelecionado] = useState('criador')
+  const [nivelSelecionado, setNivelSelecionado] = useState('facil')
   
   // Estados para edição de elementos
   const [selectedElements, setSelectedElements] = useState(new Set())
@@ -102,6 +102,44 @@ function CardLayoutView({
   
   // Estado para coordenadas do elemento clicado
   const [elementPosition, setElementPosition] = useState(null) // { label, position, cardId }
+
+  const handleCard08ModuleAction = () => {
+    if (card08IsBlinking) return
+    if (card08HighlightCount >= CARD08_STEP_COUNT) {
+      setCard08HighlightCount(0)
+      return
+    }
+    const nextIndex = card08HighlightCount
+    setCard08BlinkingIndex(nextIndex)
+    setCard08IsBlinking(true)
+    const blinkDurationMs = 450
+    const blinkIterations = 3
+    const totalMs = blinkDurationMs * blinkIterations
+    window.setTimeout(() => {
+      setCard08HighlightCount((prev) => Math.min(prev + 1, CARD08_STEP_COUNT))
+      setCard08BlinkingIndex(null)
+      setCard08IsBlinking(false)
+    }, totalMs)
+  }
+
+  const handleCard08ResetEffects = () => {
+    setCard08HighlightCount(0)
+    setCard08BlinkingIndex(null)
+    setCard08IsBlinking(false)
+  }
+
+  const handleCard08AdvanceStage = () => {
+    if (card08StageLoading) return
+    const nextStage = card08Stage >= card08StagesTotal ? 1 : card08Stage + 1
+    setCard08StageLoading(true)
+    setCard08StageBlinking(true)
+    const transitionMs = 1200
+    window.setTimeout(() => {
+      setCard08Stage(nextStage)
+      setCard08StageBlinking(false)
+      setCard08StageLoading(false)
+    }, transitionMs)
+  }
   
   // Chave para localStorage
   const STORAGE_KEY = 'cardLayoutCustomStyles'
@@ -275,7 +313,7 @@ function CardLayoutView({
         onMouseLeave={(e) => e.currentTarget.style.background = toggleBackground}
       >
         <span style={{ fontSize: '14px', fontWeight: 600, color: '#ffffff' }}>
-          Conquiste seus badges de Creator
+          CONQUISTE SEUS BADGES DE CREATOR
         </span>
         {/* Toggle Switch */}
         <div 
@@ -320,15 +358,130 @@ function CardLayoutView({
       </div>
     )
 
+    const inlineGallery = isCardExpanded && currentLayer === 'layer12' ? (
+      <div className={`badge-gallery-fixed expanded`} style={{
+        background: '#ffffff',
+        borderRadius: '24px',
+        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
+        position: 'absolute',
+        top: '12px',
+        left: '16px',
+        right: '16px',
+        bottom: '76px',
+        zIndex: 200,
+        overflowY: 'auto',
+        overflowX: 'hidden',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        padding: '24px 20px'
+      }}>
+        {/* Botão X fechar */}
+        <button
+          onClick={(e) => {
+            e.stopPropagation()
+            toggleCardGallery()
+          }}
+          style={{
+            position: 'absolute',
+            top: '16px',
+            right: '16px',
+            width: '22px',
+            height: '46px',
+            borderRadius: '50%',
+            background: '#ef4444',
+            border: 'none',
+            color: '#ffffff',
+            fontSize: '18px',
+            fontWeight: 700,
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        >
+          ×
+        </button>
+
+        <button style={{
+          background: '#fbbf24',
+          border: 'none',
+          borderRadius: '50px',
+          padding: '14px 32px',
+          fontSize: '16px',
+          fontWeight: 700,
+          color: '#1f2937',
+          cursor: 'pointer',
+          alignSelf: 'center',
+          marginTop: '24px',
+          marginBottom: '20px'
+        }}>
+          GALERIA DE BADGES
+        </button>
+
+        <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+          <p style={{ fontSize: '14px', color: '#6b7280', margin: '0 0 4px 0' }}>Conquistadas:</p>
+          <p style={{ fontSize: '28px', fontWeight: 700, margin: 0, color: '#1f2937' }}>
+            <span style={{ color: '#1f2937' }}>2</span>
+            <span style={{ color: '#9ca3af' }}>/9</span>
+          </p>
+        </div>
+
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', marginBottom: '35px' }}>
+          {[true, true, false].map((earned, i) => (
+            <div key={`top-${i}`} style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <img
+                src="/badge-icon.png"
+                alt="Badge"
+                style={{ width: '56px', height: '64px', objectFit: 'contain', marginBottom: '6px', opacity: 0.5 }}
+              />
+              <span style={{ fontSize: '11px', color: '#6b7280' }}>Lorem ipsum</span>
+            </div>
+          ))}
+        </div>
+
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '24px' }}>
+          {[false, false, false].map((earned, i) => (
+            <div key={`bottom-${i}`} style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <img
+                src="/badge-icon.png"
+                alt="Badge"
+                style={{ width: '56px', height: '64px', objectFit: 'contain', marginBottom: '6px', opacity: 0.5 }}
+              />
+              <span style={{ fontSize: '11px', color: '#6b7280' }}>Lorem ipsum</span>
+            </div>
+          ))}
+        </div>
+
+        <div style={{
+          background: 'linear-gradient(135deg, #f97316 0%, #fb923c 100%)',
+          borderRadius: '12px',
+          padding: '14px 16px',
+          marginTop: '16px'
+        }}>
+          <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#ffffff', margin: '0 0 4px 0' }}>
+            PRIMEIRO PASSO
+          </h3>
+          <p style={{ fontSize: '13px', color: '#ffffff', margin: '0 0 6px 0' }}>
+            Completar: construir uma casa.
+          </p>
+          <p style={{ fontSize: '12px', fontWeight: 600, color: '#fef3c7', margin: 0 }}>
+            PROGRESSO: 0/1
+          </p>
+        </div>
+      </div>
+    ) : null
+
     // Wrapper que insere o toggle logo após o header
     const contentWithToggle = (
       <div className="card-with-badge-toggle" style={{ display: 'flex', flexDirection: 'column', height: '100%', position: 'relative' }}>
         {cardContent}
         {badgeToggle}
+        {inlineGallery}
       </div>
     )
     
-    if (!isGalleryVisible) {
+    if (!isGalleryVisible || currentLayer === 'layer12') {
       return contentWithToggle
     }
     
@@ -344,10 +497,8 @@ function CardLayoutView({
         }}>
           {contentWithToggle}
         </div>
-        {/* Galeria de badges - overlay absoluto que não move nada, posicionada acima dos botões */}
-        {/* Só mostra a galeria se estiver expandida */}
-        {isCardExpanded && (
-        <div className={`badge-gallery-fixed expanded`} style={{ 
+        {isCardExpanded ? (
+        <div className={`badge-gallery-fixed expanded`} style={{
           background: 'linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%)',
           borderTop: '2px solid rgb(113, 180, 233)',
           boxShadow: '0 -2px 8px rgba(0, 0, 0, 0.15)',
@@ -361,7 +512,7 @@ function CardLayoutView({
           overflow: 'hidden',
           transition: 'max-height 0.3s ease, min-height 0.3s ease'
         }}>
-          <div 
+          <div
             className="badge-gallery-header"
             onClick={(e) => {
               e.stopPropagation()
@@ -386,8 +537,8 @@ function CardLayoutView({
               <h2 style={{ fontSize: '20px', paddingTop: '0px', marginBottom: '0px', margin: 0, color: '#000000' }}>
                 Galeria de Badges
               </h2>
-              <span style={{ 
-                fontSize: '24px', 
+              <span style={{
+                fontSize: '24px',
                 fontWeight: 700,
                 color: '#000000',
                 transition: 'transform 0.3s',
@@ -402,8 +553,8 @@ function CardLayoutView({
             </div>
           </div>
           {isCardExpanded && (
-            <div className="badge-gallery-content" style={{ 
-              padding: '12px 24px', 
+            <div className="badge-gallery-content" style={{
+              padding: '12px 24px',
               background: '#f9f9f9',
               maxHeight: `${galleryHeight - 100}px`, // Altura total menos o header (100px)
               overflowY: 'auto'
@@ -424,22 +575,22 @@ function CardLayoutView({
                 </button>
               </div>
               <div>
-                <BadgeHeader 
-                  earnedBadges={earnedBadges || [1, 2]} 
+                <BadgeHeader
+                  earnedBadges={earnedBadges || [1, 2]}
                   completedTutorials={completedTutorials || { class1: [1, 2, 3, 4, 5], class2: [1, 2] }}
                 />
               </div>
             </div>
           )}
         </div>
-        )}
+        ) : null}
       </div>
     )
   }
 
   // Função para navegar para o próximo card no layout
   const navigateToNextCard = (currentId) => {
-    const order = [0, 1, 2, 3, 1.5, 5, 6, '5.1', 7, 8.4, 8, 8.5, 9, 10, 11, 12, 13, 16, 17, 19, 20]
+    const order = [0, 1, 2, 3, 1.5, 5, 6, '5.1', 7, 8.4, 8, 8.5, 9, 10, 11, 12, 13, 16, 17]
     const currentIndex = order.indexOf(currentId)
     if (currentIndex !== -1 && currentIndex < order.length - 1) {
       const nextId = order[currentIndex + 1]
@@ -506,7 +657,6 @@ function CardLayoutView({
         { type: 'badge-header', selector: '.badge-header', label: 'Galeria de Badges - Expandida' },
         { type: 'badge-item', selector: '.badge-header-item', label: 'Item de Badge' },
         { type: 'badge-description', selector: '.badge-description', label: 'Descrição do Badge' },
-        { type: 'creator-stamp', selector: '.creator-stamp-inline', label: 'Selo de Creator' }
       ]
     },
     {
@@ -548,63 +698,24 @@ function CardLayoutView({
         { type: 'badge-header', selector: '.badge-header', label: 'Galeria de Badges - Expandida' },
         { type: 'badge-item', selector: '.badge-header-item', label: 'Item de Badge' },
         { type: 'badge-description', selector: '.badge-description', label: 'Descrição do Badge' },
-        { type: 'creator-stamp', selector: '.creator-stamp-inline', label: 'Selo de Creator' }
       ]
     },
     {
       id: 3,
-      name: 'Card 04 - Seleção (Concluído)',
-      component: renderBadgeGallery(
-        <Card01_02_Selection
-          cardNumber={1}
-          selectedTutorial={selectedTutorial}
-          onSelect={setSelectedTutorial}
-          onNext={() => navigateToNextCard(1.4)}
-          completedTutorials={{ class1: [1, 2, 3, 4, 5], class2: [1, 2, 3, 4, 5] }}
-          earnedBadges={[1, 2, 3]}
-          currentTutorialClass={1}
-          onTutorialClassSelect={() => {}}
-          onTutorialSelect={(tutorialId, tutorialClass) => {
-            if (onTutorialSelect) onTutorialSelect(tutorialId, tutorialClass)
-            navigateToNextCard(1.4)
-          }}
-          onBack={onMenu || (() => {})}
-          onMenu={onMenu || (() => {})}
-          defaultExpanded={true}
-        />,
-        3
-      ),
-      elements: [
-        { type: 'title-1', selector: '.card-title', label: 'Título 1 - Principal' },
-        { type: 'accordion-header', selector: 'h3', label: 'Cabeçalho do Acordeão - Título' },
-        { type: 'accordion-icon', selector: 'span[style*="transform"]', label: 'Ícone Expandir/Colapsar' },
-        { type: 'accordion-content', selector: 'div[style*="borderBottom"]', label: 'Conteúdo do Acordeão - Lista' },
-        { type: 'button-selection', selector: '.selection-button', label: 'Botão de Seleção' },
-        { type: 'tutorial-item', selector: 'div[style*="padding: \'24px\'"]', label: 'Item de Tutorial' },
-        { type: 'tutorial-status', selector: 'span[style*="✓ Concluído"]', label: 'Status - Concluído' },
-        { type: 'header-global', selector: '.card-header-global', label: 'Header Global' },
-        { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' },
-        { type: 'badge-gallery', selector: '.badge-gallery-fixed', label: 'Galeria de Badges - Fixa' },
-        { type: 'badge-scoreboard', selector: '.badge-scoreboard', label: 'Placar de Badges' },
-        { type: 'badge-header', selector: '.badge-header', label: 'Galeria de Badges - Expandida' },
-        { type: 'badge-item', selector: '.badge-header-item', label: 'Item de Badge' },
-        { type: 'badge-description', selector: '.badge-description', label: 'Descrição do Badge' },
-        { type: 'creator-stamp', selector: '.creator-stamp-inline', label: 'Selo de Creator' }
-      ]
-    },
-    {
-      id: 1.4,
-      name: 'Card de Transição - Modo Observador',
+      name: 'Card 03 - Seleção de Modo',
       component: (
-        <CardTransition_Demonstrative
-          onContinue={() => navigateToNextCard(1.4)}
+        <Card03_ModeSelection
+          onModeSelect={null}
           onMenu={onMenu || (() => {})}
+          showProgressBadge={currentLayer === 'layer12'}
         />
       ),
       elements: [
-        { type: 'title-1', selector: 'h3', label: 'Título - MODO OBSERVADOR' },
-        { type: 'body', selector: 'p', label: 'Corpo - Texto explicativo' },
-        { type: 'button-primary', selector: '.primary-button', label: 'Botão - ISSO NÃO FAZ PARTE DO LAYOUT' }
+        { type: 'title-1', selector: '.card-title', label: 'Título 1' },
+        { type: 'button-mode', selector: '.mode-button', label: 'Botão de Modo' },
+        { type: 'title-2', selector: '.mode-title', label: 'Título 2 - Subtítulo' },
+        { type: 'body', selector: '.mode-description', label: 'Corpo - Descrição' },
+        { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' },
       ]
     },
     {
@@ -616,6 +727,7 @@ function CardLayoutView({
           onMenu={onMenu || (() => {})}
           initialMode="demonstrative"
           dimmedOpacity={0.2}
+          showProgressBadge={currentLayer === 'layer12'}
         />
       ),
       elements: [
@@ -640,6 +752,7 @@ function CardLayoutView({
             if (onQuickComplete) onQuickComplete()
             else if (onMenu) onMenu()
           }}
+          uxLensesVariant={currentLayer === 'layer12'}
         />,
         5
       ),
@@ -662,11 +775,27 @@ function CardLayoutView({
           stepNumber={currentStep}
           totalSteps={3}
           stepTitle={mockStepData.title}
+          uxLensesVariant={currentLayer === 'layer12'}
+          highlightStepCount={card08HighlightCount}
+          highlightVariant="text-green"
+          blinkStepIndex={card08BlinkingIndex}
+          blinkVariant="text-green"
+          stageNumber={card08Stage}
+          totalStages={card08StagesTotal}
+          stageBlinking={card08StageBlinking}
+          stageLoading={card08StageLoading}
+          onAdvanceStage={handleCard08AdvanceStage}
+          onResetEffects={handleCard08ResetEffects}
           onDemonstrate={() => {
             if (onCardAction) onCardAction('demonstrate')
             navigateToNextCard(6)
           }}
-          onBack={() => setCurrentStep(Math.max(1, currentStep - 1))}
+          onBack={() => {
+            setCurrentStep(Math.max(1, currentStep - 1))
+            setCard08HighlightCount((prev) => Math.max(0, prev - 1))
+            setCard08BlinkingIndex(null)
+            setCard08IsBlinking(false)
+          }}
           onShowConcept={() => {
             setShowConcept(true)
             navigateToNextCard(6)
@@ -705,6 +834,7 @@ function CardLayoutView({
           }}
           onMenu={onMenu || (() => {})}
           onRestart={onRestart || (() => {})}
+          uxLensesVariant={currentLayer === 'layer12'}
         />
       ),
       elements: [
@@ -718,75 +848,6 @@ function CardLayoutView({
       ]
     },
     {
-      id: 7,
-      name: 'Card 10 - Após Ação',
-      component: renderBadgeGallery(
-        <Card06_AfterAction
-          stepNumber={currentStep}
-          totalSteps={3}
-          stepTitle={mockStepData.title}
-          onNextStep={() => {
-            setCurrentStep(Math.min(3, currentStep + 1))
-            navigateToNextCard(8.4)
-          }}
-          onBack={() => setCurrentStep(Math.max(1, currentStep - 1))}
-          onMenu={onMenu || (() => {})}
-          onRestart={onRestart || (() => {})}
-        />,
-        7
-      ),
-      elements: [
-        { type: 'title-2', selector: '.card-title', label: 'Título 2' },
-        { type: 'theme-box', selector: '.theme-box', label: 'Theme Box' },
-        { type: 'step-title-bar', selector: '.step-title-bar', label: 'Barra de Título' },
-        { type: 'button-secondary', selector: '.secondary-button', label: 'Botão Secundário - Voltar' },
-        { type: 'button-next', selector: '.next-step-button', label: 'Botão Próximo Passo' },
-        { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' },
-        { type: 'card-actions', selector: '.card-actions', label: 'Área de Ações - Footer' },
-        { type: 'badge-gallery', selector: '.badge-gallery-fixed', label: 'Galeria de Badges - Fixa' },
-        { type: 'badge-scoreboard', selector: '.badge-scoreboard', label: 'Placar de Badges' }
-      ]
-    },
-    {
-      id: 7.6,
-      name: 'Card de Transição - Modo Aprendizado',
-      component: (
-        <CardTransition_Interactive
-          onContinue={() => navigateToNextCard(7.6)}
-          onMenu={onMenu || (() => {})}
-        />
-      ),
-      elements: [
-        { type: 'title-1', selector: 'h3', label: 'Título - MODO APRENDIZADO' },
-        { type: 'body', selector: 'p', label: 'Corpo - Texto explicativo' },
-        { type: 'button-primary', selector: '.interactive-button', label: 'Botão - Continuar no Fluxo' },
-        { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' }
-      ]
-    },
-    {
-      id: 8.4,
-      name: 'Card 12 - Modo Aprendizado (Demonstração)',
-      component: (
-        <Card03_ModeSelection
-          onModeSelect={(mode) => {
-            setTutorialMode(mode)
-            if (onModeSelect) onModeSelect(mode)
-            navigateToNextCard(8.4)
-          }}
-          onMenu={onMenu || (() => {})}
-          initialMode="interactive"
-          dimmedOpacity={0.15}
-        />
-      ),
-      elements: [
-        { type: 'title-1', selector: '.card-title', label: 'Título 1' },
-        { type: 'button-mode', selector: '.mode-button', label: 'Botão de Modo' },
-        { type: 'title-2', selector: '.mode-title', label: 'Título 2 - Subtítulo' },
-        { type: 'body', selector: '.mode-description', label: 'Corpo - Descrição' },
-        { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' }
-      ]
-    },
-    {
       id: 8,
       name: 'Card 11 - Interação',
       component: renderBadgeGallery(
@@ -795,6 +856,7 @@ function CardLayoutView({
           onContinue={() => navigateToNextCard(8.5)}
           onMenu={onMenu || (() => {})}
           onRestart={onRestart || (() => {})}
+          uxLensesVariant={currentLayer === 'layer12'}
         />,
         8
       ),
@@ -815,6 +877,7 @@ function CardLayoutView({
           onContinue={() => navigateToNextCard(8.5)}
           onMenu={onMenu || (() => {})}
           onRestart={onRestart || (() => {})}
+          uxLensesVariant={currentLayer === 'layer12'}
         />,
         8.5
       ),
@@ -822,32 +885,6 @@ function CardLayoutView({
         { type: 'title-1', selector: 'h3', label: 'Título - Como usar o MODO APRENDIZADO' },
         { type: 'body', selector: '.card-interactive-content p', label: 'Corpo - Texto explicativo' },
         { type: 'button-interactive', selector: '.interactive-button.try', label: 'Botão Interativo - Continuar' },
-        { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' },
-        { type: 'badge-gallery', selector: '.badge-gallery-fixed', label: 'Galeria de Badges - Fixa' },
-        { type: 'badge-scoreboard', selector: '.badge-scoreboard', label: 'Placar de Badges' }
-      ]
-    },
-    {
-      id: 9,
-      name: 'Card 13 - Tentativa',
-      component: renderBadgeGallery(
-        <Card08_UserAttempt
-          stepNumber={currentStep}
-          totalSteps={3}
-          stepTitle={mockStepData.title}
-          onCheckResult={() => {
-            if (onCardAction) onCardAction('demonstrate')
-            navigateToNextCard(9)
-          }}
-          onSkip={() => navigateToNextCard(9)}
-          onMenu={onMenu || (() => {})}
-          onRestart={onRestart || (() => {})}
-        />,
-        9
-      ),
-      elements: [
-        { type: 'button-attempt', selector: '.user-attempt-button', label: 'Botão de Tentativa - Verificar' },
-        { type: 'link-skip', selector: '.skip-link', label: 'Link Pular' },
         { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' },
         { type: 'badge-gallery', selector: '.badge-gallery-fixed', label: 'Galeria de Badges - Fixa' },
         { type: 'badge-scoreboard', selector: '.badge-scoreboard', label: 'Placar de Badges' }
@@ -862,6 +899,7 @@ function CardLayoutView({
           onContinue={() => navigateToNextCard(11.5)}
           onMenu={onMenu || (() => {})}
           onRestart={onRestart || (() => {})}
+          uxLensesVariant={currentLayer === 'layer12'}
         />,
         10
       ),
@@ -884,6 +922,7 @@ function CardLayoutView({
           onContinue={() => navigateToNextCard(11.5)}
           onMenu={onMenu || (() => {})}
           onRestart={onRestart || (() => {})}
+          uxLensesVariant={currentLayer === 'layer12'}
         />,
         11
       ),
@@ -895,21 +934,6 @@ function CardLayoutView({
         { type: 'button-header', selector: '.header-button', label: 'Botão Header - Navegação' },
         { type: 'badge-gallery', selector: '.badge-gallery-fixed', label: 'Galeria de Badges - Fixa' },
         { type: 'badge-scoreboard', selector: '.badge-scoreboard', label: 'Placar de Badges' }
-      ]
-    },
-    {
-      id: 11.5,
-      name: 'Card de Transição - Fluxos se Encontram',
-      component: (
-        <CardTransition_Reunion
-          onContinue={() => navigateToNextCard(11.5)}
-          onMenu={onMenu || (() => {})}
-        />
-      ),
-      elements: [
-        { type: 'title-1', selector: 'h3', label: 'Título - FLUXOS SE ENCONTRAM' },
-        { type: 'body', selector: 'p', label: 'Corpo - Texto explicativo' },
-        { type: 'button-primary', selector: '.primary-button', label: 'Botão - ISSO NÃO FAZ PARTE DO LAYOUT' }
       ]
     },
     {
@@ -927,6 +951,7 @@ function CardLayoutView({
             if (onQuickComplete) onQuickComplete()
             navigateToNextCard(12.5)
           }}
+          uxLensesVariant={currentLayer === 'layer12'}
         />,
         12
       ),
@@ -940,26 +965,12 @@ function CardLayoutView({
       ]
     },
     {
-      id: 12.5,
-      name: 'Card de Transição - Badges e Conquistas',
-      component: (
-        <CardTransition_Badges
-          onContinue={() => navigateToNextCard(12.5)}
-          onMenu={onMenu || (() => {})}
-        />
-      ),
-      elements: [
-        { type: 'title-1', selector: 'h3', label: 'Título - BADGES E CONQUISTAS' },
-        { type: 'body', selector: 'p', label: 'Corpo - Texto explicativo' },
-        { type: 'button-primary', selector: '.primary-button', label: 'Botão - ISSO NÃO FAZ PARTE DO LAYOUT' }
-      ]
-    },
-    {
       id: 13,
       name: 'Card 17 - Badges',
       component: (
         <Card13_BadgeExplanation
           onClose={() => navigateToNextCard(13)}
+          uxLensesVariant={currentLayer === 'layer12'}
         />
       ),
       elements: [
@@ -973,7 +984,7 @@ function CardLayoutView({
       name: 'Creator Popup - Conquista',
       component: (
         <div className="card" style={{ padding: '24px', background: '#ffffff', height: '100%', position: 'relative', overflow: 'visible', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <CreatorPopup onClose={() => {}} />
+          <CreatorPopup onClose={() => {}} uxLensesVariant={currentLayer === 'layer12'} />
         </div>
       ),
       elements: [
@@ -985,39 +996,79 @@ function CardLayoutView({
         { type: 'button-primary', selector: '.creator-popup-button', label: 'Botão Primário - Continuar' }
       ]
     },
+  ]
+
+  const whiteCards = [
     {
-      id: 19,
-      name: 'Badge Popup 2 - Criador Iniciante',
+      id: 101,
+      name: 'Card Branco 01 - Base',
       component: (
-        <div className="card" style={{ padding: '24px', background: '#ffffff', height: '100%', position: 'relative', overflow: 'visible', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <BadgePopup2 onClose={() => {}} />
-        </div>
+        <WhiteCardCanvas01 autoPlay={onboardingAutoPlay} animationSeed={onboardingAnimationSeed} />
       ),
-      elements: [
-        { type: 'popup-overlay', selector: '.creator-popup-overlay', label: 'Overlay do Popup' },
-        { type: 'popup-content', selector: '.creator-popup-content', label: 'Conteúdo do Popup' },
-        { type: 'title-1', selector: '.creator-popup-title', label: 'Título 1 - Parabéns' },
-        { type: 'title-2', selector: '.creator-popup-creator', label: 'Título 2 - Criador Iniciante' },
-        { type: 'body', selector: '.creator-popup-message', label: 'Corpo - Mensagem' },
-        { type: 'button-primary', selector: '.creator-popup-button', label: 'Botão Primário - Continuar' }
-      ]
+      elements: []
     },
     {
-      id: 20,
-      name: 'Badge Popup 3 - Criador Avançado',
+      id: 102,
+      name: 'Card Branco 02 - Exploração',
       component: (
-        <div className="card" style={{ padding: '24px', background: '#ffffff', height: '100%', position: 'relative', overflow: 'visible', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <BadgePopup3 onClose={() => {}} />
-        </div>
+        <WhiteCardCanvas02
+          autoPlay={card02AutoPlay}
+          animationSeed={card02AnimationSeed}
+          soundEnabled={card02SoundEnabled}
+        />
       ),
-      elements: [
-        { type: 'popup-overlay', selector: '.creator-popup-overlay', label: 'Overlay do Popup' },
-        { type: 'popup-content', selector: '.creator-popup-content', label: 'Conteúdo do Popup' },
-        { type: 'title-1', selector: '.creator-popup-title', label: 'Título 1 - Parabéns' },
-        { type: 'title-2', selector: '.creator-popup-creator', label: 'Título 2 - Criador Avançado' },
-        { type: 'body', selector: '.creator-popup-message', label: 'Corpo - Mensagem' },
-        { type: 'button-primary', selector: '.creator-popup-button', label: 'Botão Primário - Continuar' }
-      ]
+      elements: []
+    },
+    {
+      id: 103,
+      name: 'Card Branco 03 - Fluxo',
+      component: (
+        <WhiteCardCanvas03 variant={card03Variant} />
+      ),
+      elements: []
+    },
+    {
+      id: 104,
+      name: 'Card Branco 04 - Placeholder',
+      component: (
+        <WhiteCardCanvas04 variant={card04Variant} />
+      ),
+      elements: []
+    },
+    {
+      id: 105,
+      name: 'Card Branco 05 - Placeholder',
+      component: (
+        <WhiteCardCanvas05 variant={card05Variant} />
+      ),
+      elements: []
+    },
+    {
+      id: 106,
+      name: 'Card Branco 06 - Placeholder',
+      component: (
+       <WhiteCardCanvas06
+          modoSelecionado={modoSelecionado}
+          nivelSelecionado={nivelSelecionado}
+        />
+      ),
+      elements: []
+    },
+    {
+      id: 107,
+      name: 'Card Branco 07 - Feedback Positivo',
+      component: (
+        <WhiteCardCanvas07 variant={card07Variant} />
+      ),
+      elements: []
+    },
+    {
+      id: 108,
+      name: 'Card Branco 08 - Modo Aprendizado',
+      component: (
+        <WhiteCardCanvas08 variant={card08Variant} />
+      ),
+      elements: []
     }
   ]
 
@@ -1072,13 +1123,13 @@ function CardLayoutView({
   // Aplicar classe do layer no body para que popups também sejam afetados
   useEffect(() => {
     // Remove todas as classes de layer do body
-    document.body.classList.remove('layer-layer1', 'layer-layer2', 'layer-layer3', 'layer-layer4', 'layer-layer5', 'layer-layer7', 'layer-layer8', 'layer-layer9', 'layer-layer10', 'layer-layer11')
+    document.body.classList.remove('layer-layer1', 'layer-layer2', 'layer-layer3', 'layer-layer4', 'layer-layer5', 'layer-layer7', 'layer-layer8', 'layer-layer9', 'layer-layer10', 'layer-layer11', 'layer-layer12', 'layer-layer13')
     // Adiciona a classe do layer atual
     document.body.classList.add(`layer-${currentLayer}`)
     
     return () => {
       // Limpa ao desmontar
-      document.body.classList.remove('layer-layer1', 'layer-layer2', 'layer-layer3', 'layer-layer4', 'layer-layer5', 'layer-layer7', 'layer-layer8', 'layer-layer9', 'layer-layer10', 'layer-layer11')
+      document.body.classList.remove('layer-layer1', 'layer-layer2', 'layer-layer3', 'layer-layer4', 'layer-layer5', 'layer-layer7', 'layer-layer8', 'layer-layer9', 'layer-layer10', 'layer-layer11', 'layer-layer12', 'layer-layer13')
     }
   }, [currentLayer])
 
@@ -1104,6 +1155,30 @@ function CardLayoutView({
     })
     return Array.from(elementMap.values())
   }, [cards])
+
+  const card01AudioRef = useRef(null)
+
+  useEffect(() => {
+    if (!card01AudioRef.current) {
+      card01AudioRef.current = new Audio('/sound-fx/soundtrack-1.mp3')
+      card01AudioRef.current.loop = true
+      card01AudioRef.current.volume = 0.48
+    }
+
+    const audio = card01AudioRef.current
+    if (card01SoundEnabled) {
+      audio.play().catch(() => {})
+    } else {
+      audio.pause()
+      audio.currentTime = 0
+    }
+
+    return () => {
+      if (!audio) return
+      audio.pause()
+      audio.currentTime = 0
+    }
+  }, [card01SoundEnabled])
 
   // Função para processar instruções e aplicar mudanças
   const handleProcessInstruction = async () => {
@@ -1753,17 +1828,30 @@ function CardLayoutView({
   }
 
   // Ordenar cards na ordem da experiência do usuário
-  const sortedCards = [...cards].sort((a, b) => {
-    // Ordem específica da experiência: 0, 1, 2, 3, 1.4, 1.5, 5, 6, 5.1, 7, 7.6, 8.4, 8, 8.5, 9, 10, 11, 11.5, 12, 12.5, 13, 16, 17, 19, 20
-    const order = [0, 1, 2, 3, 1.4, 1.5, 5, 6, '5.1', 7, 7.6, 8.4, 8, 8.5, 9, 10, 11, 11.5, 12, 12.5, 13, 16, 17, 19, 20]
-    const indexA = order.indexOf(a.id)
-    const indexB = order.indexOf(b.id)
-    // Se não estiver na lista de ordem, coloca no final
-    if (indexA === -1 && indexB === -1) return 0
-    if (indexA === -1) return 1
-    if (indexB === -1) return -1
-    return indexA - indexB
-  })
+  const sortedCards = currentLayer === 'layer13'
+    ? whiteCards
+    : [...cards]
+      // Filtrar cards específicos para UX Lenses (layer12)
+      .filter(card => {
+        if (currentLayer === 'layer12') {
+          // Remover cards não usados no UX Lenses
+          if (card.id === 1.5 || card.id === 19 || card.id === 20) {
+            return false
+          }
+        }
+        return true
+      })
+      .sort((a, b) => {
+      // Ordem específica da experiência: 0, 1, 2, 3, 1.4, 1.5, 5, 6, 5.1, 7, 7.6, 8.4, 8, 8.5, 9, 10, 11, 11.5, 12, 12.5, 13, 16, 17, 19, 20
+      const order = [0, 1, 2, 3, 1.4, 1.5, 5, 6, '5.1', 7, 7.6, 8.4, 8, 8.5, 9, 10, 11, 11.5, 12, 12.5, 13, 16, 17, 19, 20]
+      const indexA = order.indexOf(a.id)
+      const indexB = order.indexOf(b.id)
+      // Se não estiver na lista de ordem, coloca no final
+      if (indexA === -1 && indexB === -1) return 0
+      if (indexA === -1) return 1
+      if (indexB === -1) return -1
+      return indexA - indexB
+    })
   
   console.log('Cards ordenados:', sortedCards.map(c => ({ id: c.id, name: c.name })))
 
@@ -1877,7 +1965,6 @@ function CardLayoutView({
                   return numA - numB
                 })
                 .map(([key, value]) => {
-                  const isPreferred = key === 'layer9' || key === 'layer11'
                   return (
                     <button
                       key={key}
@@ -1913,13 +2000,6 @@ function CardLayoutView({
                       }}
                     >
                       <span>{value.name}</span>
-                      {isPreferred && (
-                        <span style={{
-                          fontSize: '16px',
-                          color: '#FFC107',
-                          fontWeight: 'bold'
-                        }}>⭐</span>
-                      )}
                     </button>
                   )
                 })}
@@ -1935,7 +2015,95 @@ function CardLayoutView({
               Mostrar Labels
             </label>
           </div>
+          <div className="control-group card08-module-controls">
+            <div className="card08-module-title">Iterações do Card 8</div>
+            <button
+              type="button"
+              className="card08-module-button"
+              onClick={handleCard08ModuleAction}
+            >
+              Evento de conclusão de um passo
+            </button>
+            <button
+              type="button"
+              className="card08-module-button"
+              onClick={handleCard08AdvanceStage}
+            >
+              Evento 2 - Nova Etapa
+            </button>
+            <button
+              type="button"
+              className="card08-module-button card08-module-button--reset card08-module-button--with-icon"
+              onClick={handleCard08ResetEffects}
+            >
+              <span className="card05-ux-action-icon card05-ux-action-icon--reset" aria-hidden="true" />
+              Reset efeitos
+            </button>
+            {isCard08Complete && (
+              <div className="card08-dev-message">
+                <div className="card08-dev-message-title">Mensagem para o desenvolvedor</div>
+                <div className="card08-dev-message-body">
+                  Desenvolvedor, ao final dessa iteração, a lógica segue para o Card 14, feedback positivo
+                </div>
+              </div>
+            )}
+          </div>
+          <div className="control-group card08-module-controls">
+            <div className="card08-module-title">Iterações do Onboarding</div>
+            <div className="card08-module-title">Seleção de tutorial</div>
+            <div className="card08-module-legend">
+              <div className="card08-module-legend-item">
+                <span className="card08-module-legend-dot card08-module-legend-dot--blue" />
+                <span>Implementação para a entrega atual</span>
+              </div>
+              <div className="card08-module-legend-item">
+                <span className="card08-module-legend-dot card08-module-legend-dot--yellow" />
+                <span>Implementação para a próxima entrega</span>
+              </div>
+            </div>
+            <ul className="card08-module-list">
+              <li className="card08-module-list-item">
+                1 - corrigir hover, cor precisa preencher toda altura do elemento
+              </li>
+              <li className="card08-module-list-item">
+                1.2 - precisamos colocar um botão "voltar para home"
+              </li>
+              <li className="card08-module-list-item card08-module-list-item--next">
+                2 - implementar help text (que descreve a função do elemento em questão).
+              </li>
+              <li className="card08-module-list-item">
+                3 - No primeiro paragaf, o font size aqui é 14pt, font-weigth é bold
+              </li>
+              <li className="card08-module-list-item">
+                4 - Nos demais paragrafos, o font-size é 11pt
+              </li>
+              <li className="card08-module-list-item">
+                5 - remova esse bg branco atrás do botão.
+              </li>
+              <li className="card08-module-list-item">
+                6 - Aqui o bg é preto, falta o marcador de tempo (duração do tutorial) e pode se livrar dessa linha abaixo do texto
+              </li>
+              <li className="card08-module-list-item">
+                7 - Bg preto, botão branco e texto bold cor preta.
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
+      <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
+        <button type="button" onClick={() => setModoSelecionado('criador')}>
+          Creator
+        </button>
+        <button type="button" onClick={() => setModoSelecionado('observador')}>
+          Observador
+        </button>
+        {modoSelecionado === 'criador' ? (
+          <>
+            <button type="button" onClick={() => setNivelSelecionado('facil')}>Fácil</button>
+            <button type="button" onClick={() => setNivelSelecionado('medio')}>Médio</button>
+            <button type="button" onClick={() => setNivelSelecionado('dificil')}>Difícil</button>
+          </>
+        ) : null}
       </div>
       <div className="card-layout-container">
         {sortedCards.map((card) => (
@@ -1970,7 +2138,188 @@ function CardLayoutView({
                 }
               }}
             >
-              {card.name}
+              {card.id === 101 && (
+                <button
+                  type="button"
+                  className="card08-module-button"
+                  onClick={(event) => {
+                    event.stopPropagation()
+                    setOnboardingAutoPlay((prev) => !prev)
+                    setOnboardingAnimationSeed((prev) => prev + 1)
+                  }}
+                >
+                  {onboardingAutoPlay ? 'Desativar animações' : 'Ativar animações'}
+                </button>
+              )}
+              {card.id === 102 && (
+                <button
+                  type="button"
+                  className="card08-module-button"
+                  onClick={(event) => {
+                    event.stopPropagation()
+                    setCard02AutoPlay((prev) => !prev)
+                    setCard02AnimationSeed((prev) => prev + 1)
+                  }}
+                >
+                  {card02AutoPlay ? 'Desativar animações' : 'Ativar animações'}
+                </button>
+              )}
+              <div className="card-layout-label-content">
+                <span>{card.name}</span>
+                {card.id === 101 && (
+                  <label className="card-layout-sound-toggle" onClick={(event) => event.stopPropagation()}>
+                    <input
+                      type="checkbox"
+                      checked={card01SoundEnabled}
+                      onChange={(event) => setCard01SoundEnabled(event.target.checked)}
+                    />
+                    <span className="card-layout-sound-switch" aria-hidden="true" />
+                    <span className="card-layout-sound-label">Som</span>
+                  </label>
+                )}
+                {card.id === 102 && (
+                  <label className="card-layout-sound-toggle" onClick={(event) => event.stopPropagation()}>
+                    <input
+                      type="checkbox"
+                      checked={card02SoundEnabled}
+                      onChange={(event) => setCard02SoundEnabled(event.target.checked)}
+                    />
+                    <span className="card-layout-sound-switch" aria-hidden="true" />
+                    <span className="card-layout-sound-label">Som</span>
+                  </label>
+                )}
+                {card.id === 105 && (
+                  <div className="card-layout-variant-toggle" onClick={(event) => event.stopPropagation()}>
+  <label className="card-layout-variant-option">
+    <input
+      type="radio"
+      name="card05-variant"
+      value="mvp"
+      checked={card05Variant === 'mvp'}
+      onChange={() => setCard05Variant('mvp')}
+    />
+    <span className="card-layout-variant-radio" aria-hidden="true" />
+    <span className="card-layout-variant-label">MVP</span>
+  </label>
+
+  <label className="card-layout-variant-option">
+    <input
+      type="radio"
+      name="card05-variant"
+      value="ideal"
+      checked={card05Variant === 'ideal'}
+      onChange={() => setCard05Variant('ideal')}
+    />
+    <span className="card-layout-variant-radio" aria-hidden="true" />
+    <span className="card-layout-variant-label">Ideal</span>
+  </label>
+</div>
+                )}
+                {card.id === 103 && (
+                  <div className="card-layout-variant-toggle" onClick={(event) => event.stopPropagation()}>
+                    <label className="card-layout-variant-option">
+                      <input
+                        type="radio"
+                        name="card03-variant"
+                        value="mvp"
+                        checked={card03Variant === 'mvp'}
+                        onChange={() => setCard03Variant('mvp')}
+                      />
+                      <span className="card-layout-variant-radio" aria-hidden="true" />
+                      <span className="card-layout-variant-label">MVP</span>
+                    </label>
+                    <label className="card-layout-variant-option">
+                      <input
+                        type="radio"
+                        name="card03-variant"
+                        value="ideal"
+                        checked={card03Variant === 'ideal'}
+                        onChange={() => setCard03Variant('ideal')}
+                      />
+                      <span className="card-layout-variant-radio" aria-hidden="true" />
+                      <span className="card-layout-variant-label">Ideal</span>
+                    </label>
+                  </div>
+                )}
+                {card.id === 104 && (
+                  <div className="card-layout-variant-toggle" onClick={(event) => event.stopPropagation()}>
+                    <label className="card-layout-variant-option">
+                      <input
+                        type="radio"
+                        name="card04-variant"
+                        value="mvp"
+                        checked={card04Variant === 'mvp'}
+                        onChange={() => setCard04Variant('mvp')}
+                      />
+                      <span className="card-layout-variant-radio" aria-hidden="true" />
+                      <span className="card-layout-variant-label">MVP</span>
+                    </label>
+                    <label className="card-layout-variant-option">
+                      <input
+                        type="radio"
+                        name="card04-variant"
+                        value="ideal"
+                        checked={card04Variant === 'ideal'}
+                        onChange={() => setCard04Variant('ideal')}
+                      />
+                      <span className="card-layout-variant-radio" aria-hidden="true" />
+                      <span className="card-layout-variant-label">Ideal</span>
+                    </label>
+                  </div>
+                )}
+                {card.id === 107 && (
+                  <div className="card-layout-variant-toggle" onClick={(event) => event.stopPropagation()}>
+                    <label className="card-layout-variant-option">
+                      <input
+                        type="radio"
+                        name="card07-variant"
+                        value="mvp"
+                        checked={card07Variant === 'mvp'}
+                        onChange={() => setCard07Variant('mvp')}
+                      />
+                      <span className="card-layout-variant-radio" aria-hidden="true" />
+                      <span className="card-layout-variant-label">MVP</span>
+                    </label>
+                    <label className="card-layout-variant-option">
+                      <input
+                        type="radio"
+                        name="card07-variant"
+                        value="ideal"
+                        checked={card07Variant === 'ideal'}
+                        onChange={() => setCard07Variant('ideal')}
+                      />
+                      <span className="card-layout-variant-radio" aria-hidden="true" />
+                      <span className="card-layout-variant-label">Ideal</span>
+                    </label>
+                  </div>
+                )}
+                {card.id === 108 && (
+                  <div className="card-layout-variant-toggle" onClick={(event) => event.stopPropagation()}>
+                    <label className="card-layout-variant-option">
+                      <input
+                        type="radio"
+                        name="card08-variant"
+                        value="mvp"
+                        checked={card08Variant === 'mvp'}
+                        onChange={() => setCard08Variant('mvp')}
+                      />
+                      <span className="card-layout-variant-radio" aria-hidden="true" />
+                      <span className="card-layout-variant-label">MVP</span>
+                    </label>
+                    <label className="card-layout-variant-option">
+                      <input
+                        type="radio"
+                        name="card08-variant"
+                        value="ideal"
+                        checked={card08Variant === 'ideal'}
+                        onChange={() => setCard08Variant('ideal')}
+                      />
+                      <span className="card-layout-variant-radio" aria-hidden="true" />
+                      <span className="card-layout-variant-label">Ideal</span>
+                    </label>
+                  </div>
+                )}
+              </div>
             </div>
             <div className="card-layout-item">
               <div 

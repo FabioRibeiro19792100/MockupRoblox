@@ -1,0 +1,24 @@
+{
+  "help": [
+    {
+      "id": 1,
+      "image": "public/Tutorial-steps/Build-A-House/Build-a-house-step1.png",
+      "text": "Nesta etapa você cria a primeira Part pelo menu Modelo."
+    },
+    {
+      "id": 2,
+      "image": "public/Tutorial-steps/Build-A-House/Build-a-house-step2.png",
+      "text": "Caso você não veja o painel explorer na tela, ele pode ser encontrado em Window > Explorer."
+    },
+    {
+      "id": 3,
+      "image": "public/Tutorial-steps/Build-A-House/Build-a-house-step3.png",
+      "text": "Clique nos numero ao lado, na coluna da direita, para alterar os valores da variável."
+    },
+    {
+      "id": 4,
+      "image": "public/Tutorial-steps/Build-A-House/Build-a-house-step4.png",
+      "text": "Isso irá aplicar um \"Shader\" no seu Part."
+    }
+  ]
+}
